@@ -22,6 +22,10 @@
   	<servlet-name>AboutServlet</servlet-name>
   	<servlet-class>servlet.AboutServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DirectionsServlet</servlet-name>
+  	<servlet-class>servlet.DirectionsServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -49,6 +53,10 @@
   <servlet-mapping>
   	<servlet-name>AboutServlet</servlet-name>
   	<url-pattern>/about</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DirectionsServlet</servlet-name>
+  	<url-pattern>/directions</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
