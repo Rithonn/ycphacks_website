@@ -30,6 +30,10 @@
   	<servlet-name>ProfilePageServlet</servlet-name>
   	<servlet-class>servlet.ProfilePageServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>RegistrationServlet</servlet-name>
+  	<servlet-class>servlet.RegistrationServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -65,6 +69,10 @@
   <servlet-mapping>
   	<servlet-name>ProfilePageServlet</servlet-name>
   	<url-pattern>/profile_page</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>RegistrationServlet</servlet-name>
+  	<url-pattern>/registration</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
