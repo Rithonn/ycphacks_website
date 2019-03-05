@@ -17,7 +17,11 @@
   <servlet>
     <servlet-name>MultiplyNumbersServlet</servlet-name>
     <servlet-class>servlet.MultiplyNumbersServlet</servlet-class>
-  </servlet>>
+  </servlet>
+  <servlet>
+  	<servlet-name>AboutServlet</servlet-name>
+  	<servlet-class>servlet.AboutServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -41,6 +45,10 @@
   <servlet-mapping>
     <servlet-name>MultiplyNumbersServlet</servlet-name>
     <url-pattern>/multiplyNumbers</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AboutServlet</servlet-name>
+  	<url-pattern>/about</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
