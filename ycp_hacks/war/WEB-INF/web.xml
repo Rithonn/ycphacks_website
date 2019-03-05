@@ -17,11 +17,7 @@
   <servlet>
     <servlet-name>MultiplyNumbersServlet</servlet-name>
     <servlet-class>servlet.MultiplyNumbersServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>GuessingGameServlet</servlet-name>
-    <servlet-class>servlet.GuessingGameServlet</servlet-class>
-  </servlet>
+  </servlet>>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -31,10 +27,6 @@
   <servlet>
     <servlet-name>MultiplyNumbersAjaxServlet</servlet-name>
     <servlet-class>servlet.ajax.MultiplyNumbersAjaxServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <servlet-class>servlet.ajax.NextGuessAjaxServlet</servlet-class>
   </servlet>
 
   <!-- Servlet mappings -->
@@ -50,10 +42,6 @@
     <servlet-name>MultiplyNumbersServlet</servlet-name>
     <url-pattern>/multiplyNumbers</url-pattern>
   </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>GuessingGameServlet</servlet-name>
-    <url-pattern>/guessingGame</url-pattern>
-  </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
   <servlet-mapping>
@@ -63,10 +51,6 @@
   <servlet-mapping>
     <servlet-name>MultiplyNumbersAjaxServlet</servlet-name>
     <url-pattern>/ajax/multiplyNumbers</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>NextGuessAjaxServlet</servlet-name>
-    <url-pattern>/ajax/nextGuess</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

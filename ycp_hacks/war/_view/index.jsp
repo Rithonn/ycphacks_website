@@ -27,13 +27,5 @@
 				<input type="submit" name="submit" value="Multiply Numbers!">
 			</form>
 		</div>
-		
-		<div>
-			<form action="${pageContext.servletContext.contextPath}/guessingGame">
-				<input type="submit" name="submit" value="Guessing Game!">
-			</form>
-		</div>
-		
-		
 	</body>
 </html>
