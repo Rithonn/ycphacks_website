@@ -17,8 +17,17 @@
 	
 	<body>
 		<ul class="navBar">
-			<li class="navBarLogo">Picture</li>
-			<li class="barElements"><a href="profile_page">Edit Profile</a></li>
+			<li class="navBarLogo">logo</li>
+			<li class="navProfDropDown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #27a543">
+	    			profName
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			    	<a class="dropdown-item" href="profile_page">View Profile</a>
+					<a class="dropdown-item" href="#">View Registration Status</a>   	
+			    	<a class="dropdown-item" href="#">Sign Out</a>
+				</div>
+			</li>
 			<li class="barElements"><a href="schedule">Schedule</a></li>
 		  	<li class="barElements"><a href="directions">Directions</a></li>
 		  	<li class="barElements"><a href="registration">Registration</a></li>
@@ -26,7 +35,9 @@
 		  	<li class="barElements"><a href="index">Home</a></li>
 		</ul>
 		
+		
 		<div class="makePageScroll">
+			I go under the navBar!
 		</div>
 		
 		<div class="makePageScroll2">
