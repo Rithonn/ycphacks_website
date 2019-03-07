@@ -7,50 +7,16 @@
 /*
 * ===================================================NAV BAR STYLE BEGIN=======================
 */
-.navBar{
-  	list-style-type: none;
-  	margin: 0;
-  	padding: 0;
-	overflow: visible;	
-
-	position: fixed;
-	top: 0px;
-	z-index: 99;
-
-	width: 100%;
-	height: 60px;
-
-  	background-color: rgba(61, 219, 96, 0.3);
+.bg-hacks{
+	background-color: #64965d;
 }
 
-.navBarLogo{
+.barLogo{
+	background-color:black;
 	float: left;
-	color: white;
-	background-color: black;
 	height: 100%;
-	width: 120px;
-}
-
-.barElements{
-	float: right;
-}
-
-.barElements a{
-	display: block;
-  	color: black;
-	font-size: 14pt;
-  	text-align: center;
-  	padding: 15px 25px;
-	text-decoration: none;
-}
-
-.barElements a:hover{
-	background-color: rgba(53, 196, 84, 0.6);
-}
-
-.navProfDropDown{
-	float: right;
-	padding: 10px;
+	width: 50px;
+	color:white;
 }
 /*
 * ===================================================NAV BAR STYLE END=======================
