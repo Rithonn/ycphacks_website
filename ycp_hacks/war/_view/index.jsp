@@ -9,7 +9,12 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css" />
 		
 	</head>
+	<!-- Temp style tags to make changes in -->
+	<style>
 	
+	
+	
+	</style>
 	
 	<body>
 		<c:if test="${! empty errorMessage}">
