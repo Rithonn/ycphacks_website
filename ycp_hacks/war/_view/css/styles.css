@@ -8,7 +8,7 @@
 * ===================================================NAV BAR STYLE BEGIN=======================
 */
 .bg-hacks{
-	background-color: #64965d;
+	background-color: /*#71a369;*/ rgba(128, 180, 122, 0.8);
 }
 
 .barLogo{
@@ -17,6 +17,12 @@
 	height: 100%;
 	width: 50px;
 	color:white;
+	margin-right: 20px;
+}
+
+.nav-item{
+	background-color: white;
+	margin: 2px;
 }
 /*
 * ===================================================NAV BAR STYLE END=======================
