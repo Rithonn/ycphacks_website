@@ -67,11 +67,17 @@
 		</nav>
 		<!--  COPY ABOVE FOR NAVBAR -->
 		
+<<<<<<< HEAD
 		<div class="timsTestDiv">
 			yeet
 		</div>
 		
 		
+=======
+		<div>
+            test for timmmmmmmmmmmmmmmmmmmmmmmm
+        </div>
+>>>>>>> 2b67013c3c9833f9c6e004e4058de497ff17320c
 		<div class="makePageScroll">
 			I go under the navBar!
 		</div>
