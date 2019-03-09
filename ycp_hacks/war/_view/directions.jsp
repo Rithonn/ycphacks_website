@@ -19,7 +19,7 @@
 	
 	
 	<!--  COPY UNDER FOR NAVBAR -->
-		<nav class="navbar navbar-expand-lg bg-hacks fixed-top">
+		<nav class="navbar navbar-expand-lg navbar-light bg-hacks fixed-top">
 	  		<div class="barLogo">
 	  			<a href="index">
 	  				<img src="${pageContext.request.contextPath}/_view/resources/newLogo.png" height="53" width="239.25">
@@ -66,18 +66,7 @@
 	  		</div>
 		</nav>
 		<!--  COPY ABOVE FOR NAVBAR -->
-		
-<<<<<<< HEAD
-		<div class="timsTestDiv">
-			yeet
-		</div>
-		
-		
-=======
-		<div>
-            test for timmmmmmmmmmmmmmmmmmmmmmmm
-        </div>
->>>>>>> 2b67013c3c9833f9c6e004e4058de497ff17320c
+
 		<div class="makePageScroll">
 			I go under the navBar!
 		</div>

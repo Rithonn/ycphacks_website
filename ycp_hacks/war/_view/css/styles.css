@@ -40,7 +40,6 @@
 
 #profileDropLeft{
 	background-color: #262626;
-	color: white;
 	
 	/*to counter the skewing of the other nav-items(Home, Directions, etc.)*/
 	transform: skew(0deg);
@@ -51,9 +50,20 @@
 	transform: skew(0deg);
 }
 
+/*sets profileName to white text*/
+#navbarDropdown.nav-link{
+	color:white;
+}
+
+
 .dropdown-menu{
 	background-color: #262626;
 	color: white;
+}
+
+.dropdown-menu a:hover{
+	background-color: white;
+	color: #262626;
 }
 /*
 * ===================================================NAV BAR STYLE END=======================
