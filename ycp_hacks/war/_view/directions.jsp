@@ -67,6 +67,10 @@
 		</nav>
 		<!--  COPY ABOVE FOR NAVBAR -->
 		
+		<div class="timsTestDiv">
+			yeet
+		</div>
+		
 		
 		<div class="makePageScroll">
 			I go under the navBar!
