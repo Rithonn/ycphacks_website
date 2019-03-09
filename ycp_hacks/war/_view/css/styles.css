@@ -7,50 +7,53 @@
 /*
 * ===================================================NAV BAR STYLE BEGIN=======================
 */
-.navBar{
-  	list-style-type: none;
-  	margin: 0;
-  	padding: 0;
-	overflow: visible;	
-
-	position: fixed;
-	top: 0px;
-	z-index: 99;
-
-	width: 100%;
-	height: 60px;
-
-  	background-color: rgba(61, 219, 96, 0.3);
+.bg-hacks{
+	background-color: /*#71a369;*/ rgba(128, 180, 122, 0.8);
 }
 
-.navBarLogo{
+.barLogo{
+	background-color: #262626;
 	float: left;
-	color: white;
-	background-color: black;
 	height: 100%;
-	width: 120px;
+	width: 240px;
+	color:white;
+	margin-right: 20px;
+	overflow: hidden;
 }
 
-.barElements{
-	float: right;
+.nav-item{
+	background-color: rgb(130, 233, 122);
+	margin: 5px;
+	transform: skew(-21deg);
 }
 
-.barElements a{
-	display: block;
-  	color: black;
-	font-size: 14pt;
-  	text-align: center;
-  	padding: 15px 25px;
-	text-decoration: none;
+.nav-item a{
+	color: inherit;
+	
+	/*to make the text not slanted/skewed*/
+	transform: skew(21deg);
 }
 
-.barElements a:hover{
-	background-color: rgba(53, 196, 84, 0.6);
+.nav-item:hover{
+	background-color: #4dff4d;
 }
 
-.navProfDropDown{
-	float: right;
-	padding: 10px;
+#profileDropLeft{
+	background-color: #262626;
+	color: white;
+	
+	/*to counter the skewing of the other nav-items(Home, Directions, etc.)*/
+	transform: skew(0deg);
+}
+
+#profileDropLeft a{
+	/*to counter the skewing of the other nav-items(Home, Directions, etc.)*/
+	transform: skew(0deg);
+}
+
+.dropdown-menu{
+	background-color: #262626;
+	color: white;
 }
 /*
 * ===================================================NAV BAR STYLE END=======================
@@ -63,7 +66,7 @@
 	top: 500px;
 	left: 300px;
 	height: 100px;
-	width: 100px;
+	width: 100%;
 	background-color: black;
 }
 
