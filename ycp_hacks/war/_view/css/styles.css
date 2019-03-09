@@ -12,17 +12,48 @@
 }
 
 .barLogo{
-	background-color:black;
+	background-color: #262626;
 	float: left;
 	height: 100%;
-	width: 50px;
+	width: 240px;
 	color:white;
 	margin-right: 20px;
+	overflow: hidden;
 }
 
 .nav-item{
-	background-color: white;
-	margin: 2px;
+	background-color: rgb(130, 233, 122);
+	margin: 5px;
+	transform: skew(-21deg);
+}
+
+.nav-item a{
+	color: inherit;
+	
+	/*to make the text not slanted/skewed*/
+	transform: skew(21deg);
+}
+
+.nav-item:hover{
+	background-color: #4dff4d;
+}
+
+#profileDropLeft{
+	background-color: #262626;
+	color: white;
+	
+	/*to counter the skewing of the other nav-items(Home, Directions, etc.)*/
+	transform: skew(0deg);
+}
+
+#profileDropLeft a{
+	/*to counter the skewing of the other nav-items(Home, Directions, etc.)*/
+	transform: skew(0deg);
+}
+
+.dropdown-menu{
+	background-color: #262626;
+	color: white;
 }
 /*
 * ===================================================NAV BAR STYLE END=======================
@@ -35,7 +66,7 @@
 	top: 500px;
 	left: 300px;
 	height: 100px;
-	width: 100px;
+	width: 100%;
 	background-color: black;
 }
 

@@ -12,13 +12,18 @@
 		<!-- bootstrap cdn -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<!-- external style sheet link -->
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css">
 	</head>
 	
 	<body>
-		<nav class="navbar navbar-expand-lg navbar-light bg-hacks fixed-top dropleft">
+	
+	
+	<!--  COPY UNDER FOR NAVBAR -->
+		<nav class="navbar navbar-expand-lg bg-hacks fixed-top">
 	  		<div class="barLogo">
-	  			logo
+	  			<a href="index">
+	  				<img src="${pageContext.request.contextPath}/_view/resources/newLogo.png" height="53" width="239.25">
+	  			</a>
 	  		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    		<span class="navbar-toggler-icon"></span>
@@ -46,7 +51,7 @@
 	      		
 	      		<!--  aligned right navBar contents -->
 	      		<ul class="navbar-nav ml-auto">
-				    <li class="nav-item dropdown">
+				    <li class="nav-item dropleft" id="profileDropLeft">
 				       	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				          prof_name
 				        </a>
@@ -60,7 +65,7 @@
 				 </ul>
 	  		</div>
 		</nav>
-		
+		<!--  COPY ABOVE FOR NAVBAR -->
 		
 		
 		<div class="makePageScroll">
