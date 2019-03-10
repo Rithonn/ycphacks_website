@@ -73,10 +73,21 @@ nav ul li a:focus{
 }
 
 /* This is for the button */
+nav ul li a.stationary{
+    margin: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 6px;
+    border-radius: 15px;
+}
+
+
+/* This is for the button */
 nav ul li a.active{
     background: green;
     color: white;
     border: 6px;
+    border-radius: 15px;
 }
 
 /* Start on the mainpage background */
@@ -87,4 +98,18 @@ section.firstSection{
     background-size: cover;
     background-position: center;
 
+}
+
+.secondSection{
+
+    margin-top: 80px;
+
+}
+
+.secondSection p{
+    width: 30%;
+    margin: 30px auto;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 30px;
 }
