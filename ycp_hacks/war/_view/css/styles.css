@@ -70,21 +70,61 @@
 */
 
 
-.makePageScroll{
-	position: absolute;
-	color: white;
-	top: 500px;
-	left: 300px;
-	height: 100px;
-	width: 100%;
-	background-color: black;
+/*
+*===================================================DIRECTIONS STYLE BEGIN=======================
+*/
+.directionsBody{
+	background-color: #5a8754;
 }
 
-.makePageScroll2{
-	position: absolute;
-	top: 2000px;
-	left: 0px;
-	height: 100px;
-	width: 100px;
-	background-color: black;
+.directionsContent{
+	background-color: white;
+	position: relative;
+	
+	width: 30%;
+	height: 550px;
+	
+	top: 130px;
+	left: 35%;
+	
+	border-radius: 25px;
 }
+
+.directionsGoogleMaps{
+	background-color: #262626;
+	color:white;
+	position:relative;
+	margin: auto;
+	
+	width: 90%;
+	height: 60%;
+	top: 5%;
+	
+	text-align: center;
+	
+	border-radius: 25px;
+}
+
+.directionsAddress{
+	background-color: #262626;
+	color: white;
+	position: relative;
+	margin: auto;
+	
+	height: 25%;
+	width: 90%;
+	top: 10%;
+	
+	text-align: center;
+	
+	border-radius: 25px;
+}
+
+.directionsAddress span{
+	position: relative;
+	top: 20%;
+}
+
+/*
+*===================================================DIRECTIONS STYLE END=======================
+*/
