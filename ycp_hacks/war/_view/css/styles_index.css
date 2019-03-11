@@ -99,6 +99,33 @@ section.firstSection{
 
 }
 
+.contentInfo{
+		margin: auto;
+		justify-content: center;
+		background: rgba(0, 0, 0, 0.7);
+		color: white;
+		border: 6px;
+		border-radius: 15px;
+		width: 35%;
+}
+
+.contentInfo p{
+		text-align: center;
+}
+	
+.contentInfo button{
+		justify-content: center;
+		margin: auto;
+		display: flex;
+}
+
+.logo_contentInfo{
+	
+		margin: auto;
+		display: flex;
+		
+}
+
 /* #backgroundVideo {
     width: 30%;
     margin: 30px auto;
