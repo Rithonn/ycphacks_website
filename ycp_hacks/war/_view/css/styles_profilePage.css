@@ -87,65 +87,10 @@ nav ul li a.active{
     border-radius: 15px;
 }
 
-
-
 /*=======================================================*/
 
-
-
 body{
-	background-color: #5a8754;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.directionsContent{
-	background-color: #48a23d;
-	position: relative;
-	
-	width: 30%;
-	height: 550px;
-	
-	z-index: -1;
-	
-	top: 130px;
-	left: 35%;
-	
-	border-radius: 25px;
-}
-
-.directionsGoogleMaps{
-	background-color: #262626;
-	color:white;
-	position:relative;
-	margin: auto;
-	
-	width: 90%;
-	height: 60%;
-	top: 5%;
-	
-	text-align: center;
-	
-	border-radius: 25px;
-}
-
-.directionsAddress{
-	background-color: #262626;
-	color: white;
-	position: relative;
-	margin: auto;
-	
-	height: 25%;
-	width: 90%;
-	top: 10%;
-	
-	text-align: center;
-	
-	border-radius: 25px;
-}
-
-.directionsAddress span{
-	position: relative;
-	top: 20%;
 }
 
 .scroll{
