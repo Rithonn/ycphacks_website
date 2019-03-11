@@ -22,7 +22,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-hacks fixed-top">
 	  		<div class="barLogo">
 	  			<a href="index">
-	  				<img src="${pageContext.request.contextPath}/_view/resources/newLogo.png" height="53" width="239.25">
+	  				<img src="${pageContext.request.contextPath}/_view/css/newLogo.png" height="53" width="239.25">
 	  			</a>
 	  		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
