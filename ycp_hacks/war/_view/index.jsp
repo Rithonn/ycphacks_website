@@ -4,9 +4,27 @@
 
 <html>
 	<head>
-		<title>YCP Hacks</title>
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css" />
+		
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<title>YCP Hacks</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css" />
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    	<script>
+    	
+    		$(window).on('scroll', function(){
+    			if($(window).scrollTop()){
+        			$('nav').addClass('black');
+        			$('a').removeClass('stationary');
+    			}else{
+         			$('nav').removeClass('black');
+         			$('a').addClass('stationary');    
+   				 }
+    
+			})
+    	</script>
+		
 		
 	</head>
 	<!-- Temp style tags to make changes in -->
@@ -23,48 +41,59 @@
 		<!-- Make sure when only wanting to redirect you have to remove method  -->
 		<!-- If method is not moved then the action will still occur like the program ran-->
 		<!-- It can still work for the first two but guessing game crashes -->
+		<div class="wrapper">
+        <nav>
+            <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
+            <ul>
+                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="about">About</a></li>
+                <li><a class="stationary" href="directions">Directions</a></li>
+                <li><a class="stationary" href="registration">Registration</a></li>
+                <li><a class="stationary" href="schedule">Schedule</a></li>
+                <li><a class="active" href="profile_page">Profile</a></li>
+            </ul>
+        </nav>
+        <section class="firstSection">
+
+                <video autoplay="" muted="" loop="" id="backgroundVideo">
+                        <source src="backgroundMov.mp4" type="video/mp4">
+                    </video>
+                    <div class="contentInfo">
+                        <a href="index" class="stationary"><img class="logo_contentInfo" src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
+                        <p>2019 Date To Be Announced</p>
+                        <p>York College of Pennsylvania</p>
+                        <button class="button" type="button">Register Now!</button> 
+                    </div>
+
+        </section>
+        <section class="secondSection">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        </section>
+    </div>
 		
-		<!-- Creation of a mock navbar to use for website  -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-hacks fixed-top">
-		  
-		  <!-- YCP Hacks logo for the navbar -->
-		  <img src="${pageContext.request.contextPath}/_view/css/old_logo.png" alt="Logo">
-	
-		  
-		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		    <span class="navbar-toggler-icon"></span>
-		  </button>
-		  
-		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-		    <ul class="navbar-nav">
-		      <li class="nav-item active">
-		        <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="about">About</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="registration">Registration</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="directions">Directions</a>
-		      </li>
-		      <li class="nav-item">
-		        <a class="nav-link" href="schedule">Schedule</a>
-		      </li>
-		      <li class="nav-item dropdown">
-		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		          Profile
-		        </a>
-		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-		          <a class="dropdown-item" href="#">Action</a>
-		          <a class="dropdown-item" href="#">Another action</a>
-		          <a class="dropdown-item" href="#">Something else here</a>
-		        </div>
-		      </li>
-		    </ul>
-		  </div>
-		</nav>
 		
 	</body>
 </html>

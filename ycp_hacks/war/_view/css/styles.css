@@ -1,10 +1,122 @@
-.addNumbersDiv{
-	width = 33.33%;
-	height = 33.33%;
-	background-color: black;
+/* Setup the sheet with 0 for everything */
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.bg-hacks{
-	background: rgba(118, 247, 135, 0.7);
+/* Nav is going to be fixed to the top */
+nav {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    padding: 10px 100px;
+    box-sizing: border-box;
+    transition: .3s;
 }
-		
+
+/* Change in the navbar colors */
+nav.black {
+    background: rgba(0, 0, 0, 0.7);
+    height: 100px;
+    padding: 10px 100px;
+}
+
+/* Position of the logo */
+nav .logo{
+    color: white;
+    padding: 20px 20px;
+    height: 80px;
+    float: left;
+    transition: .3s;
+}
+
+/* Logo transition from font black to white */
+nav.black .logo{
+    color: white;
+}
+
+nav ul{
+    list-style: none;
+    float: right;
+    margin: 0;
+    padding: 0;
+    display: flex;   
+}
+
+nav ul li{
+    list-style: none;
+}
+
+/* Setup the position of the actual tabs */
+nav ul li a {
+    line-height: 80px;
+    color: white;
+    padding: 10px 25px;
+    text-decoration: none;
+    text-transform: uppercase; 
+    transition: .3s;
+}
+
+/* For the transition changes the font from black to white */
+nav.black ul li a{
+    color: white;
+}
+
+/* Make the focus none if the item is selected */
+nav ul li a:focus{
+    outline: none;
+}
+
+/* This is for the button */
+nav ul li a.stationary{
+    margin: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 6px;
+    border-radius: 15px;
+}
+
+
+/* This is for the button */
+nav ul li a.active{
+    background: green;
+    color: white;
+    border: 6px;
+    border-radius: 15px;
+}
+
+/* Start on the mainpage background */
+section.firstSection{
+    width: 100%;
+    height: 100vh;
+    background: url(background.jpg);
+    background-size: cover;
+    background-position: center;
+
+}
+
+/* #backgroundVideo {
+    width: 30%;
+    margin: 30px auto;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 30px;
+} */
+
+.secondSection{
+
+    margin-top: 80px;
+
+}
+
+.secondSection p{
+    width: 30%;
+    margin: 30px auto;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 30px;
+}
