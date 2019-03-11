@@ -1,4 +1,3 @@
-/* For Index_test_two */
 /* Setup the sheet with 0 for everything */
 body{
     margin: 0;
@@ -99,6 +98,14 @@ section.firstSection{
     background-position: center;
 
 }
+
+/* #backgroundVideo {
+    width: 30%;
+    margin: 30px auto;
+    text-align: justify;
+    font-size: 18px;
+    line-height: 30px;
+} */
 
 .secondSection{
 
