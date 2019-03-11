@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 /* Setup the sheet with 0 for everything */
 body{
     margin: 0;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
-
-/*
-*====================================================NAV BAR STYLE BEGIN====
-*/
 
 /* Nav is going to be fixed to the top */
 nav {
@@ -95,14 +89,6 @@ nav ul li a.active{
     border-radius: 15px;
 }
 
-/*
-*====================================================NAV BAR STYLE END====
-*/
-
-/*
-*====================================================INDEX STYLE BEGIN=====
-*/
-
 /* Start on the mainpage background */
 section.firstSection{
     width: 100%;
@@ -161,65 +147,3 @@ section.firstSection{
     font-size: 18px;
     line-height: 30px;
 }
-/*
-*====================================================INDEX STYLE BEGIN=====
-*/
-
-/*
-*===================================================DIRECTIONS STYLE BEGIN=======================
-*/
-.directionsBody{
-	background-color: #5a8754;
-}
-
-.directionsContent{
-	background-color: white;
-	position: relative;
-	
-	width: 30%;
-	height: 550px;
-	
-	top: 130px;
-	left: 35%;
-	
-	border-radius: 25px;
-}
-
-.directionsGoogleMaps{
-	background-color: #262626;
-	color:white;
-	position:relative;
-	margin: auto;
-	
-	width: 90%;
-	height: 60%;
-	top: 5%;
-	
-	text-align: center;
-	
-	border-radius: 25px;
-}
-
-.directionsAddress{
-	background-color: #262626;
-	color: white;
-	position: relative;
-	margin: auto;
-	
-	height: 25%;
-	width: 90%;
-	top: 10%;
-	
-	text-align: center;
-	
-	border-radius: 25px;
-}
-
-.directionsAddress span{
-	position: relative;
-	top: 20%;
-}
-
-/*
-*===================================================DIRECTIONS STYLE END=======================
-*/
