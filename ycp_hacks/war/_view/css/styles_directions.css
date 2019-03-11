@@ -94,6 +94,11 @@ nav ul li a.active{
 
 
 body{
+	background-image: url(directionsBG.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	
+	
 	background-color: #5a8754;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -146,9 +151,4 @@ body{
 .directionsAddress span{
 	position: relative;
 	top: 20%;
-}
-
-.scroll{
-	position:relative;
-	top:10000px;
 }
