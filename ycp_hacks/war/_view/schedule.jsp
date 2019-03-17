@@ -44,5 +44,6 @@
                 <li><a class="active" href="profile_page">Profile</a></li>
             </ul>
         </nav>
+        </div>
 	</body>
 </html>
