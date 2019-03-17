@@ -33,7 +33,7 @@
 		<!-- If method is not moved then the action will still occur like the program ran-->
 		<!-- It can still work for the first two but guessing game crashes -->
 		<div class="wrapper">
-        <nav>
+            <nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
                 <li><a class="stationary" href="index">Home</a></li>
@@ -43,26 +43,30 @@
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <li><a class="active" href="profile_page">Profile</a></li>
             </ul>
-        </nav>
+            </nav>
         </div>
+        
         <div class='form_wrap'>
-        <form>
             <p class='form_text'>Please fill out this form.</p>
-            
-            <table>
+        <form>
+            <table class="form_table">
+                
 				<tr class="form_element">
-					
 					<td><input type="text" name="name" size="24" value="${name}" placeholder="First and Last Name"/></td>
 				</tr>
+                
 				<tr class="form_element">
 					<td><input type="text" name="email" size="24" value="${email}" placeholder="email"/></td>
 				</tr>
+                
                 <tr class="form_element">
 					<td><input type="text" name="age" size="6" value="${age}" placeholder="Age"/></td>
 				</tr>
+                
                 <tr class="form_element">
 					<td><input type="text" name="uni" size="24" value="${uni}" placeholder="University"/></td>
 				</tr>
+                
                 <!--
                 <tr class="form_element">
 					<td><input type="text" name="about" size="24" value="${about}" placeholder="Tell us about yourself"/></td>
@@ -72,7 +76,9 @@
                 </tr>
                 -->
 			</table>
-			<input type="Submit" name="submit" value="Submit">
+            <div class="form_button">
+			 <input type="Submit" name="submit" value="Submit">
+            </div>
         </form>
         </div>
 	</body>

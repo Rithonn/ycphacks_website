@@ -4,7 +4,13 @@ body{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     background-color: #5a8754; 
 }
+
+/*------Navbar------*/
 /* Nav is going to be fixed to the top */
+.wrapper{
+    height: 100px;
+    width: 100%;
+}
 nav {
     color: white;
     position: fixed;
@@ -87,3 +93,5 @@ nav ul li a.active{
     border: 6px;
     border-radius: 15px;
 }
+
+/*------Navbar------*/
