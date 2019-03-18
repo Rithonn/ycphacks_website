@@ -97,3 +97,16 @@ body{
 	position:relative;
 	top:10000px;
 }
+
+.profContents{
+	background-color: green;
+	width: 100%;
+	position: relative;
+	top: 1000px;
+	
+	z-index: -1;
+}
+
+.userName{
+	color: white;
+}
