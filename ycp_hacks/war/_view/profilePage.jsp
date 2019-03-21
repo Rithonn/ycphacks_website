@@ -48,9 +48,25 @@
         </nav>
         
         <div class="scroll">
-		
 			scroll
+		</div>
 		
+		<div class="profContents">
+			<div class="userName">
+				User's Name
+			</div>
+		
+			<div class="regStatus">
+				User's registration status
+			</div>
+		
+			<div class="email">
+				User's email
+			</div>
+		
+			<div class="university">
+				User's uni
+			</div>
 		</div>
 		
 		
