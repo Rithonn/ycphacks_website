@@ -117,6 +117,9 @@ section.firstSection{
 		justify-content: center;
 		margin: auto;
 		display: flex;
+		background: green;
+		border-color: green;
+		
 }
 
 .logo_contentInfo{
@@ -133,6 +136,8 @@ section.firstSection{
     font-size: 18px;
     line-height: 30px;
 } */
+
+
 
 .secondSection{
 
