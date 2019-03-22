@@ -17,5 +17,12 @@ private static final long serialVersionUID = 1L;
 		System.out.println("Registration Servlet: doGet");
 		
 		req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+		/*Registration servlet will parse all the info from the registration form, and then use that to create a new user in the db
+		 * provided that the user is not already in the database, and that all information passed in has been verified
+		 * */
+		
+		//TODO: Parse info from form for user
+		//TODO: verify info
+		//TODO: store into db
 	}
 }
