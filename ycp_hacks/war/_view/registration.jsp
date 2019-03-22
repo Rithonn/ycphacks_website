@@ -54,7 +54,11 @@
             <table class="form_table">
                 
 				<tr class="form_element">
-					<td><input class='form-control' type="text" name="name"  value="${name}" placeholder="First and Last Name"/></td>
+					<td><input class='form-control' type="text" name="firstname"  value="${firstname}" placeholder="First Name"/></td>
+				</tr>
+                
+                <tr class="form_element">
+					<td><input class='form-control' type="text" name="lastname"  value="${lastname}" placeholder="Last Name"/></td>
 				</tr>
                 
 				<tr class="form_element">
@@ -69,6 +73,13 @@
 					<td><input class='form-control' type="text" name="uni" value="${uni}" placeholder="University"/></td>
 				</tr>
                 
+                <tr class="form_element">
+					<td><input class='form-control' type="text" name="password1"  value="${password1}" placeholder="Password"/></td>
+				</tr>
+                
+                <tr class="form_element">
+					<td><input class='form-control' type="text" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
+				</tr>
                 <!--
                 <tr class="form_element">
 					<td><input type="text" name="about" size="24" value="${about}" placeholder="Tell us about yourself"/></td>
