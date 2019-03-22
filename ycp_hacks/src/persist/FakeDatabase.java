@@ -15,7 +15,7 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public Boolean userExists(String email) {
+	public boolean userExists(String email) {
 		// TODO Auto-generated method stub
 		//Check to see if the user exits
 		for(User exists: userList) {
@@ -27,6 +27,15 @@ public class FakeDatabase implements IDatabase {
 		return false;
 	}
 	
-	
+	public void initData(ArrayList<User> userList) {
+		User user = new User();
+		user.setEmail("tjefferson@ycp.edu");
+		user.setAge(20);
+		user.setIsReg(true);
+		user.setPassword("ilikedogs");
+		user.setUniversity("York College of PA");
+		
+		userList.add(user);
+	}
 	
 }
