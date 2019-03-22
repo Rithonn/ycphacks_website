@@ -93,10 +93,10 @@ body{
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/*Creation of the login form used*/
+/*Creation of the login form used testing*/
 .position_wrapper{
 	position: relative;
-	
+
 }
 .login-form {
 		width: 340px;
