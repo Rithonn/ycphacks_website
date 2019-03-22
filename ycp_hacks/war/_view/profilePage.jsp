@@ -46,28 +46,29 @@
                 <li><a class="active" href="profile_page">Profile</a></li>
             </ul>
         </nav>
+        <div class="position-wrapper">
         
-        <div class="scroll">
-			scroll
-		</div>
-		
-		<div class="profContents">
-			<div class="userName">
-				User's Name
-			</div>
-		
-			<div class="regStatus">
-				User's registration status
-			</div>
-		
-			<div class="email">
-				User's email
-			</div>
-		
-			<div class="university">
-				User's uni
-			</div>
-		</div>
+      
+        <div class="login-form">
+	    <form action="/examples/actions/confirmation.php" method="post">
+	        <h2 class="text-center">Log in</h2>       
+	        <div class="form-group">
+	            <input type="text" class="form-control" placeholder="Username" required="required">
+	        </div>
+	        <div class="form-group">
+	            <input type="password" class="form-control" placeholder="Password" required="required">
+	        </div>
+	        <div class="form-group">
+	            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+	        </div>
+	        <div class="clearfix">
+	            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+	            <a href="#" class="pull-right">Forgot Password?</a>
+	        </div>        
+	    </form>
+	    <p class="text-center"><a href="#">Create an Account</a></p>
+	</div>
+        </div> 
 		
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
