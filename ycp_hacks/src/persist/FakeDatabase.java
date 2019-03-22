@@ -32,7 +32,7 @@ public class FakeDatabase implements IDatabase {
 		user.setEmail("tjefferson@ycp.edu");
 		user.setAge(20);
 		user.setIsReg(true);
-		user.setPassword("t");
+		user.setPassword("ilikedogs");
 		user.setUniversity("York College of PA");
 		
 		userList.add(user);

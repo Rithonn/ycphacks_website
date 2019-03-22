@@ -43,12 +43,7 @@ public class UserController {
 	}
 	
 	public boolean checkCredentials() {
-		System.out.println("I made it here");
-
 		boolean doesExist = db.userExists(model.getEmail(), model.getPassword());
-		System.out.println(model.getEmail());
-		System.out.println(model.getPassword());
-		System.out.println(doesExist);
 		return doesExist;
 	}
 	

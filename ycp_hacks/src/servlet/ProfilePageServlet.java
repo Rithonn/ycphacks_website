@@ -41,7 +41,6 @@ private static final long serialVersionUID = 1L;
 		if(email == null || password == null) {
 			errorMessage = "please specifiy valid credentials";
 		}else{
-			System.out.println("I made it mom");
 			model.setEmail(email);
 			model.setPassword(password);
 		}
