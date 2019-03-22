@@ -99,23 +99,8 @@ nav ul li a.active{
 /*------Navbar------*/
 
 /*------Schedule------*/
-
-.tbl_wrap{
-    text-align: center;
-    position: relative;
-    margin: auto;
-    width: 30%;
-    height: 50%;
-}
 .table{
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: 6px;
-    border-radius: 10px;
-    font-size: 30px;
-    justify-content: center;
-    position: relative;
-    margin: auto;
+    width: 50%;
 }
 
 /*------Schedule------*/
