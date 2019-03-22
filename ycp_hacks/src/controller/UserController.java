@@ -2,12 +2,21 @@ package controller;
 
 import model.User;
 import persist.*;
-import main.Main;
 
 import java.util.Scanner;
 
+import main.Main;
+
+
 public class UserController {
 	private User model;
+	private IDatabase db = null;
+	
+	public UserController() {
+		DatabaseProvider.setInstance(new FakeDatabase());
+		db = DatabaseProvider.getInstance();
+	}
+	
 	
 	public void setModel(User user) {
 		this.model = user;
@@ -34,8 +43,12 @@ public class UserController {
 	}
 	
 	public boolean checkCredentials() {
-		IDatabase db = Main.getDB();
+		System.out.println("I made it here");
+
 		boolean doesExist = db.userExists(model.getEmail(), model.getPassword());
+		System.out.println(model.getEmail());
+		System.out.println(model.getPassword());
+		System.out.println(doesExist);
 		return doesExist;
 	}
 	

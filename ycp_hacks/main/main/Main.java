@@ -4,18 +4,14 @@ import java.io.File;
 
 import org.eclipse.jetty.server.Server;
 
-import persist.DatabaseProvider;
-import persist.IDatabase;
-import persist.InitDatabase;
+
 import persist.*;
 import java.util.Scanner;
+
+
 public class Main {
-	private static IDatabase db = null;
 	
 	public static void main(String[] args) throws Exception {
-		Scanner keyboard = new Scanner(System.in);
-		InitDatabase.init(keyboard);
-		db = DatabaseProvider.getInstance();
 		
 		String webappCodeBase = "./war";
 		File warFile = new File(webappCodeBase);
@@ -42,8 +38,5 @@ public class Main {
 		
 			
 	}
-	
-	public static IDatabase getDB() {
-		return db;
-	}
+
 }

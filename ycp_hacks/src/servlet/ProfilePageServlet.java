@@ -35,30 +35,33 @@ private static final long serialVersionUID = 1L;
 		String errorMessage = null;
 		
 		//get login credentials
-		String email = getStringFromParameter(req.getParameter("email"));
-		String password = getStringFromParameter(req.getParameter("password"));
+		String email = req.getParameter("email");
+		String password = req.getParameter("password");
 		
 		if(email == null || password == null) {
 			errorMessage = "please specifiy valid credentials";
 		}else{
+			System.out.println("I made it mom");
 			model.setEmail(email);
 			model.setPassword(password);
 		}
 			
-		
 		boolean loginCheck = controller.checkCredentials();
 		model.setLogInCheck(loginCheck);
+		//If true login worked yo
+		String youwon = "You didnt win go cry";
+		if(loginCheck == true) {
+			youwon = "It worked yo";
+		}
+		
+		if(loginCheck == false){
+			youwon = "hell naw bro";
+		}
+		req.setAttribute("login", youwon);
+		//if not login denied fool
 		
 		req.setAttribute("user", model);
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
 		
-	}
-
-	private String getStringFromParameter(String s) {
-		if(s == null || s.equals("")) {
-			return null;
-		}else {
-			return s;
-		}
 	}
 }
