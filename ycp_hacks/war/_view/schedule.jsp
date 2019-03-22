@@ -46,6 +46,33 @@
         </nav>
         </div>
         
-        
+        <div class="table_wrap">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">When</th>
+                        <th scope="col">What</th>
+                        <th scope="col">Where</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">5:00 pm</th>
+                <td>Check-in Begins</td>
+                <td>Bottom Floor WBC</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6:00 pm</th>
+                <td>Open Ceremony</td>
+                <td>WBC Lecture Hall</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9:00 pm</th>
+                <td>Pizza!</td>
+                        <td>Yorkview</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 	</body>
 </html>
