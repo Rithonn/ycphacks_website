@@ -13,6 +13,10 @@ public class Main {
 	private static IDatabase db = null;
 	
 	public static void main(String[] args) throws Exception {
+		Scanner keyboard = new Scanner(System.in);
+		InitDatabase.init(keyboard);
+		db = DatabaseProvider.getInstance();
+		
 		String webappCodeBase = "./war";
 		File warFile = new File(webappCodeBase);
 		Launcher launcher = new Launcher();
@@ -36,9 +40,7 @@ public class Main {
         // See http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join()
 		server.join();
 		
-		Scanner keyboard = new Scanner(System.in);
-		InitDatabase.init(keyboard);
-		db = DatabaseProvider.getInstance();	
+			
 	}
 	
 	public static IDatabase getDB() {
