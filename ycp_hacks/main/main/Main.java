@@ -4,7 +4,14 @@ import java.io.File;
 
 import org.eclipse.jetty.server.Server;
 
+import persist.DatabaseProvider;
+import persist.IDatabase;
+import persist.InitDatabase;
+import persist.*;
+import java.util.Scanner;
 public class Main {
+	private static IDatabase db = null;
+	
 	public static void main(String[] args) throws Exception {
 		String webappCodeBase = "./war";
 		File warFile = new File(webappCodeBase);
@@ -28,5 +35,13 @@ public class Main {
         // wait until the server is done executing.
         // See http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join()
 		server.join();
+		
+		Scanner keyboard = new Scanner(System.in);
+		InitDatabase.init(keyboard);
+		db = DatabaseProvider.getInstance();	
+	}
+	
+	public static IDatabase getDB() {
+		return db;
 	}
 }

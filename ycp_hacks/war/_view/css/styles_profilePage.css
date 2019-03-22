@@ -96,6 +96,7 @@ body{
 /*Creation of the login form used testing*/
 .position_wrapper{
 	position: relative;
+
 }
 .login-form {
 		width: 340px;
@@ -108,7 +109,7 @@ body{
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
         margin-top: 65%;
-        
+
 }
 .login-form h2 {
 `       margin: 0 0 15px;
@@ -117,6 +118,14 @@ body{
         min-height: 38px;
         border-radius: 2px;
 }
+    }
+.login-form h2 {
+        margin: 0 0 15px;
+    }
+.form-control, .btn {
+        min-height: 38px;
+        border-radius: 2px;
+    }
 .btn {        
         font-size: 15px;
         font-weight: bold;

@@ -12,9 +12,9 @@
 		
 		<!-- bootstrap cdn -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<!-- external style sheet link -->
+		
+	   <!-- external style sheet link -->
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles_profilePage.css">
-	
 		<!--  navBar info -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     	<script>
@@ -50,13 +50,13 @@
         
       
         <div class="login-form">
-	    <form action="/examples/actions/confirmation.php" method="post">
+	    <form action="${pageContext.servletContext.contextPath}/profile_page" method="post">
 	        <h2 class="text-center">Log in</h2>       
 	        <div class="form-group">
-	            <input type="text" class="form-control" placeholder="Username" required="required">
+	            <input type="text" name="username" class="form-control" placeholder="Username" required="required" value = "${user.email}">
 	        </div>
 	        <div class="form-group">
-	            <input type="password" class="form-control" placeholder="Password" required="required">
+	            <input type="password" name="password" class="form-control" placeholder="Password" required="required" value = "${user.password}">
 	        </div>
 	        <div class="form-group">
 	            <button type="submit" class="btn btn-primary btn-block">Log in</button>
@@ -67,6 +67,16 @@
 	        </div>        
 	    </form>
 	    <p class="text-center"><a href="#">Create an Account</a></p>
+	    
+	    <c:if test="${user.logincheck}">
+	    	<p class="" >Login Successful</p>
+	    </c:if>
+	    
+	    <c:if test="${! user.logincheck}">
+	    	<p class="" >Login Unsuccessful</p>
+	    </c:if>
+	    
+	    
 	</div>
         </div> 
 		
