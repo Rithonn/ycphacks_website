@@ -1,6 +1,10 @@
 package controller;
 
 import model.User;
+import persist.*;
+import main.Main;
+
+import java.util.Scanner;
 
 public class UserController {
 	private User model;
@@ -28,5 +32,13 @@ public class UserController {
 	public void changeUniversity(String newUniversity) {
 		model.setUniversity(newUniversity);
 	}
+	
+	public boolean checkCredentials() {
+		IDatabase db = Main.getDB();
+		boolean doesExist = db.userExists(model.getEmail(), model.getPassword());
+		return doesExist;
+	}
+	
+	
 	
 }

@@ -9,18 +9,18 @@ public class FakeDatabase implements IDatabase {
 	
 	public FakeDatabase() {
 		userList = new ArrayList<User>();
-		
+		initData(userList);
 		//Create a fake account here to be processed
 
 	}
 
 	@Override
-	public boolean userExists(String email) {
+	public boolean userExists(String email, String password) {
 		// TODO Auto-generated method stub
 		//Check to see if the user exits
 		for(User exists: userList) {
 			//return true if the email matches
-			if(exists.getEmail().equals(email)) {
+			if(exists.getEmail().equals(email) && exists.getPassword().equals(password)) {
 				return true;
 			}
 		}

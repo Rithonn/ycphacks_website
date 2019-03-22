@@ -6,6 +6,7 @@ public class User {
 	private int age;
 	private String university;
 	private boolean isReg;
+	private boolean logInCheck;
 	//profType?
 	
 	
@@ -56,6 +57,15 @@ public class User {
 	
 	public boolean isReg() {
 		return isReg;
+	}
+
+	//logincheck get set
+	public boolean isLogInCheck() {
+		return logInCheck;
+	}
+
+	public void setLogInCheck(boolean logInCheck) {
+		this.logInCheck = logInCheck;
 	}
 	
 }
