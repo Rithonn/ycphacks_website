@@ -102,22 +102,22 @@ body{
     	margin: auto;
     	
 	}
-    .login-form form {
+.login-form form {
     	margin-bottom: 15px;
         background: #f7f7f7;
         box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
         padding: 30px;
         margin-top: 65%;
         
-    }
-    .login-form h2 {
-        margin: 0 0 15px;
-    }
-    .form-control, .btn {
+}
+.login-form h2 {
+`       margin: 0 0 15px;
+}
+.form-control, .btn {
         min-height: 38px;
         border-radius: 2px;
-    }
-    .btn {        
+}
+.btn {        
         font-size: 15px;
         font-weight: bold;
-    }
+}
