@@ -45,7 +45,14 @@
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
-                <li><a class="active" href="profile_page">Profile</a></li>
+                 <c:if test="${empty currentUser}">
+                	<li><a class="active" href="profile_page">Log In</a></li>
+                </c:if>
+                <!--  if a user is logged in, display email, link to edit_profile page...
+                MUST MAKE! -->
+                 <c:if test="${! empty currentUser}">
+                 	<li><a class="active" href="#">${currentUser.email}</a></li>
+                 </c:if>
             </ul>
         </nav>
         <section class="aboutSection">

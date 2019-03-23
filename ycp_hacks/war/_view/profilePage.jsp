@@ -43,44 +43,39 @@
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
-                <c:if test="${empty user}">
+                <c:if test="${empty currentUser}">
                 	<li><a class="active" href="profile_page">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
-                 <c:if test="${! empty user}">
-                 	<li><a class="active" href="#">${user.email}</a></li>
+                 <c:if test="${! empty currentUser}">
+                 	<li><a class="active" href="#">${currentUser.email}</a></li>
                  </c:if>
             </ul>
         </nav>
         <div class="position-wrapper">
-        
-      
-        <div class="login-form">
-	    <form action="${pageContext.servletContext.contextPath}/profile_page" method="post">
-	        <h2 class="text-center">Log in</h2>       
-	        <div class="form-group">
-	            <input type="text" name="email" class="form-control" placeholder="Username" required="required" value = "${user.email}">
-	        </div>
-	        <div class="form-group">
-	            <input type="password" name="password" class="form-control" placeholder="Password" required="required" value = "${user.password}">
-	        </div>
-	        <div class="form-group">
-	            <button type="submit" class="btn btn-success btn-block">Log in</button>
-	        </div>
-	        <div class="clearfix">
-	            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-	            <a href="#" class="pull-right">Forgot Password?</a>
-	        </div>   
-	        <p class="text-center"><a href="registration">Create an Account</a></p>
-	    
-	 
-	    	<p class="loginCheck" >${login}</p>     
-	    </form>
-	   
-	    
-	    
-	</div>
+	        <div class="login-form">
+		    <form action="${pageContext.servletContext.contextPath}/profile_page" method="post">
+		        <h2 class="text-center">Log in</h2>       
+		        <div class="form-group">
+		            <input type="text" name="email" class="form-control" placeholder="Username" required="required" value = "${user.email}">
+		        </div>
+		        <div class="form-group">
+		            <input type="password" name="password" class="form-control" placeholder="Password" required="required" value = "${user.password}">
+		        </div>
+		        <div class="form-group">
+		            <button type="submit" class="btn btn-success btn-block">Log in</button>
+		        </div>
+		        <div class="clearfix">
+		            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+		            <a href="#" class="pull-right">Forgot Password?</a>
+		        </div>   
+		        <p class="text-center"><a href="registration">Create an Account</a></p>
+		    
+		 
+		    	<p class="loginCheck" >${login}</p>     
+		    </form>
+			</div>
         </div> 
 		
 		
