@@ -49,21 +49,24 @@
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
                  <c:if test="${! empty currentUser}">
-                 	<li><a class="active" href="editProfilePage">${currentUser.email}</a></li>
+                 	<li><a class="active" href="edit_profile">${currentUser.email}</a></li>
                  </c:if>
             </ul>
         </nav>
         
         <section class="aboutSection">
-                    <div class="aboutInfo">
-                        <p>Profile Options and other things will go here</p>
-                        
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-			                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-            </section>
+        	<div class="aboutInfo">
+	            <p>Profile Options and other things will go here</p>
+	            
+	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+	      	 	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	      		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
+	       		sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      		</div>
+      		<div class="logOutButton">
+      			<button type="button" class="btn btn-success btn-block">Sign Out</button>
+      		</div>
+		</section>
         
     </body>
 </html>

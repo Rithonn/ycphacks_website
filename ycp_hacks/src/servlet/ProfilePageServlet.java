@@ -61,14 +61,8 @@ private static final long serialVersionUID = 1L;
 			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 		}else if(loginCheck == false){
 			youwon = "Login was not successful";
+			req.setAttribute("login", youwon);
 		}
-		 
-		session.setAttribute("currentUser", model);
-		
-		req.setAttribute("login", youwon);
-		//if not login denied fool
-		req.setAttribute("user", model);
-		
 		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
 		

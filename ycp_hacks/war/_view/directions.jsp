@@ -49,7 +49,7 @@
                	<!--  if a user is logged in, display email, link to edit_profile page...
                	MUST MAKE! -->
                 <c:if test="${! empty currentUser}">
-                	<li><a class="active" href="editProfilePage">${currentUser.email}</a></li>
+                	<li><a class="active" href="edit_profile">${currentUser.email}</a></li>
                 </c:if>
             </ul>
         </nav>

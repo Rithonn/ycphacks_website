@@ -17,7 +17,7 @@ public class EditProfileServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("Index Servlet: doGet");
+		System.out.println("Edit Profile Servlet: doGet");
 		session = req.getSession();
 		req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
 	}
@@ -25,6 +25,8 @@ public class EditProfileServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+			System.out.println("Edit Profile Servlet: doPost");
+			session = req.getSession();
+			
 	}
 }

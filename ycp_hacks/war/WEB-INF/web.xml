@@ -88,7 +88,7 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>EditProfileServlet</servlet-name>
-  	<url-pattern>/editProfilePage</url-pattern>
+  	<url-pattern>/edit_profile</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
