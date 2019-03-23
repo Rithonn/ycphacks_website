@@ -82,7 +82,8 @@
 			
 			}
 		</script>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDtNNw5LssW_pub4HGMcxBW2-dBeILxjE&callback=myMap"></script>
+		<!-- change KEY to GoogleAPIkey -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=myMap"></script>
 	
 	
 	</body>
