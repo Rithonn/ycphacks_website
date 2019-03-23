@@ -38,6 +38,10 @@
   	<servlet-name>ScheduleServlet</servlet-name>
   	<servlet-class>servlet.ScheduleServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>EditProfileServlet</servlet-name>
+  	<servlet-class>servlet.EditProfileServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -81,6 +85,10 @@
   <servlet-mapping>
   	<servlet-name>ScheduleServlet</servlet-name>
   	<url-pattern>/schedule</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditProfileServlet</servlet-name>
+  	<url-pattern>/editProfilePage</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->
