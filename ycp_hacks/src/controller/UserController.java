@@ -43,7 +43,8 @@ public class UserController {
 	}
 	
 	public boolean checkCredentials() {
-		boolean doesExist = db.userExists(model.getEmail(), model.getPassword());
+		boolean doesExist = db.userExists(model);
+		model.setLogInCheck(doesExist);
 		return doesExist;
 	}
 	

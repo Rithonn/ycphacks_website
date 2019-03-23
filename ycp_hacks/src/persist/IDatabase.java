@@ -6,6 +6,6 @@ import model.User;
 
 public interface IDatabase {
 	
-	public boolean userExists(String email, String password);
+	public boolean userExists(User user);
 	
 }

@@ -15,12 +15,16 @@ public class FakeDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean userExists(String email, String password) {
+	public boolean userExists(User user) {
 		// TODO Auto-generated method stub
 		//Check to see if the user exits
 		for(User exists: userList) {
 			//return true if the email matches
-			if(exists.getEmail().equals(email) && exists.getPassword().equals(password)) {
+			if(exists.getEmail().equals(user.getEmail()) && exists.getPassword().equals(user.getPassword())) {
+				//user exists, build rest of user model
+				user.setAge(exists.getAge());
+				user.setIsReg(exists.isReg());
+				user.setUniversity(exists.getUniversity());
 				return true;
 			}
 		}

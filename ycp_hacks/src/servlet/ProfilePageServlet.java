@@ -46,14 +46,12 @@ private static final long serialVersionUID = 1L;
 		}
 			
 		boolean loginCheck = controller.checkCredentials();
-		model.setLogInCheck(loginCheck);
+		
 		//If true login worked yo
 		String youwon = "You didnt win go cry";
 		if(loginCheck == true) {
 			youwon = "Login was successful";
-		}
-		
-		if(loginCheck == false){
+		}else if(loginCheck == false){
 			youwon = "Login was not successful";
 		}
 		req.setAttribute("login", youwon);
