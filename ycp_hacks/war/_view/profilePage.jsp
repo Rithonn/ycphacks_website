@@ -44,7 +44,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <c:if test="${empty user}">
-                	<li><a class="active" href="profile_page">Sign Up</a></li>
+                	<li><a class="active" href="profile_page">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
