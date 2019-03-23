@@ -63,7 +63,7 @@
 				</tr>
                 
 				<tr class="form_element">
-					<td><input class='form-control' type="text" name="email"  value="${email}" placeholder="email"/></td>
+					<td><input class='form-control' type="text" name="email"  value="${email}" placeholder="Email"/></td>
 				</tr>
                 
                 <tr class="form_element">
@@ -91,7 +91,7 @@
                 -->
 			</table>
             <div class="form_button">
-			 <input type="Submit" name="submit" value="Submit" class='btn btn-primary'>
+			 <input type="Submit" name="submit" value="Submit" class='btn btn-success'>
             </div>
         </form>
         </div>

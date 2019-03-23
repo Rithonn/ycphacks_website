@@ -63,7 +63,7 @@
                         <a href="index" class="stationary"><img class="logo_contentInfo" src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
                         <p>2019 Date To Be Announced</p>
                         <p>York College of Pennsylvania</p>
-                        <button class="button btn btn-primary" type="button" onclick="location.href='registration'">Register Now!</button> 
+                        <button class="button btn btn-success" type="button" onclick="location.href='registration'">Register Now!</button> 
                     </div>
 
         </section>

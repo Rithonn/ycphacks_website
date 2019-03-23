@@ -50,11 +50,11 @@ private static final long serialVersionUID = 1L;
 		//If true login worked yo
 		String youwon = "You didnt win go cry";
 		if(loginCheck == true) {
-			youwon = "It worked yo";
+			youwon = "Login was successful";
 		}
 		
 		if(loginCheck == false){
-			youwon = "hell naw bro";
+			youwon = "Login was not successful";
 		}
 		req.setAttribute("login", youwon);
 		//if not login denied fool

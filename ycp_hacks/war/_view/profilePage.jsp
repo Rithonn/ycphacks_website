@@ -59,17 +59,18 @@
 	            <input type="password" name="password" class="form-control" placeholder="Password" required="required" value = "${user.password}">
 	        </div>
 	        <div class="form-group">
-	            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+	            <button type="submit" class="btn btn-success btn-block">Log in</button>
 	        </div>
 	        <div class="clearfix">
 	            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
 	            <a href="#" class="pull-right">Forgot Password?</a>
-	        </div>        
-	    </form>
-	    <p class="text-center"><a href="#">Create an Account</a></p>
+	        </div>   
+	        <p class="text-center"><a href="registration">Create an Account</a></p>
 	    
 	 
-	    <p class="" >${login}</p>
+	    	<p class="loginCheck" >${login}</p>     
+	    </form>
+	   
 	    
 	    
 	</div>
