@@ -51,9 +51,14 @@ private static final long serialVersionUID = 1L;
 		boolean loginCheck = controller.checkCredentials();
 		
 		//If true login worked yo
+		//If the user successfully logged in redirect to home page, 
+		//Otherwise inform that log in was not successful
 		String youwon = "You didnt win go cry";
 		if(loginCheck == true) {
-			youwon = "Login was successful";
+			//if not login denied fool
+			session.setAttribute("currentUser", model);
+			req.setAttribute("user", model);
+			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 		}else if(loginCheck == false){
 			youwon = "Login was not successful";
 		}
@@ -63,6 +68,8 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("login", youwon);
 		//if not login denied fool
 		req.setAttribute("user", model);
+		
+		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
 		
 	}
