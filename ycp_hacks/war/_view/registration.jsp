@@ -100,6 +100,8 @@
             <div class="form_button">
 			 <input type="submit" name="submit" value="Submit" class='btn btn-success'>
             </div>
+            
+            <p class="regCheck" >${reg}</p>     
         </form>
         </div>
         

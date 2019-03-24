@@ -10,11 +10,8 @@ import main.Main;
 
 public class UserController {
 	private User model;
-	private IDatabase db = null;
 	
 	public UserController() {
-		DatabaseProvider.setInstance(new FakeDatabase());
-		db = DatabaseProvider.getInstance();
 	}
 	
 	
@@ -50,13 +47,13 @@ public class UserController {
 		model.setLastName(newLast);
 	}
 	
-	public boolean checkCredentials() {
+	public boolean checkCredentials(IDatabase db) {
 		boolean doesExist = db.userExists(model);
 		model.setLogInCheck(doesExist);
 		return doesExist;
 	}
 	
-	public boolean addUser() {
+	public boolean addUser(IDatabase db) {
 		boolean wasAdded = db.addUser(model);
 		return wasAdded;
 	}

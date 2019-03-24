@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import model.User;
+import persist.IDatabase;
 import controller.UserController;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,8 @@ public class RegistrationServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
 	HttpSession session = null;
-
+	IDatabase db = null;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -47,7 +49,7 @@ private static final long serialVersionUID = 1L;
 			password = req.getParameter("password1");
 		}
 		
-		
+		//build rest of user from form submission
 		model.setFirstName(firstName);
 		model.setLastName(lastName);
 		model.setEmail(email);
@@ -56,12 +58,18 @@ private static final long serialVersionUID = 1L;
 		model.setPassword(password);
 		
 		
-		boolean wasAdded = controller.addUser();
+		//add user to db
+		//if successful load index.jsp
+		boolean wasAdded = controller.addUser((IDatabase) session.getAttribute("db"));
 		if(wasAdded) {
+			//log them in
 			session.setAttribute("currentUser", model);
+			//redirect to index.jsp
 			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+		}else {
+			//alert user reg failed
+			req.setAttribute("reg", "Registration was unsuccessful");
+			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 		}
-		
-		req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 	}
 }

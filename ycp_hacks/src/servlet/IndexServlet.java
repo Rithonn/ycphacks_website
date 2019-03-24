@@ -8,17 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import persist.DatabaseProvider;
+import persist.FakeDatabase;
+import persist.IDatabase;
+
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	HttpSession session = null;
-
+	private HttpSession session = null;
+	private IDatabase db = null;
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
 		System.out.println("Index Servlet: doGet");
 		session = req.getSession();
+		
+		//FakeDatabase initialization
+		DatabaseProvider.setInstance(new FakeDatabase());
+		db = DatabaseProvider.getInstance();
+		session.setAttribute("db", db);
+		
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 	}
 	

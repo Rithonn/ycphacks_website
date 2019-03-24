@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import persist.*;
 
 public class ProfilePageServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
 	HttpSession session = null;
+	IDatabase db = null;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -48,7 +50,7 @@ private static final long serialVersionUID = 1L;
 			model.setPassword(password);
 		}
 			
-		boolean loginCheck = controller.checkCredentials();
+		boolean loginCheck = controller.checkCredentials((IDatabase) session.getAttribute("db"));
 		
 		//If true login worked yo
 		//If the user successfully logged in redirect to home page, 
