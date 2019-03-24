@@ -63,10 +63,16 @@
 	      		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
 	       		sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       		</div>
-      		<div class="logOutButton">
-      			<button type="button" class="btn btn-success btn-block">Sign Out</button>
-      		</div>
+      		<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
+	      		<div class="logOutButton">
+	      			<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton" onclick="change()">Sign Out</button>
+	      		</div>
+	      	</form>
 		</section>
-        
+		<script>
+	        function change(){
+	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
+			}
+		</script>
     </body>
 </html>

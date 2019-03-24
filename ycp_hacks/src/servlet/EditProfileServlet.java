@@ -28,5 +28,12 @@ public class EditProfileServlet extends HttpServlet {
 			System.out.println("Edit Profile Servlet: doPost");
 			session = req.getSession();
 			
+			//if signoutButton's value is true, log out(set currentUser to null)
+			if(req.getParameter("signOutButton").equals("true")) {
+				session.setAttribute("currentUser", null);				
+				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+			}
+			
+			
 	}
 }
