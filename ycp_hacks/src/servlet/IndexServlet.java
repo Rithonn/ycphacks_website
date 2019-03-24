@@ -16,7 +16,6 @@ public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private HttpSession session = null;
-	private IDatabase db = null;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -24,11 +23,6 @@ public class IndexServlet extends HttpServlet {
 		
 		System.out.println("Index Servlet: doGet");
 		session = req.getSession();
-		
-		//FakeDatabase initialization
-		DatabaseProvider.setInstance(new FakeDatabase());
-		db = DatabaseProvider.getInstance();
-		session.setAttribute("db", db);
 		
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 	}

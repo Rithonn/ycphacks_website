@@ -24,6 +24,18 @@ private static final long serialVersionUID = 1L;
 		
 		System.out.println("Profile Page Servlet: doGet");
 		session = req.getSession();
+		
+		/*If session DB reference is null.
+		 * create new DB (fake for now)
+		 * set session DB reference to new db
+		 */
+		db = (IDatabase) session.getAttribute("db");
+		if(db == null) {
+			DatabaseProvider.setInstance(new FakeDatabase());
+			db = DatabaseProvider.getInstance();
+			session.setAttribute("db", db);
+		}
+		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
 	}
 	
@@ -50,7 +62,7 @@ private static final long serialVersionUID = 1L;
 			model.setPassword(password);
 		}
 			
-		boolean loginCheck = controller.checkCredentials((IDatabase) session.getAttribute("db"));
+		boolean loginCheck = controller.checkCredentials(db);
 		
 		//If true login worked yo
 		//If the user successfully logged in redirect to home page, 

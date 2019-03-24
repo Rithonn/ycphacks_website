@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 
 import model.User;
+import persist.DatabaseProvider;
+import persist.FakeDatabase;
 import persist.IDatabase;
 import controller.UserController;
 import javax.servlet.ServletException;
@@ -23,6 +25,19 @@ private static final long serialVersionUID = 1L;
 		
 		System.out.println("Registration Servlet: doGet");
 		session = req.getSession();
+		
+		/*If session DB reference is null.
+		 * create new DB (fake for now)
+		 * set session DB reference to new db
+		 */
+		db = (IDatabase) session.getAttribute("db");
+		if(db == null) {
+			DatabaseProvider.setInstance(new FakeDatabase());
+			db = DatabaseProvider.getInstance();
+			session.setAttribute("db", db);
+		}
+		
+		
 		req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 	}
 	
@@ -60,7 +75,7 @@ private static final long serialVersionUID = 1L;
 		
 		//add user to db
 		//if successful load index.jsp
-		boolean wasAdded = controller.addUser((IDatabase) session.getAttribute("db"));
+		boolean wasAdded = controller.addUser(db);
 		if(wasAdded) {
 			//log them in
 			session.setAttribute("currentUser", model);
