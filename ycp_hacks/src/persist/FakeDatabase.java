@@ -33,6 +33,27 @@ public class FakeDatabase implements IDatabase {
 		return false;
 	}
 	
+	@Override
+	public boolean addUser(User user) {
+		
+		boolean emailUsed = false;
+		for(User exists : userList) {
+			if(exists.getEmail().equals(user.getEmail())) {
+				emailUsed = true;
+			}
+		}
+		
+		if(emailUsed == false) {
+			userList.add(user);
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
+	
 	public void initData(ArrayList<User> userList) {
 		User user = new User();
 		user.setEmail("tjefferson@ycp.edu");

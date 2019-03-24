@@ -56,6 +56,11 @@ public class UserController {
 		return doesExist;
 	}
 	
+	public boolean addUser() {
+		boolean wasAdded = db.addUser(model);
+		return wasAdded;
+	}
+	
 	
 	
 }

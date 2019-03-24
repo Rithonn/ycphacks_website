@@ -58,35 +58,35 @@
         
         <div class='form_wrap form_text'>
             <p class=''>Please fill out this form.</p>
-        <form>
+        <form action="${pageContext.servletContext.contextPath}/registration" method="post">
             <table class="form_table">
                 
 				<tr class="form_element">
-					<td><input class='form-control' type="text" name="firstname"  value="${firstname}" placeholder="First Name"/></td>
+					<td><input class='form-control' required="required" type="text" name="firstname"  value="${firstname}" placeholder="First Name"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="text" name="lastname"  value="${lastname}" placeholder="Last Name"/></td>
+					<td><input class='form-control' required="required" type="text" name="lastname"  value="${lastname}" placeholder="Last Name"/></td>
 				</tr>
                 
 				<tr class="form_element">
-					<td><input class='form-control' type="text" name="email"  value="${email}" placeholder="Email"/></td>
+					<td><input class='form-control' required="required" type="text" name="email"  value="${email}" placeholder="Email"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="text" name="age"  value="${age}" placeholder="Age"/></td>
+					<td><input class='form-control' required="required" type="text" name="age"  value="${age}" placeholder="Age"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="text" name="uni" value="${uni}" placeholder="University"/></td>
+					<td><input class='form-control' required="required" type="text" name="uni" value="${uni}" placeholder="University"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="password" name="password1"  value="${password1}" placeholder="Password"/></td>
+					<td><input class='form-control' required="required" type="password" name="password1"  value="${password1}" placeholder="Password"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="password" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
+					<td><input class='form-control' required="required" type="password" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
 				</tr>
                 <!--
                 <tr class="form_element">
@@ -98,7 +98,7 @@
                 -->
 			</table>
             <div class="form_button">
-			 <input type="Submit" name="submit" value="Submit" class='btn btn-success'>
+			 <input type="submit" name="submit" value="Submit" class='btn btn-success'>
             </div>
         </form>
         </div>

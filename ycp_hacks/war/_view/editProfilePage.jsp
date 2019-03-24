@@ -58,8 +58,14 @@
         	<div class="aboutInfo">
 	            <p>Profile Options and other things will go here</p>
 	            
-	            <p>Should Have:
-                Registration status, display their information, if they have special privldges they will see appropriate links</p>
+	            <p>Should Have: <br>
+                Registration status, display their information, if they have special privldges they will see appropriate links<br>
+                
+                ${currentUser.email}<br>
+                ${currentUser.firstName}<br>
+                ${currentUser.university}<br>
+                ${currentUser.age}<br>
+                </p>
       		</div>
       		<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
 	      		<div class="logOutButton">

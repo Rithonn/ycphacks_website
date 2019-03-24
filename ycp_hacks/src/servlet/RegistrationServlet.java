@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 
+import model.User;
+import controller.UserController;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,14 +20,48 @@ private static final long serialVersionUID = 1L;
 			throws ServletException, IOException {
 		
 		System.out.println("Registration Servlet: doGet");
-		req.getSession();
+		session = req.getSession();
 		req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
-		/*Registration servlet will parse all the info from the registration form, and then use that to create a new user in the db
-		 * provided that the user is not already in the database, and that all information passed in has been verified
-		 * */
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+	
+		System.out.println("Registration Servlet: doPost");
 		
-		//TODO: Parse info from form for user
-		//TODO: verify info
-		//TODO: store into db
+		
+		User model = new User();
+		UserController controller = new UserController();
+		controller.setModel(model);
+		
+		String firstName = req.getParameter("firstname");
+		String lastName = req.getParameter("lastname");
+		String email = req.getParameter("email");
+		int age = Integer.parseInt(req.getParameter("age"));
+		String university = req.getParameter("uni");
+		
+		//TODO HANDLE PASSWORDS NOT MATCHING
+		String password = null;
+		if(req.getParameter("password1").equals(req.getParameter("password2"))) {
+			password = req.getParameter("password1");
+		}
+		
+		
+		model.setFirstName(firstName);
+		model.setLastName(lastName);
+		model.setEmail(email);
+		model.setAge(age);
+		model.setUniversity(university);
+		model.setPassword(password);
+		
+		
+		boolean wasAdded = controller.addUser();
+		if(wasAdded) {
+			session.setAttribute("currentUser", model);
+			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+		}
+		
+		req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 	}
 }
