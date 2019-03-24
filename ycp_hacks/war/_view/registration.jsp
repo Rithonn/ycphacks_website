@@ -82,11 +82,11 @@
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="text" name="password1"  value="${password1}" placeholder="Password"/></td>
+					<td><input class='form-control' type="password" name="password1"  value="${password1}" placeholder="Password"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' type="text" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
+					<td><input class='form-control' type="password" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
 				</tr>
                 <!--
                 <tr class="form_element">
