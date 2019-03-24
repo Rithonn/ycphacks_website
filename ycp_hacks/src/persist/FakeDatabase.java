@@ -25,6 +25,8 @@ public class FakeDatabase implements IDatabase {
 				user.setAge(exists.getAge());
 				user.setIsReg(exists.isReg());
 				user.setUniversity(exists.getUniversity());
+				user.setFirstName(exists.getFirstName());
+				user.setLastName(exists.getLastName());
 				return true;
 			}
 		}
@@ -38,6 +40,8 @@ public class FakeDatabase implements IDatabase {
 		user.setIsReg(true);
 		user.setPassword("ilikedogs");
 		user.setUniversity("York College of PA");
+		user.setFirstName("Timothy");
+		user.setLastName("Jefferson");
 		
 		userList.add(user);
 	}

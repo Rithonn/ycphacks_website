@@ -3,6 +3,8 @@ package model;
 public class User {
 	private String email;
 	private String password;
+	private String firstName;
+	private String lastName;
 	private int age;
 	private String university;
 	private boolean isReg;
@@ -66,6 +68,24 @@ public class User {
 
 	public void setLogInCheck(boolean logInCheck) {
 		this.logInCheck = logInCheck;
+	}
+
+	//lastName get set
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	//firstName get set
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 }

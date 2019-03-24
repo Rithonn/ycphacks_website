@@ -42,6 +42,14 @@ public class UserController {
 		model.setUniversity(newUniversity);
 	}
 	
+	public void changeFirstName(String newFirst) {
+		model.setFirstName(newFirst);
+	}
+	
+	public void changeLastName(String newLast) {
+		model.setLastName(newLast);
+	}
+	
 	public boolean checkCredentials() {
 		boolean doesExist = db.userExists(model);
 		model.setLogInCheck(doesExist);
