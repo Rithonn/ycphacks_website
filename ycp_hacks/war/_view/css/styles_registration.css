@@ -78,6 +78,10 @@ nav.black ul li a{
 nav ul li a:focus{
     outline: none;
 }
+/*TIM*/
+nav ul li a:hover{
+	text-decoration:none;
+}
 
 /* This is for the button */
 nav ul li a.stationary{
