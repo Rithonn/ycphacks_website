@@ -54,21 +54,19 @@
             </ul>
         </nav>
         
-        <section class="aboutSection">
+        <div class="aboutSection">
         	<div class="aboutInfo">
 	            <p>Profile Options and other things will go here</p>
 	            
-	            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-	      	 	aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-	      		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-	       		sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	            <p>Should Have:
+                Registration status, display their information, if they have special privldges they will see appropriate links</p>
       		</div>
       		<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
 	      		<div class="logOutButton">
 	      			<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton" onclick="change()">Sign Out</button>
 	      		</div>
 	      	</form>
-		</section>
+		</div>
 		<script>
 	        function change(){
 	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
