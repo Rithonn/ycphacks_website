@@ -22,6 +22,7 @@ public class FakeDatabase implements IDatabase {
 			//return true if the email matches
 			if(exists.getEmail().equals(user.getEmail()) && exists.getPassword().equals(user.getPassword())) {
 				//user exists, build rest of user model
+				user.setUserID(exists.getUserID());
 				user.setAge(exists.getAge());
 				user.setIsReg(exists.isReg());
 				user.setUniversity(exists.getUniversity());
@@ -58,6 +59,7 @@ public class FakeDatabase implements IDatabase {
 		User user = new User();
 		user.setEmail("tjefferson@ycp.edu");
 		user.setAge(20);
+		user.setUserID(1);
 		user.setIsReg(true);
 		user.setPassword("ilikedogs");
 		user.setUniversity("York College of PA");

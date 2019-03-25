@@ -44,6 +44,23 @@ public class UserTest {
 		assertEquals(false, model.isReg());
 	}
 	
+	@Test
+	public void testGetFirstName() {
+		model.setFirstName("George");
+		assertEquals("George", model.getFirstName());
+	}
+	
+	@Test
+	public void testGetLastName() {
+		model.setLastName("Washington");
+		assertEquals("Washington", model.getLastName());
+	}
+	
+	@Test
+	public void testGetUserID() {
+		model.setUserID(1);
+		assertEquals(1, model.getUserID());
+	}
 	
 	
 	

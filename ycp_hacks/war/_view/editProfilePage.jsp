@@ -61,8 +61,11 @@
 	            <p>Should Have: <br>
                 Registration status, display their information, if they have special privldges they will see appropriate links<br>
                 
+                ${currentUser.userID}<br>
                 ${currentUser.email}<br>
+                ${currentUser.password}<br>
                 ${currentUser.firstName}<br>
+                ${currentUser.lastName}<br>
                 ${currentUser.university}<br>
                 ${currentUser.age}<br>
                 </p>

@@ -49,7 +49,6 @@ public class UserController {
 	
 	public boolean checkCredentials(IDatabase db) {
 		boolean doesExist = db.userExists(model);
-		model.setLogInCheck(doesExist);
 		return doesExist;
 	}
 	

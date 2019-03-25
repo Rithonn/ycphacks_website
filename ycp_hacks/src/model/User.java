@@ -6,9 +6,9 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private int age;
+	private int userID;
 	private String university;
 	private boolean isReg;
-	private boolean logInCheck;
 	//profType?
 	
 	
@@ -61,15 +61,6 @@ public class User {
 		return isReg;
 	}
 
-	//logincheck get set
-	public boolean isLogInCheck() {
-		return logInCheck;
-	}
-
-	public void setLogInCheck(boolean logInCheck) {
-		this.logInCheck = logInCheck;
-	}
-
 	//lastName get set
 	public String getLastName() {
 		return lastName;
@@ -86,6 +77,15 @@ public class User {
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+	}
+
+	//userID get set
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
 }
