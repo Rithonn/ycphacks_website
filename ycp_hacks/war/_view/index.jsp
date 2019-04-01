@@ -9,7 +9,8 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<title>YCP Hacks</title>
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles.css" />
+    	<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles_index.css" />
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     	<script>
     	
@@ -29,7 +30,7 @@
 	</head>
 	<!-- Temp style tags to make changes in -->
 	<style>
-	
+
 	
 	
 	</style>
@@ -50,7 +51,14 @@
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
-                <li><a class="active" href="profile_page">Profile</a></li>
+                 <c:if test="${empty currentUser}">
+                	<li><a class="active" href="profile_page">Log In</a></li>
+                </c:if>
+                <!--  if a user is logged in, display email, link to edit_profile page...
+                MUST MAKE! -->
+                 <c:if test="${! empty currentUser}">
+                 	<li><a class="active" href="edit_profile">${currentUser.email}</a></li>
+                 </c:if>
             </ul>
         </nav>
         <section class="firstSection">
@@ -62,7 +70,7 @@
                         <a href="index" class="stationary"><img class="logo_contentInfo" src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
                         <p>2019 Date To Be Announced</p>
                         <p>York College of Pennsylvania</p>
-                        <button class="button" type="button">Register Now!</button> 
+                        <button class="button btn btn-success" type="button" onclick="location.href='registration'">Register Now!</button> 
                     </div>
 
         </section>
