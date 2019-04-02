@@ -110,7 +110,8 @@ section.firstSection{
 		color: white;
 		border: 6px;
 		border-radius: 15px;
-		width: 35%;
+        width: 35%;
+        padding: 50px;
 }
 
 .contentInfo p{
