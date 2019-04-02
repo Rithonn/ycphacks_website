@@ -9,9 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs320.booksdb.model.Author;
-import edu.ycp.cs320.booksdb.model.Book;
-import edu.ycp.cs320.booksdb.model.Pair;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -83,26 +80,22 @@ public class DerbyDatabase implements IDatabase {
 		return conn;
 	}
 	
-	private void loadAuthor(Author author, ResultSet resultSet, int index) throws SQLException {
-		author.setAuthorId(resultSet.getInt(index++));
-		author.setLastname(resultSet.getString(index++));
-		author.setFirstname(resultSet.getString(index++));
+	//NEED TO:
+	//Need to finish creating all the sets for user
+	//Might need to change the order of everything as well depending on the csv file
+	private void loadUser(User user, ResultSet resultSet, int index) throws SQLException {
+		user.setUserID(resultSet.getInt(index++));
+		user.setLastName(resultSet.getString(index++));
+		user.setFirstName(resultSet.getString(index++));
+		user.setEmail(resultSet.getString(index++));
 	}
 	
-	private void loadBook(Book book, ResultSet resultSet, int index) throws SQLException {
-		book.setBookId(resultSet.getInt(index++));
-		book.setAuthorId(resultSet.getInt(index++));
-		book.setTitle(resultSet.getString(index++));
-		book.setIsbn(resultSet.getString(index++));
-		book.setPublished(resultSet.getInt(index++));		
-	}
-	
+
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
-				PreparedStatement stmt2 = null;
 				
 				try {
 					stmt1 = conn.prepareStatement(
@@ -115,22 +108,10 @@ public class DerbyDatabase implements IDatabase {
 					);	
 					stmt1.executeUpdate();
 					
-					stmt2 = conn.prepareStatement(
-							"create table books (" +
-							"	book_id integer primary key " +
-							"		generated always as identity (start with 1, increment by 1), " +
-							"	author_id integer constraint author_id references authors, " +
-							"	title varchar(70)," +
-							"	isbn varchar(15)," +
-							"   published integer " +
-							")"
-					);
-					stmt2.executeUpdate();
 					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
-					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
@@ -140,47 +121,36 @@ public class DerbyDatabase implements IDatabase {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
-				List<Author> authorList;
-				List<Book> bookList;
+				List<User> userList;
 				
-				try {
-					authorList = InitialData.getAuthors();
-					bookList = InitialData.getBooks();
-				} catch (IOException e) {
-					throw new SQLException("Couldn't read initial data", e);
-				}
+				//Delete this once try catch statement is working again
+				userList = InitialData.getUserList();
+				
+				//Was getting an error because the list has null returning
+//				try {
+//					//Create a section in initdata to get userlist
+//					userList = InitialData.getUserList();
+//					
+//				} catch (IOException e) {
+//					throw new SQLException("Couldn't read initial data", e);
+//				}
 
-				PreparedStatement insertAuthor = null;
+				PreparedStatement insertUserList = null;
 				PreparedStatement insertBook   = null;
 
 				try {
-					// populate authors table (do authors first, since author_id is foreign key in books table)
-					insertAuthor = conn.prepareStatement("insert into authors (lastname, firstname) values (?, ?)");
-					for (Author author : authorList) {
-//						insertAuthor.setInt(1, author.getAuthorId());	// auto-generated primary key, don't insert this
-						insertAuthor.setString(1, author.getLastname());
-						insertAuthor.setString(2, author.getFirstname());
-						insertAuthor.addBatch();
+//					Will need to populate the user table with example entry
+					insertUserList = conn.prepareStatement("");
+					for (User inUserList : userList) {
+						//Insert user will have an auto generated id
+						
+						insertUserList.addBatch();
 					}
-					insertAuthor.executeBatch();
-					
-					// populate books table (do this after authors table,
-					// since author_id must exist in authors table before inserting book)
-					insertBook = conn.prepareStatement("insert into books (author_id, title, isbn, published) values (?, ?, ?, ?)");
-					for (Book book : bookList) {
-//						insertBook.setInt(1, book.getBookId());		// auto-generated primary key, don't insert this
-						insertBook.setInt(1, book.getAuthorId());
-						insertBook.setString(2, book.getTitle());
-						insertBook.setString(3, book.getIsbn());
-						insertBook.setInt(4,  book.getPublished());
-						insertBook.addBatch();
-					}
-					insertBook.executeBatch();
+					insertUserList.executeBatch();
 					
 					return true;
 				} finally {
-					DBUtil.closeQuietly(insertBook);
-					DBUtil.closeQuietly(insertAuthor);
+					DBUtil.closeQuietly(insertUserList);
 				}
 			}
 		});
