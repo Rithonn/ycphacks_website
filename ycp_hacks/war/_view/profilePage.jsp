@@ -64,7 +64,7 @@
 		            <input type="password" name="password" class="form-control" placeholder="Password" required="required" value = "${user.password}">
 		        </div>
 		        <div class="form-group">
-		            <button type="submit" class="btn btn-success btn-block">Log in</button>
+		            <button type="submit" class="btn btn-success btn-block" style="background-color: black;">Log in</button>
 		        </div>
 		        <div class="clearfix">
 		            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
