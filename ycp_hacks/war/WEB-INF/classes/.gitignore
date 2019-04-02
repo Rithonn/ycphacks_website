@@ -1,4 +1,4 @@
-/servlet/
 /controller/
-/persist/
 /model/
+/persist/
+/servlet/
