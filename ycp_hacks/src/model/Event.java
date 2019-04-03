@@ -6,9 +6,12 @@ public class Event{
 	private String time;
 	private String name;
 	private String description;
-	private Boolean passedTime;
-	private Boolean upComing;
+	private Boolean isPassedTime;
+	private Boolean isUpComing;
 	
+	public Event() {
+		
+	}
 	public String getLocation() {
 		return location;
 	}
@@ -34,16 +37,16 @@ public class Event{
 		this.description = description;
 	}
 	public Boolean isPassedTime() {
-		return passedTime;
+		return isPassedTime;
 	}
-	public void setPassedTime(Boolean passedTime) {
-		this.passedTime = passedTime;
+	public void setIsPassedTime(Boolean passedTime) {
+		this.isPassedTime = passedTime;
 	}
 	public Boolean isUpComing() {
-		return upComing;
+		return isUpComing;
 	}
-	public void setUpComing(Boolean upComing) {
-		this.upComing = upComing;
+	public void setIsUpComing(Boolean upComing) {
+		this.isUpComing = upComing;
 	}
 	
 	
