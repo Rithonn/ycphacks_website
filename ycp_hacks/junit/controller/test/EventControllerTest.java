@@ -1,6 +1,9 @@
 package controller.test;
 
 import static org.junit.Assert.*;
+
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 import controller.EventController;
@@ -16,9 +19,10 @@ public class EventControllerTest{
 	public void setup() {
 		model = new Event();
 		controller = new EventController();
-		
+		Calendar date = Calendar.getInstance();
+		date.set(2019, 10, 26, 17, 0);
 		model.setLocation("Yorkview");
-		model.setTime("8:00 pm");
+		model.setDate(date);
 		model.setName("Free Pizza");
 		model.setDescription("Enjoy free pizza");
 		model.setIsPassedTime(false);
@@ -36,16 +40,21 @@ public class EventControllerTest{
 	
 	@Test
 	public void testChangeTime() {
-		assertEquals("8:00 pm", model.getTime());
-		controller.changeTime("6:30 pm");
-		assertEquals("6:30 pm", model.getTime());
+		Calendar date = Calendar.getInstance();
+		date.set(2019, 10, 26, 17, 0);
+		Calendar newdate = Calendar.getInstance();
+		newdate.set(2019, 10, 26, 18, 0);
+		
+		assertEquals(date, model.getDate());
+		controller.changeDate(newdate);
+		assertEquals(newdate, model.getDate());
 	}
 	
 	@Test 
 	public void testChangeName() {
 		assertEquals("Free Pizza", model.getName());
-		controller.changeTime("Check-in");
-		assertEquals("Free Pizza", model.getName());
+		controller.changeName("Check-in");
+		assertEquals("Check-in", model.getName());
 	}
 	
 	@Test

@@ -1,6 +1,9 @@
 package model.test;
 
 import static org.junit.Assert.*;
+
+import java.util.Calendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,8 +25,10 @@ public class EventTest{
 	
 	@Test
 	public void testGetTime() {
-		testEvent.setTime("5:30 pm");
-		assertEquals("5:30 pm", testEvent.getTime());
+		Calendar date2 = Calendar.getInstance();
+		date2.set(2019, 10, 26, 20, 0);
+		testEvent.setDate(date2);
+		assertEquals(date2, testEvent.getDate());
 	}
 	
 	@Test
