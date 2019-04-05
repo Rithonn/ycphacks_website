@@ -227,36 +227,5 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	//DEV------------------
-	@Override
-	public boolean seeContents() {
-		return executeTransaction(new Transaction<Boolean>() {
-			@Override
-			public Boolean execute(Connection conn) throws SQLException {
-				PreparedStatement stmt = null;
-				ResultSet resultSet = null;
-				try {
-					stmt = conn.prepareStatement(
-							"select * from users "		
-					);
-					
-					resultSet = stmt.executeQuery();
-					
-					Boolean found = false;
-					while(resultSet.next()) {
-						found = true;	
-						System.out.println(resultSet.getString(2));
-					}
-					
-					return found;	
-				} finally {
-					DBUtil.closeQuietly(resultSet);
-					DBUtil.closeQuietly(stmt);
-					
-				}
-			}		
-		});
-	}
-	
+		
 }

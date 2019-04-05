@@ -33,7 +33,7 @@ private static final long serialVersionUID = 1L;
 		if(db == null) {
 			DatabaseProvider.setInstance(new DerbyDatabase());//------------------------------------------DATABASE MARKER
 			db = DatabaseProvider.getInstance();
-			//session.setAttribute("db", db);------------------------------------------Needed for fakeDB, so other servlets can reference fakeDB reference
+			//session.setAttribute("db", db);//------------------------------------------Needed for fakeDB, so other servlets can reference fakeDB reference
 		}
 		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
