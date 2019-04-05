@@ -8,7 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+//DEV
+import java.sql.DatabaseMetaData;
 
+
+import persist.DBUtil;
+//import persist.DerbyDatabase.Transaction;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -80,30 +85,40 @@ public class DerbyDatabase implements IDatabase {
 		return conn;
 	}
 	
-	//NEED TO:
-	//Need to finish creating all the sets for user
-	//Might need to change the order of everything as well depending on the csv file
+	//Piece together a user from the csv file to be put into the sql statement below
 	private void loadUser(User user, ResultSet resultSet, int index) throws SQLException {
 		user.setUserID(resultSet.getInt(index++));
 		user.setLastName(resultSet.getString(index++));
 		user.setFirstName(resultSet.getString(index++));
 		user.setEmail(resultSet.getString(index++));
+		user.setPassword(resultSet.getString(index++));
+		user.setAge(resultSet.getInt(index++));
+		user.setUniversity(resultSet.getString(index++));
+		user.setIsReg(resultSet.getBoolean(index++));
 	}
 	
 
+	//Change the table for user instead of authors with all the correct fields
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				
+				
+				//Create the user table with the same order of the load up above
 				try {
 					stmt1 = conn.prepareStatement(
-						"create table authors (" +
-						"	author_id integer primary key " +
+						"create table users (" +
+						"	user_id integer primary key " +
 						"		generated always as identity (start with 1, increment by 1), " +									
-						"	lastname varchar(40)," +
-						"	firstname varchar(40)" +
+						"	lastName varchar(40)," +
+						"	firstName varchar(40)," +
+						"   email varchar(40),    " +
+						"   password varchar(120)," + 
+						"   age integer," +
+						"   university varchar(40), " + 
+						"   isReg varchar(5) "    +
 						")"
 					);	
 					stmt1.executeUpdate();
@@ -123,28 +138,33 @@ public class DerbyDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
 				
-				//Delete this once try catch statement is working again
-				userList = InitialData.getUserList();
+				
 				
 				//Was getting an error because the list has null returning
-//				try {
-//					//Create a section in initdata to get userlist
-//					userList = InitialData.getUserList();
-//					
-//				} catch (IOException e) {
-//					throw new SQLException("Couldn't read initial data", e);
-//				}
+				try {
+					//Create a section in initdata to get userlist
+					userList = InitialData.getUserList();
+					
+				} catch (IOException e) {
+					throw new SQLException("Couldn't read initial data", e);
+				}
 
-				PreparedStatement insertUserList = null;
-				PreparedStatement insertBook   = null;
-
+				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
+						+ " password, age, university, isReg) values (?,?,?,?,?,?,?)");
 				try {
 //					Will need to populate the user table with example entry
-					insertUserList = conn.prepareStatement("");
-					for (User inUserList : userList) {
+					for (User user : userList) {
 						//Insert user will have an auto generated id
+						insertUserList.setString(1, user.getLastName());
+						insertUserList.setString(2, user.getFirstName());
+						insertUserList.setString(3, user.getEmail());
+						insertUserList.setString(4, user.getPassword());
+						insertUserList.setInt(5, user.getAge());
+						insertUserList.setString(6, user.getUniversity());
+						insertUserList.setString(7, String.valueOf(user.isReg()));
 						
 						insertUserList.addBatch();
+						
 					}
 					insertUserList.executeBatch();
 					
@@ -170,8 +190,36 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public boolean userExists(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users "
+						+	" where users.email = ? and users.password = ? "			
+					);
+					
+					stmt.setString(1, user.getEmail());
+					stmt.setString(2, user.getPassword());
+					
+					resultSet = stmt.executeQuery();				
+					
+					Boolean found = false;
+					while(resultSet.next()) {
+						found = true;	
+						loadUser(user, resultSet, 1);
+					}
+					
+					return found;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
 	}
 
 	@Override
@@ -179,4 +227,5 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return false;
 	}
+		
 }

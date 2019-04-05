@@ -1,2 +1,4 @@
 /.metadata/
 /.recommenders/
+/ycp_hacks/test.db
+/ycp_hacks/derby.log
