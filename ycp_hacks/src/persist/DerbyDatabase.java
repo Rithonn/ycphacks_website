@@ -8,7 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+//DEV
+import java.sql.DatabaseMetaData;
 
+
+import persist.DBUtil;
+//import persist.DerbyDatabase.Transaction;
 import model.User;
 
 public class DerbyDatabase implements IDatabase {
@@ -159,6 +164,7 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setString(7, String.valueOf(user.isReg()));
 						
 						insertUserList.addBatch();
+						
 					}
 					insertUserList.executeBatch();
 					
@@ -184,8 +190,36 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public boolean userExists(User user) {
-		// TODO Auto-generated method stub
-		return false;
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users "
+						+	" where users.email = ? and users.password = ? "			
+					);
+					
+					stmt.setString(1, user.getEmail());
+					stmt.setString(2, user.getPassword());
+					
+					resultSet = stmt.executeQuery();				
+					
+					Boolean found = false;
+					while(resultSet.next()) {
+						found = true;	
+						loadUser(user, resultSet, 1);
+					}
+					
+					return found;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
 	}
 
 	@Override
@@ -193,4 +227,36 @@ public class DerbyDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	//DEV------------------
+	@Override
+	public boolean seeContents() {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users "		
+					);
+					
+					resultSet = stmt.executeQuery();
+					
+					Boolean found = false;
+					while(resultSet.next()) {
+						found = true;	
+						System.out.println(resultSet.getString(2));
+					}
+					
+					return found;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
+	}
+	
 }

@@ -31,9 +31,9 @@ private static final long serialVersionUID = 1L;
 		 */
 		db = (IDatabase) session.getAttribute("db");
 		if(db == null) {
-			DatabaseProvider.setInstance(new FakeDatabase());
+			DatabaseProvider.setInstance(new DerbyDatabase());//------------------------------------------DATABASE MARKER
 			db = DatabaseProvider.getInstance();
-			session.setAttribute("db", db);
+			//session.setAttribute("db", db);------------------------------------------Needed for fakeDB, so other servlets can reference fakeDB reference
 		}
 		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
@@ -63,6 +63,8 @@ private static final long serialVersionUID = 1L;
 		}
 			
 		boolean loginCheck = controller.checkCredentials(db);
+		
+		
 		
 		//If true login worked yo
 		//If the user successfully logged in redirect to home page, 
