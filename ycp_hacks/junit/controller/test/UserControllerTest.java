@@ -16,6 +16,7 @@ public class UserControllerTest {
 	private UserController controller;
 	private UserController controller_toadd;
 	private IDatabase fakeDB;
+	private IDatabase derbyDB;
 	
 	@Before
 	public void setUp() {
@@ -48,6 +49,9 @@ public class UserControllerTest {
 		
 		DatabaseProvider.setInstance(new FakeDatabase());
 		fakeDB = DatabaseProvider.getInstance();
+		
+		DatabaseProvider.setInstance(new DerbyDatabase());
+		derbyDB = DatabaseProvider.getInstance();
 	}
 	
 	@Test
@@ -85,6 +89,8 @@ public class UserControllerTest {
 		assertEquals("York College of PA", model.getUniversity());
 	}
 	
+	
+	//---------------------------------------FAKE DB TESTS---------------------------
 	@Test
 	public void testCheckCredentialsFakeDB() {
 		boolean shouldExist = controller.checkCredentials(fakeDB);
@@ -99,6 +105,24 @@ public class UserControllerTest {
 		assertTrue(shouldExist);
 	}
 	
+	//---------------------------------------DERBY DB TESTS---------------------------
+	@Test
+	public void testCheckCredentialsDerbyDB() {
+		User derbyExUser = new User();
+		derbyExUser.setEmail("example@ycp.edu");
+		derbyExUser.setPassword("ilikedogs");
+		
+		UserController derbyExUserController = new UserController();
+		derbyExUserController.setModel(derbyExUser);
+		
+		boolean shouldExist = derbyExUserController.checkCredentials(derbyDB);
+		assertTrue(shouldExist);
+		
+		derbyExUser.setPassword("ilikecats");
+		boolean shouldntExist = derbyExUserController.checkCredentials(derbyDB);
+		assertFalse(shouldntExist);
+		
+	}
 	
 	
 }
