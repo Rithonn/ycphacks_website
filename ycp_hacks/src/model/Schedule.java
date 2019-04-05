@@ -9,8 +9,14 @@ public class Schedule{
 		
 	}
 	
+	public ArrayList<Event> getSchedule(){
+		return this.events;
+	}
 	
-	//Get event what does this do?
+	public void setSchedule(ArrayList<Event> schedule) {
+		this.events = schedule;
+	}
+	
 	public void addEvent(Event event) {
 		events.add(event);
 	}

@@ -1,28 +1,31 @@
 package model;
 
+import java.util.Calendar;
+
+
 public class Event{
 	//Event fields
 	private String location;
-	private String time;
+	private Calendar date;
 	private String name;
 	private String description;
 	private Boolean isPassedTime;
 	private Boolean isUpComing;
 	
 	public Event() {
-		
 	}
+	
 	public String getLocation() {
 		return location;
 	}
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getTime() {
-		return time;
+	public Calendar getDate() {
+		return date;
 	}
-	public void setTime(String time) {
-		this.time = time;
+	public void setDate(Calendar time) {
+		this.date = time;
 	}
 	public String getName() {
 		return name;

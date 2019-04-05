@@ -2,6 +2,8 @@ package controller;
 
 import model.Event;
 import persist.*;
+
+import java.util.Calendar;
 import java.util.Scanner;
 import main.Main;
 
@@ -22,8 +24,8 @@ public class EventController {
 		event.setLocation(newlocation);
 	}
 	
-	public void changeTime(String newtime) {
-		event.setTime(newtime);
+	public void changeDate(Calendar newtime) {
+		event.setDate(newtime);
 	}
 	
 	public void changeName(String newname) {
