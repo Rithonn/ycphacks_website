@@ -63,9 +63,7 @@ private static final long serialVersionUID = 1L;
 		}
 			
 		boolean loginCheck = controller.checkCredentials(db);
-		
-		
-		
+
 		//If true login worked yo
 		//If the user successfully logged in redirect to home page, 
 		//Otherwise inform that log in was not successful
