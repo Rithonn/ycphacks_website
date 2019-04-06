@@ -219,6 +219,44 @@ public class DerbyDatabase implements IDatabase {
 			}		
 		});
 	}
+	
+	
+	public boolean emailUsed(User user) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				ResultSet resultSet = null;
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users " +
+							" where email = ?"
+					);
+					//Fill in the preapred statements
+					//Set the different values. Make sure regstatus is alwyas going to be false at the start for an account
+					//That has just been created
+					stmt.setString(1, user.getEmail());
+					
+					resultSet = stmt.executeQuery();						
+					
+					Boolean used = false;
+					while(resultSet.next()) {
+						used = true;	
+					}
+					
+					return used;
+				}finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+				}
+			}
+		});
+	}
+	
+	
+	
+	
+	
 
 	//Add user will insert the new chracter into the database
 	//Might want to create a validate method to check to make sure all the credentials are ok and do not match
@@ -229,6 +267,14 @@ public class DerbyDatabase implements IDatabase {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException{
+				
+				
+				//Check to make sure email has not been used in db already
+				if(emailUsed(user)) {
+					return false;
+				}
+				
+				
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
