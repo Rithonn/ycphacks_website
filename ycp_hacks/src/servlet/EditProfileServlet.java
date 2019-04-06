@@ -19,6 +19,15 @@ public class EditProfileServlet extends HttpServlet {
 		
 		System.out.println("Edit Profile Servlet: doGet");
 		session = req.getSession();
+		
+		/*Doesn't allow logged out client to access edit_profile page
+		 * as there is no user to edit
+		 * forwards back to the index
+		 */
+		if(session.getAttribute("currentUser") == null) {
+			resp.sendRedirect(req.getContextPath() + "/index");
+		}
+		
 		req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
 	}
 	

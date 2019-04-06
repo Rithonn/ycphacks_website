@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
 		session = req.getSession();
 		
 		/*If session DB reference is null.
-		 * create new DB (fake for now)
+		 * create new DB
 		 * set session DB reference to new db
 		 */
 		

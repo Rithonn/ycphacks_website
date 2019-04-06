@@ -232,7 +232,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"insert into users (lastname, firstname, email, password, age, university, isreg)" +
+							"insert into users (lastName, firstName, email, password, age, university, isReg)" +
 							" values( ?, ?, ?, ?, ?, ?, ?)"
 					);
 					//Fill in the preapred statements
