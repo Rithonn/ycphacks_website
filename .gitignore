@@ -2,3 +2,4 @@
 /.recommenders/
 /ycp_hacks/test.db
 /ycp_hacks/derby.log
+/ycp_hacks/war/WEB-INF/classes/
