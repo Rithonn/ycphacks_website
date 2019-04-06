@@ -24,6 +24,44 @@
    				 }
     
 			})
+			
+			//Function to check the password lenght to make sure it is 6 digits
+			function checkPass()
+				{
+				    var pass1 = document.getElementById('pass1');
+				    var pass2 = document.getElementById('pass2');
+				    var message = document.getElementById('error-nwl');
+				    var goodColor = "#66cc66";
+				    var badColor = "#ff6666";
+				 	
+				    if(pass1.value.length > 5)
+				    {
+				        pass1.style.backgroundColor = goodColor;
+				        message.style.color = goodColor;
+				        message.innerHTML = "character number ok!"
+				    }
+				    else
+				    {
+				        pass1.style.backgroundColor = badColor;
+				        message.style.color = badColor;
+				        message.innerHTML = " you have to enter at least 6 digit!"
+				        return;
+				    }
+				  
+				    if(pass1.value == pass2.value)
+				    {
+				        pass2.style.backgroundColor = goodColor;
+				        message.style.color = goodColor;
+				        message.innerHTML = "ok!"
+				    }
+					else
+				    {
+				        pass2.style.backgroundColor = badColor;
+				        message.style.color = badColor;
+				        message.innerHTML = " These passwords don't match"
+				    }
+				}  
+			
     	</script>
         <!-- bootstrap cdn -->
 	</head>
@@ -81,12 +119,13 @@
 					<td><input class='form-control' required="required" type="text" name="uni" value="${uni}" placeholder="University"/></td>
 				</tr>
                 
+                <!-- Make sure to add the button func down here to check password strength -->
                 <tr class="form_element">
-					<td><input class='form-control' required="required" type="password" name="password1"  value="${password1}" placeholder="Password"/></td>
+					<td><input class='form-control' required="required" type="password" name="password1"  id="pass1" value="${password1}" placeholder="Password"/></td>
 				</tr>
                 
                 <tr class="form_element">
-					<td><input class='form-control' required="required" type="password" name="password2"  value="${password2}" placeholder="Re-type Password"/></td>
+					<td><input class='form-control' required="required" type="password" name="password2" id="pass2"  value="${password2}" placeholder="Re-type Password"/></td>
 				</tr>
                 <!--
                 <tr class="form_element">

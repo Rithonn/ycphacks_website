@@ -232,7 +232,7 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"inster into user (lastname, firstname, email, password, age, university, regstatus)" +
+							"insert into users (lastname, firstname, email, password, age, university, isreg)" +
 							" values( ?, ?, ?, ?, ?, ?, ?)"
 					);
 					//Fill in the preapred statements
@@ -244,7 +244,6 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(4, user.getPassword());
 					stmt.setInt(5, user.getAge());
 					stmt.setString(6, user.getUniversity());
-					//Might have to double check this value in the future
 					stmt.setBoolean(7, user.isReg());
 					
 					stmt.executeUpdate();
