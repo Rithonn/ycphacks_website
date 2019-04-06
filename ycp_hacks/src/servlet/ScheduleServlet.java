@@ -42,6 +42,12 @@ private static final long serialVersionUID = 1L;
 		//Set the controller's model
 		schedCont.setSchedule(schedule);
 		
+		//Loads schedule from database into the model schedule
+		schedCont.loadSchedule(db);
+		
+		//Sets schedule attribute in HTTP to the schedule model
+		req.setAttribute("schedule", schedule);
+		
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 	

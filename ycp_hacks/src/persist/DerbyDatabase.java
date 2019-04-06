@@ -13,6 +13,7 @@ import java.sql.DatabaseMetaData;
 
 
 import persist.DBUtil;
+import model.Schedule;
 //import persist.DerbyDatabase.Transaction;
 import model.User;
 
@@ -251,6 +252,12 @@ public class DerbyDatabase implements IDatabase {
 			
 			
 		});
+	}
+
+	@Override
+	public Schedule getScheduleFromDB() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 }

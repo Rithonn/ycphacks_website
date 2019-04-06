@@ -73,7 +73,7 @@ private static final long serialVersionUID = 1L;
 			//if not login denied fool
 			session.setAttribute("currentUser", model);
 			req.setAttribute("user", model);
-			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+			resp.sendRedirect("/_view/index.jsp");
 		}else if(loginCheck == false){
 			youwon = "Login was not successful";
 			req.setAttribute("login", youwon);
