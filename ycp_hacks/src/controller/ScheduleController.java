@@ -2,6 +2,7 @@ package controller;
 
 import model.Event;
 import model.Schedule;
+import persist.IDatabase;
 
 public class ScheduleController{
 	private Schedule schedule;
@@ -26,5 +27,7 @@ public class ScheduleController{
 		this.schedule.removeEvent(event);
 	}
 	
-	
+	public void loadSchedule(IDatabase db) {
+		this.schedule = db.getScheduleFromDB();
+	}
 }

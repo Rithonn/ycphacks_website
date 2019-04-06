@@ -5,16 +5,17 @@ import java.util.Calendar;
 
 
 import model.Event;
+import model.Schedule;
 import model.User;
 
 public class FakeDatabase implements IDatabase {
 	ArrayList<User> userList = null;
-	ArrayList<Event> schedule = null;
+	ArrayList<Event> eventList = null;
 	
 	public FakeDatabase() {
 		userList = new ArrayList<User>();
-		schedule = new ArrayList<Event>();
-		initData(userList, schedule);
+		eventList = new ArrayList<Event>();
+		initData(userList, eventList);
 		//Create a fake account here to be processed
 
 	}
@@ -103,9 +104,20 @@ public class FakeDatabase implements IDatabase {
 		event2.setIsUpComing(true);
 		
 		//Add test stuff to proper lists
-		schedule.add(event1);
-		schedule.add(event2);		
+		eventList.add(event1);
+		eventList.add(event2);		
 		userList.add(user);
+	}
+
+	@Override
+	public Schedule getScheduleFromDB() {
+		Schedule returnSched = new Schedule();
+		//Add each event from the stored list to the schedule
+		for(Event event: eventList) {
+			returnSched.addEvent(event);
+		}
+		
+		return returnSched;
 	}
 	
 }
