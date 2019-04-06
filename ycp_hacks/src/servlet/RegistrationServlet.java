@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import model.User;
 import persist.DatabaseProvider;
+import persist.DerbyDatabase;
 import persist.FakeDatabase;
 import persist.IDatabase;
 import controller.UserController;
@@ -30,11 +31,12 @@ private static final long serialVersionUID = 1L;
 		 * create new DB (fake for now)
 		 * set session DB reference to new db
 		 */
-		db = (IDatabase) session.getAttribute("db");
-		if(db == null) {
-			DatabaseProvider.setInstance(new FakeDatabase());
+		
+		if(DatabaseProvider.getInstance() == null) {
+			DatabaseProvider.setInstance(new DerbyDatabase());
 			db = DatabaseProvider.getInstance();
-			session.setAttribute("db", db);
+			//Don't need this for a real database
+			//session.setAttribute("db", db);
 		}
 		
 		
@@ -72,6 +74,9 @@ private static final long serialVersionUID = 1L;
 		model.setUniversity(university);
 		model.setPassword(password);
 		
+		
+		
+		//Have a check to see if the user exists first. If not then go ahead with the addUser
 		
 		//add user to db
 		//if successful load index.jsp

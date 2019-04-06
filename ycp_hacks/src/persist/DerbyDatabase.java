@@ -222,10 +222,35 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
+	//Add user will insert the new chracter into the database
+	//Might want to create a validate method to check to make sure all the credentials are ok and do not match
+	//Any that are already in the database
 	@Override
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		//Will want to return if the user creation was successful or not via true or false
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				try {
+					stmt = conn.prepareStatement(
+							"inster into user " +
+							" values( ?, ?, ?, ?, ?, ?, ?)"
+					);
+					//Fill in the preapred statements
+					
+					
+				}finally {
+					
+				}
+				//Not returning anything yet unimplemented code
+				return null;
+			}
+			
+			
+		});
 	}
 		
 }
