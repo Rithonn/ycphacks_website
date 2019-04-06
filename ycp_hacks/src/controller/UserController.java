@@ -3,11 +3,6 @@ package controller;
 import model.User;
 import persist.*;
 
-import java.util.Scanner;
-
-import main.Main;
-
-
 public class UserController {
 	private User model;
 	
