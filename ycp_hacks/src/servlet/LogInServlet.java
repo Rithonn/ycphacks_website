@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import persist.*;
 
-public class ProfilePageServlet extends HttpServlet{
+public class LogInServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
 	HttpSession session = null;
@@ -37,7 +37,7 @@ private static final long serialVersionUID = 1L;
 			db = DatabaseProvider.getInstance();
 		}
 		
-		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -73,13 +73,17 @@ private static final long serialVersionUID = 1L;
 			//if not login denied fool
 			session.setAttribute("currentUser", model);
 			req.setAttribute("user", model);
+
 			resp.sendRedirect("/_view/index.jsp");
+
+			resp.sendRedirect(req.getContextPath() + "/index");
+
 		}else if(loginCheck == false){
 			youwon = "Login was not successful";
 			req.setAttribute("login", youwon);
 		}
 		
-		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);
 		
 	}
 }

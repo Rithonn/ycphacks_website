@@ -6,10 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-//DEV
-import java.sql.DatabaseMetaData;
 
 
 import persist.DBUtil;
@@ -228,8 +225,6 @@ public class DerbyDatabase implements IDatabase {
 	//Any that are already in the database
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
-		
 		//Will want to return if the user creation was successful or not via true or false
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -237,17 +232,28 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement stmt = null;
 				try {
 					stmt = conn.prepareStatement(
-							"inster into user " +
+							"insert into users (lastName, firstName, email, password, age, university, isReg)" +
 							" values( ?, ?, ?, ?, ?, ?, ?)"
 					);
 					//Fill in the preapred statements
+					//Set the different values. Make sure regstatus is alwyas going to be false at the start for an account
+					//That has just been created
+					stmt.setString(1, user.getLastName());
+					stmt.setString(2, user.getFirstName());
+					stmt.setString(3, user.getEmail());
+					stmt.setString(4, user.getPassword());
+					stmt.setInt(5, user.getAge());
+					stmt.setString(6, user.getUniversity());
+					stmt.setBoolean(7, user.isReg());
 					
+					stmt.executeUpdate();
 					
+					return true;
 				}finally {
-					
+					DBUtil.closeQuietly(stmt);
 				}
 				//Not returning anything yet unimplemented code
-				return null;
+				
 			}
 			
 			
@@ -256,7 +262,6 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Schedule getScheduleFromDB() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 		

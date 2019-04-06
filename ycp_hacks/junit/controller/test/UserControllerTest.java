@@ -125,6 +125,33 @@ public class UserControllerTest {
 	}
 	
 	
+	/*NOTICE
+	 * 
+	 * could fail if this test user already exists in
+	 * the derbyDB Users table
+	 */
+	@Test
+	public void testAddUserDerbyDB() {
+		
+		User derbyToAdd = new User();
+		derbyToAdd.setEmail("unitTest@test.edu");
+		derbyToAdd.setPassword("cs320isfun");
+		derbyToAdd.setAge(43);
+		derbyToAdd.setUniversity("Cornell");
+		derbyToAdd.setFirstName("test");
+		derbyToAdd.setLastName("test");
+		
+		
+		UserController derbyToAddController = new UserController();
+		derbyToAddController.setModel(derbyToAdd);
+		
+		boolean shouldAdd = derbyToAddController.addUser(derbyDB);
+		assertTrue(shouldAdd);
+		
+		
+	}
+	
+	
 }
 	
 
