@@ -44,7 +44,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <c:if test="${empty currentUser}">
-                	<li><a class="active" href="profile_page">Log In</a></li>
+                	<li><a class="active" href="login">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
@@ -55,7 +55,7 @@
         </nav>
         <div class="position-wrapper">
 	        <div class="login-form">
-		    <form action="${pageContext.servletContext.contextPath}/profile_page" method="post">
+		    <form action="${pageContext.servletContext.contextPath}/login" method="post">
 		        <h2 class="text-center">Log in</h2>       
 		        <div class="form-group">
 		            <input type="text" name="email" class="form-control" placeholder="Username" required="required" value = "${user.email}">

@@ -124,6 +124,12 @@ public class UserControllerTest {
 		
 	}
 	
+	@Test
+	public void testAddUserDerbyDB() {
+		//TODO: finish test, Tim started
+		assertTrue(true);
+	}
+	
 	
 }
 	
