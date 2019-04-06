@@ -6,7 +6,7 @@ public class Schedule{
 	private ArrayList<Event> events;
 	
 	public Schedule() {
-		
+		events = new ArrayList<Event>();
 	}
 	
 	public ArrayList<Event> getSchedule(){
@@ -18,11 +18,11 @@ public class Schedule{
 	}
 	
 	public void addEvent(Event event) {
-		events.add(event);
+		this.events.add(event);
 	}
 	
 	public void removeEvent(Event event){
-		events.remove(event);
+		this.events.remove(event);
 	}
 	
 }

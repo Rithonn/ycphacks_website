@@ -105,19 +105,20 @@ public class FakeDatabase implements IDatabase {
 		
 		//Add test stuff to proper lists
 		eventList.add(event1);
-		eventList.add(event2);		
+		eventList.add(event2);
+		System.out.println(eventList.get(0).getDescription());
+		System.out.println(eventList.get(1).getDescription());
 		userList.add(user);
 	}
 
 	@Override
-	public Schedule getScheduleFromDB() {
-		Schedule returnSched = new Schedule();
+	public Schedule getScheduleFromDB(Schedule schedule) {
 		//Add each event from the stored list to the schedule
 		for(Event event: eventList) {
-			returnSched.addEvent(event);
+			schedule.addEvent(event);
 		}
 		
-		return returnSched;
+		return schedule;
 	}
 	
 }

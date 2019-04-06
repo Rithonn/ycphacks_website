@@ -33,6 +33,6 @@ public class ScheduleController{
 	
 	//Load schedule from the database
 	public void loadSchedule(IDatabase db) {
-		this.schedule = db.getScheduleFromDB();
+		this.schedule = db.getScheduleFromDB(schedule);
 	}
 }
