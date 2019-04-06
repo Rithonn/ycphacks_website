@@ -60,31 +60,21 @@
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">What</th>
                     <th scope="col">When</th>
+                    <th scope="col">What</th>
                     <th scope="col">Where</th>
                     <th scope="col">Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">5:00 pm</th>
-                    <td>Check-in Begins</td>
-                    <td>WBC Lobby</td>
-                    <td>Check-in for the event</td>
-                </tr>
-                <tr>
-                    <th scope="row">6:00 pm</th>
-                    <td>Opening Ceremony</td>
-                    <td>Willmen Lecture Hall</td>
-                    <td>Quick opening word to kick off the event</td>
-                </tr>
-                <tr>
-                    <th scope="row">9:00 pm</th>
-                    <td>Pizza</td>
-                    <td>Yorkview</td>
-                    <td>Enjoy some free pizza</td>
-                </tr>
+                <c:forEach items="${schedule}" var="event">
+                    <tr>
+                        <td>${event.date.time.hours}</td>
+                        <td>${event.name}</td>
+                        <td>${event.location}</td>
+                        <td>${event.description}</td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
         </div>

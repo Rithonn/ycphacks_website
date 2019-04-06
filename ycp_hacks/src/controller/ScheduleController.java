@@ -1,5 +1,6 @@
 package controller;
 
+
 import model.Event;
 import model.Schedule;
 import persist.IDatabase;
@@ -35,4 +36,5 @@ public class ScheduleController{
 	public void loadSchedule(IDatabase db) {
 		this.schedule = db.getScheduleFromDB(schedule);
 	}
+	
 }

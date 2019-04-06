@@ -25,4 +25,11 @@ public class Schedule{
 		this.events.remove(event);
 	}
 	
+	public Event getEvent(int i) {
+		return events.get(i);
+	}
+	
+	public int getSize() {
+		return events.size();
+	}
 }

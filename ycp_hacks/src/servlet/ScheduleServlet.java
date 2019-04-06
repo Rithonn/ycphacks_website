@@ -1,5 +1,6 @@
 package servlet;
 
+import java.util.List;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.ScheduleController;
+import model.Event;
 import model.Schedule;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -45,8 +47,11 @@ private static final long serialVersionUID = 1L;
 		//Loads schedule from database into the model schedule
 		schedCont.loadSchedule(db);
 		
+		//Convert to collection to make it iterable in the jsp
+		List<Event> eventlist = schedule.getSchedule();
+		
 		//Sets schedule attribute in HTTP to the schedule model
-		req.setAttribute("schedule", schedule);
+		req.setAttribute("schedule", eventlist);
 		
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
