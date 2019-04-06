@@ -25,5 +25,4 @@ public class Schedule{
 		events.remove(event);
 	}
 	
-	
 }

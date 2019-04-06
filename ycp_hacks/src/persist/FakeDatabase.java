@@ -92,6 +92,7 @@ public class FakeDatabase implements IDatabase {
 		Event event2 = new Event();
 		
 		Calendar date2 = Calendar.getInstance();
+		
 		date2.set(2019, 10, 26, 20, 0);
 		
 		event2.setLocation("Yorkview");

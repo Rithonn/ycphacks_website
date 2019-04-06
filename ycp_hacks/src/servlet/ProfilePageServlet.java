@@ -29,11 +29,12 @@ private static final long serialVersionUID = 1L;
 		 * create new DB (fake for now)
 		 * set session DB reference to new db
 		 */
-		db = (IDatabase) session.getAttribute("db");
-		if(db == null) {
+		
+		if(DatabaseProvider.getInstance() == null) {
 			DatabaseProvider.setInstance(new DerbyDatabase());//------------------------------------------DATABASE MARKER
 			db = DatabaseProvider.getInstance();
-			//session.setAttribute("db", db);//------------------------------------------Needed for fakeDB, so other servlets can reference fakeDB reference
+		}else {
+			db = DatabaseProvider.getInstance();
 		}
 		
 		req.getRequestDispatcher("/_view/profilePage.jsp").forward(req, resp);
