@@ -69,16 +69,29 @@
             <tbody>
                 <c:forEach items="${schedule}" var="event">
                     <tr>
-                        <td><script>
+                        <td>
+                            <script>
+                            // Script to display the event time as HH:MM am/pm
                             var eventHour = ${event.date.time.hours};
                             var eventMins = ${event.date.time.minutes};
-                            var amOrPm; 
+                            var amOrPm;
+                            //Hour is stored in 24hr format
+                            //If the hour is greater than 12, subtract 12 and make it pm
                             if (eventHour > 12) {
                                     amOrPm = "pm";
                                     eventHour = eventHour - 12; 
+                            //Otherwise it is in the am
                             }else{
                                 amOrPm = "am";
                             }
+                            
+                            //Minutes are stored as a raw into so if it is less than 10, it will display as a single digit
+                            //If it is less than 10, prepend a 0
+                            if (eventMins < 10) {
+                                eventMins = '0' + eventMins;
+                            }
+                            
+                            //Put the hour, mins, and am/pm together into one string
                             document.write(eventHour, ":", eventMins, " ", amOrPm);
                             </script>
                         </td>
