@@ -121,4 +121,13 @@ public class FakeDatabase implements IDatabase {
 		return schedule;
 	}
 	
+	@Override
+	public boolean deleteUser(User user) {
+		return false;
+	}
+	
+	@Override
+	public boolean updateUser(User user) {
+		return false;
+	}
 }
