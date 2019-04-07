@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import model.User;
 import persist.DatabaseProvider;
@@ -15,6 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class RegistrationServlet extends HttpServlet{
+	
+public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);	
+
 private static final long serialVersionUID = 1L;
 	
 	HttpSession session = null;
@@ -57,7 +63,15 @@ private static final long serialVersionUID = 1L;
 		//start pulling information from the form
 		String firstName = req.getParameter("firstname");
 		String lastName = req.getParameter("lastname");
+		
+		//validate email address with regex pattern above
 		String email = req.getParameter("email");
+		if(!validate(email)) {
+			req.setAttribute("reg", "Please provide a valid email address");
+			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/registration");
+		}
+		
 		String university = req.getParameter("uni");
 
 		//TODO: validate age is an integer, and is between 1-130
@@ -109,4 +123,10 @@ private static final long serialVersionUID = 1L;
 		
 		
 	}
+	
+	//method to validate email with the Pattern at top of file
+	public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
+}
 }
