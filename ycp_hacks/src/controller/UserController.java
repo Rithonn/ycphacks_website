@@ -52,6 +52,11 @@ public class UserController {
 		return wasAdded;
 	}
 	
+	public boolean deleteUser(IDatabase db) {
+		boolean wasDeleted = db.deleteUser(model);
+		return wasDeleted;
+	}
+	
 	
 	
 }

@@ -310,5 +310,34 @@ public class DerbyDatabase implements IDatabase {
 	public Schedule getScheduleFromDB(Schedule schedule) {
 		return null;
 	}
+	
+	@Override
+	public boolean deleteUser(User user) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"delete from users where email = ?"
+					);
+					
+					stmt.setString(1, user.getEmail());
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+	}
+	
+	@Override
+	public boolean updateUser(User user) {
+		return false;
+	}
 		
 }
