@@ -64,32 +64,37 @@ private static final long serialVersionUID = 1L;
 		String password = null;
 		if(req.getParameter("password1").equals(req.getParameter("password2"))) {
 			password = req.getParameter("password1");
-		}
-		
-		//build rest of user from form submission
-		model.setFirstName(firstName);
-		model.setLastName(lastName);
-		model.setEmail(email);
-		model.setAge(age);
-		model.setUniversity(university);
-		model.setPassword(password);
-		
-		
-		
-		//Have a check to see if the user exists first. If not then go ahead with the addUser
-		
-		//add user to db
-		//if successful load index.jsp
-		boolean wasAdded = controller.addUser(db);
-		if(wasAdded) {
-			//log them in
-			session.setAttribute("currentUser", model);
-			//redirect to index.jsp
-			req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+			//build rest of user from form submission
+			model.setFirstName(firstName);
+			model.setLastName(lastName);
+			model.setEmail(email);
+			model.setAge(age);
+			model.setUniversity(university);
+			model.setPassword(password);
+			
+			
+			
+			//Have a check to see if the user exists first. If not then go ahead with the addUser
+			
+			//add user to db
+			//if successful load index.jsp
+			boolean wasAdded = controller.addUser(db);
+			if(wasAdded) {
+				//log them in
+				session.setAttribute("currentUser", model);
+				//redirect to index.jsp
+				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+			}else {
+				//alert user reg failed
+				req.setAttribute("reg", "Registration was unsuccessful");
+				req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+			}
 		}else {
-			//alert user reg failed
-			req.setAttribute("reg", "Registration was unsuccessful");
+			//if password not matching, alert user
+			req.setAttribute("reg", "Passwords did not match");
 			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 		}
+		
+		
 	}
 }
