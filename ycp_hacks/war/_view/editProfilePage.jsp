@@ -62,7 +62,7 @@
 						<div class="">
 							<h3>Personal info</h3>
 				
-							<form class="form-horizontal" role="form">
+							<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
 								<div class="form-group">
 									<div class="">
 										<label class="">First name:</label>
@@ -106,11 +106,18 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class=""></label>
+									<label class=""></label>							
 									<div class="">
-										<input type="button" class="btn btn-primary" value="Save Changes">
+										<button type="submit" class="btn btn-success btn-block" value="" name="updateProfileButton" onclick="changeUpdateButton()">
+										Update Profile
+										</button>
 										<span></span>
-										<input type="reset" class="btn btn-primary" value="Delete Profile">
+										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
+										Delete Profile
+										</button>
+										<span></span>
+										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
+										onclick="changeSignOutButton()">Sign Out</button>
 									</div>
 								</div>
 							</form>
@@ -118,21 +125,23 @@
 					</div>
 				</div>
 				<hr>
-				<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
-					<div class="logOutButton">
-						<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton"
-							onclick="change()">Sign Out</button>
-					</div>
-				</form>
 			</div>
-		</div>
 
 		
 		
 		<script>
-	        function change(){
+	        function changeSignOutButton(){
 	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
 			}
+	        
+	        function changeDeleteButton(){
+	        	document.getElementsByName("deleteProfileButton")[0].setAttribute("value", "true");
+			}
+	        
+	        function changeUpdateButton(){
+	        	document.getElementsByName("updateProfileButton")[0].setAttribute("value", "true");
+			}
+	        
 		</script>
     </body>
 </html>
