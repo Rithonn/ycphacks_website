@@ -49,18 +49,34 @@ private static final long serialVersionUID = 1L;
 	
 		System.out.println("Registration Servlet: doPost");
 		
-		
+		//create new user/controller
 		User model = new User();
 		UserController controller = new UserController();
 		controller.setModel(model);
 		
+		//start pulling information from the form
 		String firstName = req.getParameter("firstname");
 		String lastName = req.getParameter("lastname");
 		String email = req.getParameter("email");
-		int age = Integer.parseInt(req.getParameter("age"));
 		String university = req.getParameter("uni");
+
+		//TODO: validate age is an integer, and is between 1-130
+		int age = 0;
+		try{
+			age = Integer.parseInt(req.getParameter("age"));
+			if(age > 130 || age < 1) {
+				req.setAttribute("reg", "Provide an age please");
+				req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/registration");
+			}
+		}catch(NumberFormatException e) {
+			req.setAttribute("reg", "Provide an age please");
+			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/registration");
+		}
 		
-		//TODO HANDLE PASSWORDS NOT MATCHING
+		
+		//check passwords match in registration form
 		String password = null;
 		if(req.getParameter("password1").equals(req.getParameter("password2"))) {
 			password = req.getParameter("password1");
@@ -71,12 +87,8 @@ private static final long serialVersionUID = 1L;
 			model.setAge(age);
 			model.setUniversity(university);
 			model.setPassword(password);
-			
-			
-			
-			//Have a check to see if the user exists first. If not then go ahead with the addUser
-			
-			//add user to db
+						
+			//add user to db, will check if email has been used already
 			//if successful load index.jsp
 			boolean wasAdded = controller.addUser(db);
 			if(wasAdded) {
