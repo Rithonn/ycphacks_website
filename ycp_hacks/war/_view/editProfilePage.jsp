@@ -53,29 +53,82 @@
                  </c:if>
             </ul>
         </nav>
-        
-        <div class="aboutSection">
-        	<div class="aboutInfo">
-	            <p>Profile Options and other things will go here</p>
-	            
-	            <p>Should Have: <br>
-                Registration status, display their information, if they have special privldges they will see appropriate links<br>
-                
-                ${currentUser.userID}<br>
-                ${currentUser.email}<br>
-                ${currentUser.password}<br>
-                ${currentUser.firstName}<br>
-                ${currentUser.lastName}<br>
-                ${currentUser.university}<br>
-                ${currentUser.age}<br>
-                </p>
-      		</div>
-      		<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
-	      		<div class="logOutButton">
-	      			<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton" onclick="change()">Sign Out</button>
-	      		</div>
-	      	</form>
+		<div class="editingAboutSection">
+			<div class="aboutFormEdit">
+				<div class="container">
+					<h1>Edit Profile</h1>
+					<hr>
+						<!-- Edit form column -->
+						<div class="">
+							<h3>Personal info</h3>
+				
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="">
+										<label class="">First name:</label>
+										<input class="form-control" type="text" value="${currentUser.firstName}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Last name:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.lastName}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Email:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.email}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Age:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.age}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">University:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.university}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Password:</label>
+									<div class="">
+										<input class="form-control" type="password" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Confirm password:</label>
+									<div class="">
+										<input class="form-control" type="password" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class=""></label>
+									<div class="">
+										<input type="button" class="btn btn-primary" value="Save Changes">
+										<span></span>
+										<input type="reset" class="btn btn-primary" value="Delete Profile">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
+					<div class="logOutButton">
+						<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton"
+							onclick="change()">Sign Out</button>
+					</div>
+				</form>
+			</div>
 		</div>
+
+		
+		
 		<script>
 	        function change(){
 	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
