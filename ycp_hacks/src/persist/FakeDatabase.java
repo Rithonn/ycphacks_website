@@ -80,7 +80,7 @@ public class FakeDatabase implements IDatabase {
 		Calendar date = Calendar.getInstance();
 		
 		// Format YYYY MM DD HH MM
-		date.set(2019, 10, 26, 17, 0);
+		date.set(2019, 10, 26, 17, 00);
 		
 		event1.setLocation("Lobby");
 		event1.setDescription("Check in before the event starts");
@@ -94,7 +94,7 @@ public class FakeDatabase implements IDatabase {
 		
 		Calendar date2 = Calendar.getInstance();
 		
-		date2.set(2019, 10, 26, 20, 0);
+		date2.set(2019, 10, 26, 20, 30);
 		
 		event2.setLocation("Yorkview");
 		event2.setDescription("Pizza for dinner");
