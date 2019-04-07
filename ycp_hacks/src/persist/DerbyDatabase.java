@@ -307,7 +307,7 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public Schedule getScheduleFromDB() {
+	public Schedule getScheduleFromDB(Schedule schedule) {
 		return null;
 	}
 		
