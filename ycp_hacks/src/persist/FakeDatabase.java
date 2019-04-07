@@ -103,11 +103,21 @@ public class FakeDatabase implements IDatabase {
 		event2.setIsPassedTime(false);
 		event2.setIsUpComing(true);
 		
+		Event event3 = new Event();
+		
+		Calendar date3 = Calendar.getInstance();
+		date3.set(2019, 10, 27, 8, 30);
+		event3.setLocation("Yorkview");
+		event3.setDescription("Breakfast is served");
+		event3.setName("Breakfast");
+		event3.setDate(date3);
+		event3.setIsPassedTime(false);
+		event3.setIsUpComing(true);
+		
 		//Add test stuff to proper lists
 		eventList.add(event1);
 		eventList.add(event2);
-		System.out.println(eventList.get(0).getDescription());
-		System.out.println(eventList.get(1).getDescription());
+		eventList.add(event3);
 		userList.add(user);
 	}
 
