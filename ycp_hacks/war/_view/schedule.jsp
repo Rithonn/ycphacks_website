@@ -69,7 +69,8 @@
             <tbody>
                 <c:forEach items="${schedule}" var="event">
                     <tr>
-                        <td>${event.date.time.hours}</td>
+                        <td><script id="event" type="text/javascript" data-my_var_1="${event.time.hours}" src="${pageContext.request.contextPath}/_view/js/schedule.js"></script>
+                        </td>
                         <td>${event.name}</td>
                         <td>${event.location}</td>
                         <td>${event.description}</td>
