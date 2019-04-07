@@ -69,7 +69,19 @@
             <tbody>
                 <c:forEach items="${schedule}" var="event">
                     <tr>
-                        <td>${event.date.time.hours}</td>
+                        <td><script>
+                            var eventHour = ${event.date.time.hours};
+                            var eventMins = ${event.date.time.minutes};
+                            var amOrPm; 
+                            if (eventHour > 12) {
+                                    amOrPm = "pm";
+                                    eventHour = eventHour - 12; 
+                            }else{
+                                amOrPm = "am";
+                            }
+                            document.write(eventHour, ":", eventMins, " ", amOrPm);
+                            </script>
+                        </td>
                         <td>${event.name}</td>
                         <td>${event.location}</td>
                         <td>${event.description}</td>
