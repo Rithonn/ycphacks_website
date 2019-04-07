@@ -38,9 +38,19 @@ public class EditProfileServlet extends HttpServlet {
 			session = req.getSession();
 			
 			//if signoutButton's value is true, log out(set currentUser to null)
-			if(req.getParameter("signOutButton").equals("true")) {
+			if(req.getParameter("signOutButton") != null) {
 				session.setAttribute("currentUser", null);				
-				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/index");
+			}
+			if(req.getParameter("deleteProfileButton") != null){
+				//TODO: delete user model reference, delete in actual db
+				session.setAttribute("currentUser", null);
+				resp.sendRedirect(req.getContextPath() + "/index");
+			}
+			if(req.getParameter("updateProfileButton") != null) {	
+				//TODO: update user refernce with form info
+				// also update actual user info in db with same form info
+				resp.sendRedirect(req.getContextPath() + "/index");
 			}
 			
 			
