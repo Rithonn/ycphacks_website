@@ -94,7 +94,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="">Password:</label>
+									<label class="">New Password:</label>
 									<div class="">
 										<input class="form-control" type="password" value="">
 									</div>
