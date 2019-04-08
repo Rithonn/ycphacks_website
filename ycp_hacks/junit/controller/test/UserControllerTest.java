@@ -151,6 +151,24 @@ public class UserControllerTest {
 		
 	}
 	
+	/*NOTICE
+	 * 
+	 * could fail if this test user already exists in
+	 * the derbyDB Users table
+	 */
+	@Test
+	public void testDeleteUserDerbyDB() {
+		User userToDelete = new User();
+		userToDelete.setEmail("someemail@email.com");
+		userToDelete.setPassword("test");
+		
+		UserController controller = new UserController();
+		controller.setModel(userToDelete);
+		
+		controller.addUser(derbyDB);
+		assertTrue(controller.deleteUser(derbyDB));
+	}
+	
 	
 }
 	
