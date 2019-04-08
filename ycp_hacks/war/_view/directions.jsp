@@ -44,7 +44,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <c:if test="${empty currentUser}">
-               	<li><a class="active" href="profile_page">Log In</a></li>
+               	<li><a class="active" href="login">Log In</a></li>
                	</c:if>
                	<!--  if a user is logged in, display email, link to edit_profile page...
                	MUST MAKE! -->
@@ -72,7 +72,8 @@
 	
 		<script>
 			function myMap() { 
-			var myLatlng = new google.maps.LatLng(39.945517,-76.728916);
+			var myLatlng = new google.maps.LatLng(39.945421, -76.729161);
+			var willmanLatlng = new google.maps.LatLng(39.946891, -76.730237);
 			var mapProp= {
 			  center:myLatlng,
 			  zoom:16,
@@ -80,12 +81,19 @@
 			var map = new google.maps.Map(document.getElementById("directionsGoogleMaps"),mapProp);
 			
 			
-			var marker = new google.maps.Marker({
+			var markerYCP = new google.maps.Marker({
 			    position: myLatlng,
 			    title:"York College of Pennsylvania",
-			    text:"yeet"
+			    label:"YCP Entrance"
 			});
-			marker.setMap(map);
+			markerYCP.setMap(map);
+			
+			var markerWillman = new google.maps.Marker({
+			    position: willmanLatlng,
+			    title:"Willman Business Center",
+			    label:"Willman Business Center"
+			});
+			markerWillman.setMap(map);
 			
 			}
 		</script>

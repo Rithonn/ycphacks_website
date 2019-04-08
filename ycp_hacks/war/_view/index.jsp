@@ -52,7 +52,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                  <c:if test="${empty currentUser}">
-                	<li><a class="active" href="profile_page">Log In</a></li>
+                	<li><a class="active" href="login">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
@@ -61,11 +61,12 @@
                  </c:if>
             </ul>
         </nav>
+        <video autoplay="" muted="" loop="" id="backgroundVideo">
+                        <source src="https://i.imgur.com/DNqTLS5.mp4" type="video/mp4">
+                 </video> 
         <section class="firstSection">
 
-                <video autoplay="" muted="" loop="" id="backgroundVideo">
-                        <source src="backgroundMov.mp4" type="video/mp4">
-                    </video>
+                 
                     <div class="contentInfo">
                         <a href="index" class="stationary"><img class="logo_contentInfo" src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
                         <p>2019 Date To Be Announced</p>

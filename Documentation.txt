@@ -1,1 +1,17 @@
 This is where we can put comments on how the build is going as well as post issues/solutions
+
+When creating the derby database we ran into a few issues.
+
+Major issue is that we were creating the table but nothing was inside the table after reading the csv file
+	We had forgotten to add the user we pulled the info into to the userList
+	Which meant the table had nothing in it because we passed nothing into it
+
+Another issue we ran into was locating the database
+	When you create the table in the database make sure to refresh the project in eclipse
+	Sometimes they will not show up
+
+Cannot find derby databse
+	Make sure the project build path is referencing the deby database
+
+Overall database implementation took about 2 hours and 30 minutes
+

@@ -1,15 +1,21 @@
 package persist;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+
+import model.Event;
+import model.Schedule;
 import model.User;
 
 public class FakeDatabase implements IDatabase {
 	ArrayList<User> userList = null;
+	ArrayList<Event> eventList = null;
 	
 	public FakeDatabase() {
 		userList = new ArrayList<User>();
-		initData(userList);
+		eventList = new ArrayList<Event>();
+		initData(userList, eventList);
 		//Create a fake account here to be processed
 
 	}
@@ -55,7 +61,8 @@ public class FakeDatabase implements IDatabase {
 	
 	
 	
-	public void initData(ArrayList<User> userList) {
+	
+	public void initData(ArrayList<User> userList, ArrayList<Event> schedule) {
 		User user = new User();
 		user.setEmail("tjefferson@ycp.edu");
 		user.setAge(20);
@@ -66,7 +73,71 @@ public class FakeDatabase implements IDatabase {
 		user.setFirstName("Timothy");
 		user.setLastName("Jefferson");
 		
+		//Create a test event
+		Event event1 = new Event();
+		
+		// Java calendars allow easier creation of dates
+		Calendar date = Calendar.getInstance();
+		
+		// Format YYYY MM DD HH MM
+		date.set(2019, 10, 26, 17, 00);
+		
+		event1.setLocation("Lobby");
+		event1.setDescription("Check in before the event starts");
+		event1.setName("Check-in");
+		event1.setDate(date);
+		event1.setIsPassedTime(false);
+		event1.setIsUpComing(true);
+		
+		//Creates a second test event
+		Event event2 = new Event();
+		
+		Calendar date2 = Calendar.getInstance();
+		
+		date2.set(2019, 10, 26, 20, 30);
+		
+		event2.setLocation("Yorkview");
+		event2.setDescription("Pizza for dinner");
+		event2.setName("Free pizza");
+		event2.setDate(date2);
+		event2.setIsPassedTime(false);
+		event2.setIsUpComing(true);
+		
+		Event event3 = new Event();
+		
+		Calendar date3 = Calendar.getInstance();
+		date3.set(2019, 10, 27, 8, 30);
+		event3.setLocation("Yorkview");
+		event3.setDescription("Breakfast is served");
+		event3.setName("Breakfast");
+		event3.setDate(date3);
+		event3.setIsPassedTime(false);
+		event3.setIsUpComing(true);
+		
+		//Add test stuff to proper lists
+		eventList.add(event1);
+		eventList.add(event2);
+		eventList.add(event3);
 		userList.add(user);
 	}
+
+	@Override
+	public Schedule getScheduleFromDB(Schedule schedule) {
+		//Add each event from the stored list to the schedule
+		for(Event event: eventList) {
+			schedule.addEvent(event);
+		}
+		
+		return schedule;
+	}
 	
+	@Override
+	public boolean deleteUser(User user) {
+		return false;
+	}
+	
+	@Override
+	public boolean updateUser(User user) {
+		return false;
+	}
 }

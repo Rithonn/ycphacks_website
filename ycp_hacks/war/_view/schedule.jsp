@@ -45,7 +45,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <c:if test="${empty currentUser}">
-                	<li><a class="active" href="profile_page">Log In</a></li>
+                	<li><a class="active" href="login">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
@@ -60,31 +60,46 @@
         <table class="table table-dark">
             <thead>
                 <tr>
-                    <th scope="col">What</th>
                     <th scope="col">When</th>
+                    <th scope="col">What</th>
                     <th scope="col">Where</th>
                     <th scope="col">Description</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">5:00 pm</th>
-                    <td>Check-in Begins</td>
-                    <td>WBC Lobby</td>
-                    <td>Check-in for the event</td>
-                </tr>
-                <tr>
-                    <th scope="row">6:00 pm</th>
-                    <td>Opening Ceremony</td>
-                    <td>Willmen Lecture Hall</td>
-                    <td>Quick opening word to kick off the event</td>
-                </tr>
-                <tr>
-                    <th scope="row">9:00 pm</th>
-                    <td>Pizza</td>
-                    <td>Yorkview</td>
-                    <td>Enjoy some free pizza</td>
-                </tr>
+                <c:forEach items="${schedule}" var="event">
+                    <tr>
+                        <td>
+                            <script>
+                            // Script to display the event time as HH:MM am/pm
+                            var eventHour = ${event.date.time.hours};
+                            var eventMins = ${event.date.time.minutes};
+                            var amOrPm;
+                            //Hour is stored in 24hr format
+                            //If the hour is greater than 12, subtract 12 and make it pm
+                            if (eventHour > 12) {
+                                    amOrPm = "pm";
+                                    eventHour = eventHour - 12; 
+                            //Otherwise it is in the am
+                            }else{
+                                amOrPm = "am";
+                            }
+                            
+                            //Minutes are stored as a raw into so if it is less than 10, it will display as a single digit
+                            //If it is less than 10, prepend a 0
+                            if (eventMins < 10) {
+                                eventMins = '0' + eventMins;
+                            }
+                            
+                            //Put the hour, mins, and am/pm together into one string
+                            document.write(eventHour, ":", eventMins, " ", amOrPm);
+                            </script>
+                        </td>
+                        <td>${event.name}</td>
+                        <td>${event.location}</td>
+                        <td>${event.description}</td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
         </div>

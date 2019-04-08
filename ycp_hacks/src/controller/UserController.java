@@ -3,11 +3,6 @@ package controller;
 import model.User;
 import persist.*;
 
-import java.util.Scanner;
-
-import main.Main;
-
-
 public class UserController {
 	private User model;
 	
@@ -55,6 +50,11 @@ public class UserController {
 	public boolean addUser(IDatabase db) {
 		boolean wasAdded = db.addUser(model);
 		return wasAdded;
+	}
+	
+	public boolean deleteUser(IDatabase db) {
+		boolean wasDeleted = db.deleteUser(model);
+		return wasDeleted;
 	}
 	
 	

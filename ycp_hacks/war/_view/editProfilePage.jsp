@@ -44,7 +44,7 @@
                 <li><a class="stationary" href="registration">Registration</a></li>
                 <li><a class="stationary" href="schedule">Schedule</a></li>
                 <c:if test="${empty currentUser}">
-                	<li><a class="active" href="profile_page">Log In</a></li>
+                	<li><a class="active" href="login">Log In</a></li>
                 </c:if>
                 <!--  if a user is logged in, display email, link to edit_profile page...
                 MUST MAKE! -->
@@ -53,33 +53,95 @@
                  </c:if>
             </ul>
         </nav>
-        
-        <div class="aboutSection">
-        	<div class="aboutInfo">
-	            <p>Profile Options and other things will go here</p>
-	            
-	            <p>Should Have: <br>
-                Registration status, display their information, if they have special privldges they will see appropriate links<br>
-                
-                ${currentUser.userID}<br>
-                ${currentUser.email}<br>
-                ${currentUser.password}<br>
-                ${currentUser.firstName}<br>
-                ${currentUser.lastName}<br>
-                ${currentUser.university}<br>
-                ${currentUser.age}<br>
-                </p>
-      		</div>
-      		<form action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
-	      		<div class="logOutButton">
-	      			<button type="submit" class="btn btn-success btn-block" value="false" name="signOutButton" onclick="change()">Sign Out</button>
-	      		</div>
-	      	</form>
-		</div>
+		<div class="editingAboutSection">
+			<div class="aboutFormEdit">
+				<div class="container">
+					<h1>Edit Profile</h1>
+					<hr>
+						<!-- Edit form column -->
+						<div class="">
+							<h3>Personal info</h3>
+				
+							<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/edit_profile" method="post">
+								<div class="form-group">
+									<div class="">
+										<label class="">First name:</label>
+										<input class="form-control" type="text" value="${currentUser.firstName}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Last name:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.lastName}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Email:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.email}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Age:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.age}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">University:</label>
+									<div class="">
+										<input class="form-control" type="text" value="${currentUser.university}">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">New Password:</label>
+									<div class="">
+										<input class="form-control" type="password" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="">Confirm password:</label>
+									<div class="">
+										<input class="form-control" type="password" value="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class=""></label>							
+									<div class="">
+										<button type="submit" class="btn btn-success btn-block" value="" name="updateProfileButton" onclick="changeUpdateButton()">
+										Update Profile
+										</button>
+										<span></span>
+										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
+										Delete Profile
+										</button>
+										<span></span>
+										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
+										onclick="changeSignOutButton()">Sign Out</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+
+		
+		
 		<script>
-	        function change(){
+	        function changeSignOutButton(){
 	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
 			}
+	        
+	        function changeDeleteButton(){
+	        	document.getElementsByName("deleteProfileButton")[0].setAttribute("value", "true");
+			}
+	        
+	        function changeUpdateButton(){
+	        	document.getElementsByName("updateProfileButton")[0].setAttribute("value", "true");
+			}
+	        
 		</script>
     </body>
 </html>

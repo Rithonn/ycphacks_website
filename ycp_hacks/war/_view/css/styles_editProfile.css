@@ -1,6 +1,6 @@
 body{
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	background: url(background.jpg) no-repeat center center fixed; 
+	background: url(https://i.imgur.com/GVzRUCp.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -98,26 +98,7 @@ nav ul li a.active{
 
 /*=======================================================*/
 
-.aboutSection{
-    width: 100%;
-    position: relative;
-    top: 250px;
-}
 
-.aboutInfo{
-		margin: auto;
-		justify-content: center;
-		background: rgba(0, 0, 0, 0.7);
-		color: white;
-		border: 6px;
-		border-radius: 15px;
-		width: 35%;
-		position: relative;
-}
-
-.aboutInfo p{
-		text-align: center;
-}
 
 .logOutButton button{
     margin: auto;
@@ -129,3 +110,27 @@ nav ul li a.active{
 	width: 35%;
 	position: relative;
 }
+
+/* Editing the user information section */
+/* <div class="editingAboutSection">
+            <div class="aboutFormEdit"> */
+
+.editingAboutSection{
+    width: 100%;
+    position: relative;
+    top: 250px;
+}
+
+.aboutFormEdit{
+    margin: auto;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 6px;
+    border-radius: 15px;
+    width: 35%;
+    position: relative;
+    text-align: center;
+    padding: 20px;
+}
+
