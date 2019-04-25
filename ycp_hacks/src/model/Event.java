@@ -1,13 +1,13 @@
 package model;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
+
 
 
 public class Event{
 	//Event fields
 	private String location;
-	//Calendar is clearly the best as we can surpass God with the power of the 13th month
-	private Calendar date;
+	private LocalDateTime date;
 	private String name;
 	private String description;
 	private Boolean isPassedTime;
@@ -22,10 +22,10 @@ public class Event{
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public Calendar getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
-	public void setDate(Calendar time) {
+	public void setDate(LocalDateTime time) {
 		this.date = time;
 	}
 	public String getName() {
