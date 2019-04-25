@@ -206,7 +206,9 @@ public class DerbyDatabase implements IDatabase {
 					User found = new User();
 					while(resultSet.next()) {
 						//Return the user if found
-						loadUser(found, resultSet, 1);
+						loadUser(user, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						found = user;
 					}
 					
 					return found;	
