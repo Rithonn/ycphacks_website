@@ -187,27 +187,26 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean userExists(User user) {
-		return executeTransaction(new Transaction<Boolean>() {
+	public User userExists(User user) {
+		return executeUserTransaction(new Transaction<User>() {
 			@Override
-			public Boolean execute(Connection conn) throws SQLException {
+			public User execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				try {
 					stmt = conn.prepareStatement(
 							"select * from users "
-						+	" where users.email = ? and users.password = ? "			
+						+	" where users.email = ?"			
 					);
 					
 					stmt.setString(1, user.getEmail());
-					stmt.setString(2, user.getPassword());
 					
 					resultSet = stmt.executeQuery();				
 					
-					Boolean found = false;
+					User found = new User();
 					while(resultSet.next()) {
-						found = true;	
-						loadUser(user, resultSet, 1);
+						//Return the user if found
+						loadUser(found, resultSet, 1);
 					}
 					
 					return found;	
@@ -220,7 +219,15 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	
+	//Want to return the user to check and see if the password was correct
+	private User executeUserTransaction(Transaction<User> transaction) {
+		try {
+			return doExecuteTransaction(transaction);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
+	}
+
 	public boolean emailUsed(User user) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
