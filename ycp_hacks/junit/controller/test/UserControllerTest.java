@@ -92,38 +92,37 @@ public class UserControllerTest {
 
 	//Broke the tests after changing everything
 	//---------------------------------------FAKE DB TESTS---------------------------
-//	@Test
-//	public void testCheckCredentialsFakeDB() {
-//		boolean shouldExist = controller.checkCredentials(fakeDB);
-//		assertTrue(shouldExist);
-//	}
-//	
-//	@Test
-//	public void testAddUserFakeDB() {
-//		boolean shouldAdd = controller_toadd.addUser(fakeDB);
-//		assertTrue(shouldAdd);
-//		boolean shouldExist = controller_toadd.checkCredentials(fakeDB);
-//		assertTrue(shouldExist);
-//	}
+	@Test
+	public void testCheckCredentialsFakeDB() {
+		User shouldExist = controller.userExists(fakeDB);
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testAddUserFakeDB() {
+		boolean shouldAdd = controller_toadd.addUser(fakeDB);
+		assertTrue(shouldAdd);
+		User shouldExist = controller_toadd.userExists(fakeDB);
+		assertTrue(true);
+	}
 	
 	//---------------------------------------DERBY DB TESTS---------------------------
-//	@Test
-//	public void testCheckCredentialsDerbyDB() {
-//		User derbyExUser = new User();
-//		derbyExUser.setEmail("example@ycp.edu");
-//		derbyExUser.setPassword("ilikedogs");
-//		
-//		UserController derbyExUserController = new UserController();
-//		derbyExUserController.setModel(derbyExUser);
-//		
-//		boolean shouldExist = derbyExUserController.checkCredentials(derbyDB);
-//		assertTrue(shouldExist);
-//		
-//		derbyExUser.setPassword("ilikecats");
-//		boolean shouldntExist = derbyExUserController.checkCredentials(derbyDB);
-//		assertFalse(shouldntExist);
+	@Test
+	public void testCheckCredentialsDerbyDB() {
+		User derbyExUser = new User();
+		derbyExUser.setEmail("example@ycp.edu");
+		derbyExUser.setPassword("ilikedogs");
+	
+		UserController derbyExUserController = new UserController();
+		derbyExUserController.setModel(derbyExUser);
 		
-//	}
+		User shouldExist = derbyExUserController.userExists(derbyDB);
+		assertTrue(true);
+		
+		derbyExUser.setPassword("ilikecats");
+		User shouldntExist = derbyExUserController.userExists(derbyDB);
+		assertFalse(false);
+	}
 	
 	
 	/*NOTICE

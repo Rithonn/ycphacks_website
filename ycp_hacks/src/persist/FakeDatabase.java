@@ -35,7 +35,7 @@ public class FakeDatabase implements IDatabase {
 				user.setUniversity(exists.getUniversity());
 				user.setFirstName(exists.getFirstName());
 				user.setLastName(exists.getLastName());
-				return null;
+				return user;
 			}
 		}
 		return null;
