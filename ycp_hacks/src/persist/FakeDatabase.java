@@ -20,8 +20,9 @@ public class FakeDatabase implements IDatabase {
 
 	}
 
+	//Broke fake database for this right now
 	@Override
-	public boolean userExists(User user) {
+	public User userExists(User user) {
 		// TODO Auto-generated method stub
 		//Check to see if the user exits
 		for(User exists: userList) {
@@ -34,10 +35,10 @@ public class FakeDatabase implements IDatabase {
 				user.setUniversity(exists.getUniversity());
 				user.setFirstName(exists.getFirstName());
 				user.setLastName(exists.getLastName());
-				return true;
+				return user;
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	@Override

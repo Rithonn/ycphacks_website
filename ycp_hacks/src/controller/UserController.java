@@ -42,8 +42,9 @@ public class UserController {
 		model.setLastName(newLast);
 	}
 	
-	public boolean checkCredentials(IDatabase db) {
-		boolean doesExist = db.userExists(model);
+	public User userExists(IDatabase db) {
+		//return a user if they exist
+		User doesExist = db.userExists(model);
 		return doesExist;
 	}
 	

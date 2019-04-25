@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+//Special import for the spring framework bcrypt
+import org.springframework.security.crypto.bcrypt.*;
+
 public class RegistrationServlet extends HttpServlet{
 	
 public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
@@ -100,8 +103,19 @@ private static final long serialVersionUID = 1L;
 			model.setEmail(email);
 			model.setAge(age);
 			model.setUniversity(university);
-			model.setPassword(password);
-						
+			
+			//Encrypt the password before it is installed
+
+			//Take the password and hash it with a random salt
+			String pw_hash = BCrypt.hashpw(password, BCrypt.gensalt());
+			
+			//Show the hashed password
+			System.out.println(pw_hash);
+			model.setPassword(pw_hash);
+			
+			//TODO: Will need to make test cases to check how the hasing works then
+			
+			
 			//add user to db, will check if email has been used already
 			//if successful load index.jsp
 			boolean wasAdded = controller.addUser(db);

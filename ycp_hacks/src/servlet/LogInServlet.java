@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+
 import model.User;
 import controller.UserController;
 
@@ -11,6 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import persist.*;
+
+
+//Implement the security here as well to use
+import org.springframework.security.crypto.bcrypt.*;
 
 public class LogInServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
@@ -60,22 +65,24 @@ private static final long serialVersionUID = 1L;
 			errorMessage = "please specifiy valid credentials";
 		}else{
 			model.setEmail(email);
-			model.setPassword(password);
 		}
 			
-		boolean loginCheck = controller.checkCredentials(db);
+		
+		User returnedUser = controller.userExists(db);
+		
+		
 
 		//If true login worked yo
 		//If the user successfully logged in redirect to home page, 
 		//Otherwise inform that log in was not successful
 		String youwon = "You didnt win go cry";
-		if(loginCheck == true) {
+		if(BCrypt.checkpw(password, returnedUser.getPassword())) {
 			//if not login denied fool
 			session.setAttribute("currentUser", model);
 			req.setAttribute("user", model);
 			resp.sendRedirect(req.getContextPath() + "/index");
 
-		}else if(loginCheck == false){
+		}else{
 			youwon = "Login was not successful";
 			req.setAttribute("login", youwon);
 		}
