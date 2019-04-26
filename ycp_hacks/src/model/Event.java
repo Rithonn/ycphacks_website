@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 
 
 public class Event{
-	//Event fields
 	private String location;
 	private LocalDateTime date;
 	private String name;
