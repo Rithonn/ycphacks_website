@@ -46,9 +46,14 @@ private static final long serialVersionUID = 1L;
 		
 		//Loads schedule from database into the model schedule
 		schedCont.loadSchedule(db);
-		//Tests to see if datetomillis actually works
-//		Event evnt = schedule.getEvent(1);
-//		System.out.println(evnt.dateToMillis());
+		//Displays event date in millis
+//		for (int i = 0; i < schedule.getSize(); i++) {
+//			Event evnt = schedule.getEvent(i);
+//			System.out.println(evnt.dateToMillis());
+//		}
+		
+		
+		
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
 		
