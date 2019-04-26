@@ -85,6 +85,15 @@ public class EditProfileServlet extends HttpServlet {
 				*/
 				
 				
+				if(req.getParameter("newFirst") != null) {
+					controller.changeFirstName(req.getParameter("newFirst"));
+				}
+				
+				if(req.getParameter("newLast") != null) {
+					controller.changeLastName(req.getParameter("newLast"));
+				}
+				
+				
 				
 				
 				resp.sendRedirect(req.getContextPath() + "/index");

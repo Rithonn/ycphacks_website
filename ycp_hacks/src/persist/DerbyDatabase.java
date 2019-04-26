@@ -346,7 +346,35 @@ public class DerbyDatabase implements IDatabase {
 	
 	@Override
 	public boolean updateUser(User user) {
-		return false;
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"update Users "
+							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
+							+ " where user_id = ?"
+					);
+					
+					stmt.setString(1, user.getLastName());
+					stmt.setString(2, user.getFirstName());
+					stmt.setString(3, user.getEmail());
+					stmt.setString(4, user.getPassword());
+					stmt.setInt(5, user.getAge());
+					stmt.setString(6, user.getUniversity());
+					stmt.setString(7, Boolean.toString(user.isReg()));
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
 	}
 		
 }

@@ -58,6 +58,11 @@ public class UserController {
 		return wasDeleted;
 	}
 	
+	public boolean updateUser(IDatabase db) {
+		boolean wasUpdated = db.updateUser(model);
+		return wasUpdated;
+	}
+	
 	
 	
 }
