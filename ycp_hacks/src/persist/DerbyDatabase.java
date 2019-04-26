@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import persist.DBUtil;
 import model.Schedule;
@@ -156,7 +157,11 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setString(1, user.getLastName());
 						insertUserList.setString(2, user.getFirstName());
 						insertUserList.setString(3, user.getEmail());
-						insertUserList.setString(4, user.getPassword());
+						
+						//Hash the password needed
+						String pw_hash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+						
+						insertUserList.setString(4, pw_hash);
 						insertUserList.setInt(5, user.getAge());
 						insertUserList.setString(6, user.getUniversity());
 						insertUserList.setString(7, String.valueOf(user.isReg()));
