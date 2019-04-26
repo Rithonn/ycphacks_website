@@ -86,16 +86,18 @@ public class EditProfileServlet extends HttpServlet {
 					controller.changeLastName(req.getParameter("newLast"));
 				}
 				
-				if((req.getParameter("newEmail") != null) && (validate(req.getParameter("newEmail")))) {
-					controller.changeEmail(req.getParameter("newEmail"));
-					//TODO: display error message when not valid email
+				if(req.getParameter("newEmail") != null) {
+					if(!validate(req.getParameter("newEmail"))) {
+						req.setAttribute("error", "Please provide a new valid Email");
+					}else {
+						controller.changeEmail(req.getParameter("newEmail"));
+					}
 				}
 				
 				
 				if(req.getParameter("newAge") != null ) {
 					int newAge = Integer.parseInt(req.getParameter("newAge"));
 					if(newAge > 130 || newAge < 1) {
-						//TODO: display error message when not valid age
 						req.setAttribute("error", "Please provide a new valid age");
 					}else {
 						controller.changeAge(newAge);
