@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -79,17 +78,6 @@ public class EditProfileServlet extends HttpServlet {
 				//TODO: update user refernce with form info
 				// also update actual user info in db with same form info
 				
-				/*
-				ArrayList<String> updatedInfo = new ArrayList<String>();
-				updatedInfo.add(req.getParameter("newFirst"));
-				updatedInfo.add(req.getParameter("newLast"));
-				updatedInfo.add(req.getParameter("newEmail"));
-				updatedInfo.add(req.getParameter("newAge"));
-				updatedInfo.add(req.getParameter("newUniversity"));
-				updatedInfo.add(BCrypt.hashpw(req.getParameter("newPassword"),BCrypt.gensalt()));
-				*/
-				
-				
 				if(req.getParameter("newFirst") != null) {
 					controller.changeFirstName(req.getParameter("newFirst"));
 				}
@@ -114,7 +102,18 @@ public class EditProfileServlet extends HttpServlet {
 					
 				}
 				
+				if(req.getParameter("newUniversity") != null) {
+					controller.changeUniversity(req.getParameter("newUniversity"));
+				}
 				
+				String pw1 = req.getParameter("newPassword1");
+				String pw2 = req.getParameter("newPassword2");
+				
+				if(pw1.equals(pw2)) {
+					String hashedPW = BCrypt.hashpw(pw1,BCrypt.gensalt());
+					controller.changePassword(hashedPW);
+					
+				}
 				
 				controller.updateUser(db);
 				
