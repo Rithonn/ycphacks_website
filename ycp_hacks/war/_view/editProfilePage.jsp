@@ -101,13 +101,13 @@
 								<div class="form-group">
 									<label class="">New Password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="">
+										<input class="form-control" type="password" value="" name="newPassword1">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Confirm password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="" name="newPassword">
+										<input class="form-control" type="password" value="" name="newPassword2">
 									</div>
 								</div>
 								<div class="form-group">
