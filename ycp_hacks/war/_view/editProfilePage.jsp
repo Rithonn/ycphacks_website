@@ -57,6 +57,11 @@
 			<div class="aboutFormEdit">
 				<div class="container">
 					<h1>Edit Profile</h1>
+						<a href="adminPage">
+							<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
+								Administrator Panel
+							</button>
+						</a>
 					<hr>
 						<!-- Edit form column -->
 						<div class="">
@@ -96,13 +101,13 @@
 								<div class="form-group">
 									<label class="">New Password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="">
+										<input class="form-control" type="password" value="" name="newPassword1">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Confirm password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="" name="newPassword">
+										<input class="form-control" type="password" value="" name="newPassword2">
 									</div>
 								</div>
 								<div class="form-group">
@@ -115,11 +120,8 @@
 										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
 										Delete Profile
 										</button>
-										<a href="adminPage">
-										<button type="submit" class="btn btn-success btn-block" value="" name="adminPanelButton" >
-										Administrator Panel
-										</button>
-										</a>
+										
+										
 										<span></span>
 										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
 										onclick="changeSignOutButton()">Sign Out</button>

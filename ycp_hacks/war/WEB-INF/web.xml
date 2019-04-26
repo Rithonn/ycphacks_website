@@ -42,6 +42,10 @@
   	<servlet-name>EditProfileServlet</servlet-name>
   	<servlet-class>servlet.EditProfileServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AdminPanelServlet</servlet-name>
+  	<servlet-class>servlet.AdminPanelServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -89,6 +93,10 @@
   <servlet-mapping>
   	<servlet-name>EditProfileServlet</servlet-name>
   	<url-pattern>/edit_profile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminPanelServlet</servlet-name>
+  	<url-pattern>/adminPage</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->

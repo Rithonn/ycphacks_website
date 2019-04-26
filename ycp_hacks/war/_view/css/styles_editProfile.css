@@ -18,6 +18,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 2;
 }
 
 /* Change in the navbar colors */
@@ -119,7 +120,7 @@ nav ul li a.active{
     width: 100%;
     position: relative;
     top: 250px;
-    z-index: -10;
+    z-index: 1;
 }
 
 .aboutFormEdit{
@@ -133,5 +134,12 @@ nav ul li a.active{
     position: relative;
     text-align: center;
     padding: 20px;
+}
+
+.adminPanelButton{
+    width: 25%;
+    align-content: center;
+    margin: auto;
+    text-decoration: none;
 }
 

@@ -1,8 +1,7 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,12 +17,9 @@ import persist.DatabaseProvider;
 import persist.DerbyDatabase;
 import persist.IDatabase;
 
-public class EditProfileServlet extends HttpServlet {
+public class AdminPanelServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
-	Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);	
-	
 	HttpSession session = null;
 	IDatabase db = null;
 	
@@ -49,7 +45,7 @@ public class EditProfileServlet extends HttpServlet {
 			db = DatabaseProvider.getInstance();
 		}
 		
-		req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 	}
 	
 	@Override
@@ -78,55 +74,22 @@ public class EditProfileServlet extends HttpServlet {
 				//TODO: update user refernce with form info
 				// also update actual user info in db with same form info
 				
-				if(req.getParameter("newFirst") != null) {
-					controller.changeFirstName(req.getParameter("newFirst"));
-				}
-				
-				if(req.getParameter("newLast") != null) {
-					controller.changeLastName(req.getParameter("newLast"));
-				}
-				
-				if((req.getParameter("newEmail") != null) && (validate(req.getParameter("newEmail")))) {
-					controller.changeEmail(req.getParameter("newEmail"));
-					//TODO: display error message when not valid email
-				}
+				/*
+				ArrayList<String> updatedInfo = new ArrayList<String>();
+				updatedInfo.add(req.getParameter("newFirst"));
+				updatedInfo.add(req.getParameter("newLast"));
+				updatedInfo.add(req.getParameter("newEmail"));
+				updatedInfo.add(req.getParameter("newAge"));
+				updatedInfo.add(req.getParameter("newUniversity"));
+				updatedInfo.add(BCrypt.hashpw(req.getParameter("newPassword"),BCrypt.gensalt()));
+				*/
 				
 				
-				if(req.getParameter("newAge") != null ) {
-					int newAge = Integer.parseInt(req.getParameter("newAge"));
-					if(newAge > 130 || newAge < 1) {
-						//TODO: display error message when not valid age
-					}else {
-						controller.changeAge(newAge);
-					}
-					
-				}
 				
-				if(req.getParameter("newUniversity") != null) {
-					controller.changeUniversity(req.getParameter("newUniversity"));
-				}
 				
-				String pw1 = req.getParameter("newPassword1");
-				String pw2 = req.getParameter("newPassword2");
-				
-				if(pw1.equals(pw2)) {
-					String hashedPW = BCrypt.hashpw(pw1,BCrypt.gensalt());
-					controller.changePassword(hashedPW);
-					
-				}
-				
-				controller.updateUser(db);
-				
-				resp.sendRedirect(req.getContextPath() + "/edit_profile");
+				resp.sendRedirect(req.getContextPath() + "/index");
 			}
 			
 			
-	}
-	
-	
-	//method to validate email with the Pattern at top of file
-	public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
-        return matcher.find();
 	}
 }
