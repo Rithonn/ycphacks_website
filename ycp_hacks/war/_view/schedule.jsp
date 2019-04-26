@@ -72,8 +72,8 @@
                         <td>
                             <script>
                             // Script to display the event time as HH:MM am/pm
-                            var eventHour = ${event.date.time.hours};
-                            var eventMins = ${event.date.time.minutes};
+                            var eventHour = ${event.date.hour};
+                            var eventMins = ${event.date.minute};
                             var amOrPm;
                             //Hour is stored in 24hr format
                             //If the hour is greater than 12, subtract 12 and make it pm

@@ -1,7 +1,9 @@
 package persist;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 
 
 import model.Event;
@@ -78,10 +80,10 @@ public class FakeDatabase implements IDatabase {
 		Event event1 = new Event();
 		
 		// Java calendars allow easier creation of dates
-		Calendar date = Calendar.getInstance();
+		LocalDateTime date = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 00);
 		
 		// Format YYYY MM DD HH MM
-		date.set(2019, 10, 26, 17, 00);
+//		date.set(2019, 10, 26, 17, 00);
 		
 		event1.setLocation("Lobby");
 		event1.setDescription("Check in before the event starts");
@@ -93,9 +95,9 @@ public class FakeDatabase implements IDatabase {
 		//Creates a second test event
 		Event event2 = new Event();
 		
-		Calendar date2 = Calendar.getInstance();
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 20, 30);
 		
-		date2.set(2019, 10, 26, 20, 30);
+		
 		
 		event2.setLocation("Yorkview");
 		event2.setDescription("Pizza for dinner");
@@ -106,8 +108,9 @@ public class FakeDatabase implements IDatabase {
 		
 		Event event3 = new Event();
 		
-		Calendar date3 = Calendar.getInstance();
-		date3.set(2019, 10, 27, 8, 30);
+		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 27, 8, 30);
+		
+		
 		event3.setLocation("Yorkview");
 		event3.setDescription("Breakfast is served");
 		event3.setName("Breakfast");
