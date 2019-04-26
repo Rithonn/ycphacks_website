@@ -70,6 +70,11 @@ public class EditProfileServlet extends HttpServlet {
 			if(req.getParameter("updateProfileButton") != null) {	
 				//TODO: update user refernce with form info
 				// also update actual user info in db with same form info
+				
+				
+				
+				
+				
 				resp.sendRedirect(req.getContextPath() + "/index");
 			}
 			
