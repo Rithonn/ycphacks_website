@@ -115,9 +115,16 @@
 										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
 										Delete Profile
 										</button>
+										<a href="adminPage">
+											<button type="submit" class="btn btn-success btn-block" value="" name="adminPanelButton" >
+											Administrator Panel
+											</button>
+										</a>
 										<span></span>
 										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
 										onclick="changeSignOutButton()">Sign Out</button>
+										<span></span>
+										
 									</div>
 								</div>
 							</form>
