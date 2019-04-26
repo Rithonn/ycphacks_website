@@ -1,12 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import controller.UserController;
 import model.User;
@@ -71,6 +74,15 @@ public class EditProfileServlet extends HttpServlet {
 				//TODO: update user refernce with form info
 				// also update actual user info in db with same form info
 				
+				/*
+				ArrayList<String> updatedInfo = new ArrayList<String>();
+				updatedInfo.add(req.getParameter("newFirst"));
+				updatedInfo.add(req.getParameter("newLast"));
+				updatedInfo.add(req.getParameter("newEmail"));
+				updatedInfo.add(req.getParameter("newAge"));
+				updatedInfo.add(req.getParameter("newUniversity"));
+				updatedInfo.add(BCrypt.hashpw(req.getParameter("newPassword"),BCrypt.gensalt()));
+				*/
 				
 				
 				
