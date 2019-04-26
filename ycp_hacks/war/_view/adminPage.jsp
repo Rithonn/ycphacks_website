@@ -34,7 +34,7 @@
 	
 	
 	
-	<body>
+<body>
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
@@ -53,8 +53,89 @@
                  </c:if>
             </ul>
         </nav>
-		
+		<!-- This is where the fun begins -->
 
 
-    </body>
+		<div class="allContentSection">
+			<div class="mainHeader">
+				<h2>Admin Panel</h2>
+			</div>
+
+			<!-- Stats section -->
+			<div class="stats-section">
+				<div class="stats-header">
+					<h2>Stats</h2>
+				</div>
+				<div class="stats-content">
+					<ul class="all-stats">
+						<li>Total Users: </li>
+						<li>Verfied Users: </li>
+						<li>Submitted Users: </li>
+						<div class="stats-br">
+							<br>
+						</div>
+						
+						<li>Admitted: </li>
+						<li>Confirmed: </li>
+						<li>Checked In: </li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- User panel, this is gonna be bad -->
+			<div class="user-panel-main">
+				<div class="user-panel-main-content">
+					<div class="row">
+						<div class="col-3">
+							<!-- This is where all the buttons will go -->
+							<div class="search-users-button">
+								<form class="form-inline md-form mr-auto mb-4">
+									<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+									<button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+								</form>
+							</div>
+							<div>
+								<h5>Page Numbers:</h5>
+							</div>
+							<div class="admin-controls">
+								<h5>Admin Settings:</h5>
+								<!-- Accept, Deny, Delete -->
+								<form action="submit">
+									<input type="text" placeholder="UserID" class="rounded">
+									<div style="margin-bottom: 3px;">
+
+									</div>
+									<button class="btn btn-success btn rounded btn-sm">Accept</button>
+									<button class="btn btn-success btn rounded btn-sm">Deny</button>
+									<button class="btn btn-success btn rounded btn-sm">Delete</button>
+								</form>
+
+							</div>
+							
+						</div>
+						<div class="col-9">
+							<table class="table table-sm table-dark table-striped">
+								<thead>
+									<tr>
+										<th scope="col">UserID</th>
+										<th scope="col">First</th>
+										<th scope="col">Last</th>
+										<th scope="col">Email</th>
+										<th scope="col">School</th>
+										<th scope="col">Registered</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</body>
 </html>

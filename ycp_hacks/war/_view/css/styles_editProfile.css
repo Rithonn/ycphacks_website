@@ -139,5 +139,6 @@ nav ul li a.active{
     width: 25%;
     align-content: center;
     margin: auto;
+    text-decoration: none;
 }
 
