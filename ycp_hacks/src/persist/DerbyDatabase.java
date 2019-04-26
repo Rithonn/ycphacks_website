@@ -365,6 +365,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(5, user.getAge());
 					stmt.setString(6, user.getUniversity());
 					stmt.setString(7, Boolean.toString(user.isReg()));
+					stmt.setInt(8, user.getUserID());
 					
 					stmt.executeUpdate();
 					

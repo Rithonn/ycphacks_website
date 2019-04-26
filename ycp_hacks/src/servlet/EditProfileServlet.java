@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +22,9 @@ import persist.IDatabase;
 public class EditProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+	Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);	
+	
 	HttpSession session = null;
 	IDatabase db = null;
 	
@@ -93,12 +98,36 @@ public class EditProfileServlet extends HttpServlet {
 					controller.changeLastName(req.getParameter("newLast"));
 				}
 				
+				if((req.getParameter("newEmail") != null) && (validate(req.getParameter("newEmail")))) {
+					controller.changeEmail(req.getParameter("newEmail"));
+					//TODO: display error message when not valid email
+				}
+				
+				
+				if(req.getParameter("newAge") != null ) {
+					int newAge = Integer.parseInt(req.getParameter("newAge"));
+					if(newAge > 130 || newAge < 1) {
+						//TODO: display error message when not valid age
+					}else {
+						controller.changeAge(newAge);
+					}
+					
+				}
 				
 				
 				
-				resp.sendRedirect(req.getContextPath() + "/index");
+				controller.updateUser(db);
+				
+				resp.sendRedirect(req.getContextPath() + "/edit_profile");
 			}
 			
 			
+	}
+	
+	
+	//method to validate email with the Pattern at top of file
+	public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        return matcher.find();
 	}
 }
