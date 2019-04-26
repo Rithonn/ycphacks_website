@@ -98,7 +98,7 @@
 			}
 		</script>
 		<!-- change KEY to GoogleAPIkey -->
-		<script src="https://maps.googleapis.com/maps/api/js?key==myMap"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=myMap"></script>
 	
 	
 	</body>
