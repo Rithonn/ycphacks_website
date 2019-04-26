@@ -1,6 +1,9 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 
 
@@ -26,6 +29,17 @@ public class Event{
 	}
 	public void setDate(LocalDateTime time) {
 		this.date = time;
+	}
+	public long dateToMillis() {
+		//Convert the LocalDateTime to ZonedDateTime, and then to milliseconds
+		long millis;
+		//Create a ZonedDateTime to get the offset
+		ZonedDateTime zdt = date.atZone(ZoneId.systemDefault());
+		//Get the zoned offset
+		ZoneOffset offset = zdt.getOffset();
+		//convert the date to millis with the offset
+		millis = date.toEpochSecond(offset);
+		return millis;
 	}
 	public String getName() {
 		return name;
