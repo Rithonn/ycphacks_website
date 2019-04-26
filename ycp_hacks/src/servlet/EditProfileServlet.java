@@ -96,6 +96,7 @@ public class EditProfileServlet extends HttpServlet {
 					int newAge = Integer.parseInt(req.getParameter("newAge"));
 					if(newAge > 130 || newAge < 1) {
 						//TODO: display error message when not valid age
+						req.setAttribute("error", "Please provide a new valid age");
 					}else {
 						controller.changeAge(newAge);
 					}
@@ -109,7 +110,7 @@ public class EditProfileServlet extends HttpServlet {
 				String pw1 = req.getParameter("newPassword1");
 				String pw2 = req.getParameter("newPassword2");
 				
-				if(pw1.equals(pw2)) {
+				if(pw1.equals(pw2) && (pw1 != null)) {
 					String hashedPW = BCrypt.hashpw(pw1,BCrypt.gensalt());
 					controller.changePassword(hashedPW);
 					
@@ -117,7 +118,8 @@ public class EditProfileServlet extends HttpServlet {
 				
 				controller.updateUser(db);
 				
-				resp.sendRedirect(req.getContextPath() + "/edit_profile");
+				req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
+				//resp.sendRedirect(req.getContextPath() + "/edit_profile");
 			}
 			
 			

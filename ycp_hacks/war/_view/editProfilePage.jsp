@@ -110,6 +110,12 @@
 										<input class="form-control" type="password" value="" name="newPassword2">
 									</div>
 								</div>
+								
+								<p class="error">
+									${error}
+								</p>
+								
+								
 								<div class="form-group">
 									<label class=""></label>							
 									<div class="">
