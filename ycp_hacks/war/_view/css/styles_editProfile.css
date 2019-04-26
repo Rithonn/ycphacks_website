@@ -119,6 +119,7 @@ nav ul li a.active{
     width: 100%;
     position: relative;
     top: 250px;
+    z-index: -10;
 }
 
 .aboutFormEdit{
