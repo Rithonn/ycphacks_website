@@ -65,6 +65,7 @@ public class InitialData {
 				ReadCSV readEvents = new ReadCSV("schedule.csv");
 				
 				try {
+					Integer eventId = 1;
 					while (true) {
 						List<String> tuple = readEvents.next();
 						if (tuple == null) {
@@ -76,18 +77,18 @@ public class InitialData {
 						// read author ID from CSV file, but don't use it
 						// it's there for reference purposes, just make sure that it is correct
 						// when setting up the BookAuthors CSV file				
-						
+						Integer.parseInt(i.next());
 						// build user
 						long temp = Long.valueOf(i.next());
-					
+						event.setEventId(eventId++);
 						event.setDateFromLong(temp);
-						System.out.println("InitialData ="+ temp);
+						//System.out.println("InitialData ="+ temp);
 						event.setName(i.next());
 						event.setLocation(i.next());
 						event.setDescription(i.next());
 						eventList.add(event);
 					}
-					System.out.println("userList loaded from CSV file");
+					System.out.println("eventList loaded from CSV file");
 					
 					//dev-------------
 					for(Event event: eventList) {

@@ -100,6 +100,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	//Piece together an event
 	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
+		event.setEventId(resultset.getInt(index++));
 		event.setDateFromLong(Long.valueOf(resultset.getString(index++)));
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
@@ -136,6 +137,8 @@ public class DerbyDatabase implements IDatabase {
 					
 					stmt2 = conn.prepareStatement(
 							"create table schedule (" +
+							"	event_id integer primary key " +
+							"	generated always as identity (start with 1, increment by 1), " +
 							" dateTime varchar(20)," +
 							" name varchar(40)," +
 							" location varchar(40)," +
@@ -196,7 +199,7 @@ public class DerbyDatabase implements IDatabase {
 					}
 					for(Event event : eventList) {
 						long millis = event.dateToMillis();
-						System.out.println("MILLI BITCH: "+millis);
+						//System.out.println("MILLI FELLA: "+millis);
 						insertEventList.setString(1, Long.toString(millis));
 						insertEventList.setString(2, event.getName());
 						insertEventList.setString(3, event.getLocation());
@@ -463,8 +466,6 @@ public class DerbyDatabase implements IDatabase {
 							"schedule.eventId=?"
 					);
 					
-					
-					//Convert long to string and set in the statement
 					stmt.setInt(1, event.getEventId());
 					
 					stmt.executeUpdate();

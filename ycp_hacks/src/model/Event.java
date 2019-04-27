@@ -11,7 +11,6 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 
 
-
 public class Event{
 	private String location;
 	private LocalDateTime date;
