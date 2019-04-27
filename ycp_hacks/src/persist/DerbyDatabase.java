@@ -100,7 +100,6 @@ public class DerbyDatabase implements IDatabase {
 	
 	//Piece together an event
 	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
-		System.out.println("Long before load" + resultset.getString(index));
 		event.setDateFromLong(Long.valueOf(resultset.getString(index++)));
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
@@ -196,7 +195,6 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.addBatch();
 					}
 					for(Event event : eventList) {
-						System.out.println("This is before dateToMillis: " + event);
 						long millis = event.dateToMillis();
 						System.out.println("MILLI BITCH: "+millis);
 						insertEventList.setString(1, Long.toString(millis));
