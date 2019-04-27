@@ -31,7 +31,7 @@ private static final long serialVersionUID = 1L;
 		session = req.getSession();
 		
 		if(DatabaseProvider.getInstance() == null) {
-			DatabaseProvider.setInstance(new FakeDatabase());//------------------------------------------DATABASE MARKER
+			DatabaseProvider.setInstance(new DerbyDatabase());//------------------------------------------DATABASE MARKER
 			db = DatabaseProvider.getInstance();
 		}else {
 			db = DatabaseProvider.getInstance();

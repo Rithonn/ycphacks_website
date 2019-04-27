@@ -1,5 +1,6 @@
 package model;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
@@ -29,6 +30,9 @@ public class Event{
 	}
 	public void setDate(LocalDateTime time) {
 		this.date = time;
+	}
+	public void setDateFromInt(int date) {
+		this.date = Instant.ofEpochMilli(date).atZone(ZoneId.systemDefault()).toLocalDateTime();
 	}
 	public long dateToMillis() {
 		//Convert the LocalDateTime to ZonedDateTime, and then to milliseconds

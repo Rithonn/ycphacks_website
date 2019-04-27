@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import persist.DBUtil;
+import model.Event;
 import model.Schedule;
 //import persist.DerbyDatabase.Transaction;
 import model.User;
@@ -96,6 +97,13 @@ public class DerbyDatabase implements IDatabase {
 		user.setIsReg(resultSet.getBoolean(index++));
 	}
 	
+	//Piece together an event
+	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
+		event.setDateFromInt(resultset.getInt(index++));
+		event.setName(resultset.getString(index++));
+		event.setLocation(resultset.getString(index++));
+		event.setDescription(resultset.getString(index++));
+	}
 
 	//Change the table for user instead of authors with all the correct fields
 	public void createTables() {
@@ -103,7 +111,7 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
-				
+				PreparedStatement stmt2 = null;
 				
 				//Create the user table with the same order of the load up above
 				try {
@@ -122,10 +130,20 @@ public class DerbyDatabase implements IDatabase {
 					);	
 					stmt1.executeUpdate();
 					
+					stmt2 = conn.prepareStatement(
+							"create table schedule (" +
+							" dateTime integer," +
+							" name varchar(40)," +
+							" location varchar(40)," +
+							" description varchar(120) " +
+							")"
+							);
+					stmt2.executeUpdate();
 					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
@@ -136,20 +154,24 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
-				
+				List<Event> eventList;
 				
 				
 				//Was getting an error because the list has null returning
 				try {
 					//Create a section in initdata to get userlist
 					userList = InitialData.getUserList();
-					
+					eventList = InitialData.getEventList();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
 						+ " password, age, university, isReg) values (?,?,?,?,?,?,?)");
+				
+				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description)"
+						+ " values (?,?,?,?)");
+				
 				try {
 //					Will need to populate the user table with example entry
 					for (User user : userList) {
@@ -168,12 +190,22 @@ public class DerbyDatabase implements IDatabase {
 						
 						insertUserList.addBatch();
 						
+					for(Event event : eventList) {
+						long millis = event.dateToMillis();
+						insertEventList.setInt(1, (int) millis);
+						insertEventList.setString(2, event.getName());
+						insertEventList.setString(3, event.getLocation());
+						insertEventList.setString(4, event.getDescription());
+						
+						insertEventList.addBatch();
+					}
 					}
 					insertUserList.executeBatch();
-					
+					insertEventList.executeBatch();
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUserList);
+					DBUtil.closeQuietly(insertEventList);
 				}
 			}
 		});
@@ -228,6 +260,14 @@ public class DerbyDatabase implements IDatabase {
 	
 	//Want to return the user to check and see if the password was correct
 	private User executeUserTransaction(Transaction<User> transaction) {
+		try {
+			return doExecuteTransaction(transaction);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
+	}
+	
+	private Schedule executeScheduleTransaction(Transaction<Schedule> transaction) {
 		try {
 			return doExecuteTransaction(transaction);
 		} catch (SQLException e) {
@@ -322,7 +362,34 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Schedule getScheduleFromDB(Schedule schedule) {
-		return null;
+		return executeScheduleTransaction(new Transaction<Schedule>() {
+			@Override
+			public Schedule execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from schedule "			
+					);
+					
+					resultSet = stmt.executeQuery();				
+					
+					Event found = new Event();
+					while(resultSet.next()) {
+						//Return the user if found
+						loadEvent(found, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						schedule.addEvent(found);
+					}
+					
+					return schedule;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
 	}
 	
 	@Override
