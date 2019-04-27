@@ -77,8 +77,11 @@ public class InitialData {
 						// it's there for reference purposes, just make sure that it is correct
 						// when setting up the BookAuthors CSV file				
 						
-						// build user			
-						event.setDateFromInt(Integer.parseInt(i.next()));
+						// build user
+						long temp = Long.valueOf(i.next());
+					
+						event.setDateFromLong(temp);
+						System.out.println("InitialData ="+ temp);
 						event.setName(i.next());
 						event.setLocation(i.next());
 						event.setDescription(i.next());

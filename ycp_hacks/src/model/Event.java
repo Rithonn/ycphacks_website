@@ -1,10 +1,14 @@
 package model;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 
 
@@ -31,8 +35,19 @@ public class Event{
 	public void setDate(LocalDateTime time) {
 		this.date = time;
 	}
-	public void setDateFromInt(int date) {
-		this.date = Instant.ofEpochMilli(date).atZone(ZoneId.systemDefault()).toLocalDateTime();
+	public void setDateFromLong(long i) {
+		System.out.println("Long before conversion" + i);
+//		ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochMilli(i), ZoneId.systemDefault());
+//		this.date = zdt.toLocalDateTime();
+//		DateFormat simple = new SimpleDateFormat();
+//		Date result = new Date(i);
+//		
+//		System.out.println(simple.format(result));
+//		
+		this.date = LocalDateTime.ofInstant(Instant.ofEpochMilli(i), ZoneId.systemDefault());
+		Time testing = new Time(i);
+		System.out.println(testing);
+		System.out.println(this.date);
 	}
 	public long dateToMillis() {
 		//Convert the LocalDateTime to ZonedDateTime, and then to milliseconds

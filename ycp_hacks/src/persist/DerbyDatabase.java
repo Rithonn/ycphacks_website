@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -99,10 +100,14 @@ public class DerbyDatabase implements IDatabase {
 	
 	//Piece together an event
 	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
-		event.setDateFromInt(resultset.getInt(index++));
+		System.out.println("Long before load" + resultset.getString(index));
+		event.setDateFromLong(Long.valueOf(resultset.getString(index++)));
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
 		event.setDescription(resultset.getString(index++));
+		
+		
+		
 	}
 
 	//Change the table for user instead of authors with all the correct fields
@@ -132,7 +137,7 @@ public class DerbyDatabase implements IDatabase {
 					
 					stmt2 = conn.prepareStatement(
 							"create table schedule (" +
-							" dateTime integer," +
+							" dateTime varchar(20)," +
 							" name varchar(40)," +
 							" location varchar(40)," +
 							" description varchar(120) " +
@@ -189,16 +194,17 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setString(7, String.valueOf(user.isReg()));
 						
 						insertUserList.addBatch();
-						
+					}
 					for(Event event : eventList) {
+						System.out.println("This is before dateToMillis: " + event);
 						long millis = event.dateToMillis();
-						insertEventList.setInt(1, (int) millis);
+						System.out.println("MILLI BITCH: "+millis);
+						insertEventList.setString(1, Long.toString(millis));
 						insertEventList.setString(2, event.getName());
 						insertEventList.setString(3, event.getLocation());
 						insertEventList.setString(4, event.getDescription());
 						
 						insertEventList.addBatch();
-					}
 					}
 					insertUserList.executeBatch();
 					insertEventList.executeBatch();
@@ -307,11 +313,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	
-	
-	
-	
-
 	//Add user will insert the new chracter into the database
 	//Might want to create a validate method to check to make sure all the credentials are ok and do not match
 	//Any that are already in the database
@@ -369,17 +370,18 @@ public class DerbyDatabase implements IDatabase {
 				ResultSet resultSet = null;
 				try {
 					stmt = conn.prepareStatement(
-							"select * from schedule "			
+							"select * from schedule"			
 					);
 					
 					resultSet = stmt.executeQuery();				
-					
-					Event found = new Event();
 					while(resultSet.next()) {
+						Event found = new Event();
+						
 						//Return the user if found
 						loadEvent(found, resultSet, 1);
-						//Once the user set has been loaded make sure to return it correclty
+						//Once the user set has been loaded make sure to return it correctly
 						schedule.addEvent(found);
+						
 					}
 					
 					return schedule;	
