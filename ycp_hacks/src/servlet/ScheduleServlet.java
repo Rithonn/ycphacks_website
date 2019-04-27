@@ -30,6 +30,8 @@ private static final long serialVersionUID = 1L;
 		System.out.println("Schedule Servlet: doGet");
 		session = req.getSession();
 		
+		
+		
 		if(DatabaseProvider.getInstance() == null) {
 			DatabaseProvider.setInstance(new DerbyDatabase());//------------------------------------------DATABASE MARKER
 			db = DatabaseProvider.getInstance();
@@ -53,9 +55,14 @@ private static final long serialVersionUID = 1L;
 //		}
 		
 		
+		//System.out.println("event id" + schedule.getEvent(0).getName());
+		
 		
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
+		
+	
+		
 		
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);

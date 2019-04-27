@@ -98,6 +98,7 @@
                         <td>${event.name}</td>
                         <td>${event.location}</td>
                         <td>${event.description}</td>
+                        <td>${event.eventId}</td>
                     </tr>
                 </c:forEach>
             </tbody>

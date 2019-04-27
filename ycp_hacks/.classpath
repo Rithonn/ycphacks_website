@@ -11,7 +11,6 @@
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Jetty9"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Derby"/>
-	<classpathentry kind="lib" path="C:/Users/Thomas/Documents/College/Computer Science/CS320/ycp_hacks_websites/ycp_hacks/jars/spring-security-core-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="lib" path="/Users/collinbrandt/SchoolRelated/S4/CS320/YCPHacks/repos/ycp_hacks/jars/spring-security-core-3.1.0.RELEASE.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

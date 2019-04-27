@@ -138,7 +138,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt2 = conn.prepareStatement(
 							"create table schedule (" +
 							"	event_id integer primary key " +
-							"	generated always as identity (start with 1, increment by 1), " +
+							"	 generated always as identity (start with 1, increment by 1), " +
 							" dateTime varchar(20)," +
 							" name varchar(40)," +
 							" location varchar(40)," +
@@ -462,8 +462,7 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"delete from schedule where" +
-							"schedule.eventId=?"
+							"delete from schedule where event_id = ?"
 					);
 					
 					stmt.setInt(1, event.getEventId());
