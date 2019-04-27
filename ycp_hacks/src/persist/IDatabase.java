@@ -3,6 +3,7 @@ package persist;
 import java.util.List;
 
 import model.User;
+import model.Event;
 import model.Schedule;
 
 public interface IDatabase {
@@ -13,4 +14,5 @@ public interface IDatabase {
 	public boolean updateUser(User user);
 	public User userExists(User user);
 	public Schedule getScheduleFromDB(Schedule schedule);
+	public boolean deleteEvent(Event event);
 }

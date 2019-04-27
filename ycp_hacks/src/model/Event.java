@@ -19,6 +19,7 @@ public class Event{
 	private String description;
 	private Boolean isPassedTime;
 	private Boolean isUpComing;
+	private int eventId;
 	
 	public Event() {
 	}
@@ -83,6 +84,14 @@ public class Event{
 	}
 	public void setIsUpComing(Boolean upComing) {
 		this.isUpComing = upComing;
+	}
+
+	public int getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(int eventId) {
+		this.eventId = eventId;
 	}
 	
 	

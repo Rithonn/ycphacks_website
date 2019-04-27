@@ -449,5 +449,34 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+
+	@Override
+	public boolean deleteEvent(Event event) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"delete from schedule where" +
+							"schedule.eventId=?"
+					);
+					
+					
+					//Convert long to string and set in the statement
+					stmt.setInt(1, event.getEventId());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+		
+	}
 		
 }
