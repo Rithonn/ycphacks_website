@@ -55,11 +55,11 @@ private static final long serialVersionUID = 1L;
 //		//Loads schedule from database into the model schedule
 		schedCont.loadSchedule(db);
 		
-		Event event3 = new Event();
-		
-		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 26, 22, 30);
-		event3.setDate(date3);
-		schedCont.addEventToDB(db, event3);
+//		Event event3 = new Event();
+//		
+//		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 26, 22, 30);
+//		event3.setDate(date3);
+//		schedCont.addEventToDB(db, event3);
 		//Collections.sort(schedule.getSchedule(), new SortScheduleByDate());
 		
 		//Convert to collection to make it iterable in the jsp
