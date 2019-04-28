@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +46,9 @@ public class AdminPanelServlet extends HttpServlet {
 			db = DatabaseProvider.getInstance();
 		}
 		
+		List<User> allUsers = db.getAllUsers();
+		req.setAttribute("allUsers", allUsers);
+		
 		req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 	}
 	
@@ -54,41 +58,7 @@ public class AdminPanelServlet extends HttpServlet {
 			System.out.println("Edit Profile Servlet: doPost");
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
-			UserController controller = new UserController();
-			controller.setModel(user);
 			
-			
-			
-			//if signoutButton's value is true, log out(set currentUser to null)
-			if(req.getParameter("signOutButton") != null) {
-				session.setAttribute("currentUser", null);				
-				resp.sendRedirect(req.getContextPath() + "/index");
-			}
-			if(req.getParameter("deleteProfileButton") != null){
-				//TODO: delete user model reference, delete in actual db
-				controller.deleteUser(db);
-				session.setAttribute("currentUser", null);
-				resp.sendRedirect(req.getContextPath() + "/index");
-			}
-			if(req.getParameter("updateProfileButton") != null) {	
-				//TODO: update user refernce with form info
-				// also update actual user info in db with same form info
-				
-				/*
-				ArrayList<String> updatedInfo = new ArrayList<String>();
-				updatedInfo.add(req.getParameter("newFirst"));
-				updatedInfo.add(req.getParameter("newLast"));
-				updatedInfo.add(req.getParameter("newEmail"));
-				updatedInfo.add(req.getParameter("newAge"));
-				updatedInfo.add(req.getParameter("newUniversity"));
-				updatedInfo.add(BCrypt.hashpw(req.getParameter("newPassword"),BCrypt.gensalt()));
-				*/
-				
-				
-				
-				
-				resp.sendRedirect(req.getContextPath() + "/index");
-			}
 			
 			
 	}

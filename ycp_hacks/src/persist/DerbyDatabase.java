@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -502,6 +503,45 @@ public class DerbyDatabase implements IDatabase {
 					return true;
 				}finally {
 					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+	}
+	
+	
+	@Override
+	public List<User> getAllUsers(){
+		return executeTransaction(new Transaction<List<User>>() {
+			@Override
+			public List<User> execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<User> allUsers = new ArrayList<User>();
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users"
+					);
+					
+					resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()) {
+						User user = new User();
+						//Build user
+						loadUser(user, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						allUsers.add(user);
+					}
+					
+					for(User testPrint : allUsers) {
+						System.out.println(testPrint.getEmail());
+					}
+					
+					return allUsers;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet);
 				}
 	
 			}

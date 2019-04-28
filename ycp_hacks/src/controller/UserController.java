@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.User;
 import persist.*;
 
@@ -63,6 +65,12 @@ public class UserController {
 		return wasUpdated;
 	}
 	
+	/*
+	public ArrayList<User> getAllUsers(IDatabase db){
+		ArrayList<User> allUsers = db.getAllUsers();
+		return allUsers;
+	}
+	*/
 	
 	
 }
