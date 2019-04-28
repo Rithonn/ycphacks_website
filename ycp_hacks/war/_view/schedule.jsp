@@ -141,6 +141,9 @@
 					   <td><input class='form-control' type="text" name="addEventDescription"  value="${addEventLocation}" placeholder="Enter a brief description"/></td>
 				    </tr>
                     <tr class="form_element">
+					    <td><input class='form-control' type="text" name="addEventYear"  value="${addEventYear}" placeholder="Enter year"/></td>
+				    </tr>
+                    <tr class="form_element">
 					    <td><input class='form-control' type="text" name="addEventMonth"  value="${addEventMonth}" placeholder="Enter month (1-12)"/></td>
 				    </tr>
                     <tr class="form_element">
@@ -151,11 +154,11 @@
 				    </tr>
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="${addEventTimeAM}">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="AM">
                                 <label class="form-check-label" for="inlineRadio1">AM</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="${addEventTimePM}">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="PM">
                                 <label class="form-check-label" for="inlineRadio2">PM</label>
                             </div>
                         </td>
