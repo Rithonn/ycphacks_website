@@ -3,8 +3,7 @@ package persist;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 import model.Event;
 import model.Schedule;
@@ -155,5 +154,11 @@ public class FakeDatabase implements IDatabase {
 	public boolean addEvent(Event event) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
