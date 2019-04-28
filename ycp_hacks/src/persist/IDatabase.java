@@ -1,5 +1,6 @@
 package persist;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.User;
@@ -13,6 +14,7 @@ public interface IDatabase {
 	public boolean deleteUser(User user);
 	public boolean updateUser(User user);
 	public User userExists(User user);
+	public List<User> getAllUsers();
 	public Schedule getScheduleFromDB(Schedule schedule);
 	public boolean deleteEvent(Event event);
 	public boolean addEvent(Event event);

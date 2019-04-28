@@ -60,6 +60,10 @@ public class User {
 	public boolean isReg() {
 		return isReg;
 	}
+	
+	public String getIsRegToString() {
+		return String.valueOf(isReg);
+	}
 
 	//lastName get set
 	public String getLastName() {

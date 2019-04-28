@@ -124,6 +124,16 @@
 										<th scope="col">School</th>
 										<th scope="col">Registered</th>
 									</tr>
+									<c:forEach items="${allUsers}" var="user">	
+										<tr>
+											<td>${user.userID}</td>
+											<td>${user.firstName}</td>
+											<td>${user.lastName}</td>
+											<td>${user.email}</td>
+											<td>${user.university}</td>
+											<td>${user.isRegToString}</td>
+										</tr>
+									</c:forEach>
 								</thead>
 								<tbody>
 								</tbody>
