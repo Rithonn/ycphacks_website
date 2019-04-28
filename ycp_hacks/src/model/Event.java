@@ -36,7 +36,7 @@ public class Event{
 		this.date = time;
 	}
 	public void setDateFromLong(long i) {
-		System.out.println("Long before conversion" + i);
+		//System.out.println("Long before conversion" + i);
 		ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochSecond(i), ZoneId.systemDefault());
 		this.date = zdt.toLocalDateTime();
 //		DateFormat simple = new SimpleDateFormat();
@@ -46,7 +46,7 @@ public class Event{
 //		// 	ofEpochSecond(long epochSecond, int nanoOfSecond, ZoneOffset offset)
 		//this.date = LocalDateTime.ofInstant(Instant.ofEpochSecond(i), ZoneId.systemDefault());
 		
-		System.out.println(this.date);
+		//System.out.println(this.date);
 	}
 	public long dateToMillis() {
 		//Convert the LocalDateTime to ZonedDateTime, and then to milliseconds
@@ -57,7 +57,7 @@ public class Event{
 		ZoneOffset offset = zdt.getOffset();
 		//convert the date to millis with the offset
 		millis = date.toEpochSecond(offset);
-		System.out.println("This is the millis before it is returned: " + millis);
+		//System.out.println("This is the millis before it is returned: " + millis);
 		return millis;
 	}
 	public String getName() {

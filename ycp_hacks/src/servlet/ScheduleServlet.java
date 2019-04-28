@@ -1,5 +1,6 @@
 package servlet;
 
+import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.ScheduleController;
+import controller.SortScheduleByDate;
 import model.Event;
 import model.Schedule;
 import persist.DatabaseProvider;
@@ -48,18 +50,20 @@ private static final long serialVersionUID = 1L;
 		//Set the controller's model
 		schedCont.setSchedule(schedule);
 		
-//		Event event3 = new Event();
-//		
-//		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 26, 22, 30);
-//		event3.setDate(date3);
-//		schedCont.addEventToDB(db, event3);
+		
 //		
 //		//Loads schedule from database into the model schedule
-//		schedCont.loadSchedule(db);
+		schedCont.loadSchedule(db);
+		
+		Event event3 = new Event();
+		
+		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 26, 22, 30);
+		event3.setDate(date3);
+		schedCont.addEventToDB(db, event3);
+		//Collections.sort(schedule.getSchedule(), new SortScheduleByDate());
 		
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
-		
 		
 		
 		//Sets schedule attribute in HTTP to the schedule model
