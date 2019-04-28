@@ -34,12 +34,13 @@ public class ScheduleController{
 	
 	//Load schedule from the database
 	public void loadSchedule(IDatabase db) {
-		this.schedule = db.getScheduleFromDB(schedule);
+		Schedule newschedule = db.getScheduleFromDB(this.schedule);
+		this.schedule = newschedule;
 	}
 	
 	public void deleteEvent(IDatabase db, Event event) {
 		db.deleteEvent(event);
-		this.schedule.removeEvent(event);
+		
 	}
 	
 	public void addEventToDB(IDatabase db, Event event) {

@@ -72,14 +72,55 @@ private static final long serialVersionUID = 1L;
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 	
-//	@Override 
-//	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-//			throws ServletException, IOException {
-//		
-//		System.out.println("Schedule Servlet: doPost");
-//		
-//		
-//		
-//		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
-//	}
+	@Override 
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		System.out.println("Schedule Servlet: doPost");
+		session = req.getSession();
+		
+		//Create new schedule and controller
+		Schedule schedule = new Schedule();
+		ScheduleController schedCont = new ScheduleController();
+		schedCont.setSchedule(schedule);
+		
+		//Pull info from form
+		//If the delete button was pressed, delete the event from the database, and reload the schedule
+		if(req.getParameter("delEventButton") != null) {
+			System.out.println("Delete button " + req.getParameter("delEventButton"));
+			System.out.println("Add button " + req.getParameter("addEventButton"));
+			Event delevent = new Event();
+			String eventId = req.getParameter("delEventId");
+			System.out.println("Event id " + eventId);
+			delevent.setEventId(Integer.parseInt(eventId));
+			schedCont.deleteEvent(db, delevent);
+			
+		}
+		//If the add event button was pressed, construct the new event, add it to the db and reload the schedule
+		if(req.getParameter("addEventButton") != null) {
+			Event addevent = new Event();
+			addevent.setName(req.getParameter("addEventName"));
+			addevent.setLocation(req.getParameter("addEventLocation"));
+			addevent.setDescription(req.getParameter("addEventDescription"));
+			String eventTime = req.getParameter("addEventTime");
+			int eventMonth = Integer.parseInt(req.getParameter("addEventMonth"));
+			int eventDay = Integer.parseInt(req.getParameter("addEventDay"));
+			System.out.println("Delete button " + req.getParameter("delEventButton"));
+			System.out.println("Add button " + req.getParameter("addEventButton"));
+			System.out.println("Event day " + eventDay);
+			System.out.println("AM " + req.getParameter("addEventTimeAM"));
+			System.out.println("PM " + req.getParameter("addEventTimePM"));
+		}
+		
+		//Loads schedule from database into the model schedule
+		schedCont.loadSchedule(db); 
+		//Convert to collection to make it iterable in the jsp
+		List<Event> eventlist = schedule.getSchedule();
+				
+				
+		//Sets schedule attribute in HTTP to the schedule model
+		req.setAttribute("schedule", eventlist);
+				
+		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
+	}
 }
