@@ -2,6 +2,8 @@ package servlet;
 
 import java.util.List;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,20 +50,9 @@ private static final long serialVersionUID = 1L;
 		
 		//Loads schedule from database into the model schedule
 		schedCont.loadSchedule(db);
-		//Displays event date in millis
-//		for (int i = 0; i < schedule.getSize(); i++) {
-//			Event evnt = schedule.getEvent(i);
-//			System.out.println(evnt.dateToMillis());
-//		}
-		
-		
-		//System.out.println("event id" + schedule.getEvent(0).getName());
-		
 		
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
-		
-	
 		
 		
 		//Sets schedule attribute in HTTP to the schedule model

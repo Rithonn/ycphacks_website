@@ -144,4 +144,16 @@ public class FakeDatabase implements IDatabase {
 	public boolean updateUser(User user) {
 		return false;
 	}
+
+	@Override
+	public boolean deleteEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

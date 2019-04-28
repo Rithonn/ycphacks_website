@@ -478,5 +478,34 @@ public class DerbyDatabase implements IDatabase {
 		});
 		
 	}
+
+	@Override
+	public boolean addEvent(Event event) {
+		// TODO Auto-generated method stub
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"insert into schedule (dateTime, name, location, description) values (?,?,?,?)"
+					); 
+					
+					stmt.setString(1, Long.toString(event.dateToMillis()));
+					stmt.setString(2, event.getName());
+					stmt.setString(3, event.getLocation());
+					stmt.setString(4, event.getDescription());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+	}
 		
 }
