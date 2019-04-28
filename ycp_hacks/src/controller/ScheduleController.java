@@ -42,8 +42,7 @@ public class ScheduleController{
 		this.schedule.removeEvent(event);
 	}
 	
-	public void addEvent(IDatabase db, Event event) {
+	public void addEventToDB(IDatabase db, Event event) {
 		db.addEvent(event);
-		this.schedule.addEvent(event);
 	}
 }

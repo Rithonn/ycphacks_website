@@ -101,7 +101,7 @@ public class DerbyDatabase implements IDatabase {
 	//Piece together an event
 	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
 		event.setEventId(resultset.getInt(index++));
-		event.setDateFromLong(Long.valueOf(resultset.getString(index++)));
+		event.setDateFromLong(resultset.getLong(index++));
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
 		event.setDescription(resultset.getString(index++));
@@ -139,7 +139,7 @@ public class DerbyDatabase implements IDatabase {
 							"create table schedule (" +
 							"	event_id integer primary key " +
 							"	 generated always as identity (start with 1, increment by 1), " +
-							" dateTime varchar(20)," +
+							" dateTime bigint," +
 							" name varchar(40)," +
 							" location varchar(40)," +
 							" description varchar(120) " +
@@ -200,7 +200,7 @@ public class DerbyDatabase implements IDatabase {
 					for(Event event : eventList) {
 						long millis = event.dateToMillis();
 						//System.out.println("MILLI FELLA: "+millis);
-						insertEventList.setString(1, Long.toString(millis));
+						insertEventList.setLong(1, millis);
 						insertEventList.setString(2, event.getName());
 						insertEventList.setString(3, event.getLocation());
 						insertEventList.setString(4, event.getDescription());
@@ -371,7 +371,7 @@ public class DerbyDatabase implements IDatabase {
 				ResultSet resultSet = null;
 				try {
 					stmt = conn.prepareStatement(
-							"select * from schedule"			
+							"select * from schedule order by dateTime asc"			
 					);
 					
 					resultSet = stmt.executeQuery();				
@@ -492,7 +492,7 @@ public class DerbyDatabase implements IDatabase {
 							"insert into schedule (dateTime, name, location, description) values (?,?,?,?)"
 					); 
 					
-					stmt.setString(1, Long.toString(event.dateToMillis()));
+					stmt.setLong(1, event.dateToMillis());
 					stmt.setString(2, event.getName());
 					stmt.setString(3, event.getLocation());
 					stmt.setString(4, event.getDescription());
