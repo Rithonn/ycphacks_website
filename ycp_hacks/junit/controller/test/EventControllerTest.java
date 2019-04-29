@@ -40,7 +40,7 @@ public class EventControllerTest{
 	}
 	
 	@Test
-	public void testChangeTime() {
+	public void testChangeDate() {
 		LocalDateTime date = LocalDateTime.of(2019, 10, 26, 17, 0);
 		
 		LocalDateTime newdate = LocalDateTime.of(2019, 10, 26, 18, 0);

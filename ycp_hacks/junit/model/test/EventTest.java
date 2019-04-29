@@ -26,7 +26,7 @@ public class EventTest{
 	}
 	
 	@Test
-	public void testGetTime() {
+	public void testGetDate() {
 		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
 		testEvent.setDate(date2);
 		assertEquals(date2, testEvent.getDate());
@@ -54,5 +54,31 @@ public class EventTest{
 	public void testGetUpComing() {
 		testEvent.setIsUpComing(true);
 		assertTrue(testEvent.isUpComing());
+	}
+	
+	@Test
+	public void testDateToMillis() {
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
+		testEvent.setDate(date2);
+		assertEquals(testEvent.dateToMillis(), 1572123600);
+	}
+	
+	@Test
+	public void testSetDateFromLong() {
+		testEvent.setDateFromLong(1572123600);
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
+		assertEquals(date2, testEvent.getDate());
+	}
+	
+	@Test
+	public void testGetEventId() {
+		testEvent.setEventId(8);
+		assertEquals(testEvent.getEventId(), 8);
+	}
+	
+	@Test
+	public void testIsPassedTime() {
+		testEvent.setIsPassedTime(true);
+		assertTrue(testEvent.isPassedTime());
 	}
 }
