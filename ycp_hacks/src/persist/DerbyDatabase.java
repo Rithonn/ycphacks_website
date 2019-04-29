@@ -429,10 +429,13 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"update Users "
+							"update users "
 							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
 							+ " where user_id = ?"
 					);
+					
+					//dev
+					System.out.println(user.getPassword());
 					
 					stmt.setString(1, user.getLastName());
 					stmt.setString(2, user.getFirstName());
