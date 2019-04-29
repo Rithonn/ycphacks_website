@@ -37,13 +37,13 @@ public class ScheduleController{
 		Schedule newschedule = db.getScheduleFromDB(this.schedule);
 		this.schedule = newschedule;
 	}
-	
-	public void deleteEvent(IDatabase db, Event event) {
-		db.deleteEvent(event);
+	//Remove event from DB
+	public boolean deleteEvent(IDatabase db, Event event) {
+		return db.deleteEvent(event);
 		
 	}
-	
-	public void addEventToDB(IDatabase db, Event event) {
-		db.addEvent(event);
+	//Add event to DB
+	public boolean addEventToDB(IDatabase db, Event event) {
+		return db.addEvent(event);
 	}
 }
