@@ -123,7 +123,7 @@ private static final long serialVersionUID = 1L;
 				//log them in
 				session.setAttribute("currentUser", model);
 				//redirect to index.jsp
-				req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/index");
 			}else {
 				//alert user reg failed
 				req.setAttribute("reg", "Registration was unsuccessful");
