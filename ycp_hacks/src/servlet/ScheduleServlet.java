@@ -123,6 +123,10 @@ private static final long serialVersionUID = 1L;
 			//If the time is pm, add 12 to convert to 24 hour time
 			if("PM".equals(amOrPm)) {
 				hours += 12;
+				if(hours > 23) {
+					hours = 0;
+					eventDay++;
+				}
 			}
 			//Construct the local date time
 			LocalDateTime date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);

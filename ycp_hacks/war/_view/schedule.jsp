@@ -85,6 +85,9 @@
                             }else{
                                 amOrPm = "am";
                             }
+                            if (eventHour == 0){
+                                eventHour = 12;
+                            }
                             
                             //Minutes are stored as a raw into so if it is less than 10, it will display as a single digit
                             //If it is less than 10, prepend a 0
