@@ -429,7 +429,7 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"update Users "
+							"update users "
 							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
 							+ " where user_id = ?"
 					);

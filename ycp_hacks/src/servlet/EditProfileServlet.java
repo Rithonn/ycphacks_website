@@ -109,18 +109,18 @@ public class EditProfileServlet extends HttpServlet {
 					controller.changeUniversity(req.getParameter("newUniversity"));
 				}
 				
-				String pw1 = req.getParameter("newPassword1");
-				String pw2 = req.getParameter("newPassword2");
-				
-				if(pw1.equals(pw2) && (pw1 != null)) {
-					String hashedPW = BCrypt.hashpw(pw1,BCrypt.gensalt());
-					controller.changePassword(hashedPW);
-					
+				if(!req.getParameter("newPassword1").isEmpty()) {
+					if(req.getParameter("newPassword1").equals(req.getParameter("newPassword2"))) {
+						String hashedPW = BCrypt.hashpw(req.getParameter("newPassword1"),BCrypt.gensalt());
+						controller.changePassword(hashedPW);
+					}else {
+						req.setAttribute("error", "Passwords did not match");
+					}
 				}
 				
 				controller.updateUser(db);
 				
-				req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
+				resp.sendRedirect(req.getContextPath() + "/edit_profile");
 				//resp.sendRedirect(req.getContextPath() + "/edit_profile");
 			}
 			

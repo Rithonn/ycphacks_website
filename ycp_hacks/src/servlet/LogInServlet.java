@@ -81,10 +81,9 @@ private static final long serialVersionUID = 1L;
 			session.setAttribute("currentUser", model);
 			req.setAttribute("user", model);
 			resp.sendRedirect(req.getContextPath() + "/index");
-
 		}else{
 			youwon = "Login was not successful";
-			req.setAttribute("login", youwon);
+			req.setAttribute("login", youwon);	
 		}
 		
 		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);
