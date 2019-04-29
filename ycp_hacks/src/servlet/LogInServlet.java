@@ -83,11 +83,7 @@ private static final long serialVersionUID = 1L;
 			resp.sendRedirect(req.getContextPath() + "/index");
 		}else{
 			youwon = "Login was not successful";
-			req.setAttribute("login", youwon);
-			
-			System.out.println(returnedUser.getEmail());
-			System.out.println(returnedUser.getPassword());
-			
+			req.setAttribute("login", youwon);	
 		}
 		
 		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);

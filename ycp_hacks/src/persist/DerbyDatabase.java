@@ -434,9 +434,6 @@ public class DerbyDatabase implements IDatabase {
 							+ " where user_id = ?"
 					);
 					
-					//dev
-					System.out.println(user.getPassword());
-					
 					stmt.setString(1, user.getLastName());
 					stmt.setString(2, user.getFirstName());
 					stmt.setString(3, user.getEmail());
