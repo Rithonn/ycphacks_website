@@ -2,7 +2,9 @@ package model.test;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,9 +26,8 @@ public class EventTest{
 	}
 	
 	@Test
-	public void testGetTime() {
-		Calendar date2 = Calendar.getInstance();
-		date2.set(2019, 10, 26, 20, 0);
+	public void testGetDate() {
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
 		testEvent.setDate(date2);
 		assertEquals(date2, testEvent.getDate());
 	}
@@ -53,5 +54,31 @@ public class EventTest{
 	public void testGetUpComing() {
 		testEvent.setIsUpComing(true);
 		assertTrue(testEvent.isUpComing());
+	}
+	
+	@Test
+	public void testDateToMillis() {
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
+		testEvent.setDate(date2);
+		assertEquals(testEvent.dateToMillis(), 1572123600);
+	}
+	
+	@Test
+	public void testSetDateFromLong() {
+		testEvent.setDateFromLong(1572123600);
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
+		assertEquals(date2, testEvent.getDate());
+	}
+	
+	@Test
+	public void testGetEventId() {
+		testEvent.setEventId(8);
+		assertEquals(testEvent.getEventId(), 8);
+	}
+	
+	@Test
+	public void testIsPassedTime() {
+		testEvent.setIsPassedTime(true);
+		assertTrue(testEvent.isPassedTime());
 	}
 }

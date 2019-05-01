@@ -3,7 +3,7 @@ package controller;
 import model.Event;
 import persist.*;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
 import java.util.Scanner;
 import main.Main;
 
@@ -24,7 +24,7 @@ public class EventController {
 		event.setLocation(newlocation);
 	}
 	
-	public void changeDate(Calendar newtime) {
+	public void changeDate(LocalDateTime newtime) {
 		event.setDate(newtime);
 	}
 	

@@ -96,49 +96,46 @@ nav ul li a.active{
     border-radius: 15px;
 }
 
-/*=======================================================*/
+/* This section is for all content on admin page */
 
-
-
-.logOutButton button{
-    margin: auto;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
-	color: white;
-    border: 6px;
-    border-radius: 15px;
-	width: 35%;
-	position: relative;
-}
-
-/* Editing the user information section */
-/* <div class="editingAboutSection">
-            <div class="aboutFormEdit"> */
-
-.editingAboutSection{
-    width: 100%;
+/* Main content alginment */
+.allContentSection{
+    text-align: center;
     position: relative;
     top: 250px;
-    z-index: 1;
-}
-
-.aboutFormEdit{
-    margin: auto;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     border: 6px;
     border-radius: 15px;
-    width: 35%;
-    position: relative;
-    text-align: center;
-    padding: 20px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 50px;
+    text-align: left;
+    
 }
 
-.adminPanelButton{
-    width: 25%;
-    align-content: center;
-    margin: auto;
-    text-decoration: none;
+.mainHeader{
+    border-bottom: 2px solid white;
 }
 
+/* Stats css */
+
+.stats-section {
+    border-bottom: 2px solid white;
+    margin-bottom: 20px;
+
+}
+.stats-br{
+    border-bottom: 2px solid white;
+    margin-bottom: 20px;
+    width: 30%;
+}
+.stats-section li{
+    list-style: none;
+}
+
+.user-panel-main{
+        
+}

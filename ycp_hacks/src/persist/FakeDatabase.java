@@ -1,8 +1,9 @@
 package persist;
 
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
-
+import java.util.List;
 
 import model.Event;
 import model.Schedule;
@@ -20,8 +21,9 @@ public class FakeDatabase implements IDatabase {
 
 	}
 
+	//Broke fake database for this right now
 	@Override
-	public boolean userExists(User user) {
+	public User userExists(User user) {
 		// TODO Auto-generated method stub
 		//Check to see if the user exits
 		for(User exists: userList) {
@@ -34,10 +36,10 @@ public class FakeDatabase implements IDatabase {
 				user.setUniversity(exists.getUniversity());
 				user.setFirstName(exists.getFirstName());
 				user.setLastName(exists.getLastName());
-				return true;
+				return user;
 			}
 		}
-		return false;
+		return null;
 	}
 	
 	@Override
@@ -77,10 +79,10 @@ public class FakeDatabase implements IDatabase {
 		Event event1 = new Event();
 		
 		// Java calendars allow easier creation of dates
-		Calendar date = Calendar.getInstance();
+		LocalDateTime date = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 00);
 		
 		// Format YYYY MM DD HH MM
-		date.set(2019, 10, 26, 17, 00);
+//		date.set(2019, 10, 26, 17, 00);
 		
 		event1.setLocation("Lobby");
 		event1.setDescription("Check in before the event starts");
@@ -92,9 +94,9 @@ public class FakeDatabase implements IDatabase {
 		//Creates a second test event
 		Event event2 = new Event();
 		
-		Calendar date2 = Calendar.getInstance();
+		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 20, 30);
 		
-		date2.set(2019, 10, 26, 20, 30);
+		
 		
 		event2.setLocation("Yorkview");
 		event2.setDescription("Pizza for dinner");
@@ -105,8 +107,9 @@ public class FakeDatabase implements IDatabase {
 		
 		Event event3 = new Event();
 		
-		Calendar date3 = Calendar.getInstance();
-		date3.set(2019, 10, 27, 8, 30);
+		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 27, 8, 30);
+		
+		
 		event3.setLocation("Yorkview");
 		event3.setDescription("Breakfast is served");
 		event3.setName("Breakfast");
@@ -139,5 +142,23 @@ public class FakeDatabase implements IDatabase {
 	@Override
 	public boolean updateUser(User user) {
 		return false;
+	}
+
+	@Override
+	public boolean deleteEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean addEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

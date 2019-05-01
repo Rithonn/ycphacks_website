@@ -2,7 +2,9 @@ package controller.test;
 
 import static org.junit.Assert.*;
 
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.time.Month;
+
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +21,7 @@ public class EventControllerTest{
 	public void setup() {
 		model = new Event();
 		controller = new EventController();
-		Calendar date = Calendar.getInstance();
-		date.set(2019, 10, 26, 17, 0);
+		LocalDateTime date = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
 		model.setLocation("Yorkview");
 		model.setDate(date);
 		model.setName("Free Pizza");
@@ -39,11 +40,10 @@ public class EventControllerTest{
 	}
 	
 	@Test
-	public void testChangeTime() {
-		Calendar date = Calendar.getInstance();
-		date.set(2019, 10, 26, 17, 0);
-		Calendar newdate = Calendar.getInstance();
-		newdate.set(2019, 10, 26, 18, 0);
+	public void testChangeDate() {
+		LocalDateTime date = LocalDateTime.of(2019, 10, 26, 17, 0);
+		
+		LocalDateTime newdate = LocalDateTime.of(2019, 10, 26, 18, 0);
 		
 		assertEquals(date, model.getDate());
 		controller.changeDate(newdate);

@@ -57,6 +57,11 @@
 			<div class="aboutFormEdit">
 				<div class="container">
 					<h1>Edit Profile</h1>
+						<a href="adminPage">
+							<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
+								Administrator Panel
+							</button>
+						</a>
 					<hr>
 						<!-- Edit form column -->
 						<div class="">
@@ -66,45 +71,51 @@
 								<div class="form-group">
 									<div class="">
 										<label class="">First name:</label>
-										<input class="form-control" type="text" value="${currentUser.firstName}">
+										<input class="form-control" type="text" value="${currentUser.firstName}" name="newFirst">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Last name:</label>
 									<div class="">
-										<input class="form-control" type="text" value="${currentUser.lastName}">
+										<input class="form-control" type="text" value="${currentUser.lastName}" name="newLast">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Email:</label>
 									<div class="">
-										<input class="form-control" type="text" value="${currentUser.email}">
+										<input class="form-control" type="text" value="${currentUser.email}" name="newEmail">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Age:</label>
 									<div class="">
-										<input class="form-control" type="text" value="${currentUser.age}">
+										<input class="form-control" type="text" value="${currentUser.age}" name="newAge">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">University:</label>
 									<div class="">
-										<input class="form-control" type="text" value="${currentUser.university}">
+										<input class="form-control" type="text" value="${currentUser.university}" name="newUniversity">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">New Password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="">
+										<input class="form-control" type="password" value="" name="newPassword1">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="">Confirm password:</label>
 									<div class="">
-										<input class="form-control" type="password" value="">
+										<input class="form-control" type="password" value="" name="newPassword2">
 									</div>
 								</div>
+								
+								<p class="error">
+									${error}
+								</p>
+								
+								
 								<div class="form-group">
 									<label class=""></label>							
 									<div class="">
@@ -115,9 +126,13 @@
 										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
 										Delete Profile
 										</button>
+										
+										
 										<span></span>
 										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
 										onclick="changeSignOutButton()">Sign Out</button>
+										<span></span>
+										
 									</div>
 								</div>
 							</form>

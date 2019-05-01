@@ -34,7 +34,16 @@ public class ScheduleController{
 	
 	//Load schedule from the database
 	public void loadSchedule(IDatabase db) {
-		this.schedule = db.getScheduleFromDB(schedule);
+		Schedule newschedule = db.getScheduleFromDB(this.schedule);
+		this.schedule = newschedule;
 	}
-	
+	//Remove event from DB
+	public boolean deleteEvent(IDatabase db, Event event) {
+		return db.deleteEvent(event);
+		
+	}
+	//Add event to DB
+	public boolean addEventToDB(IDatabase db, Event event) {
+		return db.addEvent(event);
+	}
 }

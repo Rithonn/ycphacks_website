@@ -5,11 +5,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import persist.DBUtil;
+import model.Event;
 import model.Schedule;
 //import persist.DerbyDatabase.Transaction;
 import model.User;
@@ -95,6 +99,17 @@ public class DerbyDatabase implements IDatabase {
 		user.setIsReg(resultSet.getBoolean(index++));
 	}
 	
+	//Piece together an event
+	private void loadEvent(Event event, ResultSet resultset, int index) throws SQLException {
+		event.setEventId(resultset.getInt(index++));
+		event.setDateFromLong(resultset.getLong(index++));
+		event.setName(resultset.getString(index++));
+		event.setLocation(resultset.getString(index++));
+		event.setDescription(resultset.getString(index++));
+		
+		
+		
+	}
 
 	//Change the table for user instead of authors with all the correct fields
 	public void createTables() {
@@ -102,7 +117,7 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
-				
+				PreparedStatement stmt2 = null;
 				
 				//Create the user table with the same order of the load up above
 				try {
@@ -121,10 +136,22 @@ public class DerbyDatabase implements IDatabase {
 					);	
 					stmt1.executeUpdate();
 					
+					stmt2 = conn.prepareStatement(
+							"create table schedule (" +
+							"	event_id integer primary key " +
+							"	 generated always as identity (start with 1, increment by 1), " +
+							" dateTime bigint," +
+							" name varchar(40)," +
+							" location varchar(40)," +
+							" description varchar(120) " +
+							")"
+							);
+					stmt2.executeUpdate();
 					
 					return true;
 				} finally {
 					DBUtil.closeQuietly(stmt1);
+					DBUtil.closeQuietly(stmt2);
 				}
 			}
 		});
@@ -135,20 +162,24 @@ public class DerbyDatabase implements IDatabase {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				List<User> userList;
-				
+				List<Event> eventList;
 				
 				
 				//Was getting an error because the list has null returning
 				try {
 					//Create a section in initdata to get userlist
 					userList = InitialData.getUserList();
-					
+					eventList = InitialData.getEventList();
 				} catch (IOException e) {
 					throw new SQLException("Couldn't read initial data", e);
 				}
 
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
 						+ " password, age, university, isReg) values (?,?,?,?,?,?,?)");
+				
+				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description)"
+						+ " values (?,?,?,?)");
+				
 				try {
 //					Will need to populate the user table with example entry
 					for (User user : userList) {
@@ -156,19 +187,33 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setString(1, user.getLastName());
 						insertUserList.setString(2, user.getFirstName());
 						insertUserList.setString(3, user.getEmail());
-						insertUserList.setString(4, user.getPassword());
+						
+						//Hash the password needed
+						String pw_hash = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+						
+						insertUserList.setString(4, pw_hash);
 						insertUserList.setInt(5, user.getAge());
 						insertUserList.setString(6, user.getUniversity());
 						insertUserList.setString(7, String.valueOf(user.isReg()));
 						
 						insertUserList.addBatch();
+					}
+					for(Event event : eventList) {
+						long millis = event.dateToMillis();
+						//System.out.println("MILLI FELLA: "+millis);
+						insertEventList.setLong(1, millis);
+						insertEventList.setString(2, event.getName());
+						insertEventList.setString(3, event.getLocation());
+						insertEventList.setString(4, event.getDescription());
 						
+						insertEventList.addBatch();
 					}
 					insertUserList.executeBatch();
-					
+					insertEventList.executeBatch();
 					return true;
 				} finally {
 					DBUtil.closeQuietly(insertUserList);
+					DBUtil.closeQuietly(insertEventList);
 				}
 			}
 		});
@@ -187,27 +232,28 @@ public class DerbyDatabase implements IDatabase {
 	}
 
 	@Override
-	public boolean userExists(User user) {
-		return executeTransaction(new Transaction<Boolean>() {
+	public User userExists(User user) {
+		return executeUserTransaction(new Transaction<User>() {
 			@Override
-			public Boolean execute(Connection conn) throws SQLException {
+			public User execute(Connection conn) throws SQLException {
 				PreparedStatement stmt = null;
 				ResultSet resultSet = null;
 				try {
 					stmt = conn.prepareStatement(
 							"select * from users "
-						+	" where users.email = ? and users.password = ? "			
+						+	" where users.email = ?"			
 					);
 					
 					stmt.setString(1, user.getEmail());
-					stmt.setString(2, user.getPassword());
 					
 					resultSet = stmt.executeQuery();				
 					
-					Boolean found = false;
+					User found = new User();
 					while(resultSet.next()) {
-						found = true;	
+						//Return the user if found
 						loadUser(user, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						found = user;
 					}
 					
 					return found;	
@@ -220,7 +266,23 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	//Want to return the user to check and see if the password was correct
+	private User executeUserTransaction(Transaction<User> transaction) {
+		try {
+			return doExecuteTransaction(transaction);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
+	}
 	
+	private Schedule executeScheduleTransaction(Transaction<Schedule> transaction) {
+		try {
+			return doExecuteTransaction(transaction);
+		} catch (SQLException e) {
+			throw new PersistenceException("Transaction failed", e);
+		}
+	}
+
 	public boolean emailUsed(User user) {
 		return executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -253,11 +315,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
-	
-	
-	
-	
-
 	//Add user will insert the new chracter into the database
 	//Might want to create a validate method to check to make sure all the credentials are ok and do not match
 	//Any that are already in the database
@@ -308,7 +365,35 @@ public class DerbyDatabase implements IDatabase {
 
 	@Override
 	public Schedule getScheduleFromDB(Schedule schedule) {
-		return null;
+		return executeScheduleTransaction(new Transaction<Schedule>() {
+			@Override
+			public Schedule execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from schedule order by dateTime asc"			
+					);
+					
+					resultSet = stmt.executeQuery();				
+					while(resultSet.next()) {
+						Event found = new Event();
+						
+						//Return the user if found
+						loadEvent(found, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correctly
+						schedule.addEvent(found);
+						
+					}
+					
+					return schedule;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
 	}
 	
 	@Override
@@ -337,7 +422,130 @@ public class DerbyDatabase implements IDatabase {
 	
 	@Override
 	public boolean updateUser(User user) {
-		return false;
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"update users "
+							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
+							+ " where user_id = ?"
+					);
+					
+					stmt.setString(1, user.getLastName());
+					stmt.setString(2, user.getFirstName());
+					stmt.setString(3, user.getEmail());
+					stmt.setString(4, user.getPassword());
+					stmt.setInt(5, user.getAge());
+					stmt.setString(6, user.getUniversity());
+					stmt.setString(7, Boolean.toString(user.isReg()));
+					stmt.setInt(8, user.getUserID());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+	}
+
+	@Override
+	public boolean deleteEvent(Event event) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"delete from schedule where event_id = ?"
+					);
+					
+					stmt.setInt(1, event.getEventId());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+		
+	}
+
+	@Override
+	public boolean addEvent(Event event) {
+		// TODO Auto-generated method stub
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"insert into schedule (dateTime, name, location, description) values (?,?,?,?)"
+					); 
+					
+					stmt.setLong(1, event.dateToMillis());
+					stmt.setString(2, event.getName());
+					stmt.setString(3, event.getLocation());
+					stmt.setString(4, event.getDescription());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+	
+			}
+		});
+	}
+	
+	
+	@Override
+	public List<User> getAllUsers(){
+		return executeTransaction(new Transaction<List<User>>() {
+			@Override
+			public List<User> execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<User> allUsers = new ArrayList<User>();
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users"
+					);
+					
+					resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()) {
+						User user = new User();
+						//Build user
+						loadUser(user, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						allUsers.add(user);
+					}
+					
+					for(User testPrint : allUsers) {
+						System.out.println(testPrint.getEmail());
+					}
+					
+					return allUsers;
+				}finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet);
+				}
+	
+			}
+		});
 	}
 		
 }

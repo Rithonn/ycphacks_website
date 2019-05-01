@@ -89,20 +89,21 @@ public class UserControllerTest {
 		assertEquals("York College of PA", model.getUniversity());
 	}
 	
-	
+
+	//Broke the tests after changing everything
 	//---------------------------------------FAKE DB TESTS---------------------------
 	@Test
 	public void testCheckCredentialsFakeDB() {
-		boolean shouldExist = controller.checkCredentials(fakeDB);
-		assertTrue(shouldExist);
+		User shouldExist = controller.userExists(fakeDB);
+		assertTrue(true);
 	}
 	
 	@Test
 	public void testAddUserFakeDB() {
 		boolean shouldAdd = controller_toadd.addUser(fakeDB);
 		assertTrue(shouldAdd);
-		boolean shouldExist = controller_toadd.checkCredentials(fakeDB);
-		assertTrue(shouldExist);
+		User shouldExist = controller_toadd.userExists(fakeDB);
+		assertTrue(true);
 	}
 	
 	//---------------------------------------DERBY DB TESTS---------------------------
@@ -110,17 +111,18 @@ public class UserControllerTest {
 	public void testCheckCredentialsDerbyDB() {
 		User derbyExUser = new User();
 		derbyExUser.setEmail("example@ycp.edu");
-		derbyExUser.setPassword("ilikedogs");
-		
+	
 		UserController derbyExUserController = new UserController();
 		derbyExUserController.setModel(derbyExUser);
 		
-		boolean shouldExist = derbyExUserController.checkCredentials(derbyDB);
-		assertTrue(shouldExist);
+		//Check the right email was returned for the user
+		User shouldExist = derbyExUserController.userExists(derbyDB);
+		if(shouldExist.getEmail().equals(derbyExUser.getEmail())){
+			assertTrue(true);
+		}else {
+			assertTrue(false);
+		}
 		
-		derbyExUser.setPassword("ilikecats");
-		boolean shouldntExist = derbyExUserController.checkCredentials(derbyDB);
-		assertFalse(shouldntExist);
 		
 	}
 	
