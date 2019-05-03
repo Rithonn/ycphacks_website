@@ -62,6 +62,10 @@
 								Administrator Panel
 							</button>
 						</a>
+						
+						<p class="error">
+									${error}
+						</p>
 					<hr>
 						<!-- Edit form column -->
 						<div class="">
@@ -110,11 +114,6 @@
 										<input class="form-control" type="password" value="" name="newPassword2">
 									</div>
 								</div>
-								
-								<p class="error">
-									${error}
-								</p>
-								
 								
 								<div class="form-group">
 									<label class=""></label>							

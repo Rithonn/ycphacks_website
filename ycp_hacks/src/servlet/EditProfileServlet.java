@@ -120,7 +120,7 @@ public class EditProfileServlet extends HttpServlet {
 				
 				controller.updateUser(db);
 				
-				resp.sendRedirect(req.getContextPath() + "/edit_profile");
+				req.getRequestDispatcher("/_view/editProfilePage.jsp").forward(req, resp);
 				//resp.sendRedirect(req.getContextPath() + "/edit_profile");
 			}
 			
