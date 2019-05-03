@@ -113,7 +113,7 @@ private static final long serialVersionUID = 1L;
 			System.out.println(pw_hash);
 			model.setPassword(pw_hash);
 			
-			//TODO: Will need to make test cases to check how the hasing works then
+			model.setAccessID(0);
 			
 			
 			//add user to db, will check if email has been used already
