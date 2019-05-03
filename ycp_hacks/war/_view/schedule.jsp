@@ -64,7 +64,10 @@
                     <th scope="col">What</th>
                     <th scope="col">Where</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Event ID</th>
+                    <!-- This will need to be hidden when not admin -->
+                    <c:if test="${currentUser.accessID == 2}">
+                        <th scope="col">Event ID</th>
+                    </c:if>
                 </tr>
             </thead>
             <tbody>
@@ -102,12 +105,16 @@
                         <td>${event.name}</td>
                         <td>${event.location}</td>
                         <td>${event.description}</td>
-                        <td>${event.eventId}</td>
+                        <c:if test="${currentUser.accessID == 2}">
+                            <td>${event.eventId}</td>
+                        </c:if>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
         </div>
+        <!-- Hide from non admin users -->
+        <c:if test="${currentUser.accessID == 2}">
         <div class="form-wrappers">
             <!--Delete Event Button & Text Box-->
         <div class="DeleteWrapper">
@@ -174,7 +181,7 @@
             </form>
         </div>
         </div>
-        
+        </c:if>
         <script>
 	        function changeDelEventButton(){
 	        	document.getElementsByName("delEventButton")[0].setAttribute("value", "true");
