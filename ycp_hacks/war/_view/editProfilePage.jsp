@@ -57,11 +57,14 @@
 			<div class="aboutFormEdit">
 				<div class="container">
 					<h1>Edit Profile</h1>
-						<a href="adminPage">
-							<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
-								Administrator Panel
-							</button>
-						</a>
+					
+						<c:if test="${currentUser.accessID == 2}">
+							<a href="adminPage">
+								<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
+									Administrator Panel
+								</button>
+							</a>
+						</c:if>
 						
 						<p class="error">
 									${error}
