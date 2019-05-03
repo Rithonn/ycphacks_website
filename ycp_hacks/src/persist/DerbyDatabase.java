@@ -119,6 +119,8 @@ public class DerbyDatabase implements IDatabase {
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
 				
 				//Create the user table with the same order of the load up above
 				try {
@@ -149,6 +151,24 @@ public class DerbyDatabase implements IDatabase {
 							")"
 							);
 					stmt2.executeUpdate();
+					
+					stmt3 = conn.prepareStatement(
+						"create table submissions (" +
+						" submission_id integer primary key " +
+						" 	generated always as identity (start with 1, increment by 1), "+
+						" message varchar(140) " +
+						")"
+						);
+					stmt3.executeUpdate();
+					
+					//need to make new object with a user(maybe just names/user_id) and their submission message
+					stmt4 = conn.prepareStatement(
+						"create table userSubmissions (" +
+						" user_id integer constraint user_id references users, " +
+						" submission_id  integer constraint submission_id references submissions "+
+						")"
+						);
+					stmt4.executeUpdate();
 					
 					return true;
 				} finally {
@@ -197,7 +217,6 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setInt(5, user.getAge());
 						insertUserList.setString(6, user.getUniversity());
 						insertUserList.setString(7, String.valueOf(user.isReg()));
-						System.out.println(user.getAccessID());
 						if(user.getAccessID() != 0) {
 							insertUserList.setInt(8, user.getAccessID());
 						}else {
