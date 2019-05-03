@@ -97,6 +97,7 @@ public class DerbyDatabase implements IDatabase {
 		user.setAge(resultSet.getInt(index++));
 		user.setUniversity(resultSet.getString(index++));
 		user.setIsReg(resultSet.getBoolean(index++));
+		user.setAccessID(resultSet.getInt(index++));
 	}
 	
 	//Piece together an event
@@ -131,7 +132,8 @@ public class DerbyDatabase implements IDatabase {
 						"   password varchar(120)," + 
 						"   age integer," +
 						"   university varchar(40), " + 
-						"   isReg varchar(5) "    +
+						"   isReg varchar(5), "    +
+						"   accessID integer DEFAULT 0"		+
 						")"
 					);	
 					stmt1.executeUpdate();
@@ -175,7 +177,7 @@ public class DerbyDatabase implements IDatabase {
 				}
 
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
-						+ " password, age, university, isReg) values (?,?,?,?,?,?,?)");
+						+ " password, age, university, isReg, accessID) values (?,?,?,?,?,?,?,?)");
 				
 				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description)"
 						+ " values (?,?,?,?)");
@@ -195,6 +197,13 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setInt(5, user.getAge());
 						insertUserList.setString(6, user.getUniversity());
 						insertUserList.setString(7, String.valueOf(user.isReg()));
+						System.out.println(user.getAccessID());
+						if(user.getAccessID() != 0) {
+							insertUserList.setInt(8, user.getAccessID());
+						}else {
+							insertUserList.setInt(8, 0);
+						}
+						
 						
 						insertUserList.addBatch();
 					}

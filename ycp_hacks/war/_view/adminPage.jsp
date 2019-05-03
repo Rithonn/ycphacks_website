@@ -123,6 +123,7 @@
 										<th scope="col">Email</th>
 										<th scope="col">School</th>
 										<th scope="col">Registered</th>
+										<th scope="col">Access ID</th>
 									</tr>
 									<c:forEach items="${allUsers}" var="user">	
 										<tr>
@@ -132,6 +133,7 @@
 											<td>${user.email}</td>
 											<td>${user.university}</td>
 											<td>${user.isRegToString}</td>
+											<td>${user.accessID}</td>
 										</tr>
 									</c:forEach>
 								</thead>

@@ -43,6 +43,7 @@ public class InitialData {
 				user.setAge(Integer.parseInt(i.next()));
 				user.setUniversity(i.next());
 				user.setIsReg(Boolean.parseBoolean(i.next()));
+				user.setAccessID(Integer.parseInt(i.next()));
 				userList.add(user);
 			}
 			System.out.println("userList loaded from CSV file");
