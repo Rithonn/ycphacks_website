@@ -100,7 +100,7 @@
 							<div class="admin-controls">
 								<h5>Admin Settings:</h5>
 								<!-- Accept, Deny, Delete -->
-								<form action="submit">
+								<form action="submit" style="margin-bottom: 3px;">
 									<input type="text" placeholder="UserID" class="rounded">
 									<div style="margin-bottom: 3px;">
 
@@ -108,6 +108,14 @@
 									<button class="btn btn-success btn rounded btn-sm">Accept</button>
 									<button class="btn btn-success btn rounded btn-sm">Deny</button>
 									<button class="btn btn-success btn rounded btn-sm">Delete</button>
+								</form>
+								
+								<form action="submit">
+									<input type="text" placeholder="UserID" class="rounded">
+									<div style="margin-bottom: 3px;">
+									<input type = "text" placeholder = "accessID" class="rounded">
+									</div>
+									<button class="btn btn-success btn rounded btn-sm">Submit</button>
 								</form>
 
 							</div>
