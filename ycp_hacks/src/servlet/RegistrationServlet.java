@@ -140,7 +140,7 @@ private static final long serialVersionUID = 1L;
 				emailSender.sendRegEmail();
 				
 				//redirect to index.jsp
-				resp.sendRedirect(req.getContextPath() + "/index");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}else {
 				//alert user reg failed
 				req.setAttribute("reg", "Registration was unsuccessful");

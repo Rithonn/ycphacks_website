@@ -38,7 +38,7 @@
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
