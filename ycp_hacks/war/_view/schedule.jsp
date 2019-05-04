@@ -70,11 +70,14 @@
                     </c:if>
                 </tr>
             </thead>
-            <tbody>
-                <%! int day="${firstevent.date.dayofmonth}"; %>
-                <% out.println(day);%>
+            <tbody> 
+                <tr>
+                    <td>${firstevent.date.dayOfWeek} ${firstevent.date.month}, ${firstevent.date.dayOfMonth}</td>
+                    
+                </tr>
                 <c:forEach items="${schedule}" var="event">
                     <tr>
+                        
                         <td>
                             <script>
                             // Script to display the event time as HH:MM am/pm
