@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.EmailSender;
 import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -15,6 +16,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+
 
 //Special import for the spring framework bcrypt
 import org.springframework.security.crypto.bcrypt.*;
@@ -122,8 +128,19 @@ private static final long serialVersionUID = 1L;
 			if(wasAdded) {
 				//log them in
 				session.setAttribute("currentUser", model);
+				
+				/*
+				 * Send registration email,
+				 * still make an list of accounts, even though it's just one
+				 * as emailSender has functionality to send to multiple recips
+				 */
+				ArrayList<User> accountsReceiving = new ArrayList<User>();
+				accountsReceiving.add(model);
+				EmailSender emailSender = new EmailSender(accountsReceiving);
+				emailSender.sendRegEmail();
+				
 				//redirect to index.jsp
-				resp.sendRedirect(req.getContextPath() + "/index");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}else {
 				//alert user reg failed
 				req.setAttribute("reg", "Registration was unsuccessful");

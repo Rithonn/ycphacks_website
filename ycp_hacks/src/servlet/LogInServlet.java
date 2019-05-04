@@ -80,7 +80,7 @@ private static final long serialVersionUID = 1L;
 			//if not login denied fool
 			session.setAttribute("currentUser", model);
 			req.setAttribute("user", model);
-			resp.sendRedirect(req.getContextPath() + "/index");
+			resp.sendRedirect(req.getContextPath() + "/home");
 		}else{
 			youwon = "Login was not successful";
 			req.setAttribute("login", youwon);	

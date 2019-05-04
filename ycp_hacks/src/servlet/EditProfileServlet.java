@@ -39,7 +39,7 @@ public class EditProfileServlet extends HttpServlet {
 		 * forwards back to the index
 		 */
 		if(session.getAttribute("currentUser") == null) {
-			resp.sendRedirect(req.getContextPath() + "/index");
+			resp.sendRedirect(req.getContextPath() + "/home");
 		}
 		
 		if(DatabaseProvider.getInstance() == null) {
@@ -66,13 +66,13 @@ public class EditProfileServlet extends HttpServlet {
 			//if signoutButton's value is true, log out(set currentUser to null)
 			if(req.getParameter("signOutButton") != null) {
 				session.setAttribute("currentUser", null);				
-				resp.sendRedirect(req.getContextPath() + "/index");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}
 			if(req.getParameter("deleteProfileButton") != null){
 				//TODO: delete user model reference, delete in actual db
 				controller.deleteUser(db);
 				session.setAttribute("currentUser", null);
-				resp.sendRedirect(req.getContextPath() + "/index");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}
 			if(req.getParameter("updateProfileButton") != null) {	
 				//TODO: update user refernce with form info

@@ -104,7 +104,8 @@ body{
 }
 
 .directionsContent{
-	background-color: #48a23d;
+	/*background-color: #48a23d;*/
+	background: rgba(0, 0, 0, 0.7);
 	position: relative;
 	
 	width: 40%;
