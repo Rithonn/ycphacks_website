@@ -145,8 +145,12 @@ private static final long serialVersionUID = 1L;
 		List<Event> eventlist = schedule.getSchedule();
 				
 				
+		//Get the first event to pass into the jsp
+		Event firstevent = eventlist.get(1);
+		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
+		req.setAttribute("firstevent", firstevent);
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}

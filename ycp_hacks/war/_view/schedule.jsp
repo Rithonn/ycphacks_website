@@ -70,14 +70,23 @@
                     </c:if>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
+                
                 <tr>
                     <td>${firstevent.date.dayOfWeek} ${firstevent.date.month}, ${firstevent.date.dayOfMonth}</td>
-                    
                 </tr>
+                
+                <c:set var = "mostrecentday" value = "${firstevent.date.dayOfMonth}" scope="page"/>
                 <c:forEach items="${schedule}" var="event">
+                    <c:if test="${mostrecentday != event.date.dayOfMonth}">
+                        <c:set var = "mostrecentday" value = "${event.date.dayOfMonth}" />
+                        <tr>
+                            <td>
+                                ${event.date.dayOfWeek} ${event.date.month}, ${event.date.dayOfMonth} 
+                            </td>  
+                        </tr>
+                    </c:if>
                     <tr>
-                        
                         <td>
                             <script>
                             // Script to display the event time as HH:MM am/pm
