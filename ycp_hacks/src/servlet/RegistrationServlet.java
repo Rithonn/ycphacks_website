@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.EmailSender;
 import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
+
 
 //Special import for the spring framework bcrypt
 import org.springframework.security.crypto.bcrypt.*;
@@ -127,34 +128,16 @@ private static final long serialVersionUID = 1L;
 			if(wasAdded) {
 				//log them in
 				session.setAttribute("currentUser", model);
-				//send email
-				String to = model.getEmail();
-				String username = "walrussuit@gmail.com";
-				//ask tim for password for sending email account
-				String passwordEmail = "";
-				Properties prop = System.getProperties();
-				prop.put("mail.smtp.host", "smtp.gmail.com");
-		        prop.put("mail.smtp.port", "587");
-		        prop.put("mail.smtp.auth", "true");
-		        prop.put("mail.smtp.starttls.enable", "true"); //TLS
 				
-		        Session session = Session.getInstance(prop,
-	                new javax.mail.Authenticator() {
-	                    protected PasswordAuthentication getPasswordAuthentication() {
-	                        return new PasswordAuthentication(username, passwordEmail);
-	                    }
-	                });
-				
-				try {
-					MimeMessage message = new MimeMessage(session);
-					message.setFrom(new InternetAddress(username));
-					message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-					message.setSubject(model.getFirstName() + ", welcome to YCP Hacks!");
-					message.setText("Your account under: " + to + ", is registered for YCP Hacks!");
-					Transport.send(message);
-				}catch(MessagingException e) {
-					System.out.println(e);
-				}
+				/*
+				 * Send registration email,
+				 * still make an list of accounts, even though it's just one
+				 * as emailSender has functionality to send to multiple recips
+				 */
+				ArrayList<User> accountsReceiving = new ArrayList<User>();
+				accountsReceiving.add(model);
+				EmailSender emailSender = new EmailSender(accountsReceiving);
+				emailSender.sendRegEmail();
 				
 				//redirect to index.jsp
 				resp.sendRedirect(req.getContextPath() + "/index");
