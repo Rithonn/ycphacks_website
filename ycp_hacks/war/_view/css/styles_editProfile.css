@@ -142,3 +142,12 @@ nav ul li a.active{
     text-decoration: none;
 }
 
+.confirmDenyDelete{
+	display: none;
+	margin: 10px;
+}
+
+button[name="deleteProfileButton"]{
+	background-color: red;
+}
+

@@ -39,7 +39,7 @@ public class EditProfileServlet extends HttpServlet {
 		 * forwards back to the index
 		 */
 		if(session.getAttribute("currentUser") == null) {
-			resp.sendRedirect(req.getContextPath() + "/index");
+			resp.sendRedirect(req.getContextPath() + "/home");
 		}
 		
 		if(DatabaseProvider.getInstance() == null) {
