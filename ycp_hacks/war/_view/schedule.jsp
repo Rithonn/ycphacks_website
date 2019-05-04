@@ -71,6 +71,8 @@
                 </tr>
             </thead>
             <tbody>
+                <%! int day="${firstevent.date.dayofmonth}"; %>
+                <% out.println(day);%>
                 <c:forEach items="${schedule}" var="event">
                     <tr>
                         <td>
