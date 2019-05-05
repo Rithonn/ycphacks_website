@@ -27,7 +27,7 @@ private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("Profile Page Servlet: doGet");
+		System.out.println("Log In Page Servlet: doGet");
 		session = req.getSession();
 		
 		/*If session DB reference is null.
@@ -49,7 +49,7 @@ private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("Profile Page Servlet: doPost");
+		System.out.println("Log In Page Servlet: doPost");
 		
 		UserController controller = new UserController();
 		User model = new User();
@@ -62,29 +62,34 @@ private static final long serialVersionUID = 1L;
 		String password = req.getParameter("password");
 		
 		if(email == null || password == null) {
-			errorMessage = "please specifiy valid credentials";
+			errorMessage = "Please specifiy valid credentials";
 		}else{
 			model.setEmail(email);
+			
+			User returnedUser = db.userExists(model);
+			//returnedUser = db.userExists(model);
+			
+			if(returnedUser.getEmail() == null) {
+				errorMessage = "No account found under: " + email;
+				req.setAttribute("login", errorMessage);
+			}else {
+				//If the user successfully logged in redirect to home page, 
+				//Otherwise inform that log in was not successful
+				if(BCrypt.checkpw(password, returnedUser.getPassword())) {
+					System.out.println("here");
+					//if not login denied fool
+					session.setAttribute("currentUser", model);
+					req.setAttribute("user", model);
+					resp.sendRedirect(req.getContextPath() + "/home");
+				}else{
+					errorMessage = "Incorrect password for account under: " + returnedUser.getEmail();
+					req.setAttribute("login", errorMessage);	
+				}
+			}
 		}
 			
 		
-		User returnedUser = controller.userExists(db);
 		
-		
-
-		//If true login worked yo
-		//If the user successfully logged in redirect to home page, 
-		//Otherwise inform that log in was not successful
-		String youwon = "You didnt win go cry";
-		if(BCrypt.checkpw(password, returnedUser.getPassword())) {
-			//if not login denied fool
-			session.setAttribute("currentUser", model);
-			req.setAttribute("user", model);
-			resp.sendRedirect(req.getContextPath() + "/home");
-		}else{
-			youwon = "Login was not successful";
-			req.setAttribute("login", youwon);	
-		}
 		
 		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);
 		
