@@ -17,6 +17,7 @@ nav {
     box-sizing: border-box;
     transition: .3s;
     z-index: 100;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 /* Change in the navbar colors */

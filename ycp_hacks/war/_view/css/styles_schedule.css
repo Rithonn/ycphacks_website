@@ -25,6 +25,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 10;
 }
 
 /* Change in the navbar colors */
