@@ -60,37 +60,28 @@ private static final long serialVersionUID = 1L;
 		//get login credentials
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
+		model.setEmail(email);
+		User returnedUser = db.userExists(model);
 		
-		if(email == null || password == null) {
-			errorMessage = "Please specifiy valid credentials";
-		}else{
-			model.setEmail(email);
-			
-			User returnedUser = db.userExists(model);
-			
-			if(returnedUser.getEmail() == null) {
-				errorMessage = "No account found under: " + email;
-				req.setAttribute("login", errorMessage);
-			}else {
-				//there is an account with that email
-				//check if password is correct
-				if(BCrypt.checkpw(password, returnedUser.getPassword())) {
-					System.out.println("here");
-					session.setAttribute("currentUser", model);
-					req.setAttribute("user", model);
-					resp.sendRedirect(req.getContextPath() + "/home");
-				//password was wrong, inform user
-				}else{
-					errorMessage = "Incorrect password for account under: " + returnedUser.getEmail();
-					req.setAttribute("login", errorMessage);	
-				}
+		//check if a user was returned from db
+		if(returnedUser.getEmail() == null) {
+			errorMessage = "No account found under: " + email;
+			req.setAttribute("login", errorMessage);
+		}else {
+			//there is an account with that email
+			//check if password is correct
+			if(BCrypt.checkpw(password, returnedUser.getPassword())) {
+				System.out.println("here");
+				session.setAttribute("currentUser", model);
+				req.setAttribute("user", model);
+				resp.sendRedirect(req.getContextPath() + "/home");
+			//password was wrong, inform user
+			}else{
+				errorMessage = "Incorrect password for account under: " + returnedUser.getEmail();
+				req.setAttribute("login", errorMessage);	
 			}
 		}
-			
-		
-		
-		
+
 		req.getRequestDispatcher("/_view/logIn.jsp").forward(req, resp);
-		
 	}
 }
