@@ -67,20 +67,19 @@ private static final long serialVersionUID = 1L;
 			model.setEmail(email);
 			
 			User returnedUser = db.userExists(model);
-			//returnedUser = db.userExists(model);
 			
 			if(returnedUser.getEmail() == null) {
 				errorMessage = "No account found under: " + email;
 				req.setAttribute("login", errorMessage);
 			}else {
-				//If the user successfully logged in redirect to home page, 
-				//Otherwise inform that log in was not successful
+				//there is an account with that email
+				//check if password is correct
 				if(BCrypt.checkpw(password, returnedUser.getPassword())) {
 					System.out.println("here");
-					//if not login denied fool
 					session.setAttribute("currentUser", model);
 					req.setAttribute("user", model);
 					resp.sendRedirect(req.getContextPath() + "/home");
+				//password was wrong, inform user
 				}else{
 					errorMessage = "Incorrect password for account under: " + returnedUser.getEmail();
 					req.setAttribute("login", errorMessage);	
