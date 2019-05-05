@@ -73,6 +73,7 @@
             </thead>
             <tbody>
                 <c:if test="${mostrecentday != firstevent.date.dayOfMonth}">
+                    <!-- maybe add another c:if to see if the event is visible-->
                     <tr>
                         <td>
                             ${firstevent.date.dayOfWeek} ${firstevent.date.month}, ${firstevent.date.dayOfMonth} 
@@ -81,6 +82,7 @@
                 </c:if>
                 <c:set var = "mostrecentday" value = "${firstevent.date.dayOfMonth}" />
                 <c:forEach items="${schedule}" var="event">
+                     <c:if test="${event.isVisible or currentUser.accessID == 2}">
                     <c:if test="${mostrecentday != event.date.dayOfMonth}">
                         <c:set var = "mostrecentday" value = "${event.date.dayOfMonth}" />
                         <tr>
@@ -127,6 +129,7 @@
                             <td>${event.isVisible}</td>
                         </c:if>
                     </tr>
+                    </c:if>
                 </c:forEach>
             </tbody>
         </table>
