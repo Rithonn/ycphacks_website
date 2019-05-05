@@ -68,13 +68,27 @@
 				</div>
 				<div class="stats-content">
 					<ul class="all-stats">
-						<li>Total Users: </li>
-						<li>Verfied Users: </li>
-						<li>Submitted Users: </li>
+						<li>Total Users: ${fn:length(allUsers)}</li>
+						
+						<% 
+						java.lang.Integer numRegistered=0;
+						java.lang.Integer numSubmitted=0;
+						%>
+						<c:forEach items="${allUsers}" var="user">
+							<c:if test="${user.isRegToString == true}">
+								<%numRegistered = numRegistered + 1; %>
+							</c:if>
+							
+							<c:if test="${user.isRegToString == false}">
+								<%numSubmitted = numSubmitted + 1; %>
+							</c:if>
+						</c:forEach>	
+						
+						<li>Verified Users: <% out.print(numRegistered);%></li>
+						<li>Submitted Users: <% out.print(numSubmitted);%></li>
 						<div class="stats-br">
 							<br>
 						</div>
-						
 						<li>Admitted: </li>
 						<li>Confirmed: </li>
 						<li>Checked In: </li>
