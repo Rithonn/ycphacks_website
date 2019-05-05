@@ -18,6 +18,7 @@ public class Event{
 	private String description;
 	private Boolean isPassedTime;
 	private Boolean isUpComing;
+	private Boolean isVisible;
 	private int eventId;
 	
 	public Event() {
@@ -91,6 +92,14 @@ public class Event{
 
 	public void setEventId(int eventId) {
 		this.eventId = eventId;
+	}
+
+	public Boolean getIsVisible() {
+		return isVisible;
+	}
+
+	public void setIsVisible(Boolean isVisible) {
+		this.isVisible = isVisible;
 	}
 	
 	

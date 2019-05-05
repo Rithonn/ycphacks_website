@@ -107,9 +107,7 @@ public class DerbyDatabase implements IDatabase {
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
 		event.setDescription(resultset.getString(index++));
-		
-		
-		
+		event.setIsVisible(resultset.getBoolean(index++));
 	}
 
 	//Change the table for user instead of authors with all the correct fields
@@ -147,7 +145,8 @@ public class DerbyDatabase implements IDatabase {
 							" dateTime bigint," +
 							" name varchar(40)," +
 							" location varchar(40)," +
-							" description varchar(120) " +
+							" description varchar(120), " +
+							" isVisible varchar(5) " +
 							")"
 							);
 					stmt2.executeUpdate();
@@ -199,8 +198,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
 						+ " password, age, university, isReg, accessID) values (?,?,?,?,?,?,?,?)");
 				
-				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description)"
-						+ " values (?,?,?,?)");
+				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description, isVisible)"
+						+ " values (?,?,?,?,?)");
 				
 				try {
 //					Will need to populate the user table with example entry
@@ -233,7 +232,7 @@ public class DerbyDatabase implements IDatabase {
 						insertEventList.setString(2, event.getName());
 						insertEventList.setString(3, event.getLocation());
 						insertEventList.setString(4, event.getDescription());
-						
+						insertEventList.setString(5, String.valueOf(event.getIsVisible()));
 						insertEventList.addBatch();
 					}
 					insertUserList.executeBatch();
@@ -536,7 +535,7 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-	
+
 	
 	@Override
 	public List<User> getAllUsers(){

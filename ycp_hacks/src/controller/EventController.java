@@ -43,4 +43,8 @@ public class EventController {
 	public void changeIsUpComing(Boolean upcoming) {
 		event.setIsUpComing(upcoming);
 	}
+	
+	public void changeIsVisible(Boolean visible) {
+		event.setIsVisible(visible);
+	}
 }

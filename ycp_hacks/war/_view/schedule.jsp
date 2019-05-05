@@ -67,6 +67,7 @@
                     <!-- This will need to be hidden when not admin -->
                     <c:if test="${currentUser.accessID == 2}">
                         <th scope="col">Event ID</th>
+                        <th scope="col"> Visible</th>
                     </c:if>
                 </tr>
             </thead>
@@ -123,6 +124,7 @@
                         <td>${event.description}</td>
                         <c:if test="${currentUser.accessID == 2}">
                             <td>${event.eventId}</td>
+                            <td>${event.isVisible}</td>
                         </c:if>
                     </tr>
                 </c:forEach>
