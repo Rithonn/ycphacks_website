@@ -73,12 +73,13 @@
             </thead>
             <tbody>
                 <c:if test="${mostrecentday != firstevent.date.dayOfMonth}">
-                    <!-- maybe add another c:if to see if the event is visible-->
+                    <c:if test="${firstevent.isVisible or currentUser.accessID == 2}">
                     <tr>
                         <td>
                             ${firstevent.date.dayOfWeek} ${firstevent.date.month}, ${firstevent.date.dayOfMonth} 
                         </td>  
                     </tr>
+                    </c:if>
                 </c:if>
                 <c:set var = "mostrecentday" value = "${firstevent.date.dayOfMonth}" />
                 <c:forEach items="${schedule}" var="event">
@@ -156,10 +157,13 @@
         </div>
         
         <div class="AddWrapper">
-            <p>Add Event</p>
+            <p>Modify or Add Event</p>
             <form action="${pageContext.servletContext.contextPath}/schedule" method="post">
                 <table class="form_table">
-                
+                    
+                    <tr class="form_element">
+					   <td><input class='form-control' type="text" name="modifyEventID"  value="${modifyEventID}" placeholder="Event ID (only if modifing)"/></td>
+				    </tr>
 				    <tr class="form_element">
 					   <td><input class='form-control' type="text" name="addEventName"  value="${addEventName}" placeholder="Enter event name"/></td>
 				    </tr>
@@ -191,6 +195,17 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="PM">
                                 <label class="form-check-label" for="inlineRadio2">PM</label>
+                            </div>
+                        </td>
+				    </tr>
+                    <tr class="form_element">
+					    <td><div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="visiblity" id="inlineRadio3" value="Visible">
+                                <label class="form-check-label" for="inlineRadio1">Visible</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="visbility" id="inlineRadio4" value="Not Visible">
+                                <label class="form-check-label" for="inlineRadio2">Not Visible</label>
                             </div>
                         </td>
 				    </tr>

@@ -101,42 +101,95 @@ private static final long serialVersionUID = 1L;
 		}
 		//If the add event button was pressed, construct the new event, add it to the db and reload the schedule
 		if(req.getParameter("addEventButton") != null) {
-			Event addEvent = new Event();
+			Event addEvent = null;
+			int eventYear = 0;
+			int eventMonth = 0;
+			int eventDay = 0;
+			int hours = 0;
+			int minutes = 0;
+			String amOrPm = null;
+			Boolean modify = false;
 			//Parse out the strings and set to the event
-			addEvent.setName(req.getParameter("addEventName"));
-			addEvent.setLocation(req.getParameter("addEventLocation"));
-			addEvent.setDescription(req.getParameter("addEventDescription"));
-			//Parse out the year, month and day
-			int eventYear = Integer.parseInt(req.getParameter("addEventYear"));
-			int eventMonth = Integer.parseInt(req.getParameter("addEventMonth"));
-			int eventDay = Integer.parseInt(req.getParameter("addEventDay"));
-//			System.out.println("Delete button " + req.getParameter("delEventButton"));
-//			System.out.println("Add button " + req.getParameter("addEventButton"));
-			//System.out.println("Event day " + eventDay);
-			
-			String amOrPm = req.getParameter("inlineRadioOptions");
-			//Parse out the hours and minutes
-			String time = req.getParameter("addEventTime");
-			//Split the time string apart to separate hours and minutes
-			String[] parts = time.split(":");
-			int hours = Integer.parseInt(parts[0]);
-			int minutes = Integer.parseInt(parts[1]);
-//			System.out.println("Event hours " + hours);
-//			System.out.println("Event minutes " + minutes);
-			//If the time is pm, add 12 to convert to 24 hour time
-			if("PM".equals(amOrPm)) {
-				hours += 12;
-				if(hours > 23) {
-					hours = 0;
-					eventDay++;
+			//If the modify event ID is not null, then set it in the event, same for all other attributes
+			/*If there is a specified event ID, find that event in the schedule, so that the actual event is modified
+			instead of creating a brand new event */
+			if(!req.getParameter("modifyEventID").isEmpty()) {
+				for(Event event : schedule.getSchedule()) {
+					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
+						addEvent = event;
+					}
+				modify = true;
+				}
+			//If an event ID is specified, create a new event to be added to the db
+			}else {
+				addEvent = new Event();
+			}
+			//Only enter the name if the user enters one
+			if(!req.getParameter("addEventName").isEmpty()) {
+				addEvent.setName(req.getParameter("addEventName"));
+			}
+			//Only update the location if the user enters one
+			if(!req.getParameter("addEventLocation").isEmpty()) {
+				addEvent.setLocation(req.getParameter("addEventLocation"));
+			}
+			//Only update the description if the user enters one
+			if(!req.getParameter("addEventDescription").isEmpty()) {
+				addEvent.setDescription(req.getParameter("addEventDescription"));
+			}
+			//Parse out the year, month and day if they are not null
+			//Only update the year if it is not null
+			if(!req.getParameter("addEventYear").isEmpty()) {
+				eventYear = Integer.parseInt(req.getParameter("addEventYear"));
+			}
+			//Only update the month if it is not null
+			if(!req.getParameter("addEventMonth").isEmpty()) {
+				eventMonth = Integer.parseInt(req.getParameter("addEventMonth"));
+			}
+			//Only update the day if it is not null
+			if(!req.getParameter("addEventDay").isEmpty()) {
+				eventDay = Integer.parseInt(req.getParameter("addEventDay"));
+			}
+			//If an am or pm option is selected, update the string
+			if(req.getParameter("inlineRadioOptions") != null) {
+				amOrPm = req.getParameter("inlineRadioOptions");
+				
+			}
+			//If a time is entered update the date
+			if(!req.getParameter("addEventTime").isEmpty()) {
+				String time = req.getParameter("addEventTime");
+				//Split the time string apart to separate hours and minutes
+				String[] parts = time.split(":");
+				hours = Integer.parseInt(parts[0]);
+				minutes = Integer.parseInt(parts[1]);
+				if("PM".equals(amOrPm)) {
+					//If the time is pm, add 12 to convert to 24 hour time
+					hours += 12;
+					if(hours > 23) {
+						hours = 0;
+						eventDay++;
+					}
+				}
+				//Construct the local date time
+				LocalDateTime date = null; 
+				
+				date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
+				addEvent.setDate(date);
+			}
+			if(req.getParameter("visibility") != null) {
+				String visibility = req.getParameter("visibility");
+				if("Visible".equals(visibility)) {
+					addEvent.setIsVisible(true);
+				}else if("Not Visible".equals(visibility)){
+					addEvent.setIsVisible(false);
 				}
 			}
-			//Construct the local date time
-			LocalDateTime date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
-			addEvent.setDate(date);
 			
-			//Add the date to the db
-			schedCont.addEventToDB(db, addEvent);
+			
+			
+			//Add the date to the db if it is not being modified
+			if(!modify) {
+				schedCont.addEventToDB(db, addEvent);
+			}
 		}
 		
 		//Loads schedule from database into the model schedule

@@ -135,7 +135,7 @@ nav ul li a.active{
     position: relative;
     margin: auto;
     width: 50%;
-    height: 450px;
+    height: 550px;
     padding-top: 100px;
     
 }
@@ -151,7 +151,8 @@ nav ul li a.active{
     text-align: center;
     position: relative;
     width: 50%;
-    height: 450px;
+    height: 550px;
+    padding-top: 25px;
 }
 .form-wrappers{
     display: flex;
@@ -175,6 +176,10 @@ nav ul li a.active{
 
 .form-check-label{
     font-size: 20px;
+}
+
+.form-control{
+    width: 100%;
 }
 /*------ScheduleEditor------*/
 
