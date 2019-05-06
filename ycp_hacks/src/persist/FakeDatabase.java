@@ -161,4 +161,10 @@ public class FakeDatabase implements IDatabase {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public boolean updateEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

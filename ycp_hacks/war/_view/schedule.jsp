@@ -200,12 +200,12 @@
 				    </tr>
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="visiblity" id="inlineRadio3" value="Visible">
-                                <label class="form-check-label" for="inlineRadio1">Visible</label>
+                                <input class="form-check-input" type="radio" name="visibility" id="inlineRadio3" value="Visible">
+                                <label class="form-check-label" for="inlineRadio3">Visible</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="visbility" id="inlineRadio4" value="Not Visible">
-                                <label class="form-check-label" for="inlineRadio2">Not Visible</label>
+                                <input class="form-check-input" type="radio" name="visibility" id="inlineRadio4" value="Not Visible">
+                                <label class="form-check-label" for="inlineRadio4">Not Visible</label>
                             </div>
                         </td>
 				    </tr>

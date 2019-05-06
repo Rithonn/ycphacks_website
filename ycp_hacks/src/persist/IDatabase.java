@@ -18,4 +18,5 @@ public interface IDatabase {
 	public Schedule getScheduleFromDB(Schedule schedule);
 	public boolean deleteEvent(Event event);
 	public boolean addEvent(Event event);
+	public boolean updateEvent(Event event);
 }

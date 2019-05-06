@@ -517,19 +517,19 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into schedule (dateTime, name, location, description) values (?,?,?,?)"
+							"insert into schedule (dateTime, name, location, description, isVisible) values (?,?,?,?,?)"
 					); 
 					
 					stmt.setLong(1, event.dateToMillis());
 					stmt.setString(2, event.getName());
 					stmt.setString(3, event.getLocation());
 					stmt.setString(4, event.getDescription());
-					
+					stmt.setString(5, Boolean.toString(event.getIsVisible()));
 					stmt.executeUpdate();
 					
 					return true;
 				}finally {
-					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(stmt); 
 				}
 	
 			}
@@ -539,6 +539,7 @@ public class DerbyDatabase implements IDatabase {
 	
 	@Override
 	public List<User> getAllUsers(){
+
 		return executeTransaction(new Transaction<List<User>>() {
 			@Override
 			public List<User> execute(Connection conn) throws SQLException{
@@ -573,6 +574,40 @@ public class DerbyDatabase implements IDatabase {
 	
 			}
 		});
+	}
+
+	
+	@Override
+	public boolean updateEvent(Event event) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"update schedule "
+							+ " set dateTime = ?, name = ?, location = ?, description = ?, isVisible = ?"
+							+ " where event_id = ?"
+					); 
+					
+					stmt.setLong(1, event.dateToMillis());
+					stmt.setString(2, event.getName());
+					stmt.setString(3, event.getLocation());
+					stmt.setString(4, event.getDescription());
+					stmt.setString(5, Boolean.toString(event.getIsVisible()));
+					stmt.setInt(6, event.getEventId());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt); 
+				}
+	
+			}
+		});
+		
 	}
 		
 }

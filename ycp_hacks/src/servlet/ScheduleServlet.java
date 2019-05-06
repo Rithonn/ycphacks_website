@@ -86,7 +86,7 @@ private static final long serialVersionUID = 1L;
 		Schedule schedule = new Schedule();
 		ScheduleController schedCont = new ScheduleController();
 		schedCont.setSchedule(schedule);
-		
+		schedCont.loadSchedule(db);
 		//Pull info from form
 		//If the delete button was pressed, delete the event from the database, and reload the schedule
 		if(req.getParameter("delEventButton") != null) {
@@ -108,21 +108,29 @@ private static final long serialVersionUID = 1L;
 			int hours = 0;
 			int minutes = 0;
 			String amOrPm = null;
-			Boolean modify = false;
+			Boolean modify = null;
 			//Parse out the strings and set to the event
 			//If the modify event ID is not null, then set it in the event, same for all other attributes
 			/*If there is a specified event ID, find that event in the schedule, so that the actual event is modified
 			instead of creating a brand new event */
-			if(!req.getParameter("modifyEventID").isEmpty()) {
+			System.out.println("Modify event ID = " +req.getParameter("modifyEventID"));
+			if(req.getParameter("modifyEventID").isEmpty() == false) {
 				for(Event event : schedule.getSchedule()) {
+					System.out.println("I am running through the loop");
 					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
 						addEvent = event;
+						System.out.println("Event was found based on ID");
 					}
+				if(addEvent == null) {
+					System.out.println("Add event is null");
+				}
 				modify = true;
 				}
-			//If an event ID is specified, create a new event to be added to the db
-			}else {
+			//If an event ID is not specified, create a new event to be added to the db
+			}else if (req.getParameter("modifyEventID").isEmpty() == true){
 				addEvent = new Event();
+				System.out.println("There is no modifying going on here");
+				modify = false;
 			}
 			//Only enter the name if the user enters one
 			if(!req.getParameter("addEventName").isEmpty()) {
@@ -177,6 +185,7 @@ private static final long serialVersionUID = 1L;
 			}
 			if(req.getParameter("visibility") != null) {
 				String visibility = req.getParameter("visibility");
+				//System.out.println("Vis = " + visibility);
 				if("Visible".equals(visibility)) {
 					addEvent.setIsVisible(true);
 				}else if("Not Visible".equals(visibility)){
@@ -184,15 +193,17 @@ private static final long serialVersionUID = 1L;
 				}
 			}
 			
-			
-			
 			//Add the date to the db if it is not being modified
 			if(!modify) {
 				schedCont.addEventToDB(db, addEvent);
+			}else if(modify) {
+				schedCont.modifyEventInDB(db, addEvent);
 			}
 		}
 		
 		//Loads schedule from database into the model schedule
+		Schedule newsched = new Schedule();
+		schedCont.setSchedule(newsched);
 		schedCont.loadSchedule(db); 
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
