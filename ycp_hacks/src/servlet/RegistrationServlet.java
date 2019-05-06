@@ -52,6 +52,8 @@ private static final long serialVersionUID = 1L;
 			db = DatabaseProvider.getInstance();
 			//Don't need this for a real database
 			//session.setAttribute("db", db);
+		}else {
+			db = DatabaseProvider.getInstance();
 		}
 		
 		
