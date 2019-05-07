@@ -56,8 +56,8 @@
             </ul>
         </nav>
         <section class="aboutSection">
-                    <div class="aboutInfo">
-                        <p>To York and Beyond</p>
+                    <div class="aboutInfoToYork aboutInfo">
+                        <h3>To York and Beyond</h3>
                         
                         <p>Conveniently nestled in the middle of rural Pennsylvania, YCP Hacks is a college level hackathon with small town charm.
 						An hour north of Baltimore, an hour and a half from Philadelphia, and 2 hours from Penn State places it right in the
@@ -69,96 +69,53 @@
                 		
 			                
                     </div>
-                    <div class="aboutInfo">
+                    <div class="aboutInfoFAQ aboutInfo">
                         <h2>FAQ</h2>
                         
-						<h4>What's a hackathon?</h4>
+						<h3>What's a hackathon?</h3>
 						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or be
 						a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be attending.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Can I come?</h3>
+						<p>We'll take any college student from anywhere on earth! We sadly cannot accept students under the age of 18.</p>
 							
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Where is this going to be?</h3>
+						<p>The Willman Business Center of York College! There will be free parking in the adjacent lot for the entire weekend.</p>
 						
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>When will this be?</h3>
+						<p>It is to be determined!</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Why?</h3>
+						<p>Learn new things, meet new people, and tons of free food and swag.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Will you reimburse travel?</h3>
+						<p>If we get enough sponsors this season, we may offer it closer to the event date. At this time we cannot confirm it
+						though. Apply and we'll email our applicants with more information as it becomes available.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>I don't have a team so....</h3>
+						<p>Well you're in luck! We have tons of team building activities if you don't have a team to come with you. You can also
+						work alone if you'd like.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>But I can't code!</h3>
+						<p>We'll have tons of great workshops and mentors to help you learn and build something amazing!</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>How much will it cost?</h3>
+						<p>Nothing! Registration is free and food will be provided for you. And of course, swag is free too.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Will there be hardware available?</h3>
+						<p>Yes! Hardware will be provided.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>What should I bring?</h3>
+						<p>ID, Clothing, sleeping bag, and any necessary tech (and chargers). And deodorant. Please.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Do I keep my Intellectual Property?</h3>
+						<p>Yes! Participants retain 100% of the intellectual property that they create during the event.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>Are there any rules?</h3>
+						<p>You can find our code of conduct <a href="https://hackcodeofconduct.org/">here</a>.</p>
 
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
-
-						<h4>What's a hackathon?</h4>
-						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
-							be
-							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
-							attending.</p>
+						<h3>You did not answer my question!</h3>
+						<p>Send it to us at info@ycphacks.io</h3>
 						
 			                
                     </div>
