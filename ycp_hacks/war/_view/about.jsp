@@ -75,6 +75,91 @@
 						<h4>What's a hackathon?</h4>
 						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or be
 						a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+							
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+						
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or
+							be
+							a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be
+							attending.</p>
+						
 			                
                     </div>
                      <div class="aboutInfo">
