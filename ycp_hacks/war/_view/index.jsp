@@ -82,7 +82,29 @@
                     <h1>Sponsors!</h1>
                     <h3>We thank you!</h3>
                 </div>
-                <div class="sponsorBlock"></div>
+                <div class="sponsorBlock">
+                    <a href="https://www.ycp.edu/about-us/offices-and-departments/jd-brown-center-for-entrepreneurship/">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="https://www.dataforma.com/">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="http://hammercreekllc.com/index.html">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="https://www.ycp.edu/academics/graham-school-of-business/">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="http://www.pennwaste.com/">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                    <a href="https://www.bd.com/en-us">
+                        <img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="">
+                    </a>
+                </div>
             </div>
         </section>
     </div>
