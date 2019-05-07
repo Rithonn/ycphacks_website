@@ -80,7 +80,7 @@
             <div class="sponsorSection">
                     <h1>Sponsors!</h1>
                     <h3>We thank you!</h3>
-
+                <!-- Need to tweek images then. Hate jsps -->
                 <div class="sponsor">
                     <a href="https://www.ycp.edu/about-us/offices-and-departments/jd-brown-center-for-entrepreneurship/">
                         <img src="${pageContext.request.contextPath}/_view/css/JDBrown.png" alt="">
