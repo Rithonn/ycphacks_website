@@ -154,6 +154,7 @@ section.firstSection {
 .secondSection {
 
     margin-top: 80px;
+    
 
 }
 
@@ -163,4 +164,15 @@ section.firstSection {
     text-align: justify;
     font-size: 18px;
     line-height: 30px;
+}
+.sponsorSection{
+    text-align: center;
+}
+.sponsor{
+    width: 80%;
+    margin: auto;
+}
+
+.sponsor img{
+    height: 200px;
 }
