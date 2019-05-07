@@ -57,31 +57,24 @@
         </nav>
         <section class="aboutSection">
                     <div class="aboutInfo">
-                        <p>Information about YCPHACKs is going to go here this is just a placeholder for right now</p>
+                        <p>To York and Beyond</p>
                         
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-			                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <p>Conveniently nestled in the middle of rural Pennsylvania, YCP Hacks is a college level hackathon with small town charm.
+						An hour north of Baltimore, an hour and a half from Philadelphia, and 2 hours from Penn State places it right in the
+						middle of Pennsylvania Dutch Country (presumably made of Funnel Cake). The event is set on the charming York College of
+						Pennsylvania campus, with all the facilities, people and camaraderie that comes with it. Our mission is to promote
+						technical knowledge, innovation, and entrepreneurship in York and beyond, and we just can't wait to see what you do
+						next.</p>
 			                
-                		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-			                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                		
 			                
                     </div>
                     <div class="aboutInfo">
-                        <p>FAQ's about YCPHACKS</p>
+                        <h2>FAQ</h2>
                         
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-			                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			                
-                		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-			                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-			                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+						<h4>What's a hackathon?</h4>
+						<p>A 36 hour event where you work together with a team to make something awesome. You don't need to know how to code or be
+						a supreme hacker, just how to be creative! You can also get help from our mentors and speakers who will be attending.</p>
 			                
                     </div>
                      <div class="aboutInfo">
