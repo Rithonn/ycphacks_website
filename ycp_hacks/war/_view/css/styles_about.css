@@ -122,3 +122,11 @@ section.aboutSection{
 .aboutInfoToYork{
     text-align: center;
 }
+
+.aboutInfoFAQ.aboutInfo h2{
+	text-align: center;
+}
+
+.aboutInfoFAQ.aboutInfo h3{
+	text-decoration: underline;
+}
