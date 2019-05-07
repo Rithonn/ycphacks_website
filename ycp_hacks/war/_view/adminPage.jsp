@@ -89,7 +89,6 @@
 						<div class="stats-br">
 							<br>
 						</div>
-						<li>Admitted: </li>
 						<li>Confirmed: </li>
 						<li>Checked In: </li>
 					</ul>
