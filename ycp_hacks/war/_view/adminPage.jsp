@@ -58,10 +58,14 @@
 		<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/adminPage" method="post">
 		<div class="allContentSection">
 			<div class="mainHeader">
-				<h2>Admin Panel</h2>
-				<button type="submit" class="btn btn-success btn-block" value="" name="adminEmailPageButton" onclick="changeAdminEmailPageButton()">
-				Send mass email
-				</button>
+				<div class=panelLabel>
+					<h2>Admin Panel</h2>
+				</div>
+				<div class="adminEmailButton">
+					<button type="submit" class="btn btn-success btn-block" value="" name="adminEmailPageButton" onclick="changeAdminEmailPageButton()">
+					Send mass email
+					</button>
+				</div>
 			</div>
 
 			<!-- Stats section -->
