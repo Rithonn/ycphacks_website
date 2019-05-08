@@ -62,7 +62,7 @@
 				<p>441 Country Club Rd, York PA, 17403</p>
 				<p>@ the Willman Besiness Center</p>
 				
-				<p>For a more detailed map please go <a href="https://map.ycp.edu/?id=802#!ct/24424,14561,14560,14555,13400,13363,13350,13349,13341,13338,13337,12105,12075,12072,13346,13394,13393,13392,13391,20466,13351,13397">here</a></p>
+				<p>For a more detailed map please go <a target="_blank" href="https://map.ycp.edu/?id=802#!ct/24424,14561,14560,14555,13400,13363,13350,13349,13341,13338,13337,12105,12075,12072,13346,13394,13393,13392,13391,20466,13351,13397">here</a></p>
 			</div>
 		</div>
 		
