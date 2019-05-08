@@ -18,12 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-
-
 //Special import for the spring framework bcrypt
 import org.springframework.security.crypto.bcrypt.*;
+
 
 public class RegistrationServlet extends HttpServlet{
 	

@@ -18,7 +18,6 @@ private static final long serialVersionUID = 1L;
 			throws ServletException, IOException {
 		
 		System.out.println("Directions Servlet: doGet");
-		session = req.getSession();
 		req.getRequestDispatcher("/_view/directions.jsp").forward(req, resp);
 	}
 }
