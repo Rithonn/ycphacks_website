@@ -110,7 +110,10 @@ public class DerbyDatabase implements IDatabase {
 		event.setIsVisible(resultset.getBoolean(index++));
 	}
 
-	//Change the table for user instead of authors with all the correct fields
+	/**
+	 * Builds all tables for database, with given
+	 * fields for columns
+	 */
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -178,6 +181,11 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	/**
+	 * Populates tables with data from csv files.
+	 * Object lists are loaded from InitialData object which
+	 * actually reads the csv files.
+	 */
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override

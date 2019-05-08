@@ -142,7 +142,7 @@ private static final long serialVersionUID = 1L;
 				accountsReceiving.add(model);
 				EmailSender emailSender = new EmailSender(accountsReceiving);
 				emailSender.sendRegEmail();
-				
+
 				//redirect to index.jsp
 				resp.sendRedirect(req.getContextPath() + "/home");
 			}else {

@@ -12,7 +12,7 @@ public class EmailSender {
 	private Properties prop;
 	Session session;
 	
-	/*
+	/**
 	 * Builds accountsReceiving/emailsReceiving lists
 	 * 		-does this in case emailSender object needs to send to multiple recips
 	 * Builds account that the email is being sent from
@@ -33,8 +33,10 @@ public class EmailSender {
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 	}
 	
-	/*
-	 * Only sends to one account
+	/**
+	 * Used for sending a confirmation email to a
+	 * single user that just registered. Will only access element 0 
+	 * of the arrayList of users provided in the constructor
 	 */
 	public void sendRegEmail() {
 		session = Session.getInstance(prop,

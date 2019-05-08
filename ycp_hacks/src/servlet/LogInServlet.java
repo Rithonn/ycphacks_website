@@ -62,7 +62,7 @@ private static final long serialVersionUID = 1L;
 		String password = req.getParameter("password");
 		model.setEmail(email);
 		User returnedUser = db.userExists(model);
-		
+
 		//check if a user was returned from db
 		if(returnedUser.getEmail() == null) {
 			errorMessage = "No account found under: " + email;
