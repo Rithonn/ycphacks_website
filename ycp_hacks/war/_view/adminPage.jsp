@@ -55,10 +55,13 @@
         </nav>
 		<!-- This is where the fun begins -->
 
-
+		<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/adminPage" method="post">
 		<div class="allContentSection">
 			<div class="mainHeader">
 				<h2>Admin Panel</h2>
+				<button type="submit" class="btn btn-success btn-block" value="" name="adminEmailPageButton" onclick="changeAdminEmailPageButton()">
+				Send mass email
+				</button>
 			</div>
 
 			<!-- Stats section -->
@@ -168,7 +171,12 @@
 			</div>
 
 		</div>
+		</form>
 
-
+	<script>
+	function changeAdminEmailPageButton(){
+        document.getElementsByName("adminEmailPageButton")[0].setAttribute("value", "true");
+	}
+	</script>
 	</body>
 </html>

@@ -59,6 +59,10 @@ public class AdminPanelServlet extends HttpServlet {
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
 			
+			if(req.getParameter("adminEmailPageButton") != null) {
+				resp.sendRedirect(req.getContextPath() + "/adminEmail");
+			}
+			
 			
 			
 	}

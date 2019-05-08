@@ -139,3 +139,7 @@ nav ul li a.active{
 .user-panel-main{
         
 }
+
+button[name="adminEmailPageButton"]{
+	float: right;
+}
