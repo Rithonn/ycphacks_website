@@ -96,52 +96,52 @@
         
         <div class='form_wrap form_text'>
             <p class=''>Please fill out this form.</p>
-        <form action="${pageContext.servletContext.contextPath}/registration" method="post">
-            <table class="form_table">
-                
-				<tr class="form_element">
-					<td><input class='form-control' required="required" type="text" name="firstname"  value="${firstname}" placeholder="First Name"/></td>
-				</tr>
-                
-                <tr class="form_element">
-					<td><input class='form-control' required="required" type="text" name="lastname"  value="${lastname}" placeholder="Last Name"/></td>
-				</tr>
-                
-				<tr class="form_element">
-					<td><input class='form-control' required="required" type="text" name="email"  value="${email}" placeholder="Email"/></td>
-				</tr>
-                
-                <tr class="form_element">
-					<td><input class='form-control' required="required" type="text" name="age"  value="${age}" placeholder="Age"/></td>
-				</tr>
-                
-                <tr class="form_element">
-					<td><input class='form-control' required="required" type="text" name="uni" value="${uni}" placeholder="University"/></td>
-				</tr>
-                
-                <!-- Make sure to add the button func down here to check password strength -->
-                <tr class="form_element">
-					<td><input class='form-control' required="required" type="password" name="password1"  id="pass1" value="${password1}" placeholder="Password"/></td>
-				</tr>
-                
-                <tr class="form_element">
-					<td><input class='form-control' required="required" type="password" name="password2" id="pass2"  value="${password2}" placeholder="Re-type Password"/></td>
-				</tr>
-                <!--
-                <tr class="form_element">
-					<td><input type="text" name="about" size="24" value="${about}" placeholder="Tell us about yourself"/></td>
-				</tr>
-                <tr class="form_element">
-					<td><input type="text" name="accomodations" size="24" value="${accomodations}" placeholder="Special Accomodation / Food Allergies"/></td>
-                </tr>
-                -->
-			</table>
-            <div class="form_button">
-			 <input type="submit" name="submit" value="Submit" class='btn btn-success'>
-            </div>
-            
-            <p class="regCheck" >${reg}</p>     
-        </form>
+        		<form action="${pageContext.servletContext.contextPath}/registration" method="post">
+		            <table class="form_table">
+		                
+						<tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="firstname"  value="${firstname}" placeholder="First Name"/></td>
+						</tr>
+		                
+		                <tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="lastname"  value="${lastname}" placeholder="Last Name"/></td>
+						</tr>
+		                
+						<tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="email"  value="${email}" placeholder="Email"/></td>
+						</tr>
+		                
+		                <tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="age"  value="${age}" placeholder="Age"/></td>
+						</tr>
+		                
+		                <tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="uni" value="${uni}" placeholder="University"/></td>
+						</tr>
+		                
+		                <!-- Make sure to add the button func down here to check password strength -->
+		                <tr class="form_element">
+							<td><input class='form-control' required="required" type="password" name="password1"  id="pass1" value="${password1}" placeholder="Password"/></td>
+						</tr>
+		                
+		                <tr class="form_element">
+							<td><input class='form-control' required="required" type="password" name="password2" id="pass2"  value="${password2}" placeholder="Re-type Password"/></td>
+						</tr>
+		                <!--
+		                <tr class="form_element">
+							<td><input type="text" name="about" size="24" value="${about}" placeholder="Tell us about yourself"/></td>
+						</tr>
+		                <tr class="form_element">
+							<td><input type="text" name="accomodations" size="24" value="${accomodations}" placeholder="Special Accomodation / Food Allergies"/></td>
+		                </tr>
+		                -->
+				</table>
+	            <div class="form_button">
+				 <input type="submit" name="submit" value="Submit" class='btn btn-success'>
+	            </div>
+		            
+	            <p class="regCheck" >${reg}</p>     
+        	</form>
         </div>
         
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

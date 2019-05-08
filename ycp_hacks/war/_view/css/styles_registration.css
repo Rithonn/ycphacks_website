@@ -115,7 +115,7 @@ nav ul li a.active{
     margin: auto;
     width: 30%;
     height: 50%;
-    
+    margin-top: 60px;
 }
 
 /*Please fill out this form blurb*/
@@ -127,8 +127,6 @@ nav ul li a.active{
     font-size: 30px;
     justify-content: center;
     position: relative;
-    margin: auto;
-    
 }
 
 .form_table{
