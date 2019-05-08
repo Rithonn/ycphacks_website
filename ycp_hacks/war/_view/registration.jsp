@@ -110,6 +110,10 @@
 						<tr class="form_element">
 							<td><input class='form-control' required="required" type="text" name="email"  value="${email}" placeholder="Email"/></td>
 						</tr>
+						
+						<tr class="form_element">
+							<td><input class='form-control' required="required" type="text" name="email2"  value="${email2}" placeholder="Confirm Email"/></td>
+						</tr>
 		                
 		                <tr class="form_element">
 							<td><input class='form-control' required="required" type="text" name="age"  value="${age}" placeholder="Age"/></td>
@@ -125,7 +129,7 @@
 						</tr>
 		                
 		                <tr class="form_element">
-							<td><input class='form-control' required="required" type="password" name="password2" id="pass2"  value="${password2}" placeholder="Re-type Password"/></td>
+							<td><input class='form-control' required="required" type="password" name="password2" id="pass2"  value="${password2}" placeholder="Confirm Password"/></td>
 						</tr>
 		                <!--
 		                <tr class="form_element">

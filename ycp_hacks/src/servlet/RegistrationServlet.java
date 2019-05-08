@@ -76,8 +76,13 @@ private static final long serialVersionUID = 1L;
 		String lastName = req.getParameter("lastname");
 		
 		//validate email address with regex pattern above
+		//and that the two emails provided match
 		String email = req.getParameter("email");
-		if(!validate(email)) {
+		if(!email.equals(req.getParameter("email2"))) {
+			req.setAttribute("reg", "Emails fields did not match");
+			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/registration");
+		}else if(!validate(email)){
 			req.setAttribute("reg", "Please provide a valid email address");
 			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/registration");
