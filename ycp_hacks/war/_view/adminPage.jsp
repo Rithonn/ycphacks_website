@@ -113,8 +113,9 @@
 							<div class="admin-controls">
 								<h5>Admin Settings:</h5>
 								<!-- Accept, Deny, Delete -->
-								<form action="submit" style="margin-bottom: 3px;">
-									<input type="text" placeholder="UserID" class="rounded">
+								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post" style="margin-bottom: 3px;">
+								
+									<input type="text" placeholder="UserID" class="rounded" value ="${userIdAdmin} }">
 									<div style="margin-bottom: 3px;">
 
 									</div>
@@ -123,7 +124,7 @@
 									<button class="btn btn-success btn rounded btn-sm">Delete</button>
 								</form>
 								
-								<form action="submit">
+								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post">
 									<input type="text" placeholder="UserID" class="rounded">
 									<div style="margin-bottom: 3px;">
 									<input type = "text" placeholder = "accessID" class="rounded">
