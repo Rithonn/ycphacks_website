@@ -120,6 +120,7 @@ private static final long serialVersionUID = 1L;
 					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
 						addEvent = event;
 						System.out.println("Event was found based on ID");
+						break;
 					}
 				if(addEvent == null) {
 					System.out.println("Add event is null");
@@ -169,13 +170,15 @@ private static final long serialVersionUID = 1L;
 				String[] parts = time.split(":");
 				hours = Integer.parseInt(parts[0]);
 				minutes = Integer.parseInt(parts[1]);
-				if("PM".equals(amOrPm)) {
+				if("PM".equals(amOrPm) && hours < 12) {
 					//If the time is pm, add 12 to convert to 24 hour time
 					hours += 12;
-					if(hours > 23) {
+					
+				//If it is midnight, increment the day
+				}else if("AM".contentEquals(amOrPm) && hours == 12) {
 						hours = 0;
 						eventDay++;
-					}
+					
 				}
 				//Construct the local date time
 				LocalDateTime date = null; 

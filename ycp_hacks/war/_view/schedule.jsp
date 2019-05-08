@@ -105,11 +105,12 @@
                                     amOrPm = "pm";
                                     eventHour = eventHour - 12; 
                             //Otherwise it is in the am
-                            }else{
-                                amOrPm = "am";
+                            }else if(eventHour == 12){
+                                amOrPm = "pm";
                             }
                             if (eventHour == 0){
                                 eventHour = 12;
+                                amOrPm = "am";
                             }
                             
                             //Minutes are stored as a raw into so if it is less than 10, it will display as a single digit
