@@ -110,13 +110,18 @@ private static final long serialVersionUID = 1L;
 			int hours = 0;
 			int minutes = 0;
 			String amOrPm = null;
-			Boolean modify = null;
+			Boolean modify = false;
 			//Parse out the strings and set to the event
 			//If the modify event ID is not null, then set it in the event, same for all other attributes
 			/*If there is a specified event ID, find that event in the schedule, so that the actual event is modified
 			instead of creating a brand new event */
 			System.out.println("Modify event ID = " +req.getParameter("modifyEventID"));
 			if(req.getParameter("modifyEventID").isEmpty() == false) {
+				try {
+					Integer.parseInt(req.getParameter("modifyEventID"));
+				}catch(NumberFormatException e) {
+					addEventErrorMsg = "Please enter a valid Event ID";
+				}
 				for(Event event : schedule.getSchedule()) {
 					System.out.println("I am running through the loop");
 					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
@@ -125,10 +130,12 @@ private static final long serialVersionUID = 1L;
 						modify = true;
 						break;
 					}
+				
+				
+				}
 				if(addEvent == null) {
 					System.out.println("Add event is null");
-				}
-				
+					addEventErrorMsg = "Please enter a valid Event ID";
 				}
 			//If an event ID is not specified, create a new event to be added to the db
 			}else if (req.getParameter("modifyEventID").isEmpty() == true){
@@ -151,15 +158,34 @@ private static final long serialVersionUID = 1L;
 			//Parse out the year, month and day if they are not null
 			//Only update the year if it is not null
 			if(!req.getParameter("addEventYear").isEmpty()) {
-				eventYear = Integer.parseInt(req.getParameter("addEventYear"));
+				try {
+					eventYear = Integer.parseInt(req.getParameter("addEventYear"));
+				}catch(NumberFormatException e) {
+					if(addEventErrorMsg == null) {
+						addEventErrorMsg = "Please enter an integer";
+					}
+				}
 			}
 			//Only update the month if it is not null
 			if(!req.getParameter("addEventMonth").isEmpty()) {
-				eventMonth = Integer.parseInt(req.getParameter("addEventMonth"));
+				try {
+					eventMonth = Integer.parseInt(req.getParameter("addEventMonth"));
+				}catch(NumberFormatException e) {
+					if(addEventErrorMsg == null) {
+						addEventErrorMsg = "Please enter an integer 1-12";
+					}
+				}
+			
 			}
 			//Only update the day if it is not null
 			if(!req.getParameter("addEventDay").isEmpty()) {
-				eventDay = Integer.parseInt(req.getParameter("addEventDay"));
+				try {
+					eventDay = Integer.parseInt(req.getParameter("addEventDay"));
+				}catch(NumberFormatException e) {
+					if(addEventErrorMsg == null) {
+						addEventErrorMsg = "Please enter an integer 1-31";
+					}
+				}
 			}
 			//If an am or pm option is selected, update the string
 			if(req.getParameter("inlineRadioOptions") != null) {
@@ -173,12 +199,20 @@ private static final long serialVersionUID = 1L;
 				//If the user specified a valid format for the time
 				if(time.indexOf(':') != -1) {
 					String[] parts = time.split(":");
-					hours = Integer.parseInt(parts[0]);
-					minutes = Integer.parseInt(parts[1]);
+					try {
+						hours = Integer.parseInt(parts[0]);
+						minutes = Integer.parseInt(parts[1]);
+					} catch(NumberFormatException e) {
+						if(addEventErrorMsg == null) {
+							addEventErrorMsg = "Please enter a valid time";
+						}
+					}
+					
 				//If the user did not include the colon
 				}else if(time.indexOf(':') == -1) {
-					//TODO put an error message for this in the jsp
-					addEventErrorMsg = "Please include a colon in your time";
+					if(addEventErrorMsg == null) {
+						addEventErrorMsg = "Please include a colon in your time";
+					}
 				}
 				if("PM".equals(amOrPm) && hours < 12) {
 					//If the time is pm, add 12 to convert to 24 hour time
@@ -220,7 +254,7 @@ private static final long serialVersionUID = 1L;
 			System.out.println("Event year = " + eventYear + "Event month = " + eventMonth + "Event day = " + eventDay);
 			System.out.println("Modify = " + modify);
 			//If the event is being modified, but the user has not specified a part of the date, pull that part from the date to be modified
-			if(modify) {
+			if(modify && addEvent != null) {
 				if(eventYear == 0){
 					eventYear = addEvent.getDate().getYear();
 				}
@@ -233,12 +267,19 @@ private static final long serialVersionUID = 1L;
 			}
 			//Construct the local date time
 			LocalDateTime date = null;
-			date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
-			addEvent.setDate(date);
+			if(eventYear == 0 || eventMonth == 0 || eventDay == 0) {
+				if(addEventErrorMsg == null) {
+					addEventErrorMsg = "Please specifiy a valid date";
+				}
+			}
+			if(eventYear != 0 && eventMonth != 0 && eventDay != 0) {
+				date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
+				addEvent.setDate(date);
+			}
 			//Add the date to the db if it is not being modified
-			if(!modify) {
+			if(!modify && addEventErrorMsg == null) {
 				schedCont.addEventToDB(db, addEvent);
-			}else if(modify) {
+			}else if(modify && addEventErrorMsg == null) {
 				schedCont.modifyEventInDB(db, addEvent);
 			}
 		}
