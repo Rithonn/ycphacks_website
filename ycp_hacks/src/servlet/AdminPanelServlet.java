@@ -28,7 +28,7 @@ public class AdminPanelServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		System.out.println("Edit Profile Servlet: doGet");
+		System.out.println("Admin Panel Servlet: doGet");
 		session = req.getSession();
 		
 		/*Doesn't allow logged out client to access edit_profile page
@@ -55,7 +55,7 @@ public class AdminPanelServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-			System.out.println("Edit Profile Servlet: doPost");
+			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
 			

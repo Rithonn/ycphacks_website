@@ -118,6 +118,7 @@ nav ul li a.active{
 
 .mainHeader{
     border-bottom: 2px solid white;
+    overflow: hidden;
 }
 
 /* Stats css */
@@ -140,6 +141,11 @@ nav ul li a.active{
         
 }
 
-button[name="adminEmailPageButton"]{
+.adminEmailButton{
 	float: right;
+	width: 150px;
+}
+
+.panelLabel{
+	float: left;
 }
