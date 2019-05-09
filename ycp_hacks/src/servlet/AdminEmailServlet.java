@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.EmailSender;
 import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -54,6 +57,36 @@ private static final long serialVersionUID = 1L;
 			throws ServletException, IOException {
 		
 		System.out.println("Admin Email Page Servlet: doPost");
+		
+		
+		
+		
+		//TODO: validate subject/message fields
+		if(req.getParameter("allUsers") != null) {
+			List<User> allUsers_list = db.getAllUsers();
+			ArrayList<User> allUsers_arrayList = new ArrayList<User>();
+			allUsers_arrayList.addAll(allUsers_list);
+			
+			//remove admin@ycp.edu as it is an actual email
+			//allUsers_arrayList.removeIf(user -> (user.getEmail() == "admin@ycp.edu"));
+			allUsers_arrayList.remove(2);
+			
+			//dev
+			/*
+			System.out.println("----");
+			for(User user : allUsers_arrayList) {
+				System.out.println(user.getEmail());
+			}
+			*/
+			
+			
+			EmailSender emailSender = new EmailSender(allUsers_arrayList);
+			emailSender.sendMassEmail(req.getParameter("subject"), req.getParameter("message"));
+			
+		}
+		
+		
+		
 		resp.sendRedirect(req.getContextPath() + "/home");
 		
 	}

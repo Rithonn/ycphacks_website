@@ -19,13 +19,13 @@ public class EmailSender {
 	 * and builds the host, which is gmail
 	 */
 	public EmailSender(ArrayList<User> accountsReceiving) {
+		this.accountsReceiving = accountsReceiving;
 		for(User user : accountsReceiving) {
-			this.accountsReceiving.add(user);
 			this.emailsReceiving.add(user.getEmail());
 		}
 		from = "walrussuit@gmail.com";
 		//ask tim if you don't know the password
-		passwordFrom = "";
+		passwordFrom = "11041998";
 		prop = System.getProperties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -38,7 +38,7 @@ public class EmailSender {
 	 * single user that just registered. Will only access element 0 
 	 * of the arrayList of users provided in the constructor
 	 */
-	public void sendRegEmail() {
+	public void sendAccCreationEmail() {
 		session = Session.getInstance(prop,
             new javax.mail.Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
@@ -47,20 +47,43 @@ public class EmailSender {
             });
 		
 		try {
-			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(from));
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
-			message.setSubject(accountsReceiving.get(0).getFirstName() + ", welcome to YCP Hacks!");
-			message.setText("Your account under: " + emailsReceiving.get(0) + ", is registered for YCP Hacks!");
-			Transport.send(message);
+			MimeMessage message_accMade = new MimeMessage(session);
+			message_accMade.setFrom(new InternetAddress(from));
+			message_accMade.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+			message_accMade.setSubject(accountsReceiving.get(0).getFirstName() + ", welcome to YCP Hacks!");
+			message_accMade.setText("Your account under: " + emailsReceiving.get(0) + ", is registered for YCP Hacks!");
+			Transport.send(message_accMade);
 		}catch(MessagingException e) {
 			System.out.println(e);
 		}	
 	}
 	
-	
-	//TODO: add notification email methods, that send out to multiple emails,
-	//		could potentially send emails to whole database
-	//		if this is case use the lists that are built in the constructor
-	
+	/**Method to send a mass email to multiple users.
+	 * Constructor handles who it gets sent to, as the constructor
+	 * gets passed an arrayList of users
+	 * 
+	 * @param subject String to display in the subject field of the email
+	 * @param message String to display as the message of the email
+	 */
+	public void sendMassEmail(String subject, String message) {
+		session = Session.getInstance(prop,
+	            new javax.mail.Authenticator() {
+	                protected PasswordAuthentication getPasswordAuthentication() {
+	                    return new PasswordAuthentication(from, passwordFrom);
+	                }
+	            });
+			
+			try {
+				MimeMessage message_massEmail = new MimeMessage(session);
+				message_massEmail.setFrom(new InternetAddress(from));
+				for(String email : emailsReceiving) {
+					message_massEmail.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+				}
+				message_massEmail.setSubject(subject);
+				message_massEmail.setText(message);
+				Transport.send(message_massEmail);
+			}catch(MessagingException e) {
+				System.out.println(e);
+			}	
+	}
 }
