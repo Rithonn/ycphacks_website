@@ -48,5 +48,14 @@ private static final long serialVersionUID = 1L;
 		
 		req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		System.out.println("Admin Email Page Servlet: doPost");
+		resp.sendRedirect(req.getContextPath() + "/home");
+		
+	}
 
 }

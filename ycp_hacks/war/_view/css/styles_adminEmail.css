@@ -105,11 +105,11 @@ nav ul li a.active {
 
 .emailSection{
 	position: relative;
-	height: 500px;
+	height: 700px;
 	width: 700px;
 	background-color: black;
 	top: 150px;
-	left: 26%;
+	left: 30%;
 	z-index: 10;
 	background: rgba(0, 0, 0, 0.9);
 	border: 6px;
@@ -118,12 +118,24 @@ nav ul li a.active {
     padding: 20px;
 }
 
-.subject h2{
+.emailSection h2{
 	color: white;
 	text-decoration: underline;
 }
 
-.subject input{
+.emailSection label{
+	color: white;
+}
+
+textarea[name="message"]{
+	height: 300px;
+}
+
+.sendEmailSection{
+	margin: auto;
+	padding: 20px;
+	width: 300px;
+	position: center;
 }
 
 
