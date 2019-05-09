@@ -135,8 +135,8 @@ nav ul li a.active{
     position: relative;
     margin: auto;
     width: 50%;
-    height: 550px;
-    padding-top: 100px;
+    height: 300px;
+    padding-top: 75px;
     
 }
 
@@ -151,8 +151,9 @@ nav ul li a.active{
     text-align: center;
     position: relative;
     width: 50%;
-    height: 550px;
+    height: 50%;
     padding-top: 25px;
+    padding-bottom: 25px;
 }
 .form-wrappers{
     display: flex;
@@ -180,6 +181,11 @@ nav ul li a.active{
 
 .form-control{
     width: 100%;
+}
+
+.adderror{
+    font-size: 15px;
+    color: red;
 }
 /*------ScheduleEditor------*/
 

@@ -187,7 +187,7 @@
 					    <td><input class='form-control' type="text" name="addEventDay"  value="${addEventDay}" placeholder="Enter day of month"/></td>
 				    </tr>
                     <tr class="form_element">
-					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/></td>
+					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
 				    </tr>
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
@@ -212,9 +212,9 @@
                         </td>
 				    </tr>
 			     </table>
+                
                 <div class="form_button">
 			     <button type="submit" class="btn btn-success btn-block" value="" name="addEventButton" onclick="changeAddEventButton()">Add Event</button>
-				<span></span>
                 </div>
             </form>
         </div>

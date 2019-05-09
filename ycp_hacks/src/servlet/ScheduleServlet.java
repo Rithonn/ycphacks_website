@@ -87,6 +87,8 @@ private static final long serialVersionUID = 1L;
 		ScheduleController schedCont = new ScheduleController();
 		schedCont.setSchedule(schedule);
 		schedCont.loadSchedule(db);
+		String addEventErrorMsg = null;
+		
 		//Pull info from form
 		//If the delete button was pressed, delete the event from the database, and reload the schedule
 		if(req.getParameter("delEventButton") != null) {
@@ -168,10 +170,16 @@ private static final long serialVersionUID = 1L;
 			if(!req.getParameter("addEventTime").isEmpty()) {
 				String time = req.getParameter("addEventTime");
 				//Split the time string apart to separate hours and minutes
-				String[] parts = time.split(":");
-				hours = Integer.parseInt(parts[0]);
-				minutes = Integer.parseInt(parts[1]);
-				
+				//If the user specified a valid format for the time
+				if(time.indexOf(':') != -1) {
+					String[] parts = time.split(":");
+					hours = Integer.parseInt(parts[0]);
+					minutes = Integer.parseInt(parts[1]);
+				//If the user did not include the colon
+				}else if(time.indexOf(':') == -1) {
+					//TODO put an error message for this in the jsp
+					addEventErrorMsg = "Please include a colon in your time";
+				}
 				if("PM".equals(amOrPm) && hours < 12) {
 					//If the time is pm, add 12 to convert to 24 hour time
 					hours += 12;
@@ -191,28 +199,10 @@ private static final long serialVersionUID = 1L;
 					
 				}
 				
-				//Construct the local date time
-				LocalDateTime date = null;
-				/*If the user has opted to modify an event, but has not altered the month, day, and year fields
-				 * pull the fields from the current event
-				 * Hours and Minutes are allowed to be 0*/
-				System.out.println("Event year = " + eventYear + "Event month = " + eventMonth + "Event day = " + eventDay);
-				System.out.println("Modify = " + modify);
-				//If the event is being modified, but the user has not specified a part of the date, pull that part from the date to be modified
-				if(modify) {
-					if(eventYear == 0){
-						eventYear = addEvent.getDate().getYear();
-					}
-					if (eventMonth == 0) { 
-						eventMonth = addEvent.getDate().getMonthValue();
-					}
-					if (eventDay == 0) {
-						eventDay = addEvent.getDate().getDayOfMonth();
-					}
-					
-				}
-				date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
-				addEvent.setDate(date);
+				
+			}else if(req.getParameter("addEventTime").isEmpty() && modify) {
+				hours = addEvent.getDate().getHour();
+				minutes = addEvent.getDate().getMinute();
 			}
 			
 			if(req.getParameter("visibility") != null) {
@@ -224,7 +214,27 @@ private static final long serialVersionUID = 1L;
 					addEvent.setIsVisible(false);
 				}
 			}
-			
+			/*If the user has opted to modify an event, but has not altered the month, day, and year fields
+			 * pull the fields from the current event
+			 * Hours and Minutes are allowed to be 0*/
+			System.out.println("Event year = " + eventYear + "Event month = " + eventMonth + "Event day = " + eventDay);
+			System.out.println("Modify = " + modify);
+			//If the event is being modified, but the user has not specified a part of the date, pull that part from the date to be modified
+			if(modify) {
+				if(eventYear == 0){
+					eventYear = addEvent.getDate().getYear();
+				}
+				if (eventMonth == 0) { 
+					eventMonth = addEvent.getDate().getMonthValue();
+				}
+				if (eventDay == 0) {
+					eventDay = addEvent.getDate().getDayOfMonth();
+				}
+			}
+			//Construct the local date time
+			LocalDateTime date = null;
+			date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
+			addEvent.setDate(date);
 			//Add the date to the db if it is not being modified
 			if(!modify) {
 				schedCont.addEventToDB(db, addEvent);
@@ -238,7 +248,7 @@ private static final long serialVersionUID = 1L;
 		schedCont.setSchedule(newsched);
 		schedCont.loadSchedule(db); 
 		//Convert to collection to make it iterable in the jsp
-		List<Event> eventlist = schedule.getSchedule();
+		List<Event> eventlist = newsched.getSchedule();
 
 		//Get the first event to pass into the jsp
 		Event firstevent = eventlist.get(0);
@@ -246,6 +256,7 @@ private static final long serialVersionUID = 1L;
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
 		req.setAttribute("firstevent", firstevent);
+		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
