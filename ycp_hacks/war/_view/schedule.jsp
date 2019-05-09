@@ -107,9 +107,10 @@
                             //Otherwise it is in the am
                             }else if(eventHour == 12){
                                 amOrPm = "pm";
-                            }
-                            if (eventHour == 0){
+                            }else if (eventHour == 0){
                                 eventHour = 12;
+                                amOrPm = "am";
+                            }else if(eventHour < 12){
                                 amOrPm = "am";
                             }
                             

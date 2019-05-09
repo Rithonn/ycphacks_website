@@ -120,12 +120,13 @@ private static final long serialVersionUID = 1L;
 					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
 						addEvent = event;
 						System.out.println("Event was found based on ID");
+						modify = true;
 						break;
 					}
 				if(addEvent == null) {
 					System.out.println("Add event is null");
 				}
-				modify = true;
+				
 				}
 			//If an event ID is not specified, create a new event to be added to the db
 			}else if (req.getParameter("modifyEventID").isEmpty() == true){
@@ -170,22 +171,50 @@ private static final long serialVersionUID = 1L;
 				String[] parts = time.split(":");
 				hours = Integer.parseInt(parts[0]);
 				minutes = Integer.parseInt(parts[1]);
+				
 				if("PM".equals(amOrPm) && hours < 12) {
 					//If the time is pm, add 12 to convert to 24 hour time
 					hours += 12;
 					
 				//If it is midnight, increment the day
-				}else if("AM".contentEquals(amOrPm) && hours == 12) {
+				}else if("AM".equals(amOrPm) && hours == 12) {
+						
 						hours = 0;
 						eventDay++;
+						//If the user is modifying an event
+						//Increment the already established event day
+						if(modify) {
+							eventDay = addEvent.getDate().getDayOfMonth();
+							eventDay++;
+						}
+				}else if("AM".equals(amOrPm) && hours < 12) {
 					
 				}
-				//Construct the local date time
-				LocalDateTime date = null; 
 				
+				//Construct the local date time
+				LocalDateTime date = null;
+				/*If the user has opted to modify an event, but has not altered the month, day, and year fields
+				 * pull the fields from the current event
+				 * Hours and Minutes are allowed to be 0*/
+				System.out.println("Event year = " + eventYear + "Event month = " + eventMonth + "Event day = " + eventDay);
+				System.out.println("Modify = " + modify);
+				//If the event is being modified, but the user has not specified a part of the date, pull that part from the date to be modified
+				if(modify) {
+					if(eventYear == 0){
+						eventYear = addEvent.getDate().getYear();
+					}
+					if (eventMonth == 0) { 
+						eventMonth = addEvent.getDate().getMonthValue();
+					}
+					if (eventDay == 0) {
+						eventDay = addEvent.getDate().getDayOfMonth();
+					}
+					
+				}
 				date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
 				addEvent.setDate(date);
 			}
+			
 			if(req.getParameter("visibility") != null) {
 				String visibility = req.getParameter("visibility");
 				//System.out.println("Vis = " + visibility);
