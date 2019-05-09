@@ -121,18 +121,27 @@
 								<h5>Admin Settings:</h5>
 								<!-- Accept, Deny, Delete -->
 								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post" style="margin-bottom: 3px;">
-								
-									<input type="text" placeholder="UserID" class="rounded" value ="${userIdAdmin} }">
-									<div style="margin-bottom: 3px;">
-
+									
+									<div class="form-group">
+									<input type="text" placeholder="UserID" class="rounded" value ="${userIdForReg}"/>
 									</div>
-									<button class="btn btn-success btn rounded btn-sm">Accept</button>
-									<button class="btn btn-success btn rounded btn-sm">Deny</button>
-									<button class="btn btn-success btn rounded btn-sm">Delete</button>
+									
+									<div style="margin-bottom: 3px;">
+									</div>
+									
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm">Accept</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm">Deny</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm">Delete</button>
+									</div>
 								</form>
 								
 								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post">
-									<input type="text" placeholder="UserID" class="rounded">
+									<input type="text" placeholder="UserID" class="rounded" value="${userIdAccess}"/>
 									<div style="margin-bottom: 3px;">
 									<input type = "text" placeholder = "accessID" class="rounded">
 									</div>
