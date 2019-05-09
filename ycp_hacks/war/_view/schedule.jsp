@@ -164,7 +164,7 @@
                 <table class="form_table">
                     
                     <tr class="form_element">
-					   <td><input class='form-control' type="text" name="modifyEventID"  value="${modifyEventID}" placeholder="Event ID (only if modifing)"/></td>
+					   <td><input class='form-control' type="text" name="modifyEventID"  value="${modifyEventID}" placeholder="Event ID (leave blank if adding a new event)"/></td>
 				    </tr>
 				    <tr class="form_element">
 					   <td><input class='form-control' type="text" name="addEventName"  value="${addEventName}" placeholder="Enter event name"/></td>
@@ -214,7 +214,7 @@
 			     </table>
                 
                 <div class="form_button">
-			     <button type="submit" class="btn btn-success btn-block" value="" name="addEventButton" onclick="changeAddEventButton()">Add Event</button>
+			     <button type="submit" class="btn btn-success btn-block" value="" name="addEventButton" onclick="changeAddEventButton()">Add/Modify Event</button>
                 </div>
             </form>
         </div>
