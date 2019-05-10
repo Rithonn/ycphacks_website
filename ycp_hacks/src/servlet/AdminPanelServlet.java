@@ -31,11 +31,14 @@ public class AdminPanelServlet extends HttpServlet {
 		System.out.println("Admin Panel Servlet: doGet");
 		session = req.getSession();
 		
-		/*Doesn't allow logged out client to access edit_profile page
+		/*Doesn't allow logged out client/non admin to access adminPanel page
 		 * as there is no user to edit
 		 * forwards back to the index
 		 */
+		User currentUser = (User) session.getAttribute("currentUser");
 		if(session.getAttribute("currentUser") == null) {
+			resp.sendRedirect(req.getContextPath() + "/home");
+		}else if(currentUser.getAccessID() != 2){
 			resp.sendRedirect(req.getContextPath() + "/home");
 		}
 		
