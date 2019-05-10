@@ -67,6 +67,8 @@ private static final long serialVersionUID = 1L;
 		
 		if(req.getParameter("allUsersButton") == null && req.getParameter("specificUsersButton") == null) {
 			req.setAttribute("error", "Please check one of the boxes below");
+			req.setAttribute("message", req.getParameter("message"));
+			req.setAttribute("subject", req.getParameter("subject"));
 			req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
 		}
 		
@@ -130,8 +132,8 @@ private static final long serialVersionUID = 1L;
 				System.out.println(email_validate);
 				if(!validate(email_validate)) {
 					req.setAttribute("error", email_validate + " is of invalid email form");
-//					req.setAttribute("message", req.getParameter("message"));
-//					req.setAttribute("subject", req.getParameter("subject"));
+					req.setAttribute("message", req.getParameter("message"));
+					req.setAttribute("subject", req.getParameter("subject"));
 					req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
 				}
 			}

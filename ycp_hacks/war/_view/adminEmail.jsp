@@ -76,7 +76,7 @@
 	        		<h2>
 	        			Message:
 	        		</h2>
-	        		<textarea class="form-control" placeholder="Enter message text here:" name="message" value="${message}"></textarea>
+	        		<textarea class="form-control" placeholder="Enter message text here:" name="message">${message}</textarea>
 	        	</div>
 	        	<div class="sendEmailSection">
 	        		<button type="submit" class="btn btn-success btn-block" name="sendEmailButton">Send Email</button>
