@@ -140,7 +140,8 @@ private static final long serialVersionUID = 1L;
 				 */
 				ArrayList<User> accountsReceiving = new ArrayList<User>();
 				accountsReceiving.add(model);
-				EmailSender emailSender = new EmailSender(accountsReceiving);
+				EmailSender emailSender = new EmailSender();
+				emailSender.loadEmailsFromUserList(accountsReceiving);
 				emailSender.sendAccCreationEmail();
 
 				//redirect to index.jsp
@@ -161,7 +162,7 @@ private static final long serialVersionUID = 1L;
 	
 	//method to validate email with the Pattern at top of file
 	public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
 	}
 }

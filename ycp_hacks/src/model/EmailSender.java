@@ -13,24 +13,38 @@ public class EmailSender {
 	Session session;
 	
 	/**
-	 * Builds accountsReceiving/emailsReceiving lists
-	 * 		-does this in case emailSender object needs to send to multiple recips
 	 * Builds account that the email is being sent from
 	 * and builds the host, which is gmail
 	 */
-	public EmailSender(ArrayList<User> accountsReceiving) {
-		this.accountsReceiving = accountsReceiving;
-		for(User user : accountsReceiving) {
-			this.emailsReceiving.add(user.getEmail());
-		}
+	public EmailSender() {
 		from = "walrussuit@gmail.com";
 		//ask tim if you don't know the password
-		passwordFrom = "";
+		passwordFrom = "11041998";
 		prop = System.getProperties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
+	}
+	
+	/**Builds email list from an arraylist of user type
+	 * 
+	 * 
+	 * @param accountsReceiving An ArrayList of User objects
+	 */
+	public void loadEmailsFromUserList(ArrayList<User> accountsReceiving) {
+		this.accountsReceiving = accountsReceiving;
+		for(User user : accountsReceiving) {
+			this.emailsReceiving.add(user.getEmail());
+		}
+	}
+	
+	/**Builds email list from an arraylist of string type
+	 * 
+	 * @param emailsReceiving An ArrayList of emails
+	 */
+	public void loadEmailsFromEmailList(ArrayList<String> emailsReceiving) {
+		this.emailsReceiving = emailsReceiving;
 	}
 	
 	/**

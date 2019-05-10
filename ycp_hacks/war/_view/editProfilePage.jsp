@@ -66,8 +66,8 @@
 							</a>
 						</c:if>
 						
-						<p class="error">
-									${error}
+						<p>
+							${error}
 						</p>
 					<hr>
 						<!-- Edit form column -->

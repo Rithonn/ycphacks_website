@@ -3,6 +3,8 @@ package servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,9 @@ import persist.IDatabase;
 public class AdminEmailServlet extends HttpServlet{
 private static final long serialVersionUID = 1L;
 	
+
+	public static final Pattern VALID_EMAIL_ADDRESS_REGEX = 
+	Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);	
 	HttpSession session = null;
 	IDatabase db = null;
 
@@ -60,35 +65,79 @@ private static final long serialVersionUID = 1L;
 		
 		
 		
+		if(req.getParameter("allUsersButton") == null && req.getParameter("specificUsersButton") == null) {
+			req.setAttribute("error", "Please check one of the boxes below");
+			req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
+		}
 		
-		//TODO: validate subject/message fields
-		if(req.getParameter("allUsers") != null) {
+		if(req.getParameter("subject").isEmpty() || req.getParameter("message").isEmpty()) {
+			req.setAttribute("error", "Please fill out the subject/message fields");
+			req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
+		}
+		
+		
+		/*If email is being sent to all users in database,
+		 * call database query, build emailSender object,
+		 * and call emailSender method
+		 */
+		if(req.getParameter("allUsersButton") != null) {
 			List<User> allUsers_list = db.getAllUsers();
 			ArrayList<User> allUsers_arrayList = new ArrayList<User>();
 			allUsers_arrayList.addAll(allUsers_list);
 			
 			//remove admin@ycp.edu as it is an actual email
-			//allUsers_arrayList.removeIf(user -> (user.getEmail() == "admin@ycp.edu"));
 			allUsers_arrayList.remove(2);
 			
-			//dev
-			/*
-			System.out.println("----");
-			for(User user : allUsers_arrayList) {
-				System.out.println(user.getEmail());
-			}
-			*/
-			
-			
-			EmailSender emailSender = new EmailSender(allUsers_arrayList);
+			EmailSender emailSender = new EmailSender();
+			emailSender.loadEmailsFromUserList(allUsers_arrayList);
 			emailSender.sendMassEmail(req.getParameter("subject"), req.getParameter("message"));
 			
+		/*If being sent to specific users,
+		 * obtain users from jsp,
+		 * build email list from comma seperated string,
+		 * build emailSender object,
+		 * call emailSender method
+		 */
+		}else if(req.getParameter("specificUsersButton") != null){
+			String rawEmails = req.getParameter("emails");
+			ArrayList<String> emails_final = new ArrayList<String>();
+			
+			//builds an email string char by char until it hits a ','
+			//then adds the email string to the arraylist, and resets the email string
+			String email = "";
+			for(int i = 0; i < rawEmails.length(); i++) {
+				char c = rawEmails.charAt(i);
+				if(c != ',') {
+					email = email + c;
+				}else if(c == ','){
+					emails_final.add(email);
+					email = "";
+				}
+			}
+		
+			//finally validates emails for correct email form using regex
+			for(String email_validate : emails_final) {
+				if(!validate(email_validate)) {
+					req.setAttribute("error", email_validate + " is of invalid email form");
+					req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
+				}
+			}
+			
+			EmailSender emailSender = new EmailSender();
+			emailSender.loadEmailsFromEmailList(emails_final);
+			emailSender.sendMassEmail(req.getParameter("subject"), req.getParameter("message"));
+		
 		}
 		
 		
-		
-		resp.sendRedirect(req.getContextPath() + "/home");
-		
+		req.setAttribute("success", "Email sent successfully!");
+		req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
+	}
+	
+	//method to validate email with the Pattern at top of file
+	public static boolean validate(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.find();
 	}
 
 }
