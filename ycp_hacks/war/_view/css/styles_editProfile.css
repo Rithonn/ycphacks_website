@@ -18,6 +18,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 100;
 }
 
 /* Change in the navbar colors */
@@ -118,7 +119,7 @@ nav ul li a.active{
 .editingAboutSection{
     width: 100%;
     position: relative;
-    top: 250px;
+    top: 150px;
     z-index: 1;
 }
 
