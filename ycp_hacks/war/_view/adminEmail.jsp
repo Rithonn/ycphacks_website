@@ -70,13 +70,13 @@
 	        		<h2>
 	        			Subject:
 	        		</h2>
-	        		<input class="form-control" type="text" placeholder="Enter subject text here:" name="subject">
+	        		<input class="form-control" type="text" placeholder="Enter subject text here:" name="subject" value="${subject}">
 	        	</div>
 	        	<div class="message">
 	        		<h2>
 	        			Message:
 	        		</h2>
-	        		<textarea class="form-control" placeholder="Enter message text here:" name="message"></textarea>
+	        		<textarea class="form-control" placeholder="Enter message text here:" name="message" value="${message}"></textarea>
 	        	</div>
 	        	<div class="sendEmailSection">
 	        		<button type="submit" class="btn btn-success btn-block" name="sendEmailButton">Send Email</button>

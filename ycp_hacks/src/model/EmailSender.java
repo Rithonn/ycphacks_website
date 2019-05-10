@@ -19,7 +19,7 @@ public class EmailSender {
 	public EmailSender() {
 		from = "walrussuit@gmail.com";
 		//ask tim if you don't know the password
-		passwordFrom = "";
+		passwordFrom = "11041998";
 		prop = System.getProperties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");

@@ -99,6 +99,12 @@ private static final long serialVersionUID = 1L;
 		 * call emailSender method
 		 */
 		}else if(req.getParameter("specificUsersButton") != null){
+			
+			if(req.getParameter("emails").isEmpty()) {
+				req.setAttribute("error", "Please provide emails to send to");
+				req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
+			}
+			
 			String rawEmails = req.getParameter("emails");
 			ArrayList<String> emails_final = new ArrayList<String>();
 			
@@ -107,9 +113,13 @@ private static final long serialVersionUID = 1L;
 			String email = "";
 			for(int i = 0; i < rawEmails.length(); i++) {
 				char c = rawEmails.charAt(i);
-				if(c != ',') {
+				if((c != ',') && (i != rawEmails.length() - 1)) {
 					email = email + c;
 				}else if(c == ','){
+					emails_final.add(email);
+					email = "";
+				}else if(i == rawEmails.length() - 1) {
+					email = email + c;
 					emails_final.add(email);
 					email = "";
 				}
@@ -117,8 +127,11 @@ private static final long serialVersionUID = 1L;
 		
 			//finally validates emails for correct email form using regex
 			for(String email_validate : emails_final) {
+				System.out.println(email_validate);
 				if(!validate(email_validate)) {
 					req.setAttribute("error", email_validate + " is of invalid email form");
+//					req.setAttribute("message", req.getParameter("message"));
+//					req.setAttribute("subject", req.getParameter("subject"));
 					req.getRequestDispatcher("/_view/adminEmail.jsp").forward(req, resp);
 				}
 			}
