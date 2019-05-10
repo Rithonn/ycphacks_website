@@ -21,8 +21,8 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
-    z-index: 100;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    z-index: 100;
 }
 
 /* Change in the navbar colors */
@@ -109,14 +109,14 @@ nav ul li a.active {
 	width: 700px;
 	background-color: black;
 	top: 150px;
-	bottom: 300px;
 	left: 30%;
-	z-index: 10;
 	background: rgba(0, 0, 0, 0.9);
 	border: 6px;
     border-radius: 15px;
     overflow: hidden;
     padding: 20px;
+    margin-bottom: 50px;
+    z-index: 1;
 }
 
 .emailSection h2{

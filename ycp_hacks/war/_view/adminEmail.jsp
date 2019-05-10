@@ -35,8 +35,7 @@
 		<!-- Make sure when only wanting to redirect you have to remove method  -->
 		<!-- If method is not moved then the action will still occur like the program ran-->
 		<!-- It can still work for the first two but guessing game crashes -->
-		<div class="wrapper">
-            <nav>
+           <nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
                 <li><a class="stationary" href="home">Home</a></li>
@@ -53,11 +52,10 @@
                  	<li><a class="active" href="edit_profile">${currentUser.email}</a></li>
                  </c:if>
             </ul>
-            </nav>
-        </div>
+           </nav>
         
-        <form action="${pageContext.servletContext.contextPath}/adminEmail" method="post">
-	        <div class="emailSection">
+        <div class="emailSection">
+        	<form action="${pageContext.servletContext.contextPath}/adminEmail" method="post">
 	        	<p align="center">${error}</p>
 	        	<p align="center" class="success">${success}</p>
 	        	<h2>Recipients:</h2>
@@ -83,8 +81,10 @@
 	        	<div class="sendEmailSection">
 	        		<button type="submit" class="btn btn-success btn-block" name="sendEmailButton">Send Email</button>
 	        	</div>
-	        </div>
-        </form>
+	        </form>
+        </div>
+        
+        <hr>
         
         
         <script>

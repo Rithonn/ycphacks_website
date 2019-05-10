@@ -18,6 +18,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 100;
 }
 
 /* Change in the navbar colors */
@@ -102,7 +103,7 @@ nav ul li a.active{
 .allContentSection{
     text-align: center;
     position: relative;
-    top: 250px;
+    top: 150px;
     margin-top: 20px;
     background: rgba(0, 0, 0, 0.9);
     color: white;
@@ -111,8 +112,10 @@ nav ul li a.active{
     width: 75%;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 50px;
     padding: 50px;
     text-align: left;
+    z-index: 1;
     
 }
 
