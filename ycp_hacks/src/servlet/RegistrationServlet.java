@@ -63,6 +63,17 @@ private static final long serialVersionUID = 1L;
 	
 		System.out.println("Registration Servlet: doPost");
 		
+		/*Refill form right away, this can be done because if the registration is successful
+		 * it redirects to /home,
+		 * if it fails it reloads /registration, and the form get refilled
+		 */
+		req.setAttribute("firstname", req.getParameter("firstname"));
+		req.setAttribute("lastname", req.getParameter("lastname"));
+		req.setAttribute("email", req.getParameter("email"));
+		req.setAttribute("email2", req.getParameter("email2"));
+		req.setAttribute("age", req.getParameter("age"));
+		req.setAttribute("uni", req.getParameter("uni"));
+
 		//create new user/controller
 		User model = new User();
 		UserController controller = new UserController();
@@ -147,8 +158,8 @@ private static final long serialVersionUID = 1L;
 				//redirect to index.jsp
 				resp.sendRedirect(req.getContextPath() + "/home");
 			}else {
-				//alert user reg failed
-				req.setAttribute("reg", "Registration was unsuccessful");
+				//alert user reg failed, because email already used
+				req.setAttribute("reg", "Email already used by an account");
 				req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 			}
 		}else {
