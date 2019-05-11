@@ -114,13 +114,13 @@ public class EmailSender {
 	            });
 			
 			try {
-				MimeMessage message_accMade = new MimeMessage(session);
-				message_accMade.setFrom(new InternetAddress(from));
-				message_accMade.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
-				message_accMade.setSubject("***Password Reset!***");
-				message_accMade.setText("Your account under: " + emailsReceiving.get(0) + " changed it's password to: " + newpw
+				MimeMessage message_forgotPW = new MimeMessage(session);
+				message_forgotPW.setFrom(new InternetAddress(from));
+				message_forgotPW.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+				message_forgotPW.setSubject("***Password Reset!***");
+				message_forgotPW.setText("Your account under: " + emailsReceiving.get(0) + " changed it's password to: " + newpw
 						+ ", log in with this new password and change your password to whatever you would like.");
-				Transport.send(message_accMade);
+				Transport.send(message_forgotPW);
 			}catch(MessagingException e) {
 				System.out.println(e);
 			}	
@@ -140,12 +140,12 @@ public class EmailSender {
 	            });
 			
 			try {
-				MimeMessage message_accMade = new MimeMessage(session);
-				message_accMade.setFrom(new InternetAddress(from));
-				message_accMade.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
-				message_accMade.setSubject(accountsReceiving.get(0).getFirstName() + ", your account is registered!");
-				message_accMade.setText("Your account under: " + emailsReceiving.get(0) + ", is registered! We look forward to seeing you at the event.");
-				Transport.send(message_accMade);
+				MimeMessage message_accRegistered = new MimeMessage(session);
+				message_accRegistered.setFrom(new InternetAddress(from));
+				message_accRegistered.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+				message_accRegistered.setSubject(accountsReceiving.get(0).getFirstName() + ", your account is registered!");
+				message_accRegistered.setText("Your account under: " + emailsReceiving.get(0) + ", is registered! We look forward to seeing you at the event.");
+				Transport.send(message_accRegistered);
 			}catch(MessagingException e) {
 				System.out.println(e);
 			}	
