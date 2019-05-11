@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.ScheduleController;
-import controller.SortScheduleByDate;
 import model.Event;
 import model.Schedule;
 import persist.DatabaseProvider;
