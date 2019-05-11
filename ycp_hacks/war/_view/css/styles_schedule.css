@@ -200,6 +200,7 @@ nav ul li a.active{
     bottom: 0;
     background: green;
     width: 100%;
+    height: auto;
     z-index: 10;
 }
 

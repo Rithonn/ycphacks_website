@@ -108,7 +108,10 @@
             </div>
         </section>
     </div>
-		
+        
+    <div class="ticker_div">
+        <marquee class="scroll-text">Current event: ${firstevent.name} ${firstevent.description}</marquee>
+    </div>
 		
 	</body>
 </html>

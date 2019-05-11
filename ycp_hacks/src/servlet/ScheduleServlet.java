@@ -296,7 +296,7 @@ private static final long serialVersionUID = 1L;
 		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
-		req.setAttribute("firstevent", firstevent);
+		session.setAttribute("firstevent", firstevent);
 		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
