@@ -27,6 +27,22 @@ public class EmailSender {
         prop.put("mail.smtp.starttls.enable", "true"); //TLS
 	}
 	
+	/**Returns accountsReceiving arrayList.
+	 * For testing use
+	 *@return Returns ArrayList of User objects
+	 */
+	public ArrayList<User> getAccountsReceiving() {
+		return accountsReceiving;
+	}
+	
+	/**Returns emailsReceiving arryList.
+	 * For testing use
+	 * @return Returns ArrayList of String Emails
+	 */
+	public ArrayList<String> getEmailsReceiving(){
+		return emailsReceiving;
+	}
+	
 	/**Builds email list from an arraylist of user type
 	 * 
 	 * 
@@ -39,7 +55,9 @@ public class EmailSender {
 		}
 	}
 	
-	/**Builds email list from an arraylist of string type
+	/**Builds email list from an arraylist of string type.
+	 * Used if you just have the emails, and not a collections
+	 * of Users.
 	 * 
 	 * @param emailsReceiving An ArrayList of emails
 	 */
