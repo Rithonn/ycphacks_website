@@ -21,6 +21,7 @@ public class IndexServlet extends HttpServlet {
 		
 		System.out.println("Index Servlet: doGet");	
 		session = req.getSession();
+		
 		req.getRequestDispatcher("/_view/index.jsp").forward(req, resp);
 	}
 }

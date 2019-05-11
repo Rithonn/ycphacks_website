@@ -55,12 +55,7 @@ private static final long serialVersionUID = 1L;
 //		//Loads schedule from database into the model schedule
 		schedCont.loadSchedule(db);
 		
-//		Event event3 = new Event();
-//		
-//		LocalDateTime date3 = LocalDateTime.of(2019, Month.OCTOBER, 26, 22, 30);
-//		event3.setDate(date3);
-//		schedCont.addEventToDB(db, event3);
-		//Collections.sort(schedule.getSchedule(), new SortScheduleByDate());
+
 		
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
@@ -70,7 +65,7 @@ private static final long serialVersionUID = 1L;
 		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
-		req.setAttribute("firstevent", firstevent);
+		session.setAttribute("firstevent", firstevent);
 		
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
