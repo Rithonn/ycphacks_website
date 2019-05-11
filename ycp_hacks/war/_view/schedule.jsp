@@ -220,8 +220,9 @@
         </div>
         </div>
         </c:if>
-        
-        <marquee class="scroll-text">Avengers: Infinity War's Iron Spider Suit May Use Bleeding Edge Tech  <span class="glyphicon glyphicon-forward"></span> Russo brothers ask for fans not to spoil Avengers: Infinity War <span class="glyphicon glyphicon-forward"></span>  Bucky's Arm Miraculously Regenerates On Avengers: Infinity War Poster</marquee>
+        <div class="ticker_div">
+            <marquee class="scroll-text">Current event: ${firstevent.name} ${firstevent.description}</marquee>
+        </div>
         <script>
 	        function changeDelEventButton(){
 	        	document.getElementsByName("delEventButton")[0].setAttribute("value", "true");
