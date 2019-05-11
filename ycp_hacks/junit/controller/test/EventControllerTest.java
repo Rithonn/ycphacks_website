@@ -26,8 +26,7 @@ public class EventControllerTest{
 		model.setDate(date);
 		model.setName("Free Pizza");
 		model.setDescription("Enjoy free pizza");
-		model.setIsPassedTime(false);
-		model.setIsUpComing(true);
+		
 		
 		controller.setModel(model);
 	}
@@ -64,17 +63,4 @@ public class EventControllerTest{
 		assertEquals("Check-in to the Hackathon", model.getDescription());
 	}
 	
-	@Test
-	public void testChangeIsPassed() {
-		assertFalse(model.isPassedTime());
-		controller.changeIsPassed(true);
-		assertTrue(model.isPassedTime());
-	}
-	
-	@Test
-	public void testChangeIsUpcoming() {
-		assertTrue(model.isUpComing());
-		controller.changeIsUpComing(false);
-		assertFalse(model.isUpComing());
-	}
 }

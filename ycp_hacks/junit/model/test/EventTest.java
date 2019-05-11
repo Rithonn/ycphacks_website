@@ -44,17 +44,7 @@ public class EventTest{
 		assertEquals("Come to Yorkview for opening remarks", testEvent.getDescription());
 	}
 	
-	@Test
-	public void testGetPassedTime() {
-		testEvent.setIsPassedTime(true);
-		assertTrue(testEvent.isPassedTime());
-	}
 	
-	@Test
-	public void testGetUpComing() {
-		testEvent.setIsUpComing(true);
-		assertTrue(testEvent.isUpComing());
-	}
 	
 	@Test
 	public void testDateToMillis() {
@@ -76,9 +66,4 @@ public class EventTest{
 		assertEquals(testEvent.getEventId(), 8);
 	}
 	
-	@Test
-	public void testIsPassedTime() {
-		testEvent.setIsPassedTime(true);
-		assertTrue(testEvent.isPassedTime());
-	}
 }

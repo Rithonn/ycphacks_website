@@ -88,8 +88,7 @@ public class FakeDatabase implements IDatabase {
 		event1.setDescription("Check in before the event starts");
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
+		
 		
 		//Creates a second test event
 		Event event2 = new Event();
@@ -102,8 +101,7 @@ public class FakeDatabase implements IDatabase {
 		event2.setDescription("Pizza for dinner");
 		event2.setName("Free pizza");
 		event2.setDate(date2);
-		event2.setIsPassedTime(false);
-		event2.setIsUpComing(true);
+		
 		
 		Event event3 = new Event();
 		
@@ -114,8 +112,7 @@ public class FakeDatabase implements IDatabase {
 		event3.setDescription("Breakfast is served");
 		event3.setName("Breakfast");
 		event3.setDate(date3);
-		event3.setIsPassedTime(false);
-		event3.setIsUpComing(true);
+		
 		
 		//Add test stuff to proper lists
 		eventList.add(event1);

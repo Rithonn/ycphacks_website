@@ -16,8 +16,7 @@ public class Event{
 	private LocalDateTime date;
 	private String name;
 	private String description;
-	private Boolean isPassedTime;
-	private Boolean isUpComing;
+	private Long eventDuration;
 	private Boolean isVisible;
 	private int eventId;
 	
@@ -73,19 +72,7 @@ public class Event{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Boolean isPassedTime() {
-		return isPassedTime;
-	}
-	public void setIsPassedTime(Boolean passedTime) {
-		this.isPassedTime = passedTime;
-	}
-	public Boolean isUpComing() {
-		return isUpComing;
-	}
-	public void setIsUpComing(Boolean upComing) {
-		this.isUpComing = upComing;
-	}
-
+	
 	public int getEventId() {
 		return eventId;
 	}
@@ -100,6 +87,14 @@ public class Event{
 
 	public void setIsVisible(Boolean isVisible) {
 		this.isVisible = isVisible;
+	}
+
+	public Long getEventDuration() {
+		return eventDuration;
+	}
+
+	public void setEventDuration(Long eventDuration) {
+		this.eventDuration = eventDuration;
 	}
 	
 	

@@ -30,8 +30,6 @@ public class ScheduleControllerTest{
 		event1.setDescription("Check in before the event starts");
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
 		schedule = new Schedule();
 		schedCont = new ScheduleController();
 		
