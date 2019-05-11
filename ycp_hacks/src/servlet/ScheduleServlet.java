@@ -322,6 +322,7 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("schedule", eventlist);
 		req.setAttribute("firstevent", firstevent);
 		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
+		session.setAttribute("firstevent", firstevent);
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
