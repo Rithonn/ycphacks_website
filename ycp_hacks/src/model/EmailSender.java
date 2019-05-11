@@ -100,4 +100,29 @@ public class EmailSender {
 				System.out.println(e);
 			}	
 	}
+	
+	/**Method to send an email to a single user with their new password
+	 * 
+	 * @param newpw New password that will be included in the email
+	 */
+	public void sendForgotPasswordEmail(String newpw) {
+		session = Session.getInstance(prop,
+	            new javax.mail.Authenticator() {
+	                protected PasswordAuthentication getPasswordAuthentication() {
+	                    return new PasswordAuthentication(from, passwordFrom);
+	                }
+	            });
+			
+			try {
+				MimeMessage message_accMade = new MimeMessage(session);
+				message_accMade.setFrom(new InternetAddress(from));
+				message_accMade.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+				message_accMade.setSubject("***Password Reset!***");
+				message_accMade.setText("Your account under: " + emailsReceiving.get(0) + " changed it's password to: " + newpw
+						+ ", log in with this new password and change your password to whatever you would like.");
+				Transport.send(message_accMade);
+			}catch(MessagingException e) {
+				System.out.println(e);
+			}	
+	}
 }
