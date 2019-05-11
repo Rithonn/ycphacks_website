@@ -220,6 +220,9 @@
         </div>
         </div>
         </c:if>
+        <div class="ticker_div">
+            <marquee class="scroll-text">Current event: ${firstevent.name} ${firstevent.description}</marquee>
+        </div>
         <script>
 	        function changeDelEventButton(){
 	        	document.getElementsByName("delEventButton")[0].setAttribute("value", "true");

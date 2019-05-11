@@ -189,3 +189,21 @@ nav ul li a.active{
 }
 /*------ScheduleEditor------*/
 
+/*------Ticker------*/
+.scroll-text{
+    font-size: 30px;
+    color: white;
+}
+
+.ticker_div{
+    position: fixed;
+    bottom: 0;
+    background: green;
+    width: 100%;
+    z-index: 10;
+}
+
+/*------Ticker------*/
+
+
+
