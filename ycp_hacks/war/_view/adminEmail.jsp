@@ -64,7 +64,7 @@
 	        		Specific Users: <input type="checkbox" name="specificUsersButton" onclick="specificUsers()">
 	        	</div>
 	        	<div class="specificUserEntries">
-	        		<input class="form-control" type="text" placeholder="Enter emails seperated by a comma here:" name="emails">
+	        		<input class="form-control" type="text" placeholder="Enter emails seperated by a comma here:" name="emails"  value="${emails}">
 	        	</div>
 	        	<div class="subject">
 	        		<h2>
