@@ -68,6 +68,7 @@
                     <c:if test="${currentUser.accessID == 2}">
                         <th scope="col">Event ID</th>
                         <th scope="col"> Visible</th>
+                        <th scope="col"> Duration</th>
                     </c:if>
                 </tr>
             </thead>
@@ -130,6 +131,7 @@
                         <c:if test="${currentUser.accessID == 2}">
                             <td>${event.eventId}</td>
                             <td>${event.isVisible}</td>
+                            <td>${event.eventDuration}</td>
                         </c:if>
                     </tr>
                     </c:if>
@@ -187,7 +189,10 @@
 					    <td><input class='form-control' type="text" name="addEventDay"  value="${addEventDay}" placeholder="Enter day of month"/></td>
 				    </tr>
                     <tr class="form_element">
-					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
+					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/> </td>
+				    </tr>
+                    <tr class="form_element">
+					    <td><input class='form-control' type="text" name="addEventDuration"  value="${addEventDuration}" placeholder="Enter duration (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
 				    </tr>
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">

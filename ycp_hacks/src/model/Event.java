@@ -16,7 +16,7 @@ public class Event{
 	private LocalDateTime date;
 	private String name;
 	private String description;
-	private Long eventDuration;
+	private long eventDuration;
 	private Boolean isVisible;
 	private int eventId;
 	
@@ -89,13 +89,30 @@ public class Event{
 		this.isVisible = isVisible;
 	}
 
-	public Long getEventDuration() {
+	public long getEventDuration() {
 		return eventDuration;
 	}
 
-	public void setEventDuration(Long eventDuration) {
+	public void setEventDuration(long eventDuration) {
 		this.eventDuration = eventDuration;
 	}
 	
+	//This method will check whether an event is ongoing, upcoming, or has already happened
+	//0 for event has passed, 1 for ongoing, 2 for upcoming
+	public int checkStatus() {
+		//If the eventdate + the duration is less than the current time, it has passed
+		if(this.dateToMillis() + eventDuration < System.currentTimeMillis()) {
+			return 0;
+		//If the event date is less then the current time, and the current time is less than the date + duration
+		//The event is in progress
+		}else if(this.dateToMillis() < System.currentTimeMillis() && System.currentTimeMillis() < this.dateToMillis() + eventDuration){
+			return 1;
+		//If the event date + the duration is greater than the current time, the event is upcoming
+		}else if(this.dateToMillis() + eventDuration > System.currentTimeMillis()) {
+			return 2;
+		}else {
+			return -1;
+		}
+	}
 	
 }

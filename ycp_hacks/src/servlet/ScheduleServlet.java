@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import controller.EventController;
 import controller.ScheduleController;
 import model.Event;
 import model.Schedule;
@@ -89,15 +90,19 @@ private static final long serialVersionUID = 1L;
 //			System.out.println("Delete button " + req.getParameter("delEventButton"));
 //			System.out.println("Add button " + req.getParameter("addEventButton"));
 			Event delevent = new Event();
+			EventController eventcont = new EventController();
+			eventcont.setModel(delevent);
 			String eventId = req.getParameter("delEventId");
 //			System.out.println("Event id " + eventId);
-			delevent.setEventId(Integer.parseInt(eventId));
+			eventcont.changeEventId(Integer.parseInt(eventId));
 			schedCont.deleteEvent(db, delevent);
 			
 		}
 		//If the add event button was pressed, construct the new event, add it to the db and reload the schedule
 		if(req.getParameter("addEventButton") != null) {
 			Event addEvent = null;
+			EventController eventcont = new EventController();
+			eventcont.setModel(addEvent);
 			int eventYear = 0;
 			int eventMonth = 0;
 			int eventDay = 0;
@@ -185,6 +190,32 @@ private static final long serialVersionUID = 1L;
 			if(req.getParameter("inlineRadioOptions") != null) {
 				amOrPm = req.getParameter("inlineRadioOptions");
 				
+			}
+			
+			if(!req.getParameter("addEventDuration").isEmpty()) {
+				String time = req.getParameter("addEventDuration");
+				//Split the time string apart to separate hours and minutes
+				//If the user specified a valid format for the time
+				if(time.indexOf(':') != -1) {
+					String[] parts = time.split(":");
+					try {
+						hours = Integer.parseInt(parts[0]);
+						minutes = Integer.parseInt(parts[1]);
+					} catch(NumberFormatException e) {
+						if(addEventErrorMsg == null) {
+							addEventErrorMsg = "Please enter a valid time";
+						}
+					}
+					
+				//If the user did not include the colon
+				}else if(time.indexOf(':') == -1) {
+					if(addEventErrorMsg == null) {
+						addEventErrorMsg = "Please include a colon in your time";
+					}
+				}
+				long totalseconds = ((hours * 60) + minutes) * 60;
+				addEvent.setEventDuration(totalseconds);
+				System.out.println("Event duration in seconds: " + totalseconds);
 			}
 			//If a time is entered update the date
 			if(!req.getParameter("addEventTime").isEmpty()) {
@@ -284,13 +315,12 @@ private static final long serialVersionUID = 1L;
 		schedCont.loadSchedule(db); 
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = newsched.getSchedule();
-
 		//Get the first event to pass into the jsp
 		Event firstevent = eventlist.get(0);
 		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
-		session.setAttribute("firstevent", firstevent);
+		req.setAttribute("firstevent", firstevent);
 		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);

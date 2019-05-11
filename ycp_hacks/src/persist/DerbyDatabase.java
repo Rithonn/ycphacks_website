@@ -108,6 +108,7 @@ public class DerbyDatabase implements IDatabase {
 		event.setLocation(resultset.getString(index++));
 		event.setDescription(resultset.getString(index++));
 		event.setIsVisible(resultset.getBoolean(index++));
+		event.setEventDuration(resultset.getLong(index++));
 	}
 
 	/**
@@ -149,7 +150,8 @@ public class DerbyDatabase implements IDatabase {
 							" name varchar(40)," +
 							" location varchar(40)," +
 							" description varchar(120), " +
-							" isVisible varchar(5) " +
+							" isVisible varchar(5), " +
+							" duration bigint " +
 							")"
 							);
 					stmt2.executeUpdate();
@@ -206,8 +208,8 @@ public class DerbyDatabase implements IDatabase {
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
 						+ " password, age, university, isReg, accessID) values (?,?,?,?,?,?,?,?)");
 				
-				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description, isVisible)"
-						+ " values (?,?,?,?,?)");
+				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description, isVisible, duration)"
+						+ " values (?,?,?,?,?,?)");
 				
 				try {
 //					Will need to populate the user table with example entry
@@ -241,6 +243,7 @@ public class DerbyDatabase implements IDatabase {
 						insertEventList.setString(3, event.getLocation());
 						insertEventList.setString(4, event.getDescription());
 						insertEventList.setString(5, String.valueOf(event.getIsVisible()));
+						insertEventList.setLong(6, event.getEventDuration());
 						insertEventList.addBatch();
 					}
 					insertUserList.executeBatch();
@@ -525,7 +528,7 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into schedule (dateTime, name, location, description, isVisible) values (?,?,?,?,?)"
+							"insert into schedule (dateTime, name, location, description, isVisible, duration) values (?,?,?,?,?,?)"
 					); 
 					
 					stmt.setLong(1, event.dateToMillis());
@@ -533,6 +536,7 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(3, event.getLocation());
 					stmt.setString(4, event.getDescription());
 					stmt.setString(5, Boolean.toString(event.getIsVisible()));
+					stmt.setLong(6, event.getEventDuration());
 					stmt.executeUpdate();
 					
 					return true;
@@ -595,7 +599,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"update schedule "
-							+ " set dateTime = ?, name = ?, location = ?, description = ?, isVisible = ?"
+							+ " set dateTime = ?, name = ?, location = ?, description = ?, isVisible = ?, duration = ?"
 							+ " where event_id = ?"
 					); 
 					
@@ -604,7 +608,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setString(3, event.getLocation());
 					stmt.setString(4, event.getDescription());
 					stmt.setString(5, Boolean.toString(event.getIsVisible()));
-					stmt.setInt(6, event.getEventId());
+					stmt.setLong(6, event.getEventDuration());
+					stmt.setInt(7, event.getEventId());
 					
 					stmt.executeUpdate();
 					

@@ -39,4 +39,8 @@ public class EventController {
 	public void changeIsVisible(Boolean visible) {
 		event.setIsVisible(visible);
 	}
+	public void changeEventId(int i) {
+		event.setEventId(i);
+	}
+	
 }
