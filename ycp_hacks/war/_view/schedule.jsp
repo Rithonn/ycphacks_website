@@ -131,7 +131,20 @@
                         <c:if test="${currentUser.accessID == 2}">
                             <td>${event.eventId}</td>
                             <td>${event.isVisible}</td>
-                            <td>${event.eventDuration}</td>
+                            <td>
+                                <script>
+                                var durationSec = ${event.eventDuration};
+                                var totalminutes = durationSec / 60;
+                                var extraminutes = totalminutes % 60;
+                                var hours = (totalminutes - extraminutes) / 60;
+                                
+                                
+                                document.write(hours, " hour(s), ", extraminutes, "minute(s)");
+                                
+                                
+                                
+                                </script>
+                            </td>
                         </c:if>
                     </tr>
                     </c:if>
