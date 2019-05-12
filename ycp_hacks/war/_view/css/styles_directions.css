@@ -154,3 +154,20 @@ body{
 	position: relative;
 	top: 20%;
 }
+
+/*------Ticker------*/
+.scroll-text{
+    font-size: 30px;
+    color: white;
+}
+
+.ticker_div{
+    position: fixed;
+    bottom: 0;
+    background: green;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+
+/*------Ticker------*/

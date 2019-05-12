@@ -102,6 +102,15 @@
 		<!-- change KEY to GoogleAPIkey -->
 		<script src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=myMap"></script>
 	
-	
+	<div class="ticker_div">
+            <marquee class="scroll-text">
+                <span> || Currently Happening: </span> 
+                <c:forEach items="${ongoing}" var="event">
+                    ${event.name}, 
+                </c:forEach> 
+                <span> || Coming up: </span>
+                ${upcoming.name}
+            </marquee>
+        </div>
 	</body>
 </html>
