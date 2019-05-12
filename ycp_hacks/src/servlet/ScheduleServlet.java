@@ -1,5 +1,6 @@
 package servlet;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.io.IOException;
@@ -60,13 +61,31 @@ private static final long serialVersionUID = 1L;
 		//Convert to collection to make it iterable in the jsp
 		List<Event> eventlist = schedule.getSchedule();
 		
+		//List to hold ongoing events for the ticker
+		List<Event> ongoing = new ArrayList<Event>();
+		//The next upcoming event for the ticker
+		Event nextup = null;
 		//Get the first event to pass into the jsp
 		Event firstevent = eventlist.get(0);
+		
+		for(Event event : eventlist) {
+			System.out.println(event.checkStatus());
+			if(event.checkStatus() == 1) {
+				ongoing.add(event);
+			}
+			if(event.checkStatus() == 2 && nextup == null) {
+				nextup = event;
+			}
+		}
 		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
-		session.setAttribute("firstevent", firstevent);
-		
+		req.setAttribute("firstevent", firstevent);
+		//Set session attribute for the ongoing and upcoming events
+		if(ongoing.size() != 0) {
+			session.setAttribute("ongoing", ongoing);
+		}
+		session.setAttribute("upcoming", nextup);
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 	
@@ -317,12 +336,30 @@ private static final long serialVersionUID = 1L;
 		List<Event> eventlist = newsched.getSchedule();
 		//Get the first event to pass into the jsp
 		Event firstevent = eventlist.get(0);
+		//List to hold ongoing events for the ticker
+		List<Event> ongoing = new ArrayList<Event>();
+		//The next upcoming event for the ticker
+		Event nextup = null;
+		for(Event event : eventlist) {
+			System.out.println(event.checkStatus());
+			if(event.checkStatus() == 1) {
+				ongoing.add(event);
+			}
+			if(event.checkStatus() == 2 && nextup == null) {
+				nextup = event;
+			}
+		}
 		//System.out.println("First event dayofmonth = " +firstevent.getDate().getDayOfMonth());
 		//Sets schedule attribute in HTTP to the schedule model
 		req.setAttribute("schedule", eventlist);
 		req.setAttribute("firstevent", firstevent);
 		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
-		session.setAttribute("firstevent", firstevent);
+		//Set session attribute for the ongoing and upcoming events
+		if(ongoing.size() != 0) {
+			session.setAttribute("ongoing", ongoing);
+		}
+		session.setAttribute("upcoming", nextup);
+		
 				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}

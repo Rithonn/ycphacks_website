@@ -100,15 +100,21 @@ public class Event{
 	//This method will check whether an event is ongoing, upcoming, or has already happened
 	//0 for event has passed, 1 for ongoing, 2 for upcoming
 	public int checkStatus() {
-		//If the eventdate + the duration is less than the current time, it has passed
-		if(this.dateToMillis() + eventDuration < System.currentTimeMillis()) {
+		//LDT for now
+		LocalDateTime now = LocalDateTime.now();
+		//Creating a LDT for the end of the event
+		long longdate = this.dateToMillis() + this.eventDuration;
+		ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochSecond(longdate), ZoneId.systemDefault());
+		LocalDateTime eventend = zdt.toLocalDateTime();
+		
+		//If now is after the end of the event it has passed
+		if(now.isAfter(eventend)) {
 			return 0;
-		//If the event date is less then the current time, and the current time is less than the date + duration
-		//The event is in progress
-		}else if(this.dateToMillis() < System.currentTimeMillis() && System.currentTimeMillis() < this.dateToMillis() + eventDuration){
+		//If now is after the start of the event, and before the end of the event it is in progress
+		}else if(now.isAfter(this.date) && now.isBefore(eventend)){
 			return 1;
-		//If the event date + the duration is greater than the current time, the event is upcoming
-		}else if(this.dateToMillis() + eventDuration > System.currentTimeMillis()) {
+		//If now is before the start of the event it is upcoming
+		}else if(now.isBefore(this.date)) {
 			return 2;
 		}else {
 			return -1;
