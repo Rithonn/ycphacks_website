@@ -114,11 +114,11 @@
                 <c:if test="${!empty ongoing}">
                     <span> || Currently Happening: </span> 
                     <c:forEach items="${ongoing}" var="event">
-                        ${event.name}, 
+                        ${event.name} |  
                     </c:forEach>
                 </c:if>
                 <span> || Coming up: </span>
-                ${upcoming.name}
+                ${upcoming.name} || See Schedule for more information || 
             </marquee>
         </div>
 		
