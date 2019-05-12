@@ -115,7 +115,7 @@
 						<p>You can find our code of conduct <a href="https://hackcodeofconduct.org/">here</a>.</p>
 
 						<h3>You did not answer my question!</h3>
-						<p>Send it to us at info@ycphacks.io</h3>
+						<p>Send it to us at info@ycphacks.io</p>
 						
 			                
                     </div>
@@ -136,7 +136,16 @@
 
         </section>
     </div>
-		
+    <div class="ticker_div">
+            <marquee class="scroll-text">
+                <span> || Currently Happening: </span> 
+                <c:forEach items="${ongoing}" var="event">
+                    ${event.name}, 
+                </c:forEach> 
+                <span> || Coming up: </span>
+                ${upcoming.name}
+            </marquee>
+        </div>
 		
 		
 	</body>

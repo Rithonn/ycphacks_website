@@ -242,7 +242,7 @@
             <marquee class="scroll-text">
                 <span> || Currently Happening: </span> 
                 <c:forEach items="${ongoing}" var="event">
-                    ${event.name}
+                    ${event.name}, 
                 </c:forEach> 
                 <span> || Coming up: </span>
                 ${upcoming.name}

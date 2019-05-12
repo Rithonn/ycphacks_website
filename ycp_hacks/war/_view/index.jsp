@@ -110,8 +110,15 @@
     </div>
         
     <div class="ticker_div">
-        <marquee class="scroll-text">Current event: ${firstevent.name} ${firstevent.description}</marquee>
-    </div>
+            <marquee class="scroll-text">
+                <span> || Currently Happening: </span> 
+                <c:forEach items="${ongoing}" var="event">
+                    ${event.name}, 
+                </c:forEach> 
+                <span> || Coming up: </span>
+                ${upcoming.name}
+            </marquee>
+        </div>
 		
 	</body>
 </html>
