@@ -9,15 +9,11 @@ public class User {
 	private int userID;
 	private String university;
 	private boolean isReg;
-	
 	/* 0 - attendee
 	 * 1 - volunteer 
 	 * 2 - admin
 	 */
-	private int accessID;
-	//profType?
-	
-	
+	private int accessID;	
 	
 	public User() {
 	}
