@@ -103,6 +103,7 @@ private static final long serialVersionUID = 1L;
 		schedCont.setSchedule(schedule);
 		schedCont.loadSchedule(db);
 		String addEventErrorMsg = null;
+		String delEventErrorMsg = null;
 		
 		//Pull info from form
 		//If the delete button was pressed, delete the event from the database, and reload the schedule
@@ -114,8 +115,13 @@ private static final long serialVersionUID = 1L;
 			eventcont.setModel(delevent);
 			String eventId = req.getParameter("delEventId");
 //			System.out.println("Event id " + eventId);
-			eventcont.changeEventId(Integer.parseInt(eventId));
-			schedCont.deleteEvent(db, delevent);
+			try {
+				eventcont.changeEventId(Integer.parseInt(eventId));
+				schedCont.deleteEvent(db, delevent);
+			}catch (NumberFormatException e) {
+				delEventErrorMsg = "Please enter a valid event ID";
+			}
+			
 			
 		}
 		//If the add event button was pressed, construct the new event, add it to the db and reload the schedule
@@ -137,25 +143,27 @@ private static final long serialVersionUID = 1L;
 			System.out.println("Modify event ID = " +req.getParameter("modifyEventID"));
 			if(req.getParameter("modifyEventID").isEmpty() == false) {
 				try {
-					Integer.parseInt(req.getParameter("modifyEventID"));
+					for(Event event : schedule.getSchedule()) {
+						System.out.println("I am running through the loop");
+						if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
+							addEvent = event;
+							System.out.println("Event was found based on ID");
+							modify = true;
+							break;
+						}
+					
+					
+					}
+					if(addEvent == null) {
+						System.out.println("Add event is null");
+						addEventErrorMsg = "Please enter a valid Event ID";
+						
+					}
 				}catch(NumberFormatException e) {
 					addEventErrorMsg = "Please enter a valid Event ID";
+	
 				}
-				for(Event event : schedule.getSchedule()) {
-					System.out.println("I am running through the loop");
-					if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
-						addEvent = event;
-						System.out.println("Event was found based on ID");
-						modify = true;
-						break;
-					}
 				
-				
-				}
-				if(addEvent == null) {
-					System.out.println("Add event is null");
-					addEventErrorMsg = "Please enter a valid Event ID";
-				}
 			//If an event ID is not specified, create a new event to be added to the db
 			}else if (req.getParameter("modifyEventID").isEmpty() == true){
 				addEvent = new Event();
@@ -234,7 +242,9 @@ private static final long serialVersionUID = 1L;
 					}
 				}
 				long totalseconds = ((hours * 60) + minutes) * 60;
-				addEvent.setEventDuration(totalseconds);
+				if(addEvent != null) {
+					addEvent.setEventDuration(totalseconds);
+				}
 				System.out.println("Event duration in seconds: " + totalseconds);
 			}
 			//If a time is entered update the date
@@ -355,13 +365,12 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("schedule", eventlist);
 		req.setAttribute("firstevent", firstevent);
 		req.setAttribute("addEventErrorMsg", addEventErrorMsg);
+		req.setAttribute("delEventError", delEventErrorMsg);
 		//Set session attribute for the ongoing and upcoming events
 		if(ongoing.size() != 0) {
 			session.setAttribute("ongoing", ongoing);
 		}
 		session.setAttribute("upcoming", nextup);
-		
-				
 		req.getRequestDispatcher("/_view/schedule.jsp").forward(req, resp);
 	}
 }

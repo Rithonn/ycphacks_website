@@ -168,7 +168,7 @@
 			     </table>
                 <div class="form_button">
 			     <button type="submit" class="btn btn-success btn-block" value="" name="delEventButton" onclick="changeDelEventButton()">Delete Event</button>
-				<span></span>
+				<span class="adderror">${delEventError}</span>
                 </div>
             </form>
         </div>
@@ -205,9 +205,6 @@
 					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/> </td>
 				    </tr>
                     <tr class="form_element">
-					    <td><input class='form-control' type="text" name="addEventDuration"  value="${addEventDuration}" placeholder="Enter duration (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
-				    </tr>
-                    <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="AM">
                                 <label class="form-check-label" for="inlineRadio1">AM</label>
@@ -218,6 +215,10 @@
                             </div>
                         </td>
 				    </tr>
+                    <tr class="form_element">
+					    <td><input class='form-control' type="text" name="addEventDuration"  value="${addEventDuration}" placeholder="Enter duration (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
+				    </tr>
+                    
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="visibility" id="inlineRadio3" value="Visible">
