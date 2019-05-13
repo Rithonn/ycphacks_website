@@ -110,8 +110,10 @@
 							<!-- This is where all the buttons will go -->
 							<div class="search-users-button">
 								<form class="form-inline md-form mr-auto mb-4">
-									<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-									<button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+									<input class="form-control mr-sm-2" type="text" placeholder="Search Email" aria-label="Search" value="${userEmailForSearch}">
+									
+									<button class="btn btn-success btn-rounded btn-sm my-0" 
+											value ="" type="submit" onclick="findUserByEmailButton()" name="userSearchOnAdmin">Search</button>
 								</form>
 							</div>
 							<div>
@@ -130,13 +132,13 @@
 									</div>
 									
 									<div class="form-group">
-										<button class="btn btn-success btn rounded btn-sm">Accept</button>
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userAcceptButton()" name="userAccept">Accept</button>
 									</div>
 									<div class="form-group">
-										<button class="btn btn-success btn rounded btn-sm">Deny</button>
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userDenyButton()" name="userDeny">Deny</button>
 									</div>
 									<div class="form-group">
-										<button class="btn btn-success btn rounded btn-sm">Delete</button>
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userDeleteButton()" name="userDelete">Delete</button>
 									</div>
 									
 								</form>
@@ -192,6 +194,19 @@
 	function changeAdminEmailPageButton(){
         document.getElementsByName("adminEmailPageButton")[0].setAttribute("value", "true");
 	}
+	
+	function findUserByEmailButton(){
+		document.getElementsByName("userSearchOnAdmin")[0].setAttribute("value", "true");
+	}
+	function userAcceptButton(){
+		document.getElementsByName("userAccept")[0].setAttribute("value", "true");
+	}
+	function userDenyButton(){
+		document.getElementsByName("userDeny")[0].setAttribute("value", "true");
+	}
+	function userDeleteButton(){
+		document.getElementsByName("userDelete")[0].setAttribute("value", "true");
+	}	
 	</script>
 	</body>
 </html>

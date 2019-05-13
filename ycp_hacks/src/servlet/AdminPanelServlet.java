@@ -66,7 +66,7 @@ public class AdminPanelServlet extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/adminEmail");
 			}
 			
-			
+			req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 			
 	}
 }
