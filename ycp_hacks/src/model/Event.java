@@ -101,14 +101,14 @@ public class Event{
 	//0 for event has passed, 1 for ongoing, 2 for upcoming
 	public int checkStatus() {
 		//LDT for now
-		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime now = LocalDateTime.now(); 
 		//Creating a LDT for the end of the event
 		long longdate = this.dateToMillis() + this.eventDuration;
 		ZonedDateTime zdt = ZonedDateTime.ofInstant(Instant.ofEpochSecond(longdate), ZoneId.systemDefault());
 		LocalDateTime eventend = zdt.toLocalDateTime();
 		
 		//If now is after the end of the event it has passed
-		if(now.isAfter(eventend)) {
+		if(now.isAfter(eventend)) { 
 			return 0;
 		//If now is after the start of the event, and before the end of the event it is in progress
 		}else if(now.isAfter(this.date) && now.isBefore(eventend)){

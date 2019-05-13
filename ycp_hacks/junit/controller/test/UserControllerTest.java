@@ -21,7 +21,7 @@ public class UserControllerTest {
 	@Before
 	public void setUp() {
 		model = new User();
-		model.setEmail("tjefferson@ycp.edu");
+		model.setEmail("test@ycp.edu");
 		model.setFirstName("Timothy");
 		model.setLastName("Jefferson");
 		model.setAge(21);
@@ -31,7 +31,7 @@ public class UserControllerTest {
 		model.setUniversity("Duke");
 		
 		model_toadd = new User();
-		model_toadd.setEmail("cbrand6@ycp.edu");
+		model_toadd.setEmail("test@ycp.edu");
 		model_toadd.setFirstName("Collin");
 		model_toadd.setLastName("Brandt");
 		model_toadd.setAge(15);
@@ -56,9 +56,9 @@ public class UserControllerTest {
 	
 	@Test
 	public void testChangeEmail() throws Exception{
-		assertEquals("tjefferson@ycp.edu", model.getEmail());
-		controller.changeEmail("cbrandt6@ycp.edu");
-		assertEquals("cbrandt6@ycp.edu", model.getEmail());
+		assertEquals("test@ycp.edu", model.getEmail());
+		controller.changeEmail("test2@ycp.edu");
+		assertEquals("test2@ycp.edu", model.getEmail());
 	}
 	
 	@Test

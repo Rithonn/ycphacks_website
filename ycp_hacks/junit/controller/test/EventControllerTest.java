@@ -12,7 +12,7 @@ import controller.EventController;
 import model.Event;
 import persist.*;
 
-public class EventControllerTest{
+public class EventControllerTest{ 
 	private Event model;
 	private EventController controller;
 	
@@ -63,4 +63,28 @@ public class EventControllerTest{
 		assertEquals("Check-in to the Hackathon", model.getDescription());
 	}
 	
+	@Test
+	public void testChangeIsVisible() {
+		controller.changeIsVisible(true);
+		assertTrue(model.getIsVisible());
+		controller.changeIsVisible(false);
+		assertFalse(model.getIsVisible());
+		
+	}
+	
+	@Test
+	public void testChangeEventId() {
+		controller.changeEventId(3);
+		assertEquals(model.getEventId(),3);
+		controller.changeEventId(6);
+		assertEquals(model.getEventId(), 6);
+	}
+	
+	@Test
+	public void testChangeDuration() {
+		controller.changeDuration(3456);
+		assertEquals(3456, model.getEventDuration());
+		controller.changeDuration(55555);
+		assertEquals(55555, model.getEventDuration());
+	}
 }
