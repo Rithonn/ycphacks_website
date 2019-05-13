@@ -168,4 +168,24 @@ public class EmailSender {
 				System.out.println(e);
 			}	
 	}
+	
+	public void sendMadeAdminEmail() {
+		session = Session.getInstance(prop,
+	            new javax.mail.Authenticator() {
+	                protected PasswordAuthentication getPasswordAuthentication() {
+	                    return new PasswordAuthentication(from, passwordFrom);
+	                }
+	            });
+			
+			try {
+				MimeMessage message_accRegistered = new MimeMessage(session);
+				message_accRegistered.setFrom(new InternetAddress(from));
+				message_accRegistered.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+				message_accRegistered.setSubject("***Account status update***");
+				message_accRegistered.setText("Your account under: " + emailsReceiving.get(0) + ", now has admin rights, please don't abuse them! Log in to see what it's all about.");
+				Transport.send(message_accRegistered);
+			}catch(MessagingException e) {
+				System.out.println(e);
+			}
+	}
 }
