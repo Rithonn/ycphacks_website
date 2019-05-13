@@ -65,6 +65,8 @@ public class AdminPanelServlet extends HttpServlet {
 			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
+			UserController controller = new UserController();
+			
 			User newUser = new User();
 			
 			if(req.getParameter("adminEmailPageButton") != null) {
@@ -85,7 +87,7 @@ public class AdminPanelServlet extends HttpServlet {
 				req.setAttribute("listOfUsers", userReturned);	
 			}
 			if(req.getParameter("userAccept") != null) {
-				System.out.println(req.getParameter("userIdForReg"));
+			
 				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
 				newUser = db.userExistsFromID(newUser);
 				
@@ -99,15 +101,24 @@ public class AdminPanelServlet extends HttpServlet {
 				req.setAttribute("listOfUsers", userReturned);
 				
 			}
-			if(req.getParameter("userDeny") != null) {
-				System.out.println(req.getParameter("userIdForReg"));	
+			//This denys the user from the db
+			if(req.getParameter("userDeny") != null) {				
+				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
+				newUser = db.userExistsFromID(newUser);
+				
+				//Change reg to true
+				newUser.setIsReg(false);
+				//Call the update function
+				db.updateUser(newUser);
 				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
 				req.setAttribute("listOfUsers", userReturned);
 			}
+			//This delete the user from the db
 			if(req.getParameter("userDelete") != null) {
-				System.out.println(req.getParameter("userIdForReg"));
+				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
+				db.deleteUser(db.userExistsFromID(newUser));
 				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
