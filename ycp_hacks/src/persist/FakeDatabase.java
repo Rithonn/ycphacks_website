@@ -170,4 +170,9 @@ public class FakeDatabase implements IDatabase {
 	public boolean addSubmission(Submission submission) {
 		return false;
 	}
+	
+	@Override
+	public List<Submission> getAllSubmissions(){
+		return null;
+	}
 }
