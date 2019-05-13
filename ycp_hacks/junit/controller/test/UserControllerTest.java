@@ -132,7 +132,24 @@ public class UserControllerTest {
 		
 		
 	}
+	@Test
+	public void testCheckCredentialsByIDDerbyDB() {
+		User derbyExUser = new User();
+		derbyExUser.setEmail("example@ycp.edu");
 	
+		UserController derbyExUserController = new UserController();
+		derbyExUserController.setModel(derbyExUser);
+		
+		//Check the right email was returned for the user
+		User shouldExist = derbyExUserController.userExists(derbyDB);
+		if(shouldExist.getEmail().equals(derbyExUser.getEmail())){
+			assertTrue(true);
+		}else {
+			assertTrue(false);
+		}
+		
+		
+	}
 	@Test
 	public void testAddUserDerbyDB() {
 		
