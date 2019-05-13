@@ -128,7 +128,6 @@ private static final long serialVersionUID = 1L;
 		if(req.getParameter("addEventButton") != null) {
 			Event addEvent = null;
 			EventController eventcont = new EventController();
-			eventcont.setModel(addEvent);
 			int eventYear = 0;
 			int eventMonth = 0;
 			int eventDay = 0;
@@ -147,6 +146,7 @@ private static final long serialVersionUID = 1L;
 						System.out.println("I am running through the loop");
 						if(event.getEventId() == Integer.parseInt(req.getParameter("modifyEventID"))){
 							addEvent = event;
+							eventcont.setModel(addEvent);
 							System.out.println("Event was found based on ID");
 							modify = true;
 							break;
@@ -165,22 +165,23 @@ private static final long serialVersionUID = 1L;
 				}
 				
 			//If an event ID is not specified, create a new event to be added to the db
-			}else if (req.getParameter("modifyEventID").isEmpty() == true){
+			}else if (req.getParameter("modifyEventID").isEmpty()){
 				addEvent = new Event();
+				eventcont.setModel(addEvent);
 				System.out.println("There is no modifying going on here");
 				modify = false;
 			}
 			//Only enter the name if the user enters one
 			if(!req.getParameter("addEventName").isEmpty()) {
-				addEvent.setName(req.getParameter("addEventName"));
+				eventcont.changeName((req.getParameter("addEventName")));
 			}
 			//Only update the location if the user enters one
 			if(!req.getParameter("addEventLocation").isEmpty()) {
-				addEvent.setLocation(req.getParameter("addEventLocation"));
+				eventcont.changeLocation(req.getParameter("addEventLocation"));
 			}
 			//Only update the description if the user enters one
 			if(!req.getParameter("addEventDescription").isEmpty()) {
-				addEvent.setDescription(req.getParameter("addEventDescription"));
+				eventcont.changeDesc(req.getParameter("addEventDescription"));
 			}
 			//Parse out the year, month and day if they are not null
 			//Only update the year if it is not null
@@ -243,7 +244,7 @@ private static final long serialVersionUID = 1L;
 				}
 				long totalseconds = ((hours * 60) + minutes) * 60;
 				if(addEvent != null) {
-					addEvent.setEventDuration(totalseconds);
+					eventcont.changeDuration(totalseconds);
 				}
 				System.out.println("Event duration in seconds: " + totalseconds);
 			}
@@ -298,9 +299,9 @@ private static final long serialVersionUID = 1L;
 				String visibility = req.getParameter("visibility");
 				//System.out.println("Vis = " + visibility);
 				if("Visible".equals(visibility)) {
-					addEvent.setIsVisible(true);
+					eventcont.changeIsVisible(true);
 				}else if("Not Visible".equals(visibility)){
-					addEvent.setIsVisible(false);
+					eventcont.changeIsVisible(false);
 				}
 			}
 			/*If the user has opted to modify an event, but has not altered the month, day, and year fields
@@ -329,7 +330,7 @@ private static final long serialVersionUID = 1L;
 			}
 			if(eventYear != 0 && eventMonth != 0 && eventDay != 0) {
 				date = LocalDateTime.of(eventYear, eventMonth, eventDay, hours, minutes);
-				addEvent.setDate(date);
+				eventcont.changeDate(date);
 			}
 			//Add the date to the db if it is not being modified
 			if(!modify && addEventErrorMsg == null) {

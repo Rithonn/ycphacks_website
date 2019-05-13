@@ -43,4 +43,7 @@ public class EventController {
 		event.setEventId(i);
 	}
 	
+	public void changeDuration(long i) {
+		event.setEventDuration(i);
+	}
 }
