@@ -146,9 +146,9 @@
 								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post">
 									<input type="text" placeholder="UserID" class="rounded" value="${userIdAccess}"/>
 									<div style="margin-bottom: 3px;">
-									<input type = "text" placeholder = "accessID" class="rounded">
+									<input type = "text" placeholder = "accessID" class="rounded" value="${userNumberForAccess}">
 									</div>
-									<button class="btn btn-success btn rounded btn-sm">Submit</button>
+									<button class="btn btn-success btn rounded btn-sm" value="" onlick="userChangeAccessID()" name="userIDAccessChange">Submit</button>
 								</form>
 
 							</div>
@@ -206,7 +206,10 @@
 	}
 	function userDeleteButton(){
 		document.getElementsByName("userDelete")[0].setAttribute("value", "true");
-	}	
+	}
+	function userChangeAccessID(){
+		document.getElementsByName("userIDAccessChange")[0].setAttribute("value", "true");
+	}
 	</script>
 	</body>
 </html>
