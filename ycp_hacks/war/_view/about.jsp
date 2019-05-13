@@ -123,9 +123,11 @@
                     <div class ="submissionsSection aboutInfo">
                     	<h2>The Experience</h2>
                     	
-                    	<h3>This person said: </h3>
-                    	<p>Wow I love this even so much! It was so nice i loved it and lvoed it and loved it and loved it
-                    	and loved it and loved it and loved it.</p>
+                    	<c:forEach items="${allSubmissions}" var="submission">
+								<h3>${submission.userFirstName} said: </h3>
+                    			<p>${submission.message}</p>
+						</c:forEach>
+                    	
                     	
                     	<c:if test="${! empty currentUser}">
 	                    	<button type="button" class="btn btn-success btn-block" value="" name="addSubmission" onclick="test()">
@@ -135,8 +137,8 @@
                  
                     	<div class="enterSubmission">
                     		<h4>**Your first name will be displayed if your experience gets approved!**</h4>
-                    		<textarea placeholder="Enter your experience text here:" name="experienceToAdd"></textarea>
                     		<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/about" method="post">
+                    			<textarea placeholder="Enter your experience text here:" name="experienceToAdd"></textarea>
 	                    		<button type="submit" class="btn btn-success btn-block" value="" name="addSubmission" onclick="test()">
 										Submit!
 								</button>

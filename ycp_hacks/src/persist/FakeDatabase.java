@@ -7,6 +7,7 @@ import java.util.List;
 
 import model.Event;
 import model.Schedule;
+import model.Submission;
 import model.User;
 
 public class FakeDatabase implements IDatabase {
@@ -163,5 +164,15 @@ public class FakeDatabase implements IDatabase {
 	public boolean updateEvent(Event event) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean addSubmission(Submission submission) {
+		return false;
+	}
+	
+	@Override
+	public List<Submission> getAllSubmissions(){
+		return null;
 	}
 }

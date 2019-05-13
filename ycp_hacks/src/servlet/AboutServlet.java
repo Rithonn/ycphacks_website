@@ -11,8 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import controller.ScheduleController;
+import controller.SubmissionController;
 import model.Event;
 import model.Schedule;
+import model.Submission;
+import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
 import persist.IDatabase;
@@ -66,6 +69,10 @@ private static final long serialVersionUID = 1L;
 			session.setAttribute("ongoing", ongoing);
 		}
 		session.setAttribute("upcoming", nextup);
+		
+		List<Submission> allSubmissions = db.getAllSubmissions();
+		req.setAttribute("allSubmissions", allSubmissions);
+		
 		req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
 	}
 	
@@ -74,6 +81,25 @@ private static final long serialVersionUID = 1L;
 			throws ServletException, IOException {
 		
 		System.out.println("About Servlet: doPost");
+		session = req.getSession();
+		
+		
+		System.out.println(req.getParameter("experienceToAdd"));
+		
+		User currentUser = (User) session.getAttribute("currentUser");
+		Submission submission = new Submission();
+		submission.setAccepted(false);
+		submission.setMessage(req.getParameter("experienceToAdd"));
+		submission.setUserFirstName(currentUser.getFirstName());
+		submission.setUserEmail(currentUser.getEmail());
+		
+		SubmissionController controller = new SubmissionController();
+		controller.setModel(submission);
+		
+		controller.addSubmission(db);
+		
+		List<Submission> allSubmissions = db.getAllSubmissions();
+		req.setAttribute("allSubmissions", allSubmissions);
 		req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
 	}
 }

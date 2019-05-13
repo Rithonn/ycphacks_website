@@ -6,6 +6,7 @@ import java.util.List;
 import model.User;
 import model.Event;
 import model.Schedule;
+import model.Submission;
 
 public interface IDatabase {
 	
@@ -71,7 +72,21 @@ public interface IDatabase {
 	/**Updates an event from the schedule table based off the event object's fields
 	 * 
 	 * @param event Event object to update, event's fields are obtained from jsp's form
-	 * @return
+	 * @return returns true if all went well
 	 */
 	public boolean updateEvent(Event event);
+	
+	/**Adds a submission object to the submissions table in database
+	 * 
+	 * @param submission Submission to be added
+	 * @return returns true if all went well
+	 */
+	public boolean addSubmission(Submission submission);
+	
+	/**Obtains all submissions that are in the submissions table of the database
+	 * 
+	 * @return A list of submissions from database
+	 */
+	public List<Submission> getAllSubmissions();
+
 }
