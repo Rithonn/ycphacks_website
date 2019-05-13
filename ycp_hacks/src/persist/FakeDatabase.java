@@ -175,4 +175,10 @@ public class FakeDatabase implements IDatabase {
 	public List<Submission> getAllSubmissions(){
 		return null;
 	}
+
+	@Override
+	public User userExistsFromID(User newUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

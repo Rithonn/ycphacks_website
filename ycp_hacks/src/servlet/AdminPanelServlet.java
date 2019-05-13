@@ -65,19 +65,15 @@ public class AdminPanelServlet extends HttpServlet {
 			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
-			
-			
+			User newUser = new User();
 			
 			if(req.getParameter("adminEmailPageButton") != null) {
 				resp.sendRedirect(req.getContextPath() + "/adminEmail");
 			}
 			
-			if(req.getParameter("userSearchOnAdmin") != null) {
-				System.out.println(req.getParameter("userEmailForSearch"));
-				
-				
+			//This will search for one specific user to output back
+			if(req.getParameter("userSearchOnAdmin") != null) {				
 				//Setup a new user and add it to a list
-				User newUser = new User();
 				
 				//Get account from email user specified from db
 				newUser.setEmail(req.getParameter("userEmailForSearch"));
@@ -86,21 +82,42 @@ public class AdminPanelServlet extends HttpServlet {
 				List<User> userReturned = new ArrayList<User>();
 				userReturned.add(newUser);
 				
-				req.setAttribute("listOfUsers", userReturned);
-				
-				
+				req.setAttribute("listOfUsers", userReturned);	
 			}
 			if(req.getParameter("userAccept") != null) {
-				System.out.println(req.getParameter("userIdForReg"));				
+				System.out.println(req.getParameter("userIdForReg"));
+				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
+				newUser = db.userExistsFromID(newUser);
+				
+				//Change reg to true
+				newUser.setIsReg(true);
+				//Call the update function
+				db.updateUser(newUser);
+				
+				//Set the list back to what it was
+				List<User> userReturned = db.getAllUsers();
+				req.setAttribute("listOfUsers", userReturned);
+				
 			}
 			if(req.getParameter("userDeny") != null) {
 				System.out.println(req.getParameter("userIdForReg"));	
+				
+				//Set the list back to what it was
+				List<User> userReturned = db.getAllUsers();
+				req.setAttribute("listOfUsers", userReturned);
 			}
 			if(req.getParameter("userDelete") != null) {
-				System.out.println(req.getParameter("userIdForReg"));				
+				System.out.println(req.getParameter("userIdForReg"));
+				
+				//Set the list back to what it was
+				List<User> userReturned = db.getAllUsers();
+				req.setAttribute("listOfUsers", userReturned);
 			}
 			if(req.getParameter("userIDAccessChange") != null) {
 				
+				//Set the list back to what it was
+				List<User> userReturned = db.getAllUsers();
+				req.setAttribute("listOfUsers", userReturned);
 			}
 
 			//This is to store the statistics

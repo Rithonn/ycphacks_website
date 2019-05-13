@@ -89,4 +89,12 @@ public interface IDatabase {
 	 */
 	public List<Submission> getAllSubmissions();
 
+	/**Checks database with a model of user
+	 * it is looking for. Checks off of the model user's id.
+	 * If found it will load the rest of the user's information
+	 *@param user This is the user to check the database for
+	 *@return A User object, This is fully loaded user found from the database
+	 */
+	public User userExistsFromID(User newUser);
+
 }

@@ -687,6 +687,41 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+
+	@Override
+	public User userExistsFromID(User newUser) {
+		return executeUserTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users "
+						+	" where users.user_id = ?"			
+					);
+					
+					stmt.setInt(1, newUser.getUserID());
+					
+					resultSet = stmt.executeQuery();				
+					
+					User found = new User();
+					while(resultSet.next()) {
+						//Return the user if found
+						loadUser(newUser, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						found = newUser;
+					}
+					
+					return found;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
+	}
 		
 	
 	
