@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import persist.DBUtil;
 import model.Event;
 import model.Schedule;
+import model.Submission;
 //import persist.DerbyDatabase.Transaction;
 import model.User;
 
@@ -110,6 +111,14 @@ public class DerbyDatabase implements IDatabase {
 		event.setIsVisible(resultset.getBoolean(index++));
 		event.setEventDuration(resultset.getLong(index++));
 	}
+	
+	private void loadSubmission(Submission submission, ResultSet resultset, int index) throws SQLException{
+		submission.setSubmission_id(resultset.getInt(index++));
+		submission.setUserFirstName(resultset.getString(index++));
+		submission.setUserEmail(resultset.getString(index++));
+		submission.setMessage(resultset.getString(index++));
+		submission.setAccepted(Boolean.getBoolean(resultset.getString(index++)));
+	}
 
 	/**
 	 * Builds all tables for database, with given
@@ -160,19 +169,13 @@ public class DerbyDatabase implements IDatabase {
 						"create table submissions (" +
 						" submission_id integer primary key " +
 						" 	generated always as identity (start with 1, increment by 1), "+
-						" message varchar(140) " +
+						" userFirstName varchar(50)," +
+						" userEmail varChar(50)," +
+						" message varchar(140), " +
+						" isAccepted varchar(5)" +
 						")"
 						);
 					stmt3.executeUpdate();
-					
-					//need to make new object with a user(maybe just names/user_id) and their submission message
-					stmt4 = conn.prepareStatement(
-						"create table userSubmissions (" +
-						" user_id integer constraint user_id references users, " +
-						" submission_id  integer constraint submission_id references submissions "+
-						")"
-						);
-					stmt4.executeUpdate();
 					
 					return true;
 				} finally {
@@ -622,5 +625,69 @@ public class DerbyDatabase implements IDatabase {
 		});
 		
 	}
+	
+	@Override
+	public boolean addSubmission(Submission submission) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							" insert into submissions(message, isAccepted, userFirstName, userEmail) values(?,?,?,?)"
+					);
+							
+					stmt.setString(1, submission.getMessage());
+					stmt.setString(2, Boolean.toString(submission.isAccepted()));
+					stmt.setString(3, submission.getUserFirstName());
+					stmt.setString(4, submission.getUserEmail());
+					
+					stmt.executeUpdate();
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+				
+				return true;
+			}
+		});
+	}
+	
+	@Override
+	public List<Submission> getAllSubmissions() {
+		return executeTransaction(new Transaction<List<Submission>>() {
+			@Override
+			public List<Submission> execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<Submission> allSubmissions = new ArrayList<Submission>();
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from submissions"
+					);
+					
+					resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()) {
+						Submission submission = new Submission();
+						
+						loadSubmission(submission, resultSet, 1);
+						
+						allSubmissions.add(submission);
+					}
+							
+					
+				}finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet);
+				}
+				
+				return allSubmissions;
+			}
+		});
+	}
 		
+	
+	
 }
