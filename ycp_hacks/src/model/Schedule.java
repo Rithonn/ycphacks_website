@@ -30,7 +30,7 @@ public class Schedule{
 	}
 	
 	public int getSize() {
-		return events.size();
+		return events.size(); 
 	}
 	
 }

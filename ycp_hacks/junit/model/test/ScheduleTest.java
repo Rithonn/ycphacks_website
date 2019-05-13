@@ -74,7 +74,7 @@ public class ScheduleTest{
 	}
 	
 	@Test
-	public void testGetSize() {
+	public void testGetSize() { 
 		assertEquals(schedule.getSize(), 0);
 		schedule.addEvent(event1);
 		assertEquals(schedule.getSize(), 1);
@@ -85,4 +85,5 @@ public class ScheduleTest{
 		schedule.addEvent(event1);
 		assertEquals(schedule.getEvent(0), event1);
 	}
+	
 }

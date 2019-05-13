@@ -11,7 +11,7 @@ import main.Main;
 public class EventController {
 	private Event event;
 	
-	public EventController() {
+	public EventController() { 
 		
 	}
 	
