@@ -21,6 +21,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 100;
 }
 
 /* Change in the navbar colors */
@@ -116,7 +117,7 @@ section.aboutSection{
         top: 25%;
         padding: 5px;
         margin-bottom: 10px;
-        z-index: -10;
+        z-index: 10;
 }
 
 .aboutInfoToYork{
@@ -129,6 +130,35 @@ section.aboutSection{
 
 .aboutInfoFAQ.aboutInfo h3{
 	text-decoration: underline;
+}
+
+.submissionsSection.aboutInfo h2{
+	text-align: center;
+}
+
+.submissionsSection.aboutInfo h4{
+	text-align: center;
+}
+
+.submissionsSection.aboutInfo button{
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	background: green;
+    color: white;
+    border: 6px;
+    border-radius: 15px;
+	cursor:pointer;
+	
+	margin:auto;
+  	display:block;
+}
+
+.enterSubmission{
+	display: none;
+}
+
+.enterSubmission textarea{
+	width: 100%;
+	height: 100px;
 }
 
 /*------Ticker------*/

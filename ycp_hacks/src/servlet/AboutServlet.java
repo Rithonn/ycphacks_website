@@ -68,4 +68,12 @@ private static final long serialVersionUID = 1L;
 		session.setAttribute("upcoming", nextup);
 		req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		System.out.println("About Servlet: doPost");
+		req.getRequestDispatcher("/_view/about.jsp").forward(req, resp);
+	}
 }

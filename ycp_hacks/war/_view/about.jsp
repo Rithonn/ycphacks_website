@@ -119,6 +119,32 @@
 						
 			                
                     </div>
+                    
+                    <div class ="submissionsSection aboutInfo">
+                    	<h2>The Experience</h2>
+                    	
+                    	<h3>This person said: </h3>
+                    	<p>Wow I love this even so much! It was so nice i loved it and lvoed it and loved it and loved it
+                    	and loved it and loved it and loved it.</p>
+                    	
+                    	<c:if test="${! empty currentUser}">
+	                    	<button type="button" class="btn btn-success btn-block" value="" name="addSubmission" onclick="test()">
+									Add your own experience!
+							</button>
+                 		</c:if>   	
+                 
+                    	<div class="enterSubmission">
+                    		<h4>**Your first name will be displayed if your experience gets approved!**</h4>
+                    		<textarea placeholder="Enter your experience text here:" name="experienceToAdd"></textarea>
+                    		<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/about" method="post">
+	                    		<button type="submit" class="btn btn-success btn-block" value="" name="addSubmission" onclick="test()">
+										Submit!
+								</button>
+							</form>
+                    	</div>
+                    	
+                    </div>
+                    
                      <div class="aboutInfo">
                         <p>Video's and pictures to be put in later</p>
                         
@@ -133,6 +159,8 @@
 			                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 			                
                     </div>
+                    
+                    
 
         </section>
     </div>
@@ -149,6 +177,12 @@
             </marquee>
         </div>
 		
-		
+	<script>
+	function test(){
+		var x = document.getElementsByClassName("enterSubmission")[0];
+		x.style.display = "block";
+	}
+	</script>
+	
 	</body>
 </html>
