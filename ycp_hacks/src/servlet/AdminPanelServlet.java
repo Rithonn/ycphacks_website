@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import controller.UserController;
+import model.EmailSender;
 import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -95,6 +96,12 @@ public class AdminPanelServlet extends HttpServlet {
 				newUser.setIsReg(true);
 				//Call the update function
 				db.updateUser(newUser);
+				
+				ArrayList<User> accountsReceiving = new ArrayList<User>();
+				accountsReceiving.add(newUser);
+				EmailSender emailSender = new EmailSender();
+				emailSender.loadEmailsFromUserList(accountsReceiving);
+				emailSender.sendRegisteredEmail();
 				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
