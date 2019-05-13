@@ -125,6 +125,8 @@ public class AdminPanelServlet extends HttpServlet {
 				req.setAttribute("listOfUsers", userReturned);
 			}
 			if(req.getParameter("userIDAccessChange") != null) {
+				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
+				
 				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
