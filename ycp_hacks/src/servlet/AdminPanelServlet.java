@@ -66,6 +66,21 @@ public class AdminPanelServlet extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/adminEmail");
 			}
 			
+			if(req.getParameter("userSearchOnAdmin") != null) {
+				System.out.println(req.getParameter("userEmailForSearch"));
+			}
+			if(req.getParameter("userAccept") != null) {
+				
+			}
+			if(req.getParameter("userDeny") != null) {
+				
+			}
+			if(req.getParameter("userDelete") != null) {
+				
+			}
+			if(req.getParameter("userIDAccessChange") != null) {
+				
+			}
 			req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 			
 	}
