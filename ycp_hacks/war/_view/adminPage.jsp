@@ -81,23 +81,31 @@
 						java.lang.Integer numRegistered=0;
 						java.lang.Integer numSubmitted=0;
 						%>
-						<c:forEach items="${allUsers}" var="user">
-							<c:if test="${user.isRegToString == true}">
-								<%numRegistered = numRegistered + 1; %>
-							</c:if>
-							
-							<c:if test="${user.isRegToString == false}">
-								<%numSubmitted = numSubmitted + 1; %>
-							</c:if>
-						</c:forEach>	
 						
-						<li>Verified Users: <% out.print(numRegistered);%></li>
-						<li>Submitted Users: <% out.print(numSubmitted);%></li>
+							<c:forEach items="${allUsers}" var="user">
+								<c:if test="${user.isRegToString == true}">
+									<%numRegistered = numRegistered + 1; %>
+								</c:if>
+								
+								<c:if test="${user.isRegToString == false}">
+									<%numSubmitted = numSubmitted + 1; %>
+								</c:if>
+							</c:forEach>
+						<%
+				            session.setAttribute("numRegistered", numRegistered);
+				            session.setAttribute("numSubmitted", numSubmitted);
+			        	%>	
+
+						<li>Verified Users: <% out.print((session.getAttribute("numRegistered")));%></li>
+						<li>Submitted Users: <% out.print((session.getAttribute("numSubmitted")));%></li>
 						<div class="stats-br">
 							<br>
 						</div>
 						<li>Confirmed: </li>
 						<li>Checked In: </li>
+						
+						
+						
 					</ul>
 				</div>
 			</div>
@@ -110,7 +118,7 @@
 							<!-- This is where all the buttons will go -->
 							<div class="search-users-button">
 								<form class="form-inline md-form mr-auto mb-4">
-									<input class="form-control mr-sm-2" type="text" placeholder="Search Email" aria-label="Search" value="${userEmailForSearch}">
+									<input class="form-control mr-sm-2" type="text" placeholder="Search Email" aria-label="Search" name="userEmailForSearch">
 									
 									<button class="btn btn-success btn-rounded btn-sm my-0" 
 											value ="" type="submit" onclick="findUserByEmailButton()" name="userSearchOnAdmin">Search</button>
@@ -122,10 +130,10 @@
 							<div class="admin-controls">
 								<h5>Admin Settings:</h5>
 								<!-- Accept, Deny, Delete -->
-								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post" style="margin-bottom: 3px;">
+								<form  method="post" style="margin-bottom: 3px;">
 									
 									<div class="form-group">
-										<input type="text" placeholder="UserID" class="rounded" value ="${userIdForReg}"/>
+										<input type="text" placeholder="UserID" class="rounded" name ="userIdForReg"/>
 									</div>
 									
 									<div style="margin-bottom: 3px;">
