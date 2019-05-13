@@ -151,12 +151,12 @@
 									
 								</form>
 								
-								<form action="${pageContext.servletContext.contextPath}/adminPage" method="post">
-									<input type="text" placeholder="UserID" class="rounded" value="${userIdAccess}"/>
+								<form method="post">
+									<input type="text" placeholder="UserID" class="rounded" name="userIdAccess"/>
 									<div style="margin-bottom: 3px;">
-									<input type = "text" placeholder = "accessID" class="rounded" value="${userNumberForAccess}">
+									<input type = "text" placeholder = "accessID" class="rounded" name="userNumberForAccess">
 									</div>
-									<button class="btn btn-success btn rounded btn-sm" value="" onlick="userChangeAccessID()" name="userIDAccessChange">Submit</button>
+									<button class="btn btn-success btn rounded btn-sm" value="" onclick="userChangeAccessID()" name="userIDAccessChange">Submit</button>
 								</form>
 
 							</div>

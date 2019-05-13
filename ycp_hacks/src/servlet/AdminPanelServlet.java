@@ -66,8 +66,6 @@ public class AdminPanelServlet extends HttpServlet {
 			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
 			User user = (User) session.getAttribute("currentUser");
-			UserController controller = new UserController();
-			
 			User newUser = new User();
 			
 			if(req.getParameter("adminEmailPageButton") != null) {
@@ -132,8 +130,13 @@ public class AdminPanelServlet extends HttpServlet {
 				req.setAttribute("listOfUsers", userReturned);
 			}
 			if(req.getParameter("userIDAccessChange") != null) {
-				newUser.setUserID(Integer.parseInt(req.getParameter("userIdForReg")));
+				newUser.setUserID(Integer.parseInt(req.getParameter("userIdAccess")));
+				//Check if it exists dumbass
+				newUser = db.userExistsFromID(newUser);
+				System.out.println(req.getParameter("userNumberForAccess"));
+				newUser.setAccessID(Integer.parseInt(req.getParameter("userNumberForAccess")));
 				
+				db.updateUser(newUser);
 				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
