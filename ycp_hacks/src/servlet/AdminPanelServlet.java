@@ -60,6 +60,7 @@ public class AdminPanelServlet extends HttpServlet {
 			throws ServletException, IOException {
 			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
+
 			User user = (User) session.getAttribute("currentUser");
 			
 			if(req.getParameter("adminEmailPageButton") != null) {
@@ -68,19 +69,36 @@ public class AdminPanelServlet extends HttpServlet {
 			
 			if(req.getParameter("userSearchOnAdmin") != null) {
 				System.out.println(req.getParameter("userEmailForSearch"));
+				
+				
+				//Setup a new user and add it to a list
+				User newUser = new User();
+				
+				//Get account from email user specified from db
+				newUser.setEmail(req.getParameter("userEmailForSearch"));
+				newUser = db.userExists(newUser);
+				
+				List<User> userReturned = new ArrayList<User>();
+				userReturned.add(newUser);
+				
+				req.setAttribute("allUsers", userReturned);
+				
+				
 			}
 			if(req.getParameter("userAccept") != null) {
-				
+				System.out.println(req.getParameter("userIdForReg"));				
 			}
 			if(req.getParameter("userDeny") != null) {
-				
+				System.out.println(req.getParameter("userIdForReg"));	
 			}
 			if(req.getParameter("userDelete") != null) {
-				
+				System.out.println(req.getParameter("userIdForReg"));				
 			}
 			if(req.getParameter("userIDAccessChange") != null) {
 				
 			}
+
+			
 			req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 			
 	}
