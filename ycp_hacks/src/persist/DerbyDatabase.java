@@ -550,7 +550,6 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
-
 	
 	@Override
 	public List<User> getAllUsers(){
@@ -591,7 +590,6 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 
-	
 	@Override
 	public boolean updateEvent(Event event) {
 		return executeTransaction(new Transaction<Boolean>() {
