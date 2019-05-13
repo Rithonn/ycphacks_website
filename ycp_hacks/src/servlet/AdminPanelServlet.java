@@ -50,7 +50,11 @@ public class AdminPanelServlet extends HttpServlet {
 		}
 		
 		List<User> allUsers = db.getAllUsers();
+		//This is to set the statistics 
 		req.setAttribute("allUsers", allUsers);
+		
+		//This is to set the list of all users
+		req.setAttribute("listOfUsers", allUsers);
 		
 		req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 	}
@@ -60,8 +64,9 @@ public class AdminPanelServlet extends HttpServlet {
 			throws ServletException, IOException {
 			System.out.println("Admin Panel Servlet: doPost");
 			session = req.getSession();
-
 			User user = (User) session.getAttribute("currentUser");
+			
+			
 			
 			if(req.getParameter("adminEmailPageButton") != null) {
 				resp.sendRedirect(req.getContextPath() + "/adminEmail");
@@ -81,7 +86,7 @@ public class AdminPanelServlet extends HttpServlet {
 				List<User> userReturned = new ArrayList<User>();
 				userReturned.add(newUser);
 				
-				req.setAttribute("allUsers", userReturned);
+				req.setAttribute("listOfUsers", userReturned);
 				
 				
 			}
@@ -98,7 +103,12 @@ public class AdminPanelServlet extends HttpServlet {
 				
 			}
 
+			//This is to store the statistics
+			List<User> allUsers = db.getAllUsers();
+			//Set the stats here
+			req.setAttribute("allUsers", allUsers);
 			
+			//Resubmit it bro
 			req.getRequestDispatcher("/_view/adminPage.jsp").forward(req, resp);
 			
 	}

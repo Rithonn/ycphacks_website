@@ -174,7 +174,7 @@
 										<th scope="col">Registered</th>
 										<th scope="col">Access ID</th>
 									</tr>
-									<c:forEach items="${allUsers}" var="user">	
+									<c:forEach items="${listOfUsers}" var="user">	
 										<tr>
 											<td>${user.userID}</td>
 											<td>${user.firstName}</td>
