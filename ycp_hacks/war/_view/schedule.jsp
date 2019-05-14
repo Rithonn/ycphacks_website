@@ -248,7 +248,7 @@
                     </c:forEach>
                 </c:if>
                 <span> || Coming up: </span>
-                ${upcoming.name}
+                ${upcoming.name} || See Schedule for more information || 
             </marquee>
         </div>
         <script>

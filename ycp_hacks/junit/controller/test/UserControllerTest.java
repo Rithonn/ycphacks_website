@@ -128,7 +128,7 @@ public class UserControllerTest {
 			assertTrue(true);
 		}else {
 			assertTrue(false);
-		}
+		} 
 		
 		
 	}

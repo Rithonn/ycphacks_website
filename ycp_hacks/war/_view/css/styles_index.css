@@ -171,6 +171,7 @@ section.firstSection {
 .sponsor{
     width: 80%;
     margin: auto;
+    margin-bottom: 60px;
 }
 
 .sponsor img{
