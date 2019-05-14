@@ -138,6 +138,12 @@ public class AdminPanelServlet extends HttpServlet {
 				
 				db.updateUser(newUser);
 				
+				ArrayList<User> accountsReceiving = new ArrayList<User>();
+				accountsReceiving.add(newUser);
+				EmailSender emailSender = new EmailSender();
+				emailSender.loadEmailsFromUserList(accountsReceiving);
+				emailSender.sendMadeAdminEmail();
+				
 				//Set the list back to what it was
 				List<User> userReturned = db.getAllUsers();
 				req.setAttribute("listOfUsers", userReturned);
