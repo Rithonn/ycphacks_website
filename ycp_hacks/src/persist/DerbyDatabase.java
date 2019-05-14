@@ -471,7 +471,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"update users "
-							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
+							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?, accessID = ?"
 							+ " where user_id = ?"
 					);
 					
@@ -482,7 +482,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(5, user.getAge());
 					stmt.setString(6, user.getUniversity());
 					stmt.setString(7, Boolean.toString(user.isReg()));
-					stmt.setInt(8, user.getUserID());
+					stmt.setInt(8, user.getAccessID());
+					stmt.setInt(9, user.getUserID());
 					
 					stmt.executeUpdate();
 					

@@ -19,7 +19,7 @@ public class EmailSender {
 	public EmailSender() {
 		from = "walrussuit@gmail.com";
 		//ask tim if you don't know the password
-		passwordFrom = "11041998";
+		passwordFrom = "";
 		prop = System.getProperties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -167,5 +167,25 @@ public class EmailSender {
 			}catch(MessagingException e) {
 				System.out.println(e);
 			}	
+	}
+	
+	public void sendMadeAdminEmail() {
+		session = Session.getInstance(prop,
+	            new javax.mail.Authenticator() {
+	                protected PasswordAuthentication getPasswordAuthentication() {
+	                    return new PasswordAuthentication(from, passwordFrom);
+	                }
+	            });
+			
+			try {
+				MimeMessage message_accRegistered = new MimeMessage(session);
+				message_accRegistered.setFrom(new InternetAddress(from));
+				message_accRegistered.addRecipient(Message.RecipientType.TO, new InternetAddress(emailsReceiving.get(0)));
+				message_accRegistered.setSubject("***Account status update***");
+				message_accRegistered.setText("Your account under: " + emailsReceiving.get(0) + ", now has admin rights, please don't abuse them! Log in to see what it's all about.");
+				Transport.send(message_accRegistered);
+			}catch(MessagingException e) {
+				System.out.println(e);
+			}
 	}
 }
