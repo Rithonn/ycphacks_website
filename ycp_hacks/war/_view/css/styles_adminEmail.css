@@ -1,19 +1,15 @@
-body{
+/* Setup the sheet with 0 for everything */
+body {
     margin: 0;
     padding: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-image: url(https://i.imgur.com/scBxmx2.jpg);
-    background-repeat: no-repeat;
+    background: url(https://i.imgur.com/GVzRUCp.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover; 
-    height: 100%;
-    width: 100%;
 }
 
-/*------Navbar------*/
-.wrapper{
-    height: 100px;
-    width: 100%;
-}
 /* Nav is going to be fixed to the top */
 nav {
     color: white;
@@ -25,7 +21,8 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
-    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    z-index: 100;
 }
 
 /* Change in the navbar colors */
@@ -36,7 +33,7 @@ nav.black {
 }
 
 /* Position of the logo */
-nav .logo{
+nav .logo {
     color: white;
     padding: 20px 20px;
     height: 80px;
@@ -45,19 +42,19 @@ nav .logo{
 }
 
 /* Logo transition from font black to white */
-nav.black .logo{
+nav.black .logo {
     color: white;
 }
 
-nav ul{
+nav ul {
     list-style: none;
     float: right;
     margin: 0;
     padding: 0;
-    display: flex;   
+    display: flex;
 }
 
-nav ul li{
+nav ul li {
     list-style: none;
 }
 
@@ -67,26 +64,27 @@ nav ul li a {
     color: white;
     padding: 10px 25px;
     text-decoration: none;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     transition: .3s;
 }
 
 /* For the transition changes the font from black to white */
-nav.black ul li a{
+nav.black ul li a {
     color: white;
 }
 
 /* Make the focus none if the item is selected */
-nav ul li a:focus{
+nav ul li a:focus {
     outline: none;
 }
+
 /*TIM*/
-nav ul li a:hover{
-	text-decoration:none;
+nav ul li a:hover {
+    text-decoration: none;
 }
 
 /* This is for the button */
-nav ul li a.stationary{
+nav ul li a.stationary {
     margin: 5px;
     background: rgba(0, 0, 0, 0.7);
     color: white;
@@ -96,50 +94,71 @@ nav ul li a.stationary{
 
 
 /* This is for the button */
-nav ul li a.active{
+nav ul li a.active {
     background: green;
     color: white;
     border: 6px;
     border-radius: 15px;
 }
 
-/*------Navbar------*/
+/*--------------------------------------------------------*/
 
-
-/*------RegistrationForm------*/
-
-/* Wrapping div for whole form*/
-.form_wrap{
-    text-align: center;
-    position: relative;
-    margin: auto;
-    width: 30%;
-    height: 50%;
-    margin-top: 60px;
+.emailSection{
+	position: relative;
+	height: 700px;
+	width: 700px;
+	background-color: black;
+	top: 150px;
+	left: 30%;
+	background: rgba(0, 0, 0, 0.9);
+	border: 6px;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 20px;
+    margin-bottom: 50px;
+    z-index: 1;
 }
 
-/*Please fill out this form blurb*/
-.form_text{
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
-    border: 6px;
-    border-radius: 10px;
-    font-size: 30px;
-    justify-content: center;
-    position: relative;
+.emailSection h2{
+	color: white;
+	text-decoration: underline;
 }
 
-.form_table{
-    justify-content: center;
-    position: relative;
-    margin: auto;
+.emailSection label{
+	color: white;
 }
 
-.form_button{
-    justify-content: center;
-    position: relative;
-    margin: auto;
+textarea[name="message"]{
+	height: 300px;
+}
+
+.sendEmailSection{
+	margin: auto;
+	padding: 20px;
+	width: 300px;
+	position: center;
+}
+
+.checkboxDiv{
+	color:white;
+}
+.checkboxDiv label{
+	padding: 10px;
+}
+
+.specificUserEntries{
+	display: none;
+}
+
+p{
+	color: red;
+	font-size: 25px;
+}
+
+.success{
+	color: green;
 }
 
 
-/*------RegistrationForm------*/
+
+

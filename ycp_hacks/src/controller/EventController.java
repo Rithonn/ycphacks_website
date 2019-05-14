@@ -11,7 +11,7 @@ import main.Main;
 public class EventController {
 	private Event event;
 	
-	public EventController() {
+	public EventController() { 
 		
 	}
 	
@@ -36,11 +36,14 @@ public class EventController {
 		event.setDescription(newdesc);
 	}
 	
-	public void changeIsPassed(Boolean passed) {
-		event.setIsPassedTime(passed);
+	public void changeIsVisible(Boolean visible) {
+		event.setIsVisible(visible);
+	}
+	public void changeEventId(int i) {
+		event.setEventId(i);
 	}
 	
-	public void changeIsUpComing(Boolean upcoming) {
-		event.setIsUpComing(upcoming);
+	public void changeDuration(long i) {
+		event.setEventDuration(i);
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import model.EmailSender;
 import model.User;
 import persist.DatabaseProvider;
 import persist.DerbyDatabase;
@@ -16,8 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.*;
 //Special import for the spring framework bcrypt
 import org.springframework.security.crypto.bcrypt.*;
+
 
 public class RegistrationServlet extends HttpServlet{
 	
@@ -46,6 +49,8 @@ private static final long serialVersionUID = 1L;
 			db = DatabaseProvider.getInstance();
 			//Don't need this for a real database
 			//session.setAttribute("db", db);
+		}else {
+			db = DatabaseProvider.getInstance();
 		}
 		
 		
@@ -58,6 +63,17 @@ private static final long serialVersionUID = 1L;
 	
 		System.out.println("Registration Servlet: doPost");
 		
+		/*Refill form right away, this can be done because if the registration is successful
+		 * it redirects to /home,
+		 * if it fails it reloads /registration, and the form get refilled
+		 */
+		req.setAttribute("firstname", req.getParameter("firstname"));
+		req.setAttribute("lastname", req.getParameter("lastname"));
+		req.setAttribute("email", req.getParameter("email"));
+		req.setAttribute("email2", req.getParameter("email2"));
+		req.setAttribute("age", req.getParameter("age"));
+		req.setAttribute("uni", req.getParameter("uni"));
+
 		//create new user/controller
 		User model = new User();
 		UserController controller = new UserController();
@@ -68,8 +84,13 @@ private static final long serialVersionUID = 1L;
 		String lastName = req.getParameter("lastname");
 		
 		//validate email address with regex pattern above
+		//and that the two emails provided match
 		String email = req.getParameter("email");
-		if(!validate(email)) {
+		if(!email.equals(req.getParameter("email2"))) {
+			req.setAttribute("reg", "Emails fields did not match");
+			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
+			resp.sendRedirect(req.getContextPath() + "/registration");
+		}else if(!validate(email)){
 			req.setAttribute("reg", "Please provide a valid email address");
 			req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 			resp.sendRedirect(req.getContextPath() + "/registration");
@@ -113,7 +134,7 @@ private static final long serialVersionUID = 1L;
 			System.out.println(pw_hash);
 			model.setPassword(pw_hash);
 			
-			//TODO: Will need to make test cases to check how the hasing works then
+			model.setAccessID(0);
 			
 			
 			//add user to db, will check if email has been used already
@@ -122,11 +143,23 @@ private static final long serialVersionUID = 1L;
 			if(wasAdded) {
 				//log them in
 				session.setAttribute("currentUser", model);
+				
+				/*
+				 * Send registration email,
+				 * still make an list of accounts, even though it's just one
+				 * as emailSender has functionality to send to multiple recips
+				 */
+				ArrayList<User> accountsReceiving = new ArrayList<User>();
+				accountsReceiving.add(model);
+				EmailSender emailSender = new EmailSender();
+				emailSender.loadEmailsFromUserList(accountsReceiving);
+				emailSender.sendAccCreationEmail();
+
 				//redirect to index.jsp
-				resp.sendRedirect(req.getContextPath() + "/index");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			}else {
-				//alert user reg failed
-				req.setAttribute("reg", "Registration was unsuccessful");
+				//alert user reg failed, because email already used
+				req.setAttribute("reg", "Email already used by an account");
 				req.getRequestDispatcher("/_view/registration.jsp").forward(req, resp);
 			}
 		}else {
@@ -140,7 +173,7 @@ private static final long serialVersionUID = 1L;
 	
 	//method to validate email with the Pattern at top of file
 	public static boolean validate(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(emailStr);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.find();
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import model.Event;
 import model.Schedule;
+import model.Submission;
 import model.User;
 
 public class FakeDatabase implements IDatabase {
@@ -88,8 +89,7 @@ public class FakeDatabase implements IDatabase {
 		event1.setDescription("Check in before the event starts");
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
+		
 		
 		//Creates a second test event
 		Event event2 = new Event();
@@ -102,8 +102,7 @@ public class FakeDatabase implements IDatabase {
 		event2.setDescription("Pizza for dinner");
 		event2.setName("Free pizza");
 		event2.setDate(date2);
-		event2.setIsPassedTime(false);
-		event2.setIsUpComing(true);
+		
 		
 		Event event3 = new Event();
 		
@@ -114,8 +113,7 @@ public class FakeDatabase implements IDatabase {
 		event3.setDescription("Breakfast is served");
 		event3.setName("Breakfast");
 		event3.setDate(date3);
-		event3.setIsPassedTime(false);
-		event3.setIsUpComing(true);
+		
 		
 		//Add test stuff to proper lists
 		eventList.add(event1);
@@ -158,6 +156,28 @@ public class FakeDatabase implements IDatabase {
 
 	@Override
 	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean updateEvent(Event event) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public boolean addSubmission(Submission submission) {
+		return false;
+	}
+	
+	@Override
+	public List<Submission> getAllSubmissions(){
+		return null;
+	}
+
+	@Override
+	public User userExistsFromID(User newUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}

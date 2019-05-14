@@ -25,16 +25,14 @@ public class ScheduleTest{
 		event1.setDescription("Check in before the event starts");
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
+		
 		event2 = new Event();
 		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 20, 30);
 		event2.setLocation("Yorkview");
 		event2.setDescription("Pizza for dinner");
 		event2.setName("Free pizza");
 		event2.setDate(date2);
-		event2.setIsPassedTime(false);
-		event2.setIsUpComing(true);
+		
 	}
 	
 	@Test
@@ -55,8 +53,7 @@ public class ScheduleTest{
 		event1.setDescription("Check in before the event starts");
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
+		
 		
 		schedule.addEvent(event1);
 			
@@ -77,7 +74,7 @@ public class ScheduleTest{
 	}
 	
 	@Test
-	public void testGetSize() {
+	public void testGetSize() { 
 		assertEquals(schedule.getSize(), 0);
 		schedule.addEvent(event1);
 		assertEquals(schedule.getSize(), 1);
@@ -88,4 +85,5 @@ public class ScheduleTest{
 		schedule.addEvent(event1);
 		assertEquals(schedule.getEvent(0), event1);
 	}
+	
 }

@@ -27,11 +27,11 @@ public class ScheduleControllerTest{
 		event1 = new Event();
 		LocalDateTime date = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 00);
 		event1.setLocation("Lobby");
-		event1.setDescription("Check in before the event starts");
+		event1.setDescription("Check in before the event starts"); 
 		event1.setName("Check-in");
 		event1.setDate(date);
-		event1.setIsPassedTime(false);
-		event1.setIsUpComing(true);
+		event1.setIsVisible(true);
+		event1.setEventDuration(3600);
 		schedule = new Schedule();
 		schedCont = new ScheduleController();
 		
@@ -79,6 +79,15 @@ public class ScheduleControllerTest{
 	@Test
 	public void testAddEventToDB() {
 		schedCont.setSchedule(schedule);
-		assertTrue(schedCont.addEventToDB(derbyDB, event1));
+		assertTrue(schedCont.addEventToDB(derbyDB, event1)); 
+	}
+	
+	@Test
+	public void testModifyEvent() {
+		schedCont.setSchedule(schedule);
+		schedCont.addEventToDB(derbyDB, event1);
+		event1.setName("a");
+		assertTrue(schedCont.modifyEventInDB(derbyDB, event1));
+		
 	}
 }

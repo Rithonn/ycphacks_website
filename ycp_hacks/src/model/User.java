@@ -9,9 +9,11 @@ public class User {
 	private int userID;
 	private String university;
 	private boolean isReg;
-	//profType?
-	
-	
+	/* 0 - attendee
+	 * 1 - volunteer 
+	 * 2 - admin
+	 */
+	private int accessID;	
 	
 	public User() {
 	}
@@ -90,6 +92,14 @@ public class User {
 
 	public void setUserID(int userID) {
 		this.userID = userID;
+	}
+
+	public int getAccessID() {
+		return accessID;
+	}
+
+	public void setAccessID(int accessID) {
+		this.accessID = accessID;
 	}
 	
 }

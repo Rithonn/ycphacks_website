@@ -12,7 +12,7 @@ import controller.EventController;
 import model.Event;
 import persist.*;
 
-public class EventControllerTest{
+public class EventControllerTest{ 
 	private Event model;
 	private EventController controller;
 	
@@ -26,8 +26,7 @@ public class EventControllerTest{
 		model.setDate(date);
 		model.setName("Free Pizza");
 		model.setDescription("Enjoy free pizza");
-		model.setIsPassedTime(false);
-		model.setIsUpComing(true);
+		
 		
 		controller.setModel(model);
 	}
@@ -65,16 +64,27 @@ public class EventControllerTest{
 	}
 	
 	@Test
-	public void testChangeIsPassed() {
-		assertFalse(model.isPassedTime());
-		controller.changeIsPassed(true);
-		assertTrue(model.isPassedTime());
+	public void testChangeIsVisible() {
+		controller.changeIsVisible(true);
+		assertTrue(model.getIsVisible());
+		controller.changeIsVisible(false);
+		assertFalse(model.getIsVisible());
+		
 	}
 	
 	@Test
-	public void testChangeIsUpcoming() {
-		assertTrue(model.isUpComing());
-		controller.changeIsUpComing(false);
-		assertFalse(model.isUpComing());
+	public void testChangeEventId() {
+		controller.changeEventId(3);
+		assertEquals(model.getEventId(),3);
+		controller.changeEventId(6);
+		assertEquals(model.getEventId(), 6);
+	}
+	
+	@Test
+	public void testChangeDuration() {
+		controller.changeDuration(3456);
+		assertEquals(3456, model.getEventDuration());
+		controller.changeDuration(55555);
+		assertEquals(55555, model.getEventDuration());
 	}
 }

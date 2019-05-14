@@ -38,7 +38,7 @@
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -55,10 +55,17 @@
         </nav>
 		<!-- This is where the fun begins -->
 
-
+		<form class="form-horizontal" role="form" action="${pageContext.servletContext.contextPath}/adminPage" method="post">
 		<div class="allContentSection">
 			<div class="mainHeader">
-				<h2>Admin Panel</h2>
+				<div class=panelLabel>
+					<h2>Admin Panel</h2>
+				</div>
+				<div class="adminEmailButton">
+					<button type="submit" class="btn btn-success btn-block" value="" name="adminEmailPageButton" onclick="changeAdminEmailPageButton()">
+					Send mass email
+					</button>
+				</div>
 			</div>
 
 			<!-- Stats section -->
@@ -68,16 +75,37 @@
 				</div>
 				<div class="stats-content">
 					<ul class="all-stats">
-						<li>Total Users: </li>
-						<li>Verfied Users: </li>
-						<li>Submitted Users: </li>
+						<li>Total Users: ${fn:length(allUsers)}</li>
+						
+						<% 
+						java.lang.Integer numRegistered=0;
+						java.lang.Integer numSubmitted=0;
+						%>
+						
+							<c:forEach items="${allUsers}" var="user">
+								<c:if test="${user.isRegToString == true}">
+									<%numRegistered = numRegistered + 1; %>
+								</c:if>
+								
+								<c:if test="${user.isRegToString == false}">
+									<%numSubmitted = numSubmitted + 1; %>
+								</c:if>
+							</c:forEach>
+						<%
+				            session.setAttribute("numRegistered", numRegistered);
+				            session.setAttribute("numSubmitted", numSubmitted);
+			        	%>	
+
+						<li>Verified Users: <% out.print((session.getAttribute("numRegistered")));%></li>
+						<li>Submitted Users: <% out.print((session.getAttribute("numSubmitted")));%></li>
 						<div class="stats-br">
 							<br>
 						</div>
-						
-						<li>Admitted: </li>
 						<li>Confirmed: </li>
 						<li>Checked In: </li>
+						
+						
+						
 					</ul>
 				</div>
 			</div>
@@ -90,8 +118,10 @@
 							<!-- This is where all the buttons will go -->
 							<div class="search-users-button">
 								<form class="form-inline md-form mr-auto mb-4">
-									<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-									<button class="btn btn-success btn-rounded btn-sm my-0" type="submit">Search</button>
+									<input class="form-control mr-sm-2" type="text" placeholder="Search Email" aria-label="Search" name="userEmailForSearch">
+									
+									<button class="btn btn-success btn-rounded btn-sm my-0" 
+											value ="" type="submit" onclick="findUserByEmailButton()" name="userSearchOnAdmin">Search</button>
 								</form>
 							</div>
 							<div>
@@ -100,14 +130,33 @@
 							<div class="admin-controls">
 								<h5>Admin Settings:</h5>
 								<!-- Accept, Deny, Delete -->
-								<form action="submit">
-									<input type="text" placeholder="UserID" class="rounded">
-									<div style="margin-bottom: 3px;">
-
+								<form  method="post" style="margin-bottom: 3px;">
+									
+									<div class="form-group">
+										<input type="text" placeholder="UserID" class="rounded" name ="userIdForReg"/>
 									</div>
-									<button class="btn btn-success btn rounded btn-sm">Accept</button>
-									<button class="btn btn-success btn rounded btn-sm">Deny</button>
-									<button class="btn btn-success btn rounded btn-sm">Delete</button>
+									
+									<div style="margin-bottom: 3px;">
+									</div>
+									
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userAcceptButton()" name="userAccept">Accept</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userDenyButton()" name="userDeny">Deny</button>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-success btn rounded btn-sm" value="" onclick="userDeleteButton()" name="userDelete">Delete</button>
+									</div>
+									
+								</form>
+								
+								<form method="post">
+									<input type="text" placeholder="UserID" class="rounded" name="userIdAccess"/>
+									<div style="margin-bottom: 3px;">
+									<input type = "text" placeholder = "accessID" class="rounded" name="userNumberForAccess">
+									</div>
+									<button class="btn btn-success btn rounded btn-sm" value="" onclick="userChangeAccessID()" name="userIDAccessChange">Submit</button>
 								</form>
 
 							</div>
@@ -123,8 +172,9 @@
 										<th scope="col">Email</th>
 										<th scope="col">School</th>
 										<th scope="col">Registered</th>
+										<th scope="col">Access ID</th>
 									</tr>
-									<c:forEach items="${allUsers}" var="user">	
+									<c:forEach items="${listOfUsers}" var="user">	
 										<tr>
 											<td>${user.userID}</td>
 											<td>${user.firstName}</td>
@@ -132,6 +182,7 @@
 											<td>${user.email}</td>
 											<td>${user.university}</td>
 											<td>${user.isRegToString}</td>
+											<td>${user.accessID}</td>
 										</tr>
 									</c:forEach>
 								</thead>
@@ -145,7 +196,28 @@
 			</div>
 
 		</div>
+		</form>
 
-
+	<script>
+	function changeAdminEmailPageButton(){
+        document.getElementsByName("adminEmailPageButton")[0].setAttribute("value", "true");
+	}
+	
+	function findUserByEmailButton(){
+		document.getElementsByName("userSearchOnAdmin")[0].setAttribute("value", "true");
+	}
+	function userAcceptButton(){
+		document.getElementsByName("userAccept")[0].setAttribute("value", "true");
+	}
+	function userDenyButton(){
+		document.getElementsByName("userDeny")[0].setAttribute("value", "true");
+	}
+	function userDeleteButton(){
+		document.getElementsByName("userDelete")[0].setAttribute("value", "true");
+	}
+	function userChangeAccessID(){
+		document.getElementsByName("userIDAccessChange")[0].setAttribute("value", "true");
+	}
+	</script>
 	</body>
 </html>

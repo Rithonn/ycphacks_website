@@ -46,6 +46,10 @@
   	<servlet-name>AdminPanelServlet</servlet-name>
   	<servlet-class>servlet.AdminPanelServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>AdminEmailServlet</servlet-name>
+  	<servlet-class>servlet.AdminEmailServlet</servlet-class>
+  </servlet>
   
   <!-- AJAX servlets. -->
   <servlet>
@@ -60,7 +64,7 @@
   <!-- Servlet mappings -->
   <servlet-mapping>
     <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/index</url-pattern>
+    <url-pattern>/home</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>AddNumbersServlet</servlet-name>
@@ -97,6 +101,10 @@
   <servlet-mapping>
   	<servlet-name>AdminPanelServlet</servlet-name>
   	<url-pattern>/adminPage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>AdminEmailServlet</servlet-name>
+  	<url-pattern>/adminEmail</url-pattern>
   </servlet-mapping>
   
   <!--  AJAX servlet mappings. -->

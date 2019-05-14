@@ -38,7 +38,7 @@
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -59,8 +59,10 @@
 		<div class="directionsContent">
 			<div id="directionsGoogleMaps"></div>
 			<div class="directionsAddress">
-				<span>441 Country Club Rd, York, PA 17403<br><br>
-				@ the Willman Business Center</span>
+				<p>441 Country Club Rd, York PA, 17403</p>
+				<p>@ the Willman Besiness Center</p>
+				
+				<p>For a more detailed map please go <a target="_blank" href="https://map.ycp.edu/?id=802#!ct/24424,14561,14560,14555,13400,13363,13350,13349,13341,13338,13337,12105,12075,12072,13346,13394,13393,13392,13391,20466,13351,13397">here</a></p>
 			</div>
 		</div>
 		
@@ -100,6 +102,17 @@
 		<!-- change KEY to GoogleAPIkey -->
 		<script src="https://maps.googleapis.com/maps/api/js?key=KEY&callback=myMap"></script>
 	
-	
+	   <div class="ticker_div">
+            <marquee class="scroll-text">
+                <c:if test="${!empty ongoing}">
+                    <span> || Currently Happening: </span> 
+                    <c:forEach items="${ongoing}" var="event">
+                        ${event.name}, 
+                    </c:forEach>
+                </c:if>
+                <span> || Coming up: </span>
+                ${upcoming.name} || See Schedule for more information || 
+            </marquee>
+        </div>
 	</body>
 </html>

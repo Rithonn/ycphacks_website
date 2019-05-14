@@ -46,7 +46,7 @@
         <nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -68,41 +68,59 @@
 
                  
                     <div class="contentInfo">
-                        <a href="index" class="stationary"><img class="logo_contentInfo" src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
+                        <a href="index" class="stationary"><img class="logo_contentInfo" 
+                            src="${pageContext.request.contextPath}/_view/css/old_logo.PNG" href="#" alt="Logo" height="120px"></a>
                         <p>2019 Date To Be Announced</p>
                         <p>York College of Pennsylvania</p>
                         <button class="button btn btn-success" type="button" onclick="location.href='registration'">Register Now!</button> 
                     </div>
 
         </section>
+        <!-- This section will be for the sponsosrs -->
         <section class="secondSection">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <div class="sponsorSection">
+                    <h1>Sponsors!</h1>
+                    <h3>We thank you!</h3>
+                <!-- Need to tweek images then. Hate jsps -->
+                <div class="sponsor">
+                    <a href="https://www.ycp.edu/about-us/offices-and-departments/jd-brown-center-for-entrepreneurship/">
+                        <img src="${pageContext.request.contextPath}/_view/css/JDBrown.png" alt="">
+                    </a>
+                    <a href="https://www.dataforma.com/">
+                        <img src="${pageContext.request.contextPath}/_view/css/dataforma.png" alt="">
+                    </a>
+                    <a href="http://hammercreekllc.com/index.html">
+                        <img src="${pageContext.request.contextPath}/_view/css/HC-Logo-Enterprise.jpg" alt="">
+                    </a>
+                    <a href="https://www.ycp.edu/academics/graham-school-of-business/">
+                        <img src="${pageContext.request.contextPath}/_view/css/graham.jpg" alt="">
+                    </a>
+                    <a href="">
+                        <img src="${pageContext.request.contextPath}/_view/css/logo_wdale.jpg" alt="">
+                    </a>
+                    <a href="http://www.pennwaste.com/">
+                        <img src="${pageContext.request.contextPath}/_view/css/pennwaste.jpg" alt="">
+                    </a>
+                    <a href="https://www.bd.com/en-us">
+                        <img src="${pageContext.request.contextPath}/_view/css/bd_logo.png" alt="">
+                    </a>
+                </div>
+            </div>
         </section>
     </div>
-		
+        
+    <div class="ticker_div">
+            <marquee class="scroll-text">
+                <c:if test="${!empty ongoing}">
+                    <span> || Currently Happening: </span> 
+                    <c:forEach items="${ongoing}" var="event">
+                        ${event.name} |  
+                    </c:forEach>
+                </c:if>
+                <span> || Coming up: </span>
+                ${upcoming.name} || See Schedule for more information || 
+            </marquee>
+        </div>
 		
 	</body>
 </html>

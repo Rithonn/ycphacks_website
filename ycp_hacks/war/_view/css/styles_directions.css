@@ -104,7 +104,8 @@ body{
 }
 
 .directionsContent{
-	background-color: #48a23d;
+	/*background-color: #48a23d;*/
+	background: rgba(0, 0, 0, 0.7);
 	position: relative;
 	
 	width: 40%;
@@ -146,9 +147,27 @@ body{
 	text-align: center;
 	
 	border-radius: 25px;
+	padding-top: 15px;
 }
 
 .directionsAddress span{
 	position: relative;
 	top: 20%;
 }
+
+/*------Ticker------*/
+.scroll-text{
+    font-size: 30px;
+    color: white;
+}
+
+.ticker_div{
+    position: fixed;
+    bottom: 0;
+    background: green;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+
+/*------Ticker------*/

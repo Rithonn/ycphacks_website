@@ -8,7 +8,7 @@ import persist.IDatabase;
 public class ScheduleController{
 	private Schedule schedule;
 	
-	public ScheduleController() {
+	public ScheduleController() { 
 		
 	}
 	
@@ -44,6 +44,10 @@ public class ScheduleController{
 	}
 	//Add event to DB
 	public boolean addEventToDB(IDatabase db, Event event) {
-		return db.addEvent(event);
+		return db.addEvent(event); 
+	}
+	//Modify event
+	public boolean modifyEventInDB(IDatabase db, Event event) {
+		return db.updateEvent(event);
 	}
 }

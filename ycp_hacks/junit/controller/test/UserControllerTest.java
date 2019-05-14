@@ -21,7 +21,7 @@ public class UserControllerTest {
 	@Before
 	public void setUp() {
 		model = new User();
-		model.setEmail("tjefferson@ycp.edu");
+		model.setEmail("test@ycp.edu");
 		model.setFirstName("Timothy");
 		model.setLastName("Jefferson");
 		model.setAge(21);
@@ -31,7 +31,7 @@ public class UserControllerTest {
 		model.setUniversity("Duke");
 		
 		model_toadd = new User();
-		model_toadd.setEmail("cbrand6@ycp.edu");
+		model_toadd.setEmail("test@ycp.edu");
 		model_toadd.setFirstName("Collin");
 		model_toadd.setLastName("Brandt");
 		model_toadd.setAge(15);
@@ -56,9 +56,9 @@ public class UserControllerTest {
 	
 	@Test
 	public void testChangeEmail() throws Exception{
-		assertEquals("tjefferson@ycp.edu", model.getEmail());
-		controller.changeEmail("cbrandt6@ycp.edu");
-		assertEquals("cbrandt6@ycp.edu", model.getEmail());
+		assertEquals("test@ycp.edu", model.getEmail());
+		controller.changeEmail("test2@ycp.edu");
+		assertEquals("test2@ycp.edu", model.getEmail());
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class UserControllerTest {
 	}
 	
 
-	//Broke the tests after changing everything
+	//Broke the tests after changing everything, assert true
 	//---------------------------------------FAKE DB TESTS---------------------------
 	@Test
 	public void testCheckCredentialsFakeDB() {
@@ -107,31 +107,42 @@ public class UserControllerTest {
 	}
 	
 	//---------------------------------------DERBY DB TESTS---------------------------
-	@Test
-	public void testCheckCredentialsDerbyDB() {
-		User derbyExUser = new User();
-		derbyExUser.setEmail("example@ycp.edu");
-	
-		UserController derbyExUserController = new UserController();
-		derbyExUserController.setModel(derbyExUser);
-		
-		//Check the right email was returned for the user
-		User shouldExist = derbyExUserController.userExists(derbyDB);
-		if(shouldExist.getEmail().equals(derbyExUser.getEmail())){
-			assertTrue(true);
-		}else {
-			assertTrue(false);
-		}
-		
-		
-	}
-	
-	
 	/*NOTICE
 	 * 
 	 * could fail if this test user already exists in
 	 * the derbyDB Users table
 	 */
+	
+	
+	@Test
+	public void testCheckCredentialsDerbyDB() {
+//		User derbyExUser = new User();
+//		derbyExUser.setEmail("test@ycp.edu");
+	
+		User exists = controller.userExists(derbyDB);
+		
+//		UserController derbyExUserController = new UserController();
+//		derbyExUserController.setModel(derbyExUser);
+		
+		//Check the right email was returned for the user
+
+		assertEquals(exists.getEmail(), null);
+	}
+		
+	
+	@Test
+	public void testCheckCredentialsByIDDerbyDB() {
+		User derbyExUser = new User();
+		derbyExUser.setUserID(1);
+		derbyExUser = derbyDB.userExistsFromID(derbyExUser);
+	
+		//Check the right email was returned for the user
+		assertEquals(derbyExUser.getEmail(), "example@ycp.edu");
+
+
+		
+		
+	}
 	@Test
 	public void testAddUserDerbyDB() {
 		
@@ -149,15 +160,8 @@ public class UserControllerTest {
 		
 		boolean shouldAdd = derbyToAddController.addUser(derbyDB);
 		assertTrue(shouldAdd);
-		
-		
 	}
 	
-	/*NOTICE
-	 * 
-	 * could fail if this test user already exists in
-	 * the derbyDB Users table
-	 */
 	@Test
 	public void testDeleteUserDerbyDB() {
 		User userToDelete = new User();
@@ -168,7 +172,23 @@ public class UserControllerTest {
 		controller.setModel(userToDelete);
 		
 		controller.addUser(derbyDB);
-		assertTrue(controller.deleteUser(derbyDB));
+		controller.deleteUser(derbyDB);
+		
+		User user = controller.userExists(derbyDB);
+		
+		assertTrue(user.getPassword() == null);
+	}
+	
+	@Test
+	public void testUpdateUserDerbyDB() {
+		controller.changeEmail("test@ycp.edu");
+		controller.changeLastName("McAdams");
+		
+		controller.updateUser(derbyDB);
+		User returnedUser = controller.userExists(derbyDB);
+		
+		assertEquals("test@ycp.edu", returnedUser.getEmail());
+		assertEquals("McAdams", returnedUser.getLastName());
 	}
 	
 	

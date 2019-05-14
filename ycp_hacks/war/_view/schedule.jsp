@@ -11,7 +11,7 @@
         <!-- bootstrap cdn -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     	<link rel="stylesheet" href="${pageContext.request.contextPath}/_view/css/styles_schedule.css" />
-         
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		
     	<script>
     		$(window).on('scroll', function(){
@@ -39,7 +39,7 @@
         <nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -64,11 +64,35 @@
                     <th scope="col">What</th>
                     <th scope="col">Where</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Event ID</th>
+                    <!-- This will need to be hidden when not admin -->
+                    <c:if test="${currentUser.accessID == 2}">
+                        <th scope="col">Event ID</th>
+                        <th scope="col"> Visible</th>
+                        <th scope="col"> Duration</th>
+                    </c:if>
                 </tr>
             </thead>
             <tbody>
+                <c:if test="${mostrecentday != firstevent.date.dayOfMonth}">
+                    <c:if test="${firstevent.isVisible or currentUser.accessID == 2}">
+                    <tr>
+                        <td>
+                            ${firstevent.date.dayOfWeek} ${firstevent.date.month}, ${firstevent.date.dayOfMonth} 
+                        </td>  
+                    </tr>
+                    </c:if>
+                </c:if>
+                <c:set var = "mostrecentday" value = "${firstevent.date.dayOfMonth}" />
                 <c:forEach items="${schedule}" var="event">
+                     <c:if test="${event.isVisible or currentUser.accessID == 2}">
+                    <c:if test="${mostrecentday != event.date.dayOfMonth}">
+                        <c:set var = "mostrecentday" value = "${event.date.dayOfMonth}" />
+                        <tr>
+                            <td>
+                                ${event.date.dayOfWeek} ${event.date.month}, ${event.date.dayOfMonth} 
+                            </td>  
+                        </tr>
+                    </c:if>
                     <tr>
                         <td>
                             <script>
@@ -82,11 +106,13 @@
                                     amOrPm = "pm";
                                     eventHour = eventHour - 12; 
                             //Otherwise it is in the am
-                            }else{
-                                amOrPm = "am";
-                            }
-                            if (eventHour == 0){
+                            }else if(eventHour == 12){
+                                amOrPm = "pm";
+                            }else if (eventHour == 0){
                                 eventHour = 12;
+                                amOrPm = "am";
+                            }else if(eventHour < 12){
+                                amOrPm = "am";
                             }
                             
                             //Minutes are stored as a raw into so if it is less than 10, it will display as a single digit
@@ -102,12 +128,32 @@
                         <td>${event.name}</td>
                         <td>${event.location}</td>
                         <td>${event.description}</td>
-                        <td>${event.eventId}</td>
+                        <c:if test="${currentUser.accessID == 2}">
+                            <td>${event.eventId}</td>
+                            <td>${event.isVisible}</td>
+                            <td>
+                                <script>
+                                var durationSec = ${event.eventDuration};
+                                var totalminutes = durationSec / 60;
+                                var extraminutes = totalminutes % 60;
+                                var hours = (totalminutes - extraminutes) / 60;
+                                
+                                
+                                document.write(hours, " hour(s), ", extraminutes, "minute(s)");
+                                
+                                
+                                
+                                </script>
+                            </td>
+                        </c:if>
                     </tr>
+                    </c:if>
                 </c:forEach>
             </tbody>
         </table>
         </div>
+        <!-- Hide from non admin users -->
+        <c:if test="${currentUser.accessID == 2}">
         <div class="form-wrappers">
             <!--Delete Event Button & Text Box-->
         <div class="DeleteWrapper">
@@ -122,16 +168,19 @@
 			     </table>
                 <div class="form_button">
 			     <button type="submit" class="btn btn-success btn-block" value="" name="delEventButton" onclick="changeDelEventButton()">Delete Event</button>
-				<span></span>
+				<span class="adderror">${delEventError}</span>
                 </div>
             </form>
         </div>
         
         <div class="AddWrapper">
-            <p>Add Event</p>
+            <p>Modify or Add Event</p>
             <form action="${pageContext.servletContext.contextPath}/schedule" method="post">
                 <table class="form_table">
-                
+                    
+                    <tr class="form_element">
+					   <td><input class='form-control' type="text" name="modifyEventID"  value="${modifyEventID}" placeholder="Event ID (leave blank if adding a new event)"/></td>
+				    </tr>
 				    <tr class="form_element">
 					   <td><input class='form-control' type="text" name="addEventName"  value="${addEventName}" placeholder="Enter event name"/></td>
 				    </tr>
@@ -153,7 +202,7 @@
 					    <td><input class='form-control' type="text" name="addEventDay"  value="${addEventDay}" placeholder="Enter day of month"/></td>
 				    </tr>
                     <tr class="form_element">
-					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/></td>
+					    <td><input class='form-control' type="text" name="addEventTime"  value="${addEventTime}" placeholder="Enter time (HH:MM)"/> </td>
 				    </tr>
                     <tr class="form_element">
 					    <td><div class="form-check form-check-inline">
@@ -166,15 +215,42 @@
                             </div>
                         </td>
 				    </tr>
+                    <tr class="form_element">
+					    <td><input class='form-control' type="text" name="addEventDuration"  value="${addEventDuration}" placeholder="Enter duration (HH:MM)"/> <span class="adderror"> ${addEventErrorMsg} </span></td>
+				    </tr>
+                    
+                    <tr class="form_element">
+					    <td><div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="visibility" id="inlineRadio3" value="Visible">
+                                <label class="form-check-label" for="inlineRadio3">Visible</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="visibility" id="inlineRadio4" value="Not Visible">
+                                <label class="form-check-label" for="inlineRadio4">Not Visible</label>
+                            </div>
+                        </td>
+				    </tr>
 			     </table>
+                
                 <div class="form_button">
-			     <button type="submit" class="btn btn-success btn-block" value="" name="addEventButton" onclick="changeAddEventButton()">Add Event</button>
-				<span></span>
+			     <button type="submit" class="btn btn-success btn-block" value="" name="addEventButton" onclick="changeAddEventButton()">Add/Modify Event</button>
                 </div>
             </form>
         </div>
         </div>
-        
+        </c:if>
+        <div class="ticker_div">
+            <marquee class="scroll-text">
+                <c:if test="${!empty ongoing}">
+                    <span> || Currently Happening: </span> 
+                    <c:forEach items="${ongoing}" var="event">
+                        ${event.name}, 
+                    </c:forEach>
+                </c:if>
+                <span> || Coming up: </span>
+                ${upcoming.name} || See Schedule for more information || 
+            </marquee>
+        </div>
         <script>
 	        function changeDelEventButton(){
 	        	document.getElementsByName("delEventButton")[0].setAttribute("value", "true");

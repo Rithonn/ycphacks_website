@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import persist.DBUtil;
 import model.Event;
 import model.Schedule;
+import model.Submission;
 //import persist.DerbyDatabase.Transaction;
 import model.User;
 
@@ -97,6 +98,7 @@ public class DerbyDatabase implements IDatabase {
 		user.setAge(resultSet.getInt(index++));
 		user.setUniversity(resultSet.getString(index++));
 		user.setIsReg(resultSet.getBoolean(index++));
+		user.setAccessID(resultSet.getInt(index++));
 	}
 	
 	//Piece together an event
@@ -106,18 +108,30 @@ public class DerbyDatabase implements IDatabase {
 		event.setName(resultset.getString(index++));
 		event.setLocation(resultset.getString(index++));
 		event.setDescription(resultset.getString(index++));
-		
-		
-		
+		event.setIsVisible(resultset.getBoolean(index++));
+		event.setEventDuration(resultset.getLong(index++));
+	}
+	
+	private void loadSubmission(Submission submission, ResultSet resultset, int index) throws SQLException{
+		submission.setSubmission_id(resultset.getInt(index++));
+		submission.setUserFirstName(resultset.getString(index++));
+		submission.setUserEmail(resultset.getString(index++));
+		submission.setMessage(resultset.getString(index++));
+		submission.setAccepted(Boolean.getBoolean(resultset.getString(index++)));
 	}
 
-	//Change the table for user instead of authors with all the correct fields
+	/**
+	 * Builds all tables for database, with given
+	 * fields for columns
+	 */
 	public void createTables() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
 			public Boolean execute(Connection conn) throws SQLException {
 				PreparedStatement stmt1 = null;
 				PreparedStatement stmt2 = null;
+				PreparedStatement stmt3 = null;
+				PreparedStatement stmt4 = null;
 				
 				//Create the user table with the same order of the load up above
 				try {
@@ -131,7 +145,8 @@ public class DerbyDatabase implements IDatabase {
 						"   password varchar(120)," + 
 						"   age integer," +
 						"   university varchar(40), " + 
-						"   isReg varchar(5) "    +
+						"   isReg varchar(5), "    +
+						"   accessID integer DEFAULT 0"		+
 						")"
 					);	
 					stmt1.executeUpdate();
@@ -143,10 +158,24 @@ public class DerbyDatabase implements IDatabase {
 							" dateTime bigint," +
 							" name varchar(40)," +
 							" location varchar(40)," +
-							" description varchar(120) " +
+							" description varchar(120), " +
+							" isVisible varchar(5), " +
+							" duration bigint " +
 							")"
 							);
 					stmt2.executeUpdate();
+					
+					stmt3 = conn.prepareStatement(
+						"create table submissions (" +
+						" submission_id integer primary key " +
+						" 	generated always as identity (start with 1, increment by 1), "+
+						" userFirstName varchar(50)," +
+						" userEmail varChar(50)," +
+						" message varchar(140), " +
+						" isAccepted varchar(5)" +
+						")"
+						);
+					stmt3.executeUpdate();
 					
 					return true;
 				} finally {
@@ -157,6 +186,11 @@ public class DerbyDatabase implements IDatabase {
 		});
 	}
 	
+	/**
+	 * Populates tables with data from csv files.
+	 * Object lists are loaded from InitialData object which
+	 * actually reads the csv files.
+	 */
 	public void loadInitialData() {
 		executeTransaction(new Transaction<Boolean>() {
 			@Override
@@ -175,10 +209,10 @@ public class DerbyDatabase implements IDatabase {
 				}
 
 				PreparedStatement insertUserList = conn.prepareStatement("insert into users (lastName, firstName, email,"
-						+ " password, age, university, isReg) values (?,?,?,?,?,?,?)");
+						+ " password, age, university, isReg, accessID) values (?,?,?,?,?,?,?,?)");
 				
-				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description)"
-						+ " values (?,?,?,?)");
+				PreparedStatement insertEventList = conn.prepareStatement("insert into schedule (dateTime, name, location, description, isVisible, duration)"
+						+ " values (?,?,?,?,?,?)");
 				
 				try {
 //					Will need to populate the user table with example entry
@@ -195,6 +229,12 @@ public class DerbyDatabase implements IDatabase {
 						insertUserList.setInt(5, user.getAge());
 						insertUserList.setString(6, user.getUniversity());
 						insertUserList.setString(7, String.valueOf(user.isReg()));
+						if(user.getAccessID() != 0) {
+							insertUserList.setInt(8, user.getAccessID());
+						}else {
+							insertUserList.setInt(8, 0);
+						}
+						
 						
 						insertUserList.addBatch();
 					}
@@ -205,7 +245,8 @@ public class DerbyDatabase implements IDatabase {
 						insertEventList.setString(2, event.getName());
 						insertEventList.setString(3, event.getLocation());
 						insertEventList.setString(4, event.getDescription());
-						
+						insertEventList.setString(5, String.valueOf(event.getIsVisible()));
+						insertEventList.setLong(6, event.getEventDuration());
 						insertEventList.addBatch();
 					}
 					insertUserList.executeBatch();
@@ -430,7 +471,7 @@ public class DerbyDatabase implements IDatabase {
 				try {
 					stmt = conn.prepareStatement(
 							"update users "
-							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?"
+							+" set lastName = ?, firstName = ?, email = ?, password = ?, age = ?, university = ?, isReg = ?, accessID = ?"
 							+ " where user_id = ?"
 					);
 					
@@ -441,7 +482,8 @@ public class DerbyDatabase implements IDatabase {
 					stmt.setInt(5, user.getAge());
 					stmt.setString(6, user.getUniversity());
 					stmt.setString(7, Boolean.toString(user.isReg()));
-					stmt.setInt(8, user.getUserID());
+					stmt.setInt(8, user.getAccessID());
+					stmt.setInt(9, user.getUserID());
 					
 					stmt.executeUpdate();
 					
@@ -490,28 +532,29 @@ public class DerbyDatabase implements IDatabase {
 				
 				try {
 					stmt = conn.prepareStatement(
-							"insert into schedule (dateTime, name, location, description) values (?,?,?,?)"
+							"insert into schedule (dateTime, name, location, description, isVisible, duration) values (?,?,?,?,?,?)"
 					); 
 					
 					stmt.setLong(1, event.dateToMillis());
 					stmt.setString(2, event.getName());
 					stmt.setString(3, event.getLocation());
 					stmt.setString(4, event.getDescription());
-					
+					stmt.setString(5, Boolean.toString(event.getIsVisible()));
+					stmt.setLong(6, event.getEventDuration());
 					stmt.executeUpdate();
 					
 					return true;
 				}finally {
-					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(stmt); 
 				}
 	
 			}
 		});
 	}
 	
-	
 	@Override
 	public List<User> getAllUsers(){
+
 		return executeTransaction(new Transaction<List<User>>() {
 			@Override
 			public List<User> execute(Connection conn) throws SQLException{
@@ -547,5 +590,138 @@ public class DerbyDatabase implements IDatabase {
 			}
 		});
 	}
+
+	@Override
+	public boolean updateEvent(Event event) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							"update schedule "
+							+ " set dateTime = ?, name = ?, location = ?, description = ?, isVisible = ?, duration = ?"
+							+ " where event_id = ?"
+					); 
+					
+					stmt.setLong(1, event.dateToMillis());
+					stmt.setString(2, event.getName());
+					stmt.setString(3, event.getLocation());
+					stmt.setString(4, event.getDescription());
+					stmt.setString(5, Boolean.toString(event.getIsVisible()));
+					stmt.setLong(6, event.getEventDuration());
+					stmt.setInt(7, event.getEventId());
+					
+					stmt.executeUpdate();
+					
+					return true;
+				}finally {
+					DBUtil.closeQuietly(stmt); 
+				}
+	
+			}
+		});
 		
+	}
+	
+	@Override
+	public boolean addSubmission(Submission submission) {
+		return executeTransaction(new Transaction<Boolean>() {
+			@Override
+			public Boolean execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				
+				try {
+					stmt = conn.prepareStatement(
+							" insert into submissions(message, isAccepted, userFirstName, userEmail) values(?,?,?,?)"
+					);
+							
+					stmt.setString(1, submission.getMessage());
+					stmt.setString(2, Boolean.toString(submission.isAccepted()));
+					stmt.setString(3, submission.getUserFirstName());
+					stmt.setString(4, submission.getUserEmail());
+					
+					stmt.executeUpdate();
+				}finally {
+					DBUtil.closeQuietly(stmt);
+				}
+				
+				return true;
+			}
+		});
+	}
+	
+	@Override
+	public List<Submission> getAllSubmissions() {
+		return executeTransaction(new Transaction<List<Submission>>() {
+			@Override
+			public List<Submission> execute(Connection conn) throws SQLException{
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				List<Submission> allSubmissions = new ArrayList<Submission>();
+				
+				try {
+					stmt = conn.prepareStatement(
+							"select * from submissions"
+					);
+					
+					resultSet = stmt.executeQuery();
+					
+					while(resultSet.next()) {
+						Submission submission = new Submission();
+						
+						loadSubmission(submission, resultSet, 1);
+						
+						allSubmissions.add(submission);
+					}
+							
+					
+				}finally {
+					DBUtil.closeQuietly(stmt);
+					DBUtil.closeQuietly(resultSet);
+				}
+				
+				return allSubmissions;
+			}
+		});
+	}
+
+	@Override
+	public User userExistsFromID(User newUser) {
+		return executeUserTransaction(new Transaction<User>() {
+			@Override
+			public User execute(Connection conn) throws SQLException {
+				PreparedStatement stmt = null;
+				ResultSet resultSet = null;
+				try {
+					stmt = conn.prepareStatement(
+							"select * from users "
+						+	" where users.user_id = ?"			
+					);
+					
+					stmt.setInt(1, newUser.getUserID());
+					
+					resultSet = stmt.executeQuery();				
+					
+					User found = new User();
+					while(resultSet.next()) {
+						//Return the user if found
+						loadUser(newUser, resultSet, 1);
+						//Once the user set has been loaded make sure to return it correclty
+						found = newUser;
+					}
+					
+					return found;	
+				} finally {
+					DBUtil.closeQuietly(resultSet);
+					DBUtil.closeQuietly(stmt);
+					
+				}
+			}		
+		});
+	}
+		
+	
+	
 }

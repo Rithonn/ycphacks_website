@@ -45,18 +45,6 @@ public class EventTest{
 	}
 	
 	@Test
-	public void testGetPassedTime() {
-		testEvent.setIsPassedTime(true);
-		assertTrue(testEvent.isPassedTime());
-	}
-	
-	@Test
-	public void testGetUpComing() {
-		testEvent.setIsUpComing(true);
-		assertTrue(testEvent.isUpComing());
-	}
-	
-	@Test
 	public void testDateToMillis() {
 		LocalDateTime date2 = LocalDateTime.of(2019, Month.OCTOBER, 26, 17, 0);
 		testEvent.setDate(date2);
@@ -77,8 +65,40 @@ public class EventTest{
 	}
 	
 	@Test
-	public void testIsPassedTime() {
-		testEvent.setIsPassedTime(true);
-		assertTrue(testEvent.isPassedTime());
+	public void testGetIsVisible() {
+		testEvent.setIsVisible(true);
+		assertTrue(testEvent.getIsVisible());
+	}
+	
+	@Test
+	public void testGetEventDuration() {
+		testEvent.setEventDuration(3600);
+		assertEquals(3600, testEvent.getEventDuration());
+	}
+	
+	@Test
+	public void testCheckStatusAfterEvent() {
+		testEvent.setEventDuration(3600);
+		testEvent.setDateFromLong(1990);
+		assertEquals(0, testEvent.checkStatus());
+	}
+	
+	@Test
+	public void testCheckStatusBeforeEvent() {
+		testEvent.setDate(LocalDateTime.of(3000, 1, 1, 5, 30));
+		assertEquals(2, testEvent.checkStatus());
+	}
+	
+	@Test
+	public void testCheckStatusDuringEvent() {
+		LocalDateTime now = LocalDateTime.now();
+		LocalDateTime test = now;
+		testEvent.setDate(test);
+		long conv = testEvent.dateToMillis();
+		testEvent.setDateFromLong(conv - 10);
+		testEvent.setEventDuration(36000000);
+		
+		assertEquals(1, testEvent.checkStatus());
+		
 	}
 }

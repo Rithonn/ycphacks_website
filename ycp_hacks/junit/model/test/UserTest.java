@@ -62,6 +62,18 @@ public class UserTest {
 		assertEquals(1, model.getUserID());
 	}
 	
+	@Test
+	public void testIsRegToString() {
+		model.setIsReg(true);
+		assertEquals("true", model.getIsRegToString());
+	}
+	
+	@Test
+	public void testGetAccessID() {
+		model.setAccessID(0);
+		assertEquals(0, model.getAccessID());
+	}
+	
 	
 	
 }

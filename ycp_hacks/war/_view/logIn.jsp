@@ -38,7 +38,7 @@
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -68,7 +68,7 @@
 		        </div>
 		        <div class="clearfix">
 		            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-		            <a href="#" class="pull-right">Forgot Password?</a>
+		            <button type="submit" class="btn btn-success" style="background-color: black;" name="forgotPasswordButton" formnovalidate>Forgot Password?</button>
 		        </div>   
 		        <p class="text-center"><a href="registration">Create an Account</a></p>
 		    
@@ -77,7 +77,6 @@
 		    </form>
 			</div>
         </div> 
-		
 		
 		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

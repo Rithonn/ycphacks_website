@@ -38,7 +38,7 @@
 		<nav>
             <div class="logo"><img src="${pageContext.request.contextPath}/_view/css/newLogo.png" alt="" height="50px"></div>
             <ul>
-                <li><a class="stationary" href="index">Home</a></li>
+                <li><a class="stationary" href="home">Home</a></li>
                 <li><a class="stationary" href="about">About</a></li>
                 <li><a class="stationary" href="directions">Directions</a></li>
                 <li><a class="stationary" href="registration">Registration</a></li>
@@ -57,11 +57,18 @@
 			<div class="aboutFormEdit">
 				<div class="container">
 					<h1>Edit Profile</h1>
-						<a href="adminPage">
-							<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
-								Administrator Panel
-							</button>
-						</a>
+					
+						<c:if test="${currentUser.accessID == 2}">
+							<a href="adminPage">
+								<button type="submit" class="btn btn-success btn-block btn-md adminPanelButton" href="adminPage"value="" name="adminPanelButton">
+									Administrator Panel
+								</button>
+							</a>
+						</c:if>
+						
+						<p>
+							${error}
+						</p>
 					<hr>
 						<!-- Edit form column -->
 						<div class="">
@@ -111,11 +118,6 @@
 									</div>
 								</div>
 								
-								<p class="error">
-									${error}
-								</p>
-								
-								
 								<div class="form-group">
 									<label class=""></label>							
 									<div class="">
@@ -123,11 +125,18 @@
 										Update Profile
 										</button>
 										<span></span>
-										<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="changeDeleteButton()">
+										<button type="button" class="btn btn-success btn-block" value="" name="deleteRequestButton" onclick="deleteRequest()">
 										Delete Profile
 										</button>
-										
-										
+										<span></span>
+										<div class="confirmDenyDelete">
+											<button type="submit" class="btn btn-success btn-block" value="" name="deleteProfileButton" onclick="confirmDeletion()">
+											Confirm Deletion
+											</button>
+											<button type="button" class="btn btn-success btn-block" value="" name="denyDeleteProfileButton" onclick="abortDeletion()">
+											Do Not Delete
+											</button>
+										</div>
 										<span></span>
 										<button type="submit" class="btn btn-success btn-block" value="" name="signOutButton"
 										onclick="changeSignOutButton()">Sign Out</button>
@@ -145,11 +154,22 @@
 		
 		
 		<script>
+			function deleteRequest(){
+				var x = document.getElementsByClassName("confirmDenyDelete")[0];
+				x.style.display = "block";
+			}
+			
+			function abortDeletion(){
+				var x = document.getElementsByClassName("confirmDenyDelete")[0];
+				x.style.display = "none";
+			}
+			
+		
 	        function changeSignOutButton(){
 	        	document.getElementsByName("signOutButton")[0].setAttribute("value", "true");
 			}
 	        
-	        function changeDeleteButton(){
+	        function confirmDeletion(){
 	        	document.getElementsByName("deleteProfileButton")[0].setAttribute("value", "true");
 			}
 	        

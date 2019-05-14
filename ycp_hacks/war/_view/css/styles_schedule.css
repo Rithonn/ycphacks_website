@@ -25,6 +25,7 @@ nav {
     padding: 10px 100px;
     box-sizing: border-box;
     transition: .3s;
+    z-index: 10;
 }
 
 /* Change in the navbar colors */
@@ -134,8 +135,8 @@ nav ul li a.active{
     position: relative;
     margin: auto;
     width: 50%;
-    height: 450px;
-    padding-top: 100px;
+    height: 300px;
+    padding-top: 75px;
     
 }
 
@@ -150,7 +151,10 @@ nav ul li a.active{
     text-align: center;
     position: relative;
     width: 50%;
-    height: 450px;
+    height: 50%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-bottom: 60px;
 }
 .form-wrappers{
     display: flex;
@@ -175,5 +179,33 @@ nav ul li a.active{
 .form-check-label{
     font-size: 20px;
 }
+
+.form-control{
+    width: 100%;
+}
+
+.adderror{
+    font-size: 15px;
+    color: red;
+}
 /*------ScheduleEditor------*/
+
+/*------Ticker------*/
+.scroll-text{
+    font-size: 30px;
+    color: white;
+}
+
+.ticker_div{
+    position: fixed;
+    bottom: 0;
+    background: green;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+}
+
+/*------Ticker------*/
+
+
 
